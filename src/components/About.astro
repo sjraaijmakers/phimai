@@ -1,0 +1,217 @@
+---
+---
+
+<section id="about" class="about">
+  <div class="container">
+    <div class="about-content">
+      <div class="about-text">
+        <h2>Experience Phimai</h2>
+        <p class="intro">Discover the charm of small town Thailand in our comfortable tiny homes. Located minutes from the ancient Phimai Historical Park and the iconic Sai Ngam mangrove, you'll have easy access to history, nature, and local culture.</p>
+        
+        <div class="host-stats">
+          <div class="stat">
+            <div class="stat-number">150+</div>
+            <div class="stat-label">Happy Guests</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">4.9</div>
+            <div class="stat-label">Average Rating</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">Free</div>
+            <div class="stat-label">Bike Rentals</div>
+          </div>
+        </div>
+
+        <div class="commitments">
+          <h3>What's Included</h3>
+          <ul>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20,6 9,17 4,12"></polyline>
+              </svg>
+              Kitchenette with essential appliances and utensils
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20,6 9,17 4,12"></polyline>
+              </svg>
+              Complimentary snacks, coffee, and tea
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20,6 9,17 4,12"></polyline>
+              </svg>
+              Free bike rentals to explore the area
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20,6 9,17 4,12"></polyline>
+              </svg>
+              Free tuktuk transfer to bus station (3+ nights)
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="about-image">
+        <img src="https://images.pexels.com/photos/2029667/pexels-photo-2029667.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Phimai Historical Park" loading="lazy" />
+        <div class="host-badge">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22,4 12,14.01 9,11.01"></polyline>
+          </svg>
+          <span>Phimai Location</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    padding: 5rem 2rem;
+    background: #FAFAFA;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .about-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #2C2C2C;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .intro {
+    font-size: 1.15rem;
+    color: #5A5A5A;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  .host-stats {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: #8B7355;
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 0.875rem;
+    color: #5A5A5A;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+
+  .commitments h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #2C2C2C;
+    margin-bottom: 1rem;
+  }
+
+  .commitments ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .commitments li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    color: #5A5A5A;
+  }
+
+  .commitments li svg {
+    color: #8B7355;
+    flex-shrink: 0;
+  }
+
+  .about-image {
+    position: relative;
+  }
+
+  .about-image img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    filter: contrast(1.05) saturate(0.85);
+  }
+
+  .host-badge {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 0.75rem 1rem;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 400;
+    color: #8B7355;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .host-badge svg {
+    color: #8B7355;
+  }
+
+  @media (max-width: 768px) {
+    .about {
+      padding: 3rem 1rem;
+    }
+
+    .about-content {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .about-text h2 {
+      font-size: 2rem;
+    }
+
+    .host-stats {
+      justify-content: center;
+    }
+
+    .about-image {
+      order: -1;
+    }
+
+    .about-image img {
+      height: 400px;
+    }
+  }
+</style>

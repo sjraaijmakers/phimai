@@ -1,0 +1,148 @@
+---
+---
+
+<section id="reviews" class="reviews">
+  <div class="container">
+    <div class="section-header">
+      <h2>Book Your Stay</h2>
+      <p>Ready to experience Phimai? Book directly through our trusted platforms.</p>
+    </div>
+
+    <div class="booking-platforms">
+      <a href="https://airbnb.com/users/show/example" target="_blank" rel="noopener" class="platform-link airbnb">
+        <div class="platform-logo">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <path d="M16 1C7.7 1 1 7.7 1 16s6.7 15 15 15 15-6.7 15-15S24.3 1 16 1zm7.1 24.3c-.6 1.2-1.9 1.9-3.2 1.9-1.4 0-2.7-.8-3.3-2.1L16 23.5l-.6 1.6c-.6 1.3-1.9 2.1-3.3 2.1-1.3 0-2.6-.7-3.2-1.9C7.8 23.8 7.5 22 8.5 20.5l7.5-15 7.5 15c1 1.5.7 3.3-.4 4.8z" fill="#FF5A5F"/>
+          </svg>
+        </div>
+        <div class="platform-content">
+          <h3>Book on Airbnb</h3>
+          <p>See reviews, photos, and book instantly</p>
+        </div>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M7 17l9.2-9.2M17 17V7H7"></path>
+        </svg>
+      </a>
+      
+      <a href="https://booking.com/hotel/example" target="_blank" rel="noopener" class="platform-link booking">
+        <div class="platform-logo">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <rect width="32" height="32" rx="4" fill="#003580"/>
+            <path d="M8 12h16v8H8z" fill="white"/>
+            <path d="M10 14h4v1h-4zm0 2h6v1h-6zm0 2h5v1h-5z" fill="#003580"/>
+          </svg>
+        </div>
+        <div class="platform-content">
+          <h3>Book on Booking.com</h3>
+          <p>Compare prices and read guest reviews</p>
+        </div>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M7 17l9.2-9.2M17 17V7H7"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .reviews {
+    padding: 5rem 2rem;
+    background: #FAFAFA;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #2C2C2C;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .section-header p {
+    font-size: 1.15rem;
+    color: #5A5A5A;
+  }
+
+  .booking-platforms {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .platform-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem;
+    background: white;
+    border: 1px solid #F0F0F0;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .platform-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .platform-logo {
+    flex-shrink: 0;
+  }
+
+  .platform-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #2C2C2C;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .platform-content p {
+    color: #5A5A5A;
+    margin: 0;
+  }
+
+  .platform-link > svg {
+    color: #8B7355;
+    flex-shrink: 0;
+  }
+
+  .platform-link.airbnb:hover .platform-content h3 {
+    color: #8B7355;
+  }
+
+  .platform-link.booking:hover .platform-content h3 {
+    color: #8B7355;
+  }
+
+  @media (max-width: 768px) {
+    .reviews {
+      padding: 3rem 1rem;
+    }
+
+    .section-header h2 {
+      font-size: 2rem;
+    }
+
+    .booking-platforms {
+      grid-template-columns: 1fr;
+    }
+
+    .platform-link {
+      padding: 1.5rem;
+    }
+  }
+</style>
