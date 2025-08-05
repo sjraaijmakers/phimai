@@ -75,9 +75,9 @@
   }
 
   .booking-platforms {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
     max-width: 800px;
     margin: 0 auto;
   }
@@ -86,46 +86,62 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 2rem;
-    background: white;
-    border: 1px solid #F0F0F0;
+    padding: 1.5rem 2rem;
     text-decoration: none;
     transition: all 0.3s ease;
+    border-radius: 8px;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 
-  .platform-link:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  .platform-link.airbnb {
+    background: linear-gradient(135deg, #FF5A5F 0%, #FF385C 100%);
+    color: white;
+  }
+
+  .platform-link.airbnb:hover {
+    background: linear-gradient(135deg, #FF385C 0%, #E31C23 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 56, 92, 0.4);
+  }
+
+  .platform-link.booking {
+    background: linear-gradient(135deg, #003580 0%, #0057B8 100%);
+    color: white;
+  }
+
+  .platform-link.booking:hover {
+    background: linear-gradient(135deg, #0057B8 0%, #0073E6 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 53, 128, 0.4);
   }
 
   .platform-logo {
     flex-shrink: 0;
+    filter: brightness(0) invert(1);
   }
 
   .platform-content h3 {
     font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     font-weight: 600;
-    color: #2C2C2C;
+    color: white;
     margin: 0 0 0.5rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
 
   .platform-content p {
-    color: #5A5A5A;
+    color: rgba(255, 255, 255, 0.9);
     margin: 0;
+    font-size: 1rem;
   }
 
   .platform-link > svg {
-    color: #8B7355;
+    color: white;
     flex-shrink: 0;
-  }
-
-  .platform-link.airbnb:hover .platform-content h3 {
-    color: #8B7355;
-  }
-
-  .platform-link.booking:hover .platform-content h3 {
-    color: #8B7355;
+    width: 20px;
+    height: 20px;
   }
 
   @media (max-width: 768px) {
@@ -137,12 +153,16 @@
       font-size: 2rem;
     }
 
-    .booking-platforms {
-      grid-template-columns: 1fr;
+    .platform-link {
+      padding: 1.25rem 1.5rem;
     }
 
-    .platform-link {
-      padding: 1.5rem;
+    .platform-content h3 {
+      font-size: 1.2rem;
+    }
+
+    .platform-content p {
+      font-size: 0.9rem;
     }
   }
 </style>
