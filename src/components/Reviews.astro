@@ -75,9 +75,9 @@
   }
 
   .booking-platforms {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
     max-width: 800px;
     margin: 0 auto;
   }
@@ -85,63 +85,82 @@
   .platform-link {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    padding: 1.5rem 2rem;
+    gap: 1.5rem;
+    padding: 2rem;
     text-decoration: none;
     transition: all 0.3s ease;
-    border-radius: 8px;
-    font-weight: 500;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 2px solid #E5E5E5;
+    background: white;
+    color: #2C2C2C;
   }
 
   .platform-link.airbnb {
-    background: linear-gradient(135deg, #FF5A5F 0%, #FF385C 100%);
-    color: white;
+    border-color: #FF5A5F;
   }
 
   .platform-link.airbnb:hover {
-    background: linear-gradient(135deg, #FF385C 0%, #E31C23 100%);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(255, 56, 92, 0.4);
+    background: #FF5A5F;
+    color: white;
+    transform: translateY(-2px);
   }
 
   .platform-link.booking {
-    background: linear-gradient(135deg, #003580 0%, #0057B8 100%);
-    color: white;
+    border-color: #003580;
   }
 
   .platform-link.booking:hover {
-    background: linear-gradient(135deg, #0057B8 0%, #0073E6 100%);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 53, 128, 0.4);
+    background: #003580;
+    color: white;
+    transform: translateY(-2px);
   }
 
   .platform-logo {
     flex-shrink: 0;
+  }
+
+  .platform-link.airbnb .platform-logo {
+    filter: none;
+  }
+
+  .platform-link.airbnb:hover .platform-logo {
+    filter: brightness(0) invert(1);
+  }
+
+  .platform-link.booking .platform-logo {
+    filter: none;
+  }
+
+  .platform-link.booking:hover .platform-logo {
     filter: brightness(0) invert(1);
   }
 
   .platform-content h3 {
     font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: 600;
-    color: white;
+    color: inherit;
     margin: 0 0 0.5rem 0;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
   }
 
   .platform-content p {
-    color: rgba(255, 255, 255, 0.9);
+    color: #5A5A5A;
     margin: 0;
     font-size: 1rem;
   }
 
+  .platform-link:hover .platform-content p {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
   .platform-link > svg {
-    color: white;
+    color: #5A5A5A;
     flex-shrink: 0;
     width: 20px;
     height: 20px;
+  }
+
+  .platform-link:hover > svg {
+    color: white;
   }
 
   @media (max-width: 768px) {
@@ -149,12 +168,17 @@
       padding: 3rem 1rem;
     }
 
+    .booking-platforms {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
     .section-header h2 {
       font-size: 2rem;
     }
 
     .platform-link {
-      padding: 1.25rem 1.5rem;
+      padding: 1.5rem;
     }
 
     .platform-content h3 {

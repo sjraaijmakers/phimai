@@ -53,10 +53,10 @@ import Footer from '../components/Footer.astro';
 
     // Active navigation highlighting
     const sections = document.querySelectorAll('section[id]');
-    const navLinks2 = document.querySelectorAll('.nav-link');
+    const navLinks2 = document.querySelectorAll('.nav-links a');
     
     function updateActiveNav() {
-      const scrollPosition = window.scrollY + 100;
+      const scrollPosition = window.scrollY + 150;
       
       sections.forEach(section => {
         const sectionTop = section.offsetTop;
@@ -66,13 +66,20 @@ import Footer from '../components/Footer.astro';
         if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
           navLinks2.forEach(link => {
             link.classList.remove('active');
-            if (link.getAttribute('href') === `#${sectionId}`) {
+            if (link.getAttribute('href') === `#${sectionId}` || (sectionId === 'gallery' && link.getAttribute('href') === '#gallery')) {
               link.classList.add('active');
             }
           });
         }
       });
     }
+
+    // Set initial active state on page load
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        updateActiveNav();
+      }, 100);
+    });
 
     // Header background on scroll
     let lastScrollTop = 0;
