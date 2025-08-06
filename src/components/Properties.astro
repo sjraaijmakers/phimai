@@ -321,17 +321,16 @@ const galleryImages = [
   }
 
   .property-details {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 4rem;
     margin-top: 4rem;
     padding-top: 4rem;
     border-top: 1px solid #F0F0F0;
   }
 
   .details-content {
-    display: flex;
-    gap: 3rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 4rem;
+    width: 100%;
   }
 
   .amenities h3,
@@ -344,7 +343,7 @@ const galleryImages = [
   }
 
   .amenities {
-    flex: 2;
+    width: 100%;
   }
 
   .amenities-grid {
@@ -357,6 +356,7 @@ const galleryImages = [
     align-items: center;
     gap: 0.75rem;
     color: #5A5A5A;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
   .amenity svg {
@@ -364,13 +364,14 @@ const galleryImages = [
   }
 
   .location-section {
-    flex: 1;
+    width: 100%;
   }
 
   .location-section p {
     color: #5A5A5A;
     line-height: 1.7;
     margin-bottom: 2rem;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
   .btn-map {
@@ -383,6 +384,7 @@ const galleryImages = [
     padding: 0.75rem 1.5rem;
     border: 1px solid #E0E0E0;
     transition: color 0.3s ease;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
   .btn-map:hover {
@@ -518,13 +520,8 @@ const galleryImages = [
       grid-template-columns: repeat(3, 1fr);
     }
 
-    .property-details {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-
     .details-content {
-      flex-direction: column;
+      grid-template-columns: 1fr;
       gap: 2rem;
     }
 
