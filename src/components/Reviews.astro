@@ -4,42 +4,43 @@
 <section id="reviews" class="reviews">
   <div class="container">
     <div class="section-header">
-      <h2>Book Your Stay</h2>
-      <p>Ready to experience Phimai? Book directly through our trusted platforms.</p>
+      <h2>Guest Reviews</h2>
+      <p>See what our guests say about their stay in Phimai.</p>
     </div>
 
-    <div class="booking-platforms">
-      <a href="https://airbnb.com/users/show/example" target="_blank" rel="noopener" class="platform-link airbnb">
-        <div class="platform-logo">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <path d="M16 1C7.7 1 1 7.7 1 16s6.7 15 15 15 15-6.7 15-15S24.3 1 16 1zm7.1 24.3c-.6 1.2-1.9 1.9-3.2 1.9-1.4 0-2.7-.8-3.3-2.1L16 23.5l-.6 1.6c-.6 1.3-1.9 2.1-3.3 2.1-1.3 0-2.6-.7-3.2-1.9C7.8 23.8 7.5 22 8.5 20.5l7.5-15 7.5 15c1 1.5.7 3.3-.4 4.8z" fill="#FF5A5F"/>
-          </svg>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">
+          <span>★★★★★</span>
         </div>
-        <div class="platform-content">
-          <h3>Book on Airbnb</h3>
-          <p>See reviews, photos, and book instantly</p>
+        <p>"Perfect location to explore Phimai Historical Park. The tiny home was cozy and had everything we needed. The free bikes were a great touch!"</p>
+        <div class="reviewer">
+          <strong>Sarah M.</strong>
+          <span>March 2024</span>
         </div>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M7 17l9.2-9.2M17 17V7H7"></path>
-        </svg>
-      </a>
-      
-      <a href="https://booking.com/hotel/example" target="_blank" rel="noopener" class="platform-link booking">
-        <div class="platform-logo">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <rect width="32" height="32" rx="4" fill="#003580"/>
-            <path d="M8 12h16v8H8z" fill="white"/>
-            <path d="M10 14h4v1h-4zm0 2h6v1h-6zm0 2h5v1h-5z" fill="#003580"/>
-          </svg>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">
+          <span>★★★★★</span>
         </div>
-        <div class="platform-content">
-          <h3>Book on Booking.com</h3>
-          <p>Compare prices and read guest reviews</p>
+        <p>"Authentic Thai experience in a comfortable setting. The host was incredibly helpful and the tuktuk transfer made our departure so easy."</p>
+        <div class="reviewer">
+          <strong>James L.</strong>
+          <span>February 2024</span>
         </div>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M7 17l9.2-9.2M17 17V7H7"></path>
-        </svg>
-      </a>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">
+          <span>★★★★★</span>
+        </div>
+        <p>"Loved the small town atmosphere. Walking to Sai Ngam mangrove was beautiful. The kitchenette had everything we needed for our 4-day stay."</p>
+        <div class="reviewer">
+          <strong>Emma K.</strong>
+          <span>January 2024</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -75,94 +76,57 @@
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
-  .booking-platforms {
+  .reviews-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
-    max-width: 800px;
-    margin: 0 auto;
   }
 
-  .platform-link {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    padding: 2rem;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    border: 2px solid #E5E5E5;
+  .review-card {
     background: white;
-    color: #2C2C2C;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
-  .platform-link.airbnb {
-    border-color: #FF5A5F;
+  .review-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
   }
 
-  .platform-link.airbnb:hover {
-    background: #FF5A5F;
-    color: white;
-    transform: translateY(-2px);
+  .review-stars {
+    margin-bottom: 1rem;
   }
 
-  .platform-link.booking {
-    border-color: #003580;
+  .review-stars span {
+    color: #FFD700;
+    font-size: 1.2rem;
   }
 
-  .platform-link.booking:hover {
-    background: #003580;
-    color: white;
-    transform: translateY(-2px);
-  }
-
-  .platform-logo {
-    flex-shrink: 0;
-  }
-
-  .platform-link.airbnb .platform-logo {
-    filter: none;
-  }
-
-  .platform-link.airbnb:hover .platform-logo {
-    filter: brightness(0) invert(1);
-  }
-
-  .platform-link.booking .platform-logo {
-    filter: none;
-  }
-
-  .platform-link.booking:hover .platform-logo {
-    filter: brightness(0) invert(1);
-  }
-
-  .platform-content h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: inherit;
-    margin: 0 0 0.5rem 0;
-  }
-
-  .platform-content p {
+  .review-card p {
     color: #5A5A5A;
-    margin: 0;
-    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-style: italic;
+  }
+
+  .reviewer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
-  .platform-link:hover .platform-content p {
-    color: rgba(255, 255, 255, 0.9);
+  .reviewer strong {
+    color: #2C2C2C;
+    font-weight: 600;
   }
 
-  .platform-link > svg {
-    color: #5A5A5A;
-    flex-shrink: 0;
-    width: 20px;
-    height: 20px;
-  }
-
-  .platform-link:hover > svg {
-    color: white;
+  .reviewer span {
+    color: #8A8A8A;
+    font-size: 0.9rem;
   }
 
   @media (max-width: 768px) {
@@ -170,25 +134,16 @@
       padding: 3rem 1rem;
     }
 
-    .booking-platforms {
-      grid-template-columns: 1fr;
-      gap: 1rem;
-    }
-
     .section-header h2 {
       font-size: 2rem;
     }
 
-    .platform-link {
+    .reviews-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .review-card {
       padding: 1.5rem;
-    }
-
-    .platform-content h3 {
-      font-size: 1.2rem;
-    }
-
-    .platform-content p {
-      font-size: 0.9rem;
     }
   }
 </style>
