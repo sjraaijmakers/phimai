@@ -1,0 +1,92 @@
+---
+interface Props {
+  id?: string;
+  className?: string;
+}
+
+const { id = "scrollToTop", className = "" } = Astro.props;
+---
+
+<button class={`scroll-to-top ${className}`} id={id} aria-label="Scroll to top">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <polyline points="18,15 12,9 6,15"></polyline>
+  </svg>
+</button>
+
+<script define:vars={{ buttonId: id }}>
+  // Scroll to top functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const scrollToTopBtn = document.getElementById(buttonId);
+    
+    if (scrollToTopBtn) {
+      // Show/hide scroll to top button based on scroll position
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+          scrollToTopBtn.classList.add('visible');
+        } else {
+          scrollToTopBtn.classList.remove('visible');
+        }
+      });
+      
+      // Scroll to top when button is clicked
+      scrollToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    }
+  });
+</script>
+
+<style>
+  .scroll-to-top {
+    background: rgba(139, 115, 85, 0.1);
+    border: 1px solid rgba(139, 115, 85, 0.2);
+    color: #8B7355;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: scale(0.8);
+    backdrop-filter: blur(10px);
+  }
+
+  .scroll-to-top.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .scroll-to-top:hover {
+    background: rgba(139, 115, 85, 0.2);
+    color: #8B7355;
+    transform: scale(1.05);
+  }
+
+  .scroll-to-top svg {
+    transition: transform 0.3s ease;
+  }
+
+  .scroll-to-top:hover svg {
+    transform: translateY(-1px);
+  }
+
+  /* Footer-specific styling */
+  .scroll-to-top.footer-style {
+    background: rgba(102, 102, 102, 0.1);
+    border: 1px solid rgba(102, 102, 102, 0.2);
+    color: #666;
+    width: 28px;
+    height: 28px;
+  }
+
+  .scroll-to-top.footer-style:hover {
+    background: rgba(102, 102, 102, 0.2);
+    color: #666;
+  }
+</style>

@@ -104,52 +104,152 @@ import Footer from '../components/Footer.astro';
     // Set initial active nav
     updateActiveNav();
 
-    // Gallery lightbox functionality
+    // Gallery lightbox functionality - using the same gallery images from the configuration
     const galleryImages = [
       {
-        src: "https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        src: "/images/tiny-home-exterior.jpg",
         alt: "Cozy tiny home exterior",
         description: "Our charming tiny home exterior with modern design"
       },
       {
-        src: "https://images.pexels.com/photos/1648776/pexels-photo-1648776.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        src: "/images/interior-living.jpg",
         alt: "Tiny home interior living space",
         description: "Comfortable living area with all essentials"
       },
       {
-        src: "https://images.pexels.com/photos/2029667/pexels-photo-2029667.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        src: "/images/phimai-temple.jpg",
         alt: "Phimai Historical Park nearby",
         description: "Ancient Khmer temple ruins just minutes away"
       },
       {
-        src: "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        src: "/images/family-suite.jpg",
         alt: "Family suite accommodation",
         description: "Spacious family accommodation for larger groups"
       },
       {
-        src: "https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        src: "/images/kitchenette.jpg",
         alt: "Kitchenette with essentials",
         description: "Fully equipped kitchenette for your convenience"
       },
       {
-        src: "https://images.pexels.com/photos/2724749/pexels-photo-2724749.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        src: "/images/bedroom.jpg",
         alt: "Comfortable bedroom space",
         description: "Cozy bedroom with quality linens"
       },
       {
-        src: "https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        alt: "Local market nearby",
-        description: "Fresh local produce and authentic Thai food"
+        src: "/images/free-bikes.jpg",
+        alt: "Free bikes for exploring",
+        description: "Complimentary bikes to explore Phimai at your own pace"
       },
       {
-        src: "https://images.pexels.com/photos/2506988/pexels-photo-2506988.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        src: "/images/sai-ngam-mangrove.jpg",
         alt: "Sai Ngam mangrove area",
         description: "Beautiful mangrove forest perfect for nature walks"
       },
       {
-        src: "https://images.pexels.com/photos/1320684/pexels-photo-1320684.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        alt: "Free bikes for exploring",
-        description: "Complimentary bikes to explore Phimai at your own pace"
+        src: "/images/PHOTO-2025-08-01-07-20-25 2.jpg",
+        alt: "Additional property view",
+        description: ""
+      },
+      {
+        src: "/images/PHOTO-2025-08-01-07-23-55.jpg",
+        alt: "Property detail",
+        description: ""
+      },
+      {
+        src: "/images/PHOTO-2025-08-01-07-23-55 2.jpg",
+        alt: "Property feature",
+        description: ""
+      },
+      {
+        src: "/images/PHOTO-2025-08-01-07-23-55 3.jpg",
+        alt: "Property amenity",
+        description: ""
+      },
+      {
+        src: "/images/PHOTO-2025-08-01-07-23-56.jpg",
+        alt: "Property view",
+        description: ""
+      },
+      {
+        src: "/images/PHOTO-2025-08-01-07-23-56 2.jpg",
+        alt: "Property detail",
+        description: ""
+      },
+      {
+        src: "/images/PHOTO-2025-08-01-07-23-56 3.jpg",
+        alt: "Property feature",
+        description: ""
+      },
+      {
+        src: "/images/PHOTO-2025-08-01-07-26-50.jpg",
+        alt: "Property amenity",
+        description: ""
+      },
+      {
+        src: "/images/PHOTO-2025-08-01-07-27-20.jpg",
+        alt: "Property view",
+        description: ""
+      },
+      {
+        src: "/images/PHOTO-2025-08-01-13-11-18.jpg",
+        alt: "Property detail",
+        description: ""
+      },
+      {
+        src: "/images/PHOTO-2025-08-01-13-11-26.jpg",
+        alt: "Property feature",
+        description: ""
+      },
+      {
+        src: "/images/PHOTO-2025-08-01-13-11-45.jpg",
+        alt: "Property amenity",
+        description: ""
+      },
+      {
+        src: "/images/PHOTO-2025-08-01-13-12-08.jpg",
+        alt: "Property view",
+        description: ""
+      },
+      {
+        src: "/images/PHOTO-2025-08-01-13-12-33.jpg",
+        alt: "Property detail",
+        description: ""
+      },
+      {
+        src: "/images/PHOTO-2025-08-01-13-12-55.jpg",
+        alt: "Property feature",
+        description: ""
+      },
+      {
+        src: "/images/PHOTO-2025-08-01-13-13-15.jpg",
+        alt: "Property amenity",
+        description: ""
+      },
+      {
+        src: "/images/PHOTO-2025-08-01-13-14-44.jpg",
+        alt: "Property view",
+        description: ""
+      },
+      {
+        src: "/images/PHOTO-2025-08-01-13-15-02.jpg",
+        alt: "Property detail",
+        description: ""
+      },
+      {
+        src: "/images/PHOTO-2025-08-01-13-15-36.jpg",
+        alt: "Property feature",
+        description: ""
+      },
+      {
+        src: "/images/PHOTO-2025-08-01-13-15-54.jpg",
+        alt: "Property amenity",
+        description: ""
+      },
+      {
+        src: "/images/PHOTO-2025-08-01-13-20-44.jpg",
+        alt: "Property view",
+        description: ""
       }
     ];
 

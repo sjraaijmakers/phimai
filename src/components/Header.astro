@@ -1,24 +1,47 @@
 ---
+import ScrollToTop from './ScrollToTop.astro';
 ---
 
 <header class="header">
-  <nav class="nav-container">
-    <div class="logo">
-      <h2>Phimai Pound House</h2>
-    </div>
-    <div class="nav-links">
-      <a href="#gallery">Gallery</a>
-      <a href="#reviews">Book Now</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </div>
-    <div class="mobile-menu-toggle">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </nav>
+  <div class="container">
+    <nav class="nav-container">
+             <div class="logo-section">
+         <h2 id="headerLogo">Phimai Pound House</h2>
+         <ScrollToTop id="headerScrollToTop" />
+       </div>
+      <div class="nav-links">
+        <a href="#gallery">Gallery</a>
+        <a href="#reviews">Book Now</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="mobile-menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+  </div>
 </header>
+
+<script>
+  // Make header logo clickable to scroll to top
+  document.addEventListener('DOMContentLoaded', () => {
+    const headerLogo = document.getElementById('headerLogo');
+    
+    if (headerLogo) {
+      headerLogo.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+      
+      // Add cursor pointer to indicate it's clickable
+      headerLogo.style.cursor = 'pointer';
+    }
+  });
+</script>
 
 <style>
   .header {
@@ -34,15 +57,19 @@
   }
 
   .nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 1rem 2rem;
+    padding: 1rem 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
-  .logo h2 {
+  .logo-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .logo-section h2 {
     margin: 0;
     color: #8B7355;
     font-family: 'Crimson Text', serif;
@@ -118,7 +145,7 @@
     }
 
     .nav-container {
-      padding: 1rem;
+      padding: 1rem 0;
     }
   }
 </style>

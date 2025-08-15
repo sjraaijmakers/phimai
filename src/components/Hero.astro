@@ -1,18 +1,21 @@
 ---
+import { heroImage } from '../data/images';
 ---
 
 <section class="hero">
-  <div class="hero-content">
-    <div class="hero-text">
-      <h1>Phimai Pound House</h1>
-      <p>Enjoy small town living in our comfortable tiny homes. Experience the tranquility of open spaces with modern amenities. Walk or bike to Phimai Historical Park, Sai Ngam mangrove, and local attractions—all just minutes away.</p>
-      <div class="hero-buttons">
-        <a href="#gallery" class="btn btn-primary">View Gallery</a>
-        <a href="#contact" class="btn btn-secondary">Check Availability</a>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1>Phimai Pound House</h1>
+        <p>Enjoy small town living in our comfortable tiny homes. Experience the tranquility of open spaces with modern amenities. Walk or bike to Phimai Historical Park, Sai Ngam mangrove, and local attractions—all just minutes away.</p>
+        <div class="hero-buttons">
+          <a href="#gallery" class="btn btn-primary">View Gallery</a>
+          <a href="#contact" class="btn btn-secondary">Check Availability</a>
+        </div>
       </div>
-    </div>
-    <div class="hero-image">
-      <img src="https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Cozy tiny home in Phimai" loading="eager" />
+      <div class="hero-image">
+        <img src={`/images/${heroImage.filename}`} alt={heroImage.alt} loading="eager" />
+      </div>
     </div>
   </div>
 </section>
@@ -27,8 +30,6 @@
   }
 
   .hero-content {
-    max-width: 1200px;
-    margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
