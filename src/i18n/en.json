@@ -1,0 +1,67 @@
+{
+  "nav": {
+    "gallery": "Gallery",
+    "bookNow": "Book Now",
+    "reviews": "Reviews",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "header": {
+    "logo": "Phimai Pond House"
+  },
+  "hero": {
+    "title": "Your Perfect Getaway",
+    "subtitle": "Experience authentic small-town Thailand living in our cozy tiny homes. Minutes from Phimai Historical Park and Sai Ngam mangrove. Free bike rentals included."
+  },
+  "about": {
+    "title": "Your Home Away From Home",
+    "intro": "Experience authentic small-town Thailand living in our cozy tiny homes. Whether you're a solo traveler seeking tranquility or a family wanting to explore together, our thoughtfully equipped spaces provide everything you need for a memorable stay in Phimai.",
+    "familySuite": {
+      "title": "Perfect for Groups",
+      "description": "Traveling with family or friends? Our spacious family suite comfortably accommodates 6 or more people, offering the same thoughtful amenities in a larger space perfect for group adventures."
+    },
+    "amenities": {
+      "title": "What's Included",
+      "washingMachine": "Washing machine and drying rack",
+      "kitchenette": "Kitchenette with essential appliances and utensils",
+      "snacks": "Complimentary snacks, coffee, and tea",
+      "bikes": "Free bike rentals for exploring",
+      "essentials": "Refrigerator, hairdryer, dishes, and home essentials",
+      "transfer": "Free tuktuk transfer to bus station (3+ nights)"
+    }
+  },
+  "gallery": {
+    "title": "Our Tiny Homes",
+    "subtitle": "Enjoy small town living when you stay in our cozy tiny homes. We offer the tranquility of open spaces without sacrificing comfort. Walk or bike to local dining, markets, and attractions—the ancient Phimai Historical Park and the iconic Sai Ngam mangrove—all just minutes away.",
+    "showMore": "more"
+  },
+  "location": {
+    "title": "Discover Phimai",
+    "description": "Immerse yourself in the rich history and natural beauty of Phimai. Our tiny homes are perfectly positioned to explore the ancient Khmer temple complex, the iconic Sai Ngam banyan tree forest, and the charming local markets. Experience authentic Thai culture in this peaceful small town setting.",
+    "openMaps": "Open in Google Maps"
+  },
+  "booking": {
+    "title": "Book Your Stay",
+    "subtitle": "Ready to experience Phimai? Book directly through our trusted platforms",
+    "airbnb": "Book on Airbnb",
+    "booking": "Book on Booking.com",
+    "airbnbDescription": "Browse photos, read reviews, and book instantly",
+    "bookingDescription": "Secure booking with flexible cancellation options"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "email": "Email",
+    "message": "Message",
+    "messagePlaceholder": "Tell us about your travel plans and any questions you have...",
+    "sendMessage": "Send Message"
+  },
+  "footer": {
+    "copyright": "All rights reserved.",
+    "languageSelector": "Language"
+  },
+  "page": {
+    "title": "Phimai Pond House - Cozy Tiny Homes in Thailand",
+    "description": "Stay in cozy tiny homes at Phimai Pond House, Thailand. Minutes from Phimai Historical Park and Sai Ngam mangrove. Free bikes, kitchenette, and authentic Thai experience.",
+    "keywords": "Phimai accommodation, Thailand tiny homes, Phimai Historical Park, vacation rental Thailand, small town Thailand"
+  }
+}

@@ -1,4 +1,5 @@
 ---
+import { siteConfig } from '../config/site';
 ---
 
 <section id="contact" class="contact">
@@ -18,7 +19,7 @@
             </div>
             <div class="contact-details">
               <h4>Email</h4>
-              <a href="mailto:stay@phimaitinyhomes.com">stay@phimaitinyhomes.com</a>
+              <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
             </div>
           </div>
 
@@ -30,22 +31,10 @@
             </div>
             <div class="contact-details">
               <h4>Phone</h4>
-              <a href="tel:+66123456789">+66 12 345 6789</a>
+              <a href={`tel:${siteConfig.phone}`}>{siteConfig.phone}</a>
             </div>
           </div>
 
-          <div class="contact-method">
-            <div class="contact-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"></circle>
-                <polyline points="12,6 12,12 16,14"></polyline>
-              </svg>
-            </div>
-            <div class="contact-details">
-              <h4>Response Time</h4>
-              <span>Usually within 1 hour</span>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -54,18 +43,13 @@
           <h3>Contact Us</h3>
           
           <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" required>
-          </div>
-
-          <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
           </div>
 
           <div class="form-group">
             <label for="message">Message</label>
-            <textarea id="message" name="message" rows="5" placeholder="Tell us about your travel plans and any questions you have..."></textarea>
+            <textarea id="message" name="message" rows="5" minlength="10" maxlength="1000" placeholder="Tell us about your travel plans and any questions you have..." required style="resize: vertical;"></textarea>
           </div>
 
           <button type="submit" class="btn btn-primary">Send Message</button>

@@ -1,0 +1,33 @@
+{
+  "nav": {
+    "gallery": "画廊",
+    "bookNow": "立即预订",
+    "reviews": "评论",
+    "about": "关于",
+    "contact": "联系"
+  },
+  "header": {
+    "logo": "Phimai Pond House"
+  },
+  "hero": {
+    "title": "您的完美度假胜地",
+    "subtitle": "在我们的舒适小木屋中体验正宗的泰国小镇生活。距离披迈历史公园和赛南红树林仅数分钟路程。包含免费自行车租赁。"
+  },
+  "booking": {
+    "title": "预订您的住宿",
+    "subtitle": "准备体验披迈了吗？通过我们值得信赖的平台直接预订",
+    "airbnb": "在Airbnb上预订",
+    "booking": "在Booking.com上预订",
+    "airbnbDescription": "浏览照片、阅读评论并即时预订",
+    "bookingDescription": "安全预订，灵活的取消选项"
+  },
+  "footer": {
+    "copyright": "版权所有。",
+    "languageSelector": "语言"
+  },
+  "page": {
+    "title": "Phimai Pond House - 泰国舒适小木屋",
+    "description": "在泰国披迈池塘屋的舒适小木屋中住宿。距离披迈历史公园和赛南红树林仅数分钟路程。免费自行车、小厨房和正宗泰国体验。",
+    "keywords": "披迈住宿, 泰国小木屋, 披迈历史公园, 泰国度假租赁, 泰国小镇"
+  }
+}
