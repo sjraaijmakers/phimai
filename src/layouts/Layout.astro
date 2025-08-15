@@ -26,7 +26,7 @@ const { title = "Phimai Pound House - Cozy Tiny Homes in Thailand" } = Astro.pro
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
   </head>
   <body>
     <slot />
@@ -34,21 +34,27 @@ const { title = "Phimai Pound House - Cozy Tiny Homes in Thailand" } = Astro.pro
 </html>
 
 <style is:global>
+  :root {
+    --border-radius: 12px;
+    --border-radius-sm: 8px;
+    --border-radius-lg: 16px;
+  }
+
   * {
     box-sizing: border-box;
   }
 
   html {
     scroll-behavior: smooth;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
   body {
     margin: 0;
     padding: 0;
     line-height: 1.6;
-    color: #2C2C2C;
-    background: #FFFFFF;
+    color: #3A3A3A;
+    background: #FEFEFE;
   }
 
   img {
@@ -83,50 +89,51 @@ const { title = "Phimai Pound House - Cozy Tiny Homes in Thailand" } = Astro.pro
     align-items: center;
     justify-content: center;
     padding: 1rem 2rem;
-    border-radius: 8px;
+    border-radius: var(--border-radius-sm);
     text-decoration: none;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 1rem;
     letter-spacing: 0.02em;
     transition: all 0.3s ease;
     cursor: pointer;
     border: none;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
   .btn-primary {
-    background: #2C2C2C;
+    background: #8B7355;
     color: #FFFFFF;
-    box-shadow: 0 2px 10px rgba(44, 44, 44, 0.15);
+    box-shadow: 0 2px 10px rgba(139, 115, 85, 0.25);
   }
 
   .btn-primary:hover {
-    background: #8B7355;
+    background: #6B5A47;
     transform: translateY(-2px);
-    box-shadow: 0 4px 20px rgba(44, 44, 44, 0.25);
+    box-shadow: 0 4px 20px rgba(139, 115, 85, 0.35);
   }
 
   .btn-secondary {
     background: transparent;
-    color: #2C2C2C;
-    border: 1px solid #2C2C2C;
+    color: #8B7355;
+    border: 1px solid #8B7355;
   }
 
   .btn-secondary:hover {
-    background: #2C2C2C;
+    background: #8B7355;
     color: #FFFFFF;
     transform: translateY(-2px);
   }
 
   .btn-outline {
     background: transparent;
-    color: #5A5A5A;
-    border: 1px solid #E0E0E0;
+    color: #8B7355;
+    border: 1px solid #D4C4B0;
   }
 
   .btn-outline:hover {
     color: #8B7355;
     border-color: #8B7355;
+    background: rgba(139, 115, 85, 0.05);
   }
   /* Loading animation */
   @keyframes fadeIn {
