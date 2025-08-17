@@ -3,7 +3,7 @@ import { languages, defaultLang } from '../i18n/ui';
 ---
 
 <div class="language-selector">
-  <label for="language-select">Language</label>
+  <label for="language-select" data-i18n="language.label" />
   <select id="language-select" class="language-select">
     {Object.entries(languages).map(([code, name]) => (
       <option value={code} selected={code === defaultLang}>
