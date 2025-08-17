@@ -1,10 +1,16 @@
 ---
 import { siteConfig } from '../config/site';
+import { galleryImages as rawGalleryImages } from '../data/images';
+
+// Get the first image from gallery for hero background
+const heroImage = rawGalleryImages[0];
+const heroImageSrc = `/images/${heroImage.filename}`;
+const heroImageAlt = heroImage.alt;
 ---
 
 <section class="hero">
   <div class="hero-background">
-    <img src="/images/hero-tiny-home.jpg" alt="Cozy tiny home at Phimai Pond House" class="hero-image">
+    <img src={heroImageSrc} alt={heroImageAlt} class="hero-image">
     <div class="hero-overlay"></div>
   </div>
   

@@ -1,8 +1,13 @@
 ---
-import { siteConfig } from '../config/site';
-import { galleryImages } from '../data/images';
+import { galleryImages as rawGalleryImages } from '../data/images';
 import Lightbox from './Lightbox.astro';
 
+// Convert to the format expected by the lightbox
+const galleryImages = rawGalleryImages.map(img => ({
+  src: `/images/${img.filename}`,
+  alt: img.alt,
+  description: img.description || ''
+}));
 
 const maxImages = 5;
 ---
@@ -18,14 +23,14 @@ const maxImages = 5;
       <div class="gallery-grid">
         {galleryImages.slice(0, maxImages).map((image, index) => (
           <div class={`gallery-item ${index === 0 ? 'featured' : ''}`} data-index={index}>
-            <img src={`/images/${image.filename}`} alt={image.alt} />
+            <img src={image.src} alt={image.alt} />
           </div>
         ))}
       </div>
       
       {galleryImages.length > maxImages && (
         <div class="gallery-more">
-          <button class="btn btn-secondary" onclick="showMoreImages()">
+          <button class="btn btn-secondary" onclick="openLightbox(0)">
             <span data-i18n="gallery.showMore" />
           </button>
         </div>
@@ -34,53 +39,20 @@ const maxImages = 5;
   </div>
 </section>
 
-      <Lightbox images={galleryImages} />
+<Lightbox images={galleryImages} />
 
-  <script define:vars={{ galleryImages, maxImages }}>
+<script define:vars={{ galleryImages, maxImages }}>
   // Gallery functionality
   document.addEventListener('DOMContentLoaded', () => {
     // Gallery click handlers
     const galleryItems = document.querySelectorAll('.gallery-item');
     galleryItems.forEach((item, index) => {
       item.addEventListener('click', () => {
-        (window as any).openLightbox(index);
+        if (typeof window.openLightbox === 'function') {
+          window.openLightbox(index);
+        }
       });
     });
-
-    // Show more images functionality
-    (window as any).showMoreImages = function() {
-      const galleryGrid = document.querySelector('.gallery-grid');
-      const showMoreBtn = document.querySelector('.gallery-more');
-      
-      if (galleryGrid) {
-        // Add all remaining images to the grid
-        const currentItems = galleryGrid.querySelectorAll('.gallery-item');
-        const totalImages = galleryImages.length;
-        
-        for (let i = currentItems.length; i < totalImages; i++) {
-          const newItem = document.createElement('div');
-          newItem.className = 'gallery-item';
-          newItem.setAttribute('data-index', i.toString());
-          
-          const img = document.createElement('img');
-          img.src = `/images/${galleryImages[i].filename}`;
-          img.alt = galleryImages[i].alt;
-          
-          newItem.appendChild(img);
-          galleryGrid.appendChild(newItem);
-          
-          // Add click handler for new item
-          newItem.addEventListener('click', () => {
-            (window as any).openLightbox(i);
-          });
-        }
-        
-        galleryGrid.classList.add('expanded');
-        if (showMoreBtn) {
-          (showMoreBtn as HTMLElement).style.display = 'none';
-        }
-      }
-    };
   });
 </script>
 

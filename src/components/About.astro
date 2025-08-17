@@ -1,15 +1,13 @@
 ---
 import { siteConfig } from '../config/site';
-import { WashingMachine, Utensils, Coffee, Package, Bike, Users } from 'lucide-astro';
+import { WashingMachine, Utensils, Coffee, Package, Bike, Users, Car } from 'lucide-astro';
 ---
 
 <section id="about" class="about section">
   <div class="container">
-    <div class="about-header">
-      <h2 data-i18n="about.title" />
-    </div>
     <div class="about-content">
       <div class="about-info">
+        <h2 data-i18n="about.title" />
         <p data-i18n="about.intro" />
         
         <div class="bikes-section">
@@ -63,7 +61,7 @@ import { WashingMachine, Utensils, Coffee, Package, Bike, Users } from 'lucide-a
           </div>
           <div class="amenity-item">
             <div class="amenity-icon">
-              <Bike size={20} />
+              <Car size={20} />
             </div>
             <span data-i18n="about.amenities.transfer" />
           </div>

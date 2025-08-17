@@ -27,7 +27,7 @@
         "culture": "Local Thai Culture"
       }
     },
-    "showMore": "Show More Photos"
+    "showMore": "View All Photos"
   },
   "about": {
     "title": "Your Home Away From Home",
@@ -48,7 +48,7 @@
   },
   "booking": {
     "title": "Book Your Stay",
-    "subtitle": "Ready to experience Phimai? Book directly through our trusted platforms",
+    "subtitle": "Ready to experience Phimai? Book directly through our trusted platforms!",
     "airbnb": "Book on Airbnb",
     "booking": "Book on Booking.com"
   },
