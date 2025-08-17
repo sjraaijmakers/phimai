@@ -1,10 +1,18 @@
 ---
 import { X, ChevronLeft, ChevronRight } from 'lucide-astro';
-interface Props {
-  id?: string;
+
+interface ImageData {
+  filename: string;
+  alt: string;
+  description?: string;
 }
 
-const { id = "lightbox" } = Astro.props;
+interface Props {
+  id?: string;
+  images?: ImageData[];
+}
+
+const { id = "lightbox", images = [] } = Astro.props;
 ---
 
 <div id={id} class="lightbox">
@@ -22,6 +30,87 @@ const { id = "lightbox" } = Astro.props;
     </button>
   </div>
 </div>
+
+<script define:vars={{ lightboxId: id, imageData: images }}>
+  // Lightbox functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const lightbox = document.getElementById(lightboxId);
+    const lightboxImage = document.getElementById('lightbox-image');
+    const lightboxText = document.getElementById('lightbox-text');
+    const lightboxClose = lightbox?.querySelector('.lightbox-close');
+    const lightboxPrev = lightbox?.querySelector('.lightbox-prev');
+    const lightboxNext = lightbox?.querySelector('.lightbox-next');
+    
+    let currentImageIndex = 0;
+    
+    // Open lightbox function
+    window.openLightbox = function(index) {
+      if (!lightbox || !lightboxImage || !lightboxText || !imageData[index]) return;
+      
+      currentImageIndex = index;
+      lightboxImage.src = `/images/${imageData[index].filename}`;
+      lightboxImage.alt = imageData[index].alt;
+      lightboxText.textContent = imageData[index].alt;
+      lightbox.classList.add('active');
+    };
+    
+    // Close lightbox function
+    function closeLightbox() {
+      if (lightbox) {
+        lightbox.classList.remove('active');
+      }
+    }
+    
+    // Navigation functions
+    function showPrevImage() {
+      currentImageIndex = (currentImageIndex - 1 + imageData.length) % imageData.length;
+      openLightbox(currentImageIndex);
+    }
+    
+    function showNextImage() {
+      currentImageIndex = (currentImageIndex + 1) % imageData.length;
+      openLightbox(currentImageIndex);
+    }
+    
+    // Event listeners
+    if (lightboxClose) {
+      lightboxClose.addEventListener('click', closeLightbox);
+    }
+    
+    if (lightboxPrev) {
+      lightboxPrev.addEventListener('click', showPrevImage);
+    }
+    
+    if (lightboxNext) {
+      lightboxNext.addEventListener('click', showNextImage);
+    }
+    
+    if (lightbox) {
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+          closeLightbox();
+        }
+      });
+    }
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox || !lightbox?.classList.contains('active')) return;
+      
+      switch(e.key) {
+        case 'Escape':
+          closeLightbox();
+          break;
+        case 'ArrowLeft':
+          showPrevImage();
+          break;
+        case 'ArrowRight':
+          showNextImage();
+          break;
+      }
+    });
+  });
+</script>
 
 
 

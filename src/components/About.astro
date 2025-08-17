@@ -1,6 +1,6 @@
 ---
 import { siteConfig } from '../config/site';
-import { Wifi, Coffee, Car, Utensils, WashingMachine, CheckCircle, Package } from 'lucide-astro';
+import { WashingMachine, Utensils, Coffee, Package, Bike, Users } from 'lucide-astro';
 ---
 
 <section id="about" class="about section">
@@ -9,27 +9,36 @@ import { Wifi, Coffee, Car, Utensils, WashingMachine, CheckCircle, Package } fro
       <div class="about-info">
         <h2 data-i18n="about.title" />
         <p data-i18n="about.intro" />
+        
+        <div class="bikes-section">
+          <div class="bikes-feature">
+            <div class="bikes-icon">
+              <Bike size={24} />
+            </div>
+            <p data-i18n="about.bikes" />
+          </div>
+        </div>
+
+        <div class="family-suite-section">
+          <div class="family-feature">
+            <div class="family-icon">
+              <Users size={24} />
+            </div>
+            <div class="family-content">
+              <h3 data-i18n="about.familySuite.title" />
+              <p data-i18n="about.familySuite.description" />
+            </div>
+          </div>
+        </div>
 
         <div class="amenities">
           <h3 data-i18n="about.amenities.title" />
-          <div class="amenities-grid">
+          <div class="amenities-list">
             <div class="amenity-item">
               <div class="amenity-icon">
-                <Wifi size={20} />
+                <WashingMachine size={20} />
               </div>
-              <span data-i18n="about.amenities.wifi" />
-            </div>
-            <div class="amenity-item">
-              <div class="amenity-icon">
-                <Coffee size={20} />
-              </div>
-              <span data-i18n="about.amenities.coffee" />
-            </div>
-            <div class="amenity-item">
-              <div class="amenity-icon">
-                <Car size={20} />
-              </div>
-              <span data-i18n="about.amenities.freeBikes" />
+              <span data-i18n="about.amenities.washingMachine" />
             </div>
             <div class="amenity-item">
               <div class="amenity-icon">
@@ -39,29 +48,27 @@ import { Wifi, Coffee, Car, Utensils, WashingMachine, CheckCircle, Package } fro
             </div>
             <div class="amenity-item">
               <div class="amenity-icon">
-                <WashingMachine size={20} />
+                <Coffee size={20} />
               </div>
-              <span data-i18n="about.amenities.washingMachine" />
+              <span data-i18n="about.amenities.snacks" />
             </div>
             <div class="amenity-item">
               <div class="amenity-icon">
                 <Package size={20} />
+              </div>
+              <span data-i18n="about.amenities.essentials" />
+            </div>
+            <div class="amenity-item">
+              <div class="amenity-icon">
+                <Bike size={20} />
               </div>
               <span data-i18n="about.amenities.transfer" />
             </div>
           </div>
         </div>
 
-        <div class="conclusion-section">
-          <div class="feature">
-            <div class="feature-icon">
-              <CheckCircle size={24} />
-            </div>
-            <div class="feature-content">
-              <h3 data-i18n="about.familySuite.title" />
-              <p data-i18n="about.familySuite.description" />
-            </div>
-          </div>
+        <div class="conclusion">
+          <p data-i18n="about.conclusion" />
         </div>
       </div>
 

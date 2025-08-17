@@ -31,9 +31,9 @@
       "mangrove": "赛南红树林",
       "localMarkets": "当地市场和餐饮",
       "features": {
-        "parking": "免费停车",
-        "transport": "便捷交通",
-        "attractions": "附近景点"
+        "temple": "古代高棉寺庙",
+        "mangrove": "赛南榕树",
+        "culture": "当地泰国文化"
       }
     },
     "map": {

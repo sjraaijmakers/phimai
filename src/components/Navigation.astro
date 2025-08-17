@@ -7,10 +7,45 @@ const { className = "" } = Astro.props;
 ---
 
 <nav class={`navigation ${className}`}>
-      <a href="#gallery" data-i18n="nav.gallery"><span /></a>
-    <a href="#booking" data-i18n="nav.bookNow"><span /></a>
-    <a href="#about" data-i18n="nav.about"><span /></a>
-    <a href="#contact" data-i18n="nav.contact"><span /></a>
+  <a href="#gallery" data-i18n="nav.gallery" class="nav-link"><span /></a>
+  <a href="#booking" data-i18n="nav.bookNow" class="nav-link"><span /></a>
+  <a href="#about" data-i18n="nav.about" class="nav-link"><span /></a>
+  <a href="#contact" data-i18n="nav.contact" class="nav-link"><span /></a>
 </nav>
+
+<script>
+  // Active navigation functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('section[id]');
+    
+    function updateActiveNav() {
+      const scrollPosition = window.scrollY + 100; // Offset for header height
+      
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+        
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+          // Remove active class from all nav links
+          navLinks.forEach(link => link.classList.remove('active'));
+          
+          // Add active class to corresponding nav link
+          const activeLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+          if (activeLink) {
+            activeLink.classList.add('active');
+          }
+        }
+      });
+    }
+    
+    // Update on scroll
+    window.addEventListener('scroll', updateActiveNav);
+    
+    // Update on page load
+    updateActiveNav();
+  });
+</script>
 
 

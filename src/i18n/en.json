@@ -33,9 +33,9 @@
       "mangrove": "Sai Ngam Mangrove",
       "localMarkets": "Local Markets & Dining",
       "features": {
-        "parking": "Free Parking",
-        "transport": "Easy Transport",
-        "attractions": "Nearby Attractions"
+        "temple": "Ancient Khmer Temple",
+        "mangrove": "Sai Ngam Banyan Trees",
+        "culture": "Local Thai Culture"
       }
     },
     "map": {
@@ -46,20 +46,18 @@
   "about": {
     "title": "Your Home Away From Home",
     "intro": "Enjoy small town living when you stay in our cozy tiny homes. We offer the tranquility of open spaces without sacrificing comfort. Walk or bike to local dining, markets, and attractions— the ancient Phimai Historical Park and the iconic Sai Ngam mangrove - all just minutes away.",
+    "bikes": "We offer free bike rentals, so that you can explore on your own.",
     "familySuite": {
       "title": "Perfect for Groups",
       "description": "In addition to our tiny homes, we offer a family suite that may accommodate 6 or more people."
     },
     "amenities": {
-      "title": "What's Included",
-      "wifi": "Free WiFi throughout the property",
-      "coffee": "Complimentary coffee and tea",
-      "freeBikes": "Free bicycles for exploring",
+      "title": "Each home includes:",
       "washingMachine": "A washing machine and drying rack for your convenience",
-      "kitchenette": "A kitchenette with essential appliances and utensils",
-      "snacks": "Complimentary snacks, coffee and tea",
+      "kitchenette": "A kitchenette with essential appliances and utensils—perfect for preparing meals with local market finds",
+      "snacks": "Complimentary snacks, coffee and tea.",
       "essentials": "A refrigerator, hairdryer, dishes, and other home essentials",
-      "transfer": "Complimentary transfer to local bus station via tuktuk with minimum 3 night stay"
+      "transfer": "Complimentary transfer to local bus station via tuktuk with minimum 3 night stay."
     },
     "conclusion": "Whether you're here to explore local history or simply relax, our tiny homes offer the perfect mix of comfort, and convenience."
   },
