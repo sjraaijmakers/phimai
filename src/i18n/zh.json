@@ -29,11 +29,17 @@
       "description": "坐落在披迈中心，您将享受开放空间的宁静，同时距离古老的披迈历史公园和标志性的赛南红树林仅数分钟路程。包含免费自行车租赁，便于探索。",
       "historicalPark": "披迈历史公园",
       "mangrove": "赛南红树林",
-      "localMarkets": "当地市场和餐饮"
+      "localMarkets": "当地市场和餐饮",
+      "features": {
+        "parking": "免费停车",
+        "transport": "便捷交通",
+        "attractions": "附近景点"
+      }
     },
     "map": {
       "placeholder": "交互式地图即将推出"
-    }
+    },
+    "showMore": "显示更多照片"
   },
   "about": {
     "title": "您的家外之家",
@@ -44,6 +50,9 @@
     },
     "amenities": {
       "title": "包含内容",
+      "wifi": "全屋免费WiFi",
+      "coffee": "免费咖啡和茶",
+      "freeBikes": "免费自行车探索",
       "washingMachine": "为您提供便利的洗衣机和晾衣架",
       "kitchenette": "配备基本电器和厨具的小厨房",
       "snacks": "免费小吃、咖啡和茶",

@@ -2,33 +2,32 @@
 import { siteConfig } from '../config/site';
 import { galleryImages } from '../data/images';
 import Lightbox from './Lightbox.astro';
+import { Play, Layers, MapPin } from 'lucide-astro';
 ---
 
-<section id="gallery" class="properties">
+<section id="gallery" class="properties section">
   <div class="container">
     <div class="properties-content">
-      <div class="properties-header">
-            <h2 data-i18n="gallery.title" />
-    <p data-i18n="gallery.subtitle" />
+      <div class="section-header">
+        <h2 class="section-title" data-i18n="gallery.title" />
+        <p class="section-subtitle" data-i18n="gallery.subtitle" />
       </div>
 
       <div class="gallery-grid">
-        <div class="gallery-item featured" data-index={0}>
-          <img src="/images/tiny-home-exterior.jpg" alt="Tiny home exterior" loading="lazy">
-        </div>
-        <div class="gallery-item" data-index={1}>
-          <img src="/images/interior-living.jpg" alt="Tiny home interior living space" loading="lazy">
-        </div>
-        <div class="gallery-item" data-index={2}>
-          <img src="/images/bedroom.jpg" alt="Comfortable bedroom space" loading="lazy">
-        </div>
-        <div class="gallery-item" data-index={3}>
-          <img src="/images/kitchenette.jpg" alt="Kitchenette with essentials" loading="lazy">
-        </div>
-        <div class="gallery-item" data-index={4}>
-          <img src="/images/family-suite.jpg" alt="Family suite accommodation" loading="lazy">
-        </div>
+        {galleryImages.slice(0, 12).map((image, index) => (
+          <div class={`gallery-item ${index === 0 ? 'featured' : ''}`} data-index={index}>
+            <img src={image.src} alt={image.alt} />
+          </div>
+        ))}
       </div>
+      
+      {galleryImages.length > 12 && (
+        <div class="gallery-more">
+          <button class="btn btn-secondary" onclick="showMoreImages()">
+            <span data-i18n="gallery.showMore" />
+          </button>
+        </div>
+      )}
 
       <div class="location-section">
         <div class="location-info">
@@ -38,45 +37,32 @@ import Lightbox from './Lightbox.astro';
           <div class="location-features">
             <div class="location-feature">
               <div class="feature-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                  <circle cx="12" cy="10" r="3"></circle>
-                </svg>
+                <Play size={16} />
               </div>
-              <span data-i18n="gallery.location.historicalPark" />
+              <span data-i18n="gallery.location.features.parking" />
             </div>
             <div class="location-feature">
               <div class="feature-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                  <circle cx="12" cy="10" r="3"></circle>
-                </svg>
+                <Layers size={16} />
               </div>
-              <span data-i18n="gallery.location.mangrove" />
+              <span data-i18n="gallery.location.features.transport" />
             </div>
             <div class="location-feature">
               <div class="feature-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                  <circle cx="12" cy="10" r="3"></circle>
-                </svg>
+                <MapPin size={16} />
               </div>
-              <span data-i18n="gallery.location.localMarkets" />
+              <span data-i18n="gallery.location.features.attractions" />
             </div>
           </div>
         </div>
 
         <div class="location-map">
           <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3825.1234567890123!2d102.494444!3d15.223333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTXCsDEzJzI0LjAiTiAxMDLCsDI5JzQwLjAiRQ!5e0!3m2!1sen!2sth!4v1234567890123"
-            width="100%" 
-            height="300" 
-            style="border:0;" 
+            class="map-iframe"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3825.5!2d102.5!3d15.2!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTXCsDEyJzAwLjAiTiAxMDLCsDMwJzAwLjAiRQ!5e0!3m2!1sen!2sth!4v1234567890"
             allowfullscreen="" 
             loading="lazy" 
-            referrerpolicy="no-referrer-when-downgrade"
-            title="Phimai Pond House Location"
-            class="map-iframe">
+            referrerpolicy="no-referrer-when-downgrade">
           </iframe>
         </div>
       </div>
@@ -89,69 +75,106 @@ import Lightbox from './Lightbox.astro';
 <script>
   // Gallery lightbox functionality
   document.addEventListener('DOMContentLoaded', () => {
-    const galleryImages = [
-      {
-        src: "/images/tiny-home-exterior.jpg",
-        alt: "Tiny home exterior",
-        description: "Our charming tiny home exterior with modern design"
-      },
-      {
-        src: "/images/interior-living.jpg",
-        alt: "Tiny home interior living space",
-        description: "Comfortable living area with all essentials"
-      },
-      {
-        src: "/images/bedroom.jpg",
-        alt: "Comfortable bedroom space",
-        description: "Cozy bedroom with quality linens"
-      },
-      {
-        src: "/images/kitchenette.jpg",
-        alt: "Kitchenette with essentials",
-        description: "Fully equipped kitchenette for your convenience"
-      },
-      {
-        src: "/images/family-suite.jpg",
-        alt: "Family suite accommodation",
-        description: "Spacious family accommodation for larger groups"
-      }
-    ];
-
     const lightbox = document.getElementById('lightbox');
     const lightboxImage = document.getElementById('lightbox-image');
     const lightboxText = document.getElementById('lightbox-text');
     const closeBtn = document.querySelector('.lightbox-close');
     const prevBtn = document.querySelector('.lightbox-prev');
     const nextBtn = document.querySelector('.lightbox-next');
-    
+
+    // Get the actual gallery images from the data
+    const galleryImagesData = [
+      { src: '/images/tiny-home-exterior.jpg', alt: 'Tiny home exterior view' },
+      { src: '/images/interior-living.jpg', alt: 'Tiny home interior living space' },
+      { src: '/images/phimai-temple.jpg', alt: 'Phimai Historical Park nearby' },
+      { src: '/images/family-suite.jpg', alt: 'Family suite accommodation' },
+      { src: '/images/kitchenette.jpg', alt: 'Kitchenette with essentials' },
+      { src: '/images/bedroom.jpg', alt: 'Comfortable bedroom space' },
+      { src: '/images/free-bikes.jpg', alt: 'Free bikes for exploring' },
+      { src: '/images/sai-ngam-mangrove.jpg', alt: 'Sai Ngam mangrove area' },
+      { src: '/images/bedroom-comfort.jpg', alt: 'Comfortable bedroom' },
+      { src: '/images/bedroom-cozy.jpg', alt: 'Cozy bedroom setting' },
+      { src: '/images/bedroom-modern.jpg', alt: 'Modern bedroom design' },
+      { src: '/images/bedroom-storage.jpg', alt: 'Bedroom with storage' },
+      { src: '/images/bedroom-warmth.jpg', alt: 'Warm bedroom atmosphere' },
+      { src: '/images/bedroom-corner.jpg', alt: 'Bedroom corner view' },
+      { src: '/images/bedroom-detail.jpg', alt: 'Bedroom detail' },
+      { src: '/images/bedroom-evening.jpg', alt: 'Bedroom evening view' },
+      { src: '/images/bedroom-light.jpg', alt: 'Bedroom with natural light' },
+      { src: '/images/bedroom-sunset.jpg', alt: 'Bedroom sunset view' },
+      { src: '/images/bedroom-window.jpg', alt: 'Bedroom window view' },
+      { src: '/images/bathroom-elegant.jpg', alt: 'Elegant bathroom' },
+      { src: '/images/bathroom-interior.jpg', alt: 'Bathroom interior' },
+      { src: '/images/bathroom-shower.jpg', alt: 'Bathroom shower' },
+      { src: '/images/bathroom-sink.jpg', alt: 'Bathroom sink' },
+      { src: '/images/kitchen-appliances.jpg', alt: 'Kitchen appliances' },
+      { src: '/images/kitchen-area.jpg', alt: 'Kitchen area' },
+      { src: '/images/kitchen-counter.jpg', alt: 'Kitchen counter' },
+      { src: '/images/kitchen-cozy.jpg', alt: 'Cozy kitchen' },
+      { src: '/images/kitchen-detail.jpg', alt: 'Kitchen detail' },
+      { src: '/images/kitchen-living.jpg', alt: 'Kitchen living area' },
+      { src: '/images/kitchen-modern.jpg', alt: 'Modern kitchen' },
+      { src: '/images/living-comfort.jpg', alt: 'Comfortable living area' },
+      { src: '/images/living-cozy.jpg', alt: 'Cozy living space' },
+      { src: '/images/living-elegant.jpg', alt: 'Elegant living area' },
+      { src: '/images/living-modern.jpg', alt: 'Modern living space' },
+      { src: '/images/living-room-view.jpg', alt: 'Living room view' },
+      { src: '/images/living-space.jpg', alt: 'Living space' },
+      { src: '/images/dining-area.jpg', alt: 'Dining area' },
+      { src: '/images/dining-cozy.jpg', alt: 'Cozy dining area' },
+      { src: '/images/dining-elegant.jpg', alt: 'Elegant dining area' },
+      { src: '/images/dining-sunset.jpg', alt: 'Dining sunset view' },
+      { src: '/images/exterior-cozy.jpg', alt: 'Cozy exterior' },
+      { src: '/images/exterior-day.jpg', alt: 'Exterior day view' },
+      { src: '/images/exterior-elegant.jpg', alt: 'Elegant exterior' },
+      { src: '/images/exterior-entrance.jpg', alt: 'Exterior entrance' },
+      { src: '/images/exterior-evening.jpg', alt: 'Exterior evening view' },
+      { src: '/images/exterior-garden.jpg', alt: 'Exterior garden' },
+      { src: '/images/exterior-night.jpg', alt: 'Exterior night view' },
+      { src: '/images/exterior-side.jpg', alt: 'Exterior side view' },
+      { src: '/images/exterior-sunset.jpg', alt: 'Exterior sunset view' },
+      { src: '/images/garden-cozy.jpg', alt: 'Cozy garden' },
+      { src: '/images/garden-lounge.jpg', alt: 'Garden lounge' },
+      { src: '/images/garden-path.jpg', alt: 'Garden path' },
+      { src: '/images/garden-terrace.jpg', alt: 'Garden terrace' },
+      { src: '/images/garden-view.jpg', alt: 'Garden view' },
+      { src: '/images/outdoor-cozy.jpg', alt: 'Cozy outdoor area' },
+      { src: '/images/outdoor-dining.jpg', alt: 'Outdoor dining' },
+      { src: '/images/outdoor-lounge.jpg', alt: 'Outdoor lounge' },
+      { src: '/images/outdoor-seating.jpg', alt: 'Outdoor seating' },
+      { src: '/images/outdoor-sunset.jpg', alt: 'Outdoor sunset view' },
+      { src: '/images/terrace-cozy.jpg', alt: 'Cozy terrace' },
+      { src: '/images/terrace-dining.jpg', alt: 'Terrace dining' },
+      { src: '/images/terrace-view.jpg', alt: 'Terrace view' }
+    ];
+
     let currentImageIndex = 0;
 
     function openLightbox(index: number) {
       currentImageIndex = index;
-      const image = galleryImages[index];
-      if (lightboxImage && lightboxText && lightbox) {
-        (lightboxImage as HTMLImageElement).src = image.src;
-        (lightboxImage as HTMLImageElement).alt = image.alt;
-        lightboxText.textContent = image.description || '';
+      if (lightboxImage && lightboxText) {
+        (lightboxImage as HTMLImageElement).src = galleryImagesData[index].src;
+        (lightboxImage as HTMLImageElement).alt = galleryImagesData[index].alt;
+        lightboxText.textContent = galleryImagesData[index].alt;
+      }
+      if (lightbox) {
         lightbox.classList.add('active');
-        document.body.style.overflow = 'hidden';
       }
     }
 
     function closeLightbox() {
       if (lightbox) {
         lightbox.classList.remove('active');
-        document.body.style.overflow = '';
       }
     }
 
     function showPrevImage() {
-      currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+      currentImageIndex = (currentImageIndex - 1 + galleryImagesData.length) % galleryImagesData.length;
       openLightbox(currentImageIndex);
     }
 
     function showNextImage() {
-      currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+      currentImageIndex = (currentImageIndex + 1) % galleryImagesData.length;
       openLightbox(currentImageIndex);
     }
 
@@ -193,6 +216,41 @@ import Lightbox from './Lightbox.astro';
           break;
       }
     });
+
+    // Show more images functionality
+    window.showMoreImages = function() {
+      const galleryGrid = document.querySelector('.gallery-grid');
+      const showMoreBtn = document.querySelector('.gallery-more');
+      
+      if (galleryGrid) {
+        // Add all remaining images to the grid
+        const currentItems = galleryGrid.querySelectorAll('.gallery-item');
+        const totalImages = galleryImagesData.length;
+        
+        for (let i = currentItems.length; i < totalImages; i++) {
+          const newItem = document.createElement('div');
+          newItem.className = 'gallery-item';
+          newItem.dataset.index = i.toString();
+          
+          const img = document.createElement('img');
+          img.src = galleryImagesData[i].src;
+          img.alt = galleryImagesData[i].alt;
+          
+          newItem.appendChild(img);
+          galleryGrid.appendChild(newItem);
+          
+          // Add click listener to new item
+          newItem.addEventListener('click', () => {
+            openLightbox(i);
+          });
+        }
+        
+        galleryGrid.classList.add('expanded');
+        if (showMoreBtn) {
+          showMoreBtn.style.display = 'none';
+        }
+      }
+    };
   });
 </script>
 

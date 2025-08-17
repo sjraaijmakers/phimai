@@ -31,11 +31,17 @@
       "description": "Nestled in the heart of Phimai, you'll enjoy the tranquility of open spaces while staying just minutes from the ancient Phimai Historical Park and the iconic Sai Ngam mangrove. Free bike rentals included for effortless exploration.",
       "historicalPark": "Phimai Historical Park",
       "mangrove": "Sai Ngam Mangrove",
-      "localMarkets": "Local Markets & Dining"
+      "localMarkets": "Local Markets & Dining",
+      "features": {
+        "parking": "Free Parking",
+        "transport": "Easy Transport",
+        "attractions": "Nearby Attractions"
+      }
     },
     "map": {
       "placeholder": "Interactive map coming soon"
-    }
+    },
+    "showMore": "Show More Photos"
   },
   "about": {
     "title": "Your Home Away From Home",
@@ -46,6 +52,9 @@
     },
     "amenities": {
       "title": "What's Included",
+      "wifi": "Free WiFi throughout the property",
+      "coffee": "Complimentary coffee and tea",
+      "freeBikes": "Free bicycles for exploring",
       "washingMachine": "A washing machine and drying rack for your convenience",
       "kitchenette": "A kitchenette with essential appliances and utensils",
       "snacks": "Complimentary snacks, coffee and tea",
