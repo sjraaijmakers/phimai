@@ -2,7 +2,7 @@
 import { siteConfig } from '../config/site';
 import { galleryImages } from '../data/images';
 import Lightbox from './Lightbox.astro';
-import { Landmark, TreePine, Users } from 'lucide-astro';
+
 
 const maxImages = 5;
 ---
@@ -30,44 +30,6 @@ const maxImages = 5;
           </button>
         </div>
       )}
-
-      <div class="location-section">
-        <div class="location-info">
-          <h3 data-i18n="gallery.location.title" />
-          <p data-i18n="gallery.location.description" />
-          
-          <div class="location-features">
-            <div class="location-feature">
-              <div class="feature-icon">
-                <Landmark size={16} />
-              </div>
-              <span data-i18n="gallery.location.features.temple" />
-            </div>
-            <div class="location-feature">
-              <div class="feature-icon">
-                <TreePine size={16} />
-              </div>
-              <span data-i18n="gallery.location.features.mangrove" />
-            </div>
-            <div class="location-feature">
-              <div class="feature-icon">
-                <Users size={16} />
-              </div>
-              <span data-i18n="gallery.location.features.culture" />
-            </div>
-          </div>
-        </div>
-
-        <div class="location-map">
-          <iframe 
-            class="map-iframe"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3825.5!2d102.5!3d15.2!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTXCsDEyJzAwLjAiTiAxMDLCsDMwJzAwLjAiRQ!5e0!3m2!1sen!2sth!4v1234567890"
-            allowfullscreen="" 
-            loading="lazy" 
-            referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
-        </div>
-      </div>
     </div>
   </div>
 </section>

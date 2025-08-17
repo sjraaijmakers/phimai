@@ -563,6 +563,15 @@ img {
 }
 
 /* ===== LOCATION ===== */
+.location {
+  background: var(--color-white);
+}
+
+.location-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .location-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -634,6 +643,19 @@ img {
 /* ===== ABOUT ===== */
 .about {
   background: var(--gradient-warm);
+}
+
+.about-header {
+  text-align: center;
+}
+
+.about-header h2 {
+  font-family: var(--font-primary);
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0;
+  letter-spacing: -0.02em;
 }
 
 .about-content {
