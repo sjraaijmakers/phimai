@@ -1,6 +1,7 @@
 ---
 import Navigation from './Navigation.astro';
 import ScrollToTop from './ScrollToTop.astro';
+import { Menu, X } from 'lucide-astro';
 ---
 
 <header class="header">
@@ -17,9 +18,8 @@ import ScrollToTop from './ScrollToTop.astro';
       
       <div class="header-actions">
         <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu">
-          <span></span>
-          <span></span>
-          <span></span>
+          <Menu size={20} class="menu-icon" />
+          <X size={20} class="close-icon" />
         </button>
       </div>
     </div>
