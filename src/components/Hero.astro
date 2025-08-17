@@ -10,138 +10,14 @@ import { siteConfig } from '../config/site';
   
   <div class="container">
     <div class="hero-content">
-      <h1 class="hero-title" data-i18n="hero.title">Your Perfect Getaway</h1>
-      <p class="hero-subtitle" data-i18n="hero.subtitle">Experience authentic small-town Thailand living in our cozy tiny homes. Minutes from Phimai Historical Park and Sai Ngam mangrove. Free bike rentals included.</p>
+      <h1 class="hero-title" data-i18n="hero.title" />
+      <p class="hero-subtitle" data-i18n="hero.subtitle" />
       
       <div class="hero-actions">
-        <a href="#booking" class="btn btn-primary">Book Now</a>
-        <a href="#gallery" class="btn btn-secondary">View Gallery</a>
+        <a href="#booking" class="btn btn-primary" data-i18n="hero.bookNow" />
+        <a href="#gallery" class="btn btn-secondary" data-i18n="hero.viewGallery" />
       </div>
     </div>
   </div>
 </section>
 
-<style>
-  .hero {
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-
-  .hero-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-  }
-
-  .hero-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-  }
-
-  .hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      135deg,
-      rgba(139, 115, 85, 0.3) 0%,
-      rgba(166, 124, 82, 0.2) 50%,
-      rgba(196, 164, 132, 0.1) 100%
-    );
-  }
-
-  .hero-content {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem;
-    background: var(--glass-bg);
-    border-radius: var(--border-radius-lg);
-    border: 1px solid var(--glass-border);
-    backdrop-filter: blur(20px);
-    box-shadow: var(--shadow-xl);
-    animation: fadeIn 1s ease-out;
-  }
-
-  .hero-title {
-    font-family: 'Crimson Text', serif;
-    font-size: 3.5rem;
-    font-weight: 600;
-    color: #FFFFFF;
-    margin-bottom: 1.5rem;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  }
-
-  .hero-subtitle {
-    font-size: 1.25rem;
-    color: #F8F8F8;
-    line-height: 1.7;
-    margin-bottom: 2.5rem;
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  }
-
-  .hero-actions {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .hero-actions .btn {
-    min-width: 140px;
-  }
-
-  @media (max-width: 768px) {
-    .hero {
-      min-height: 80vh;
-    }
-
-    .hero-content {
-      padding: 1.5rem;
-      margin: 1rem;
-    }
-
-    .hero-title {
-      font-size: 2.5rem;
-    }
-
-    .hero-subtitle {
-      font-size: 1.1rem;
-    }
-
-    .hero-actions {
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .hero-actions .btn {
-      width: 100%;
-      max-width: 280px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .hero-title {
-      font-size: 2rem;
-    }
-
-    .hero-subtitle {
-      font-size: 1rem;
-    }
-  }
-</style>

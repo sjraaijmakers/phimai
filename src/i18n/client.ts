@@ -48,6 +48,18 @@ function updateAllElements() {
       }
     }
   });
+
+  // Handle placeholder-specific translations
+  const placeholderElements = document.querySelectorAll('[data-i18n-placeholder]');
+  placeholderElements.forEach(element => {
+    const key = element.getAttribute('data-i18n-placeholder');
+    if (key) {
+      const translation = i18next.t(key);
+      if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+        (element as HTMLInputElement).placeholder = translation;
+      }
+    }
+  });
 }
 
 // Initialize on page load

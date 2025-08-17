@@ -6,25 +6,13 @@ import { siteConfig } from '../config/site';
   <div class="container">
     <div class="about-content">
       <div class="about-text">
-        <h2 data-i18n="about.title">Your Home Away From Home</h2>
-        <p data-i18n="about.intro">Enjoy small town living when you stay in our cozy tiny homes. We offer the tranquility of open spaces without sacrificing comfort. Walk or bike to local dining, markets, and attractions— the ancient Phimai Historical Park and the iconic Sai Ngam mangrove - all just minutes away.</p>
-        
-        <div class="about-features">
-          <div class="feature">
-            <div class="feature-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-              </svg>
-            </div>
-            <div class="feature-content">
-              <h3 data-i18n="about.familySuite.title">Perfect for Groups</h3>
-              <p data-i18n="about.familySuite.description">In addition to our tiny homes, we offer a family suite that may accommodate 6 or more people.</p>
-            </div>
-          </div>
+        <div class="hero-section">
+          <h2 data-i18n="about.title" />
+          <p data-i18n="about.intro" />
         </div>
-
+        
         <div class="amenities">
-          <h3 data-i18n="about.amenities.title">What's Included</h3>
+          <h3 data-i18n="about.amenities.title" />
           <div class="amenities-grid">
             <div class="amenity-item">
               <div class="amenity-icon">
@@ -32,7 +20,7 @@ import { siteConfig } from '../config/site';
                   <polyline points="20,6 9,17 4,12"></polyline>
                 </svg>
               </div>
-              <span data-i18n="about.amenities.washingMachine">A washing machine and drying rack for your convenience</span>
+              <span data-i18n="about.amenities.washingMachine" />
             </div>
             <div class="amenity-item">
               <div class="amenity-icon">
@@ -40,7 +28,7 @@ import { siteConfig } from '../config/site';
                   <polyline points="20,6 9,17 4,12"></polyline>
                 </svg>
               </div>
-              <span data-i18n="about.amenities.kitchenette">A kitchenette with essential appliances and utensils</span>
+              <span data-i18n="about.amenities.kitchenette" />
             </div>
             <div class="amenity-item">
               <div class="amenity-icon">
@@ -48,7 +36,7 @@ import { siteConfig } from '../config/site';
                   <polyline points="20,6 9,17 4,12"></polyline>
                 </svg>
               </div>
-              <span data-i18n="about.amenities.snacks">Complimentary snacks, coffee and tea</span>
+              <span data-i18n="about.amenities.snacks" />
             </div>
             <div class="amenity-item">
               <div class="amenity-icon">
@@ -56,7 +44,7 @@ import { siteConfig } from '../config/site';
                   <polyline points="20,6 9,17 4,12"></polyline>
                 </svg>
               </div>
-              <span data-i18n="about.amenities.essentials">A refrigerator, hairdryer, dishes, and other home essentials</span>
+              <span data-i18n="about.amenities.essentials" />
             </div>
             <div class="amenity-item">
               <div class="amenity-icon">
@@ -64,147 +52,26 @@ import { siteConfig } from '../config/site';
                   <polyline points="20,6 9,17 4,12"></polyline>
                 </svg>
               </div>
-              <span data-i18n="about.amenities.transfer">Complimentary transfer to local bus station via tuktuk with minimum 3 night stay</span>
+              <span data-i18n="about.amenities.transfer" />
             </div>
           </div>
         </div>
 
-        <p data-i18n="about.conclusion">Whether you're here to explore local history or simply relax, our tiny homes offer the perfect mix of comfort, and convenience.</p>
+        <div class="conclusion-section">
+          <div class="feature">
+            <div class="feature-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+              </svg>
+            </div>
+            <div class="feature-content">
+              <h3 data-i18n="about.familySuite.title" />
+              <p data-i18n="about.familySuite.description" />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<style>
-  .about {
-    padding: 5rem 2rem;
-    background: var(--warm-gradient);
-  }
-
-  .about-content {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .about-text h2 {
-    font-family: 'Crimson Text', serif;
-    font-size: 2.5rem;
-    font-weight: 600;
-    color: #3A3A3A;
-    margin-bottom: 1.5rem;
-    letter-spacing: -0.02em;
-  }
-
-  .about-text p {
-    font-size: 1.15rem;
-    color: #6B6B6B;
-    line-height: 1.7;
-    margin-bottom: 2rem;
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-  }
-
-  .about-features {
-    margin: 3rem 0;
-  }
-
-  .feature {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
-
-  .feature-icon {
-    width: 48px;
-    height: 48px;
-    background: var(--accent-gradient);
-    border-radius: var(--border-radius-sm);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    flex-shrink: 0;
-  }
-
-  .feature-content h3 {
-    font-family: 'Crimson Text', serif;
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: #3A3A3A;
-    margin-bottom: 0.5rem;
-  }
-
-  .feature-content p {
-    font-size: 1rem;
-    color: #6B6B6B;
-    line-height: 1.6;
-    margin: 0;
-  }
-
-  .amenities {
-    margin: 3rem 0;
-  }
-
-  .amenities h3 {
-    font-family: 'Crimson Text', serif;
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: #3A3A3A;
-    margin-bottom: 1.5rem;
-  }
-
-  .amenities-grid {
-    display: grid;
-    gap: 1rem;
-  }
-
-  .amenity-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-  }
-
-  .amenity-icon {
-    width: 24px;
-    height: 24px;
-    background: #4ECDC4;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    flex-shrink: 0;
-    margin-top: 0.125rem;
-  }
-
-  .amenity-item span {
-    font-size: 1rem;
-    color: #6B6B6B;
-    line-height: 1.6;
-    font-family: 'Inter', sans-serif;
-  }
-
-  @media (max-width: 768px) {
-    .about {
-      padding: 3rem 1rem;
-    }
-
-    .about-text h2 {
-      font-size: 2rem;
-    }
-
-    .about-text p {
-      font-size: 1rem;
-    }
-
-    .feature {
-      flex-direction: column;
-      text-align: center;
-    }
-
-    .feature-icon {
-      align-self: center;
-    }
-  }
-</style>

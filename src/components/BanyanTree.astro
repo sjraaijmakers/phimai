@@ -102,35 +102,4 @@ const {
   <circle cx="120" cy="55" r="2.5" fill={color} opacity="0.25"/>
 </svg>
 
-<style>
-  .banyan-tree {
-    transition: all 0.3s ease;
-  }
-  
-  .banyan-tree:hover {
-    transform: scale(1.05);
-    filter: brightness(1.1);
-  }
-  
-  /* Subtle animation for the aerial roots */
-  .banyan-tree path:nth-child(n+2):nth-child(-n+6) {
-    animation: sway 4s ease-in-out infinite;
-  }
-  
-  .banyan-tree path:nth-child(7) {
-    animation: sway 4s ease-in-out infinite 0.5s;
-  }
-  
-  .banyan-tree path:nth-child(8) {
-    animation: sway 4s ease-in-out infinite 1s;
-  }
-  
-  .banyan-tree path:nth-child(9) {
-    animation: sway 4s ease-in-out infinite 1.5s;
-  }
-  
-  @keyframes sway {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(1px); }
-  }
-</style>
+

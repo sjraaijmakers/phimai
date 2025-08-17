@@ -7,79 +7,10 @@ const { className = "" } = Astro.props;
 ---
 
 <nav class={`navigation ${className}`}>
-  <a href="#gallery" data-i18n="nav.gallery">Gallery</a>
-  <a href="#booking" data-i18n="nav.bookNow">Book Now</a>
-  <a href="#about" data-i18n="nav.about">About</a>
-  <a href="#contact" data-i18n="nav.contact">Contact</a>
+      <a href="#gallery" data-i18n="nav.gallery"><span /></a>
+    <a href="#booking" data-i18n="nav.bookNow"><span /></a>
+    <a href="#about" data-i18n="nav.about"><span /></a>
+    <a href="#contact" data-i18n="nav.contact"><span /></a>
 </nav>
 
-<style>
-  .navigation {
-    display: flex;
-    gap: 2rem;
-  }
 
-  .navigation a {
-    text-decoration: none;
-    color: #3A3A3A;
-    font-weight: 500;
-    font-size: 1rem;
-    letter-spacing: 0.02em;
-    transition: color 0.3s ease;
-    position: relative;
-    font-family: 'Inter', sans-serif;
-  }
-
-  .navigation a:hover {
-    color: #8B7355;
-  }
-
-  .navigation a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--primary-gradient);
-    transition: width 0.3s ease;
-    border-radius: 1px;
-  }
-
-  .navigation a:hover::after {
-    width: 100%;
-  }
-
-  .navigation a.active {
-    background: var(--primary-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .navigation a.active::after {
-    width: 100%;
-  }
-
-  /* Mobile styling */
-  .navigation.mobile {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .navigation.mobile a {
-    font-size: 1.1rem;
-    padding: 0.75rem 0;
-    border-bottom: 1px solid rgba(139, 115, 85, 0.1);
-  }
-
-  .navigation.mobile a:last-child {
-    border-bottom: none;
-  }
-
-  .navigation.mobile a:hover {
-    background: var(--muted-gradient);
-    margin: 0 -2rem;
-    padding: 0.75rem 2rem;
-  }
-</style>

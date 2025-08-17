@@ -1,5 +1,6 @@
 ---
 import { siteConfig } from '../config/site';
+import '../assets/styles.css';
 
 export interface Props {
   title?: string;
@@ -30,9 +31,14 @@ const { title = `${siteConfig.name} - ${siteConfig.description}` } = Astro.props
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+    
+
   </head>
   <body>
     <slot />
+    <script>
+      import '../i18n/client';
+    </script>
   </body>
 </html>
 
@@ -42,19 +48,19 @@ const { title = `${siteConfig.name} - ${siteConfig.description}` } = Astro.props
     --border-radius-sm: 8px;
     --border-radius-lg: 16px;
     
-    /* Harmonious color palette with gradients */
+    /* Subtle, warm color palette inspired by Thai countryside */
     --primary-gradient: linear-gradient(135deg, #8B7355 0%, #A67C52 50%, #C4A484 100%);
     --secondary-gradient: linear-gradient(135deg, #F8F6F3 0%, #F0EDE8 50%, #E8E0D5 100%);
-    --accent-gradient: linear-gradient(135deg, #7FB3D3 0%, #8BC4D1 50%, #A8D5E2 100%);
+    --accent-gradient: linear-gradient(135deg, #9CAF88 0%, #A8B8A0 50%, #B4C6B8 100%);
     --warm-gradient: linear-gradient(135deg, #F5F1ED 0%, #EDE8E0 50%, #E5DCD0 100%);
-    --cool-gradient: linear-gradient(135deg, #E8F4F8 0%, #D4E9F0 50%, #C0DEE8 100%);
+    --cool-gradient: linear-gradient(135deg, #F0F4F0 0%, #E8F0E8 50%, #E0ECE0 100%);
     --muted-gradient: linear-gradient(135deg, #E8E0D5 0%, #D4C4B0 50%, #C0B8A0 100%);
     
-    /* Enhanced shadows */
-    --shadow-sm: 0 2px 8px rgba(139, 115, 85, 0.1);
-    --shadow-md: 0 4px 16px rgba(139, 115, 85, 0.15);
-    --shadow-lg: 0 8px 32px rgba(139, 115, 85, 0.2);
-    --shadow-xl: 0 16px 64px rgba(139, 115, 85, 0.25);
+    /* Enhanced shadows with warmer tones */
+    --shadow-sm: 0 2px 8px rgba(139, 115, 85, 0.08);
+    --shadow-md: 0 4px 16px rgba(139, 115, 85, 0.12);
+    --shadow-lg: 0 8px 32px rgba(139, 115, 85, 0.16);
+    --shadow-xl: 0 16px 64px rgba(139, 115, 85, 0.2);
     
     /* Glass morphism */
     --glass-bg: rgba(255, 255, 255, 0.1);
@@ -90,7 +96,7 @@ const { title = `${siteConfig.name} - ${siteConfig.description}` } = Astro.props
     height: 100%;
     background: 
       radial-gradient(circle at 20% 80%, rgba(139, 115, 85, 0.02) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, rgba(127, 179, 211, 0.02) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(156, 175, 136, 0.02) 0%, transparent 50%),
       radial-gradient(circle at 40% 40%, rgba(196, 164, 132, 0.01) 0%, transparent 50%);
     pointer-events: none;
     z-index: -1;

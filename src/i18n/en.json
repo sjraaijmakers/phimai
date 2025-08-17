@@ -11,34 +11,48 @@
   },
   "hero": {
     "title": "Your Perfect Getaway",
-    "subtitle": "Experience authentic small-town Thailand living in our cozy tiny homes. Minutes from Phimai Historical Park and Sai Ngam mangrove. Free bike rentals included."
-  },
-  "about": {
-    "title": "Your Home Away From Home",
-    "intro": "Experience authentic small-town Thailand living in our cozy tiny homes. Whether you're a solo traveler seeking tranquility or a family wanting to explore together, our thoughtfully equipped spaces provide everything you need for a memorable stay in Phimai.",
-    "familySuite": {
-      "title": "Perfect for Groups",
-      "description": "Traveling with family or friends? Our spacious family suite comfortably accommodates 6 or more people, offering the same thoughtful amenities in a larger space perfect for group adventures."
-    },
-    "amenities": {
-      "title": "What's Included",
-      "washingMachine": "Washing machine and drying rack",
-      "kitchenette": "Kitchenette with essential appliances and utensils",
-      "snacks": "Complimentary snacks, coffee, and tea",
-      "bikes": "Free bike rentals for exploring",
-      "essentials": "Refrigerator, hairdryer, dishes, and home essentials",
-      "transfer": "Free tuktuk transfer to bus station (3+ nights)"
-    }
+    "subtitle": "Experience authentic small-town Thailand living in our cozy tiny homes. Minutes from Phimai Historical Park and Sai Ngam mangrove. Free bike rentals included.",
+    "bookNow": "Book Now",
+    "viewGallery": "View Gallery"
   },
   "gallery": {
     "title": "Our Tiny Homes",
-    "subtitle": "Enjoy small town living when you stay in our cozy tiny homes. We offer the tranquility of open spaces without sacrificing comfort. Walk or bike to local dining, markets, and attractions—the ancient Phimai Historical Park and the iconic Sai Ngam mangrove—all just minutes away.",
-    "showMore": "more"
+    "subtitle": "Experience the perfect blend of comfort and adventure in our thoughtfully designed tiny homes.",
+    "tinyHome": {
+      "title": "Cozy Tiny Home",
+      "description": "Perfect for couples or solo travelers, featuring all the comforts of home in a compact, efficient space."
+    },
+    "familySuite": {
+      "title": "Family Suite",
+      "description": "Spacious accommodation for groups of 6 or more, with separate sleeping areas and shared living space."
+    },
+    "location": {
+      "title": "Discover Phimai",
+      "description": "Nestled in the heart of Phimai, you'll enjoy the tranquility of open spaces while staying just minutes from the ancient Phimai Historical Park and the iconic Sai Ngam mangrove. Free bike rentals included for effortless exploration.",
+      "historicalPark": "Phimai Historical Park",
+      "mangrove": "Sai Ngam Mangrove",
+      "localMarkets": "Local Markets & Dining"
+    },
+    "map": {
+      "placeholder": "Interactive map coming soon"
+    }
   },
-  "location": {
-    "title": "Discover Phimai",
-    "description": "Immerse yourself in the rich history and natural beauty of Phimai. Our tiny homes are perfectly positioned to explore the ancient Khmer temple complex, the iconic Sai Ngam banyan tree forest, and the charming local markets. Experience authentic Thai culture in this peaceful small town setting.",
-    "openMaps": "Open in Google Maps"
+  "about": {
+    "title": "Your Home Away From Home",
+    "intro": "Enjoy small town living when you stay in our cozy tiny homes. We offer the tranquility of open spaces without sacrificing comfort. Walk or bike to local dining, markets, and attractions— the ancient Phimai Historical Park and the iconic Sai Ngam mangrove - all just minutes away.",
+    "familySuite": {
+      "title": "Perfect for Groups",
+      "description": "In addition to our tiny homes, we offer a family suite that may accommodate 6 or more people."
+    },
+    "amenities": {
+      "title": "What's Included",
+      "washingMachine": "A washing machine and drying rack for your convenience",
+      "kitchenette": "A kitchenette with essential appliances and utensils",
+      "snacks": "Complimentary snacks, coffee and tea",
+      "essentials": "A refrigerator, hairdryer, dishes, and other home essentials",
+      "transfer": "Complimentary transfer to local bus station via tuktuk with minimum 3 night stay"
+    },
+    "conclusion": "Whether you're here to explore local history or simply relax, our tiny homes offer the perfect mix of comfort, and convenience."
   },
   "booking": {
     "title": "Book Your Stay",
@@ -49,11 +63,26 @@
     "bookingDescription": "Secure booking with flexible cancellation options"
   },
   "contact": {
-    "title": "Contact Us",
-    "email": "Email",
-    "message": "Message",
-    "messagePlaceholder": "Tell us about your travel plans and any questions you have...",
-    "sendMessage": "Send Message"
+    "title": "Book Your Stay",
+    "subtitle": "Ready to experience Phimai? Book directly through our platforms or contact us for availability and special requests.",
+    "email": {
+      "label": "Email"
+    },
+    "phone": {
+      "label": "Phone"
+    },
+    "form": {
+      "title": "Contact Us",
+      "email": {
+        "label": "Email",
+        "placeholder": "your.email@example.com"
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Tell us about your travel plans and any questions you have..."
+      },
+      "submit": "Send Message"
+    }
   },
   "footer": {
     "copyright": "All rights reserved.",

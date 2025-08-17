@@ -1,0 +1,20 @@
+---
+interface Props {
+  id?: string;
+}
+
+const { id = "lightbox" } = Astro.props;
+---
+
+<div id={id} class="lightbox">
+  <div class="lightbox-content">
+    <button class="lightbox-close" aria-label="Close lightbox">&times;</button>
+    <img id="lightbox-image" src="" alt="">
+    <p id="lightbox-text"></p>
+    <button class="lightbox-prev" aria-label="Previous image">&lt;</button>
+    <button class="lightbox-next" aria-label="Next image">&gt;</button>
+  </div>
+</div>
+
+
+
