@@ -857,20 +857,12 @@ img {
   background: var(--gradient-cool);
 }
 
-.booking-content {
-  max-width: 900px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.booking-header {
-  margin-bottom: var(--space-2xl);
-}
-
 .booking-options {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-xl);
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .booking-option {
@@ -906,34 +898,34 @@ img {
 }
 
 .booking-option.airbnb {
-  background: linear-gradient(135deg, #F5E6D3 0%, #E8D4B8 50%, #D4C4A8 100%);
-  color: var(--color-text);
+  background: linear-gradient(135deg, #FF5A5F 0%, #E31C5F 50%, #D70466 100%);
+  color: var(--color-white);
 }
 
 .booking-option.booking {
-  background: linear-gradient(135deg, #E8E0D5 0%, #D4C4B0 50%, #C0B8A0 100%);
-  color: var(--color-text);
+  background: linear-gradient(135deg, #003580 0%, #004990 50%, #0056B3 100%);
+  color: var(--color-white);
 }
 
 .booking-logo {
   width: 60px;
   height: 60px;
-  background: rgba(139, 115, 85, 0.1);
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  overflow: hidden;
 }
 
-.logo-text {
-  font-family: var(--font-secondary);
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--color-text);
+.logo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
 }
 
-.booking-content {
+.booking-option .booking-content {
   flex: 1;
   text-align: left;
 }
@@ -943,19 +935,19 @@ img {
   font-size: 1.3rem;
   font-weight: 600;
   margin-bottom: var(--space-sm);
-  color: var(--color-text);
+  color: inherit;
 }
 
 .booking-content p {
   font-size: 0.95rem;
-  color: var(--color-text-light);
+  color: rgba(255, 255, 255, 0.9);
   line-height: 1.5;
   margin: 0;
   font-family: var(--font-secondary);
 }
 
 .booking-arrow {
-  color: var(--color-text);
+  color: inherit;
   transition: transform 0.3s ease;
 }
 

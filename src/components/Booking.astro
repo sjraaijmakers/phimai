@@ -6,41 +6,39 @@ import { ArrowRight } from 'lucide-astro';
 const t = useTranslations('en');
 ---
 
-<section id="booking" class="booking">
+<section id="booking" class="booking section">
   <div class="container">
-    <div class="booking-content">
-      <div class="booking-header">
-        <h2 data-i18n="booking.title" />
-        <p data-i18n="booking.subtitle" />
-      </div>
+    <div class="section-header">
+      <h2 class="section-title" data-i18n="booking.title" />
+      <p class="section-subtitle" data-i18n="booking.subtitle" />
+    </div>
 
-      <div class="booking-options">
-        <a href="#" class="booking-option airbnb" target="_blank" rel="noopener">
+    <div class="booking-options">
+              <a href="#" class="booking-option airbnb" target="_blank" rel="noopener">
           <div class="booking-logo">
-            <span class="logo-text">A</span>
+            <img src="/images/logos/airbnb-logo.jpeg" alt="Airbnb" class="logo-image" />
           </div>
-          <div class="booking-content">
-            <h3 data-i18n="booking.airbnb" />
-            <p data-i18n="booking.airbnbDescription" />
-          </div>
-          <div class="booking-arrow">
-            <ArrowRight size={20} />
-          </div>
-        </a>
+        <div class="booking-content">
+          <h3 data-i18n="booking.airbnb" />
+          <p data-i18n="booking.airbnbDescription" />
+        </div>
+        <div class="booking-arrow">
+          <ArrowRight size={20} />
+        </div>
+      </a>
 
-        <a href="#" class="booking-option booking" target="_blank" rel="noopener">
+              <a href="#" class="booking-option booking" target="_blank" rel="noopener">
           <div class="booking-logo">
-            <span class="logo-text">B</span>
+            <img src="/images/logos/booking-logo.jpeg" alt="Booking.com" class="logo-image" />
           </div>
-          <div class="booking-content">
-            <h3 data-i18n="booking.booking" />
-            <p data-i18n="booking.bookingDescription" />
-          </div>
-          <div class="booking-arrow">
-            <ArrowRight size={20} />
-          </div>
-        </a>
-      </div>
+        <div class="booking-content">
+          <h3 data-i18n="booking.booking" />
+          <p data-i18n="booking.bookingDescription" />
+        </div>
+        <div class="booking-arrow">
+          <ArrowRight size={20} />
+        </div>
+      </a>
     </div>
   </div>
 </section>
