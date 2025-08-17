@@ -10,21 +10,23 @@ import { WashingMachine, Utensils, Coffee, Package, Bike, Users, Car } from 'luc
         <h2 data-i18n="about.title" />
         <p data-i18n="about.intro" />
         
-        <div class="bikes-section">
-          <div class="bikes-feature">
-            <div class="bikes-icon">
+        <div class="feature-section">
+          <div class="feature-box">
+            <div class="feature-icon bikes">
               <Bike size={24} />
             </div>
-            <p data-i18n="about.bikes" />
+            <div class="feature-content">
+              <p data-i18n="about.bikes" />
+            </div>
           </div>
         </div>
 
-        <div class="family-suite-section">
-          <div class="family-feature">
-            <div class="family-icon">
+        <div class="feature-section">
+          <div class="feature-box">
+            <div class="feature-icon family">
               <Users size={24} />
             </div>
-            <div class="family-content">
+            <div class="feature-content">
               <h3 data-i18n="about.familySuite.title" />
               <p data-i18n="about.familySuite.description" />
             </div>
