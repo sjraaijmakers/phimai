@@ -50,9 +50,7 @@
     "title": "Book Your Stay",
     "subtitle": "Ready to experience Phimai? Book directly through our trusted platforms",
     "airbnb": "Book on Airbnb",
-    "booking": "Book on Booking.com",
-    "airbnbDescription": "Browse photos, read reviews, and book instantly",
-    "bookingDescription": "Secure booking with flexible cancellation options"
+    "booking": "Book on Booking.com"
   },
   "contact": {
     "title": "Get in touch",

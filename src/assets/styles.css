@@ -861,7 +861,7 @@ img {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-xl);
-  max-width: 900px;
+  max-width: 800px;
   margin: 0 auto;
 }
 
@@ -869,11 +869,11 @@ img {
   display: flex;
   align-items: center;
   gap: var(--space-lg);
-  padding: var(--space-xl);
-  border-radius: var(--radius-lg);
+  padding: var(--space);
+  border-radius: 16px;
   text-decoration: none;
-  transition: var(--transition);
-  box-shadow: var(--shadow-md);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   position: relative;
   overflow: hidden;
 }
@@ -893,65 +893,78 @@ img {
 .booking-option:hover::before { opacity: 1; }
 
 .booking-option:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
 }
 
 .booking-option.airbnb {
-  background: linear-gradient(135deg, #FF5A5F 0%, #E31C5F 50%, #D70466 100%);
+  background: linear-gradient(135deg, #FF5A5F 0%, #FF385C 100%);
   color: var(--color-white);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .booking-option.booking {
-  background: linear-gradient(135deg, #003580 0%, #004990 50%, #0056B3 100%);
+  background: linear-gradient(135deg, #003580 0%, #004990 100%);
   color: var(--color-white);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .booking-logo {
-  width: 60px;
-  height: 60px;
-  border-radius: var(--radius-sm);
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   overflow: hidden;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .logo-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: var(--radius-sm);
+  border-radius: 12px;
 }
 
 .booking-option .booking-content {
   flex: 1;
   text-align: left;
+  display: flex;
+  align-items: center;
 }
 
 .booking-content h3 {
   font-family: var(--font-secondary);
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 600;
-  margin-bottom: var(--space-sm);
+  margin: 0;
   color: inherit;
+  letter-spacing: -0.01em;
 }
 
 .booking-content p {
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.85);
   line-height: 1.5;
   margin: 0;
   font-family: var(--font-secondary);
+  font-weight: 400;
 }
 
 .booking-arrow {
   color: inherit;
-  transition: transform 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.8;
 }
 
-.booking-option:hover .booking-arrow { transform: translateX(4px); }
+.booking-option:hover .booking-arrow { 
+  transform: translateX(4px); 
+  opacity: 1;
+}
 
 /* ===== CONTACT ===== */
 .contact {
