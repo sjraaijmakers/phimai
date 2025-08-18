@@ -792,12 +792,6 @@ p {
   transition: opacity 0.3s ease;
 }
 
-.booking-option:hover::before { opacity: 1; }
-
-.booking-option:hover {
-  transform: translateY(-3px);
-}
-
 .booking-logo {
   width: 48px;
   height: 48px;
