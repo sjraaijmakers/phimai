@@ -1,16 +1,22 @@
 ---
 import { siteConfig } from '../config/site';
 import { galleryImages as rawGalleryImages } from '../data/images';
+import Carousel from './Carousel.astro';
 
-// Get the first image from gallery for hero background
-const heroImage = rawGalleryImages[0];
-const heroImageSrc = heroImage.src;
-const heroImageAlt = heroImage.caption || '';
+// Use the first 5 images for the hero carousel
+const heroImages = rawGalleryImages.slice(0, 5);
 ---
 
 <section class="hero">
   <div class="hero-background">
-    <img src={heroImageSrc} alt={heroImageAlt} class="hero-image">
+    <Carousel 
+      id="hero-carousel"
+      images={heroImages}
+      interval={6000}
+      showArrows={false}
+      showDots={true}
+      autoPlay={true}
+    />
     <div class="hero-overlay"></div>
   </div>
   

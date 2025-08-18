@@ -197,6 +197,13 @@ p {
   padding: var(--space-4xl) var(--space-xl);
 }
 
+/* Global rule for sections with multiple columns to be vertically centered */
+.section > .container > div[class*="grid"],
+.section > div[class*="grid"],
+.section > .container > div[class*="content"] {
+  align-items: center;
+}
+
 .section-header {
   text-align: center;
   margin-bottom: var(--space-3xl);
@@ -428,10 +435,15 @@ p {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
+  z-index: 1;
 }
 
-.hero-image {
+.hero-background .carousel {
+  width: 100%;
+  height: 100%;
+}
+
+.hero-background .carousel-slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -450,6 +462,8 @@ p {
     rgba(0, 0, 0, 0.2) 50%,
     rgba(0, 0, 0, 0.1) 100%
   );
+  z-index: 2;
+  pointer-events: none;
 }
 
 .hero-content {
@@ -461,6 +475,8 @@ p {
   border-radius: var(--radius-lg);
   animation: fadeIn 1s ease-out;
   border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  z-index: 3;
 }
 
 
@@ -941,7 +957,7 @@ p {
 /* ===== FOOTER ===== */
 .footer {
   background: var(--gradient-muted);
-  padding: var(--space-xl);
+  padding: var(--space-lg);
   border-top: 1px solid rgba(139, 115, 85, 0.1);
 }
 
@@ -1289,7 +1305,7 @@ p {
   .contact-info h2 { font-size: 2rem; }
   .contact-form-container { padding: var(--space-lg); }
   
-  .footer { padding: var(--space-lg) var(--space); }
+  .footer { padding: var(--space) var(--space); }
   .footer-content {
     flex-direction: column;
     text-align: center;
@@ -1396,7 +1412,7 @@ p {
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
-  z-index: 10;
+  z-index: 20;
 }
 
 .carousel-arrow:hover {
@@ -1419,26 +1435,32 @@ p {
   transform: translateX(-50%);
   display: flex;
   gap: 8px;
-  z-index: 10;
+  z-index: 20;
 }
 
 .carousel-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.5);
   background: transparent;
+  border: none;
   cursor: pointer;
   transition: all 0.3s ease;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .carousel-dot:hover {
-  background: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.8);
+  transform: scale(1.1);
 }
 
 .carousel-dot.active {
-  background: white;
-  border-color: white;
+  color: white;
+}
+
+.carousel-dot.active svg {
+  fill: white;
 }
 
 @media (max-width: 768px) {
@@ -1459,7 +1481,7 @@ p {
     bottom: 15px;
   }
 
-  .carousel-dot {
+  .carousel-dot svg {
     width: 10px;
     height: 10px;
   }
