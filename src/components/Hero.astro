@@ -4,8 +4,8 @@ import { galleryImages as rawGalleryImages } from '../data/images';
 
 // Get the first image from gallery for hero background
 const heroImage = rawGalleryImages[0];
-const heroImageSrc = `/images/${heroImage.filename}`;
-const heroImageAlt = heroImage.alt;
+const heroImageSrc = heroImage.src;
+const heroImageAlt = heroImage.caption || '';
 ---
 
 <section class="hero">

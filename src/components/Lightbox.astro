@@ -3,8 +3,7 @@ import { X, ChevronLeft, ChevronRight } from 'lucide-astro';
 
 interface LightboxImage {
   src: string;
-  alt: string;
-  description?: string;
+  caption?: string;
 }
 
 interface Props {
@@ -20,9 +19,9 @@ const { id = "lightbox", images = [] } = Astro.props;
     <button class="lightbox-control lightbox-close" aria-label="Close lightbox">
       <X size={24} />
     </button>
-    <div class="lightbox-control lightbox-counter" id="lightbox-counter"></div>
+    <div class="lightbox-counter" id="lightbox-counter"></div>
     <img id="lightbox-image" class="lightbox-image" src="" alt="">
-    <p id="lightbox-text"></p>
+    <p id="lightbox-text" class="lightbox-text"></p>
     <button class="lightbox-control lightbox-prev" aria-label="Previous image">
       <ChevronLeft size={24} />
     </button>
@@ -44,6 +43,24 @@ const { id = "lightbox", images = [] } = Astro.props;
     const lightboxNext = lightbox?.querySelector('.lightbox-next');
     
     let currentImageIndex = 0;
+    let previousScrollY = 0;
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchActive = false;
+
+    function lockPageScroll() {
+      previousScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+      document.documentElement.classList.add('no-scroll');
+      document.body.classList.add('no-scroll');
+      document.body.style.top = `-${previousScrollY}px`;
+    }
+
+    function unlockPageScroll() {
+      document.documentElement.classList.remove('no-scroll');
+      document.body.classList.remove('no-scroll');
+      document.body.style.top = '';
+      window.scrollTo(0, previousScrollY || 0);
+    }
     
     // Open lightbox function
     window.openLightbox = function(index) {
@@ -51,21 +68,32 @@ const { id = "lightbox", images = [] } = Astro.props;
       
       currentImageIndex = index;
       lightboxImage.src = imageData[index].src;
-      lightboxImage.alt = imageData[index].alt;
-      lightboxText.textContent = imageData[index].description || imageData[index].alt;
+      const desc = imageData[index].caption || '';
+      lightboxImage.alt = desc || '';
+      if (desc && desc.trim().length > 0) {
+        lightboxText.textContent = desc;
+        lightboxText.style.display = '';
+      } else {
+        lightboxText.textContent = '';
+        lightboxText.style.display = 'none';
+      }
       
       // Update counter
       if (lightboxCounter) {
         lightboxCounter.textContent = `${currentImageIndex + 1}/${imageData.length}`;
       }
       
-      lightbox.classList.add('active');
+      if (!lightbox.classList.contains('active')) {
+        lightbox.classList.add('active');
+        lockPageScroll();
+      }
     };
     
     // Close lightbox function
     function closeLightbox() {
       if (lightbox) {
         lightbox.classList.remove('active');
+        unlockPageScroll();
       }
     }
     
@@ -95,10 +123,50 @@ const { id = "lightbox", images = [] } = Astro.props;
     
     if (lightbox) {
       lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) {
-          closeLightbox();
+        const target = e.target;
+        if (!(target instanceof HTMLElement)) return;
+
+        // Ignore clicks on nav/close buttons
+        const isNavOrClose = target.closest('.lightbox-prev, .lightbox-next, .lightbox-close') !== null;
+        if (isNavOrClose) return;
+
+        // Clicking the image goes to next
+        const isImage = target.id === 'lightbox-image' || target.closest('#lightbox-image');
+        if (isImage) {
+          e.preventDefault();
+          showNextImage();
+          return;
         }
+
+        // Clicking anywhere else closes
+        closeLightbox();
       });
+
+      // Touch swipe for mobile: left→next, right→prev
+      lightbox.addEventListener('touchstart', (e) => {
+        if (!lightbox.classList.contains('active')) return;
+        if (!e.touches || e.touches.length === 0) return;
+        touchActive = true;
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+      }, { passive: true });
+
+      lightbox.addEventListener('touchend', (e) => {
+        if (!touchActive) return;
+        touchActive = false;
+        if (!e.changedTouches || e.changedTouches.length === 0) return;
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        const dy = e.changedTouches[0].clientY - touchStartY;
+        const horizontalThreshold = 40; // px
+        const verticalTolerance = 80; // px
+        if (Math.abs(dx) > horizontalThreshold && Math.abs(dy) < verticalTolerance) {
+          if (dx < 0) {
+            showNextImage();
+          } else {
+            showPrevImage();
+          }
+        }
+      }, { passive: true });
     }
     
     // Keyboard navigation

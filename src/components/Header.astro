@@ -9,7 +9,7 @@ import { Menu, X } from 'lucide-astro';
     <div class="header-content">
       <div class="logo-section">
         <div class="logo">
-          <a href="#" id="logoScrollToTop" data-i18n="header.logo" />
+          <a href="#top" class="logo-link" data-i18n="header.logo" />
         </div>
         <ScrollToTop id="headerScrollToTop" className="header-style" />
       </div>
@@ -37,7 +37,6 @@ import { Menu, X } from 'lucide-astro';
   document.addEventListener('DOMContentLoaded', () => {
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');
     const mobileMenu = document.getElementById('mobileMenu');
-    const logoScrollToTop = document.getElementById('logoScrollToTop');
     const headerScrollToTop = document.getElementById('headerScrollToTop');
     
     // Mobile menu functionality
@@ -57,36 +56,11 @@ import { Menu, X } from 'lucide-astro';
       });
     }
 
-    // Logo scroll to top functionality
-    if (logoScrollToTop) {
-      logoScrollToTop.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
-      });
-    }
-
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach((anchorEl) => {
-      anchorEl.addEventListener('click', (e) => {
-        e.preventDefault();
-        const href = (e.currentTarget as HTMLAnchorElement).getAttribute('href');
-        if (!href) return;
-        const target = document.querySelector(href) as HTMLElement | null;
-        if (target) {
-          const headerHeight = (document.querySelector('.header') as HTMLElement | null)?.offsetHeight || 0;
-          const targetPosition = target.offsetTop - headerHeight;
-          window.scrollTo({ top: targetPosition, behavior: 'smooth' });
-        }
-      });
-    });
+    // Smooth anchor scrolling is handled globally in Layout.astro
 
     // Active navigation highlighting handled in Navigation.astro
 
     // Header background on scroll
-    let lastScrollTop = 0;
     const header = document.querySelector('.header') as HTMLElement | null;
     
     window.addEventListener('scroll', () => {
@@ -104,7 +78,6 @@ import { Menu, X } from 'lucide-astro';
         }
       }
       
-      lastScrollTop = scrollTop;
     });
 
     // Active nav handled in Navigation.astro

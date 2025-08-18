@@ -3,6 +3,8 @@ export const siteConfig = {
   url: 'https://pph.aktis.dev',
   email: 'stay@phimaipondhouse.com',
   phone: '+66 12 345 6789',
+  // Contact form endpoint (e.g., Formspree: https://formspree.io/f/xxxxxxx or your serverless API URL)
+  contactEndpoint: '',
   
   // Site metadata
   name: 'Phimai Pond House',

@@ -1,13 +1,6 @@
 ---
-import { galleryImages as rawGalleryImages } from '../data/images';
+import { galleryImages } from '../data/images';
 import Lightbox from './Lightbox.astro';
-
-// Convert to the format expected by the lightbox
-const galleryImages = rawGalleryImages.map(img => ({
-  src: `/images/${img.filename}`,
-  alt: img.alt,
-  description: img.description || ''
-}));
 
 const maxImages = 5;
 ---
@@ -22,8 +15,8 @@ const maxImages = 5;
 
       <div class="gallery-grid">
         {galleryImages.slice(0, maxImages).map((image, index) => (
-          <div class={`gallery-item ${index === 0 ? 'featured' : ''}`} data-index={index}>
-            <img src={image.src} alt={image.alt} />
+          <div class={`gallery-item ${index === 0 ? 'featured' : ''}`} data-index={index} onclick={`openLightbox(${index})`}>
+            <img src={image.src} alt={image.caption || ''} />
           </div>
         ))}
       </div>
@@ -31,7 +24,11 @@ const maxImages = 5;
       {galleryImages.length > maxImages && (
         <div class="gallery-more">
           <button class="btn btn-secondary" onclick="openLightbox(0)">
-            <span data-i18n="gallery.showMore" />
+            <span>
+              <span data-i18n="gallery.showMore"></span>
+              {' '}
+              ({galleryImages.length})
+            </span>
           </button>
         </div>
       )}
@@ -41,18 +38,5 @@ const maxImages = 5;
 
 <Lightbox images={galleryImages} />
 
-<script define:vars={{ galleryImages, maxImages }}>
-  // Gallery functionality
-  document.addEventListener('DOMContentLoaded', () => {
-    // Gallery click handlers
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    galleryItems.forEach((item, index) => {
-      item.addEventListener('click', () => {
-        if (typeof window.openLightbox === 'function') {
-          window.openLightbox(index);
-        }
-      });
-    });
-  });
-</script>
+
 

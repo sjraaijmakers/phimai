@@ -35,7 +35,7 @@ import { Mail, Phone } from 'lucide-astro';
       </div>
 
       <div class="contact-form-container">
-        <form class="contact-form" id="contactForm">
+        <form class="contact-form" id="contactForm" novalidate>
           <h3 data-i18n="contact.form.title" />
           
           <div class="form-group">
@@ -48,6 +48,9 @@ import { Mail, Phone } from 'lucide-astro';
             <textarea id="message" name="message" rows="5" minlength="10" maxlength="1000" data-i18n-placeholder="contact.form.message.placeholder" required style="resize: vertical;" />
           </div>
 
+          <!-- Honeypot field -->
+          <input type="text" name="company" id="company" style="display:none" tabindex="-1" autocomplete="off">
+
           <button type="submit" class="btn btn-primary" data-i18n="contact.form.submit" />
         </form>
       </div>
@@ -59,14 +62,45 @@ import { Mail, Phone } from 'lucide-astro';
   // Contact form handling
   document.addEventListener('DOMContentLoaded', () => {
     const contactForm = document.getElementById('contactForm');
-    
-    if (contactForm) {
-      contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        alert('Thank you for your message! I\'ll get back to you within 1 hour.');
-        contactForm.reset();
-      });
-    }
+    const endpoint = "${siteConfig.contactEndpoint}";
+
+    if (!contactForm) return;
+
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const form = e.currentTarget;
+      const email = (document.getElementById('email') as HTMLInputElement)?.value.trim();
+      const message = (document.getElementById('message') as HTMLTextAreaElement)?.value.trim();
+      const company = (document.getElementById('company') as HTMLInputElement)?.value.trim();
+
+      if (company) return; // bot detected
+
+      if (!email || !message) {
+        alert('Please fill in your email and message.');
+        return;
+      }
+
+      if (!endpoint) {
+        alert('Contact form endpoint is not configured. Please set siteConfig.contactEndpoint.');
+        return;
+      }
+
+      try {
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, message, source: window.location.href })
+        });
+
+        if (!res.ok) throw new Error('Network response was not ok');
+        alert('Thanks! Your message has been sent.');
+        (form as HTMLFormElement).reset();
+      } catch (err) {
+        console.error(err);
+        alert('Sorry, something went wrong. Please email us directly at ${siteConfig.email}.');
+      }
+    });
   });
 </script>
 
