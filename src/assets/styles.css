@@ -1348,3 +1348,9 @@ p {
 }
 
 
+@media (min-width: 1025px) {
+  /* Ensure mobile menu never shows on larger screens */
+  .mobile-menu { display: none !important; }
+}
+
+

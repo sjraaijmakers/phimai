@@ -17,7 +17,7 @@ import { Menu, X } from 'lucide-astro';
       <Navigation className="desktop-nav nav-links" />
       
       <div class="header-actions">
-        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu">
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu" onclick="toggleMobileMenu()">
           <Menu size={20} class="menu-icon" />
           <X size={20} class="close-icon" />
         </button>
@@ -25,36 +25,37 @@ import { Menu, X } from 'lucide-astro';
     </div>
   </div>
   
-  <div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu" id="mobileMenu" onclick="onMobileMenuClick(event)">
     <div class="mobile-menu-content">
       <Navigation className="mobile nav-links" />
     </div>
   </div>
-</header>
+</header>i
 
 <script>
   // Header functionality
+  // Expose simple reusable handlers for inline HTML events
+  window.toggleMobileMenu = function() {
+    const menu = document.getElementById('mobileMenu');
+    const toggle = document.getElementById('mobileMenuToggle');
+    if (menu) menu.classList.toggle('active');
+    if (toggle) toggle.classList.toggle('active');
+  };
+
+  window.onMobileMenuClick = function(event) {
+    const target = event && event.target;
+    if (target && target.closest && target.closest('a')) {
+      const menu = document.getElementById('mobileMenu');
+      const toggle = document.getElementById('mobileMenuToggle');
+      if (menu) menu.classList.remove('active');
+      if (toggle) toggle.classList.remove('active');
+    }
+  };
+
   document.addEventListener('DOMContentLoaded', () => {
-    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-    const mobileMenu = document.getElementById('mobileMenu');
     const headerScrollToTop = document.getElementById('headerScrollToTop');
     
-    // Mobile menu functionality
-    if (mobileMenuToggle && mobileMenu) {
-      mobileMenuToggle.addEventListener('click', () => {
-        mobileMenu.classList.toggle('active');
-        mobileMenuToggle.classList.toggle('active');
-      });
-      
-      // Close mobile menu when clicking on a link
-      const mobileLinks = mobileMenu.querySelectorAll('a');
-      mobileLinks.forEach(link => {
-        link.addEventListener('click', () => {
-          mobileMenu.classList.remove('active');
-          mobileMenuToggle.classList.remove('active');
-        });
-      });
-    }
+    // Mobile menu handled via global inline handlers
 
     // Smooth anchor scrolling is handled globally in Layout.astro
 
