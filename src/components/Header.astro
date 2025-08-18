@@ -69,60 +69,30 @@ import { Menu, X } from 'lucide-astro';
     }
 
     // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
+    document.querySelectorAll('a[href^="#"]').forEach((anchorEl) => {
+      anchorEl.addEventListener('click', (e) => {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        const href = (e.currentTarget as HTMLAnchorElement).getAttribute('href');
+        if (!href) return;
+        const target = document.querySelector(href) as HTMLElement | null;
         if (target) {
-          const headerHeight = document.querySelector('.header')?.offsetHeight || 0;
-          const targetPosition = target.offsetTop - headerHeight - 20;
-          
-          window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth'
-          });
+          const headerHeight = (document.querySelector('.header') as HTMLElement | null)?.offsetHeight || 0;
+          const targetPosition = target.offsetTop - headerHeight;
+          window.scrollTo({ top: targetPosition, behavior: 'smooth' });
         }
       });
     });
 
-    // Active navigation highlighting
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-links a');
-    
-    function updateActiveNav() {
-      const scrollPosition = window.scrollY + 150;
-      
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.offsetHeight;
-        const sectionId = section.getAttribute('id');
-        
-        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-          navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${sectionId}` || (sectionId === 'gallery' && link.getAttribute('href') === '#gallery')) {
-              link.classList.add('active');
-            }
-          });
-        }
-      });
-    }
-
-    // Set initial active state on page load
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        updateActiveNav();
-      }, 100);
-    });
+    // Active navigation highlighting handled in Navigation.astro
 
     // Header background on scroll
     let lastScrollTop = 0;
-    const header = document.querySelector('.header');
+    const header = document.querySelector('.header') as HTMLElement | null;
     
     window.addEventListener('scroll', () => {
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       
-      updateActiveNav();
+      // Active nav handled in Navigation.astro
       
       if (header) {
         if (scrollTop > 100) {
@@ -137,7 +107,6 @@ import { Menu, X } from 'lucide-astro';
       lastScrollTop = scrollTop;
     });
 
-    // Set initial active nav
-    updateActiveNav();
+    // Active nav handled in Navigation.astro
   });
 </script>
