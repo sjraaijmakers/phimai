@@ -1,0 +1,150 @@
+---
+import { ChevronLeft, ChevronRight } from 'lucide-astro';
+
+interface CarouselImage {
+  src: string;
+  alt?: string;
+}
+
+interface Props {
+  id?: string;
+  images: CarouselImage[];
+  interval?: number; // milliseconds
+  showArrows?: boolean;
+  showDots?: boolean;
+  autoPlay?: boolean;
+}
+
+const { 
+  id = "carousel", 
+  images = [], 
+  interval = 5000, 
+  showArrows = true, 
+  showDots = true, 
+  autoPlay = true 
+} = Astro.props;
+---
+
+<div class="carousel" id={id}>
+  <div class="carousel-container">
+    {images.map((image, index) => (
+             <div class={`carousel-slide ${index === 0 ? 'active' : ''}`} data-index={index}>
+         <img src={image.src} alt={image.alt || ''} class="hero-image">
+       </div>
+    ))}
+  </div>
+
+     {showArrows && images.length > 1 && (
+     <>
+       <button class="carousel-arrow carousel-prev" aria-label="Previous">
+         <ChevronLeft size={24} />
+       </button>
+       <button class="carousel-arrow carousel-next" aria-label="Next">
+         <ChevronRight size={24} />
+       </button>
+     </>
+   )}
+
+   {showDots && images.length > 1 && (
+     <div class="carousel-dots">
+       {images.map((_, index) => (
+         <button 
+           class={`carousel-dot ${index === 0 ? 'active' : ''}`} 
+           aria-label={`Go to slide ${index + 1}`}
+         />
+       ))}
+     </div>
+   )}
+</div>
+
+ <script define:vars={{ autoPlayInterval: interval, shouldAutoPlay: autoPlay }}>
+   // Carousel functionality
+   document.addEventListener('DOMContentLoaded', () => {
+     // Event delegation for carousel controls
+     document.addEventListener('click', (e) => {
+       const target = e.target as HTMLElement;
+       
+       // Handle arrow clicks
+       if (target.closest('.carousel-arrow')) {
+         const arrow = target.closest('.carousel-arrow') as HTMLElement;
+         const carousel = arrow.closest('.carousel') as HTMLElement;
+         if (!carousel) return;
+         
+         const slides = carousel.querySelectorAll('.carousel-slide');
+         const dots = carousel.querySelectorAll('.carousel-dot');
+         const currentSlide = carousel.querySelector('.carousel-slide.active') as HTMLElement;
+         const currentIndex = Array.from(slides).indexOf(currentSlide);
+         
+         if (arrow.classList.contains('carousel-next')) {
+           const nextIndex = (currentIndex + 1) % slides.length;
+           showSlide(carousel, nextIndex);
+         } else if (arrow.classList.contains('carousel-prev')) {
+           const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
+           showSlide(carousel, prevIndex);
+         }
+       }
+       
+       // Handle dot clicks
+       if (target.closest('.carousel-dot')) {
+         const dot = target.closest('.carousel-dot') as HTMLElement;
+         const carousel = dot.closest('.carousel') as HTMLElement;
+         if (!carousel) return;
+         
+         const dots = carousel.querySelectorAll('.carousel-dot');
+         const index = Array.from(dots).indexOf(dot);
+         showSlide(carousel, index);
+       }
+     });
+     
+     function showSlide(carousel: HTMLElement, index: number) {
+       const slides = carousel.querySelectorAll('.carousel-slide');
+       const dots = carousel.querySelectorAll('.carousel-dot');
+       
+       // Hide all slides and dots
+       slides.forEach(slide => slide.classList.remove('active'));
+       dots.forEach(dot => dot.classList.remove('active'));
+       
+       // Show current slide and dot
+       if (slides[index]) slides[index].classList.add('active');
+       if (dots[index]) dots[index].classList.add('active');
+     }
+     
+     // Auto-play functionality
+     const carousels = document.querySelectorAll('.carousel');
+     carousels.forEach(carousel => {
+       if (!shouldAutoPlay) return;
+       
+       const slides = carousel.querySelectorAll('.carousel-slide');
+       if (slides.length <= 1) return;
+       
+       let intervalId: number | null = null;
+       
+       function nextSlide() {
+         const currentSlide = carousel.querySelector('.carousel-slide.active') as HTMLElement;
+         const currentIndex = Array.from(slides).indexOf(currentSlide);
+         const nextIndex = (currentIndex + 1) % slides.length;
+         showSlide(carousel as HTMLElement, nextIndex);
+       }
+       
+       function startAutoPlay() {
+         intervalId = setInterval(nextSlide, autoPlayInterval);
+       }
+       
+       function stopAutoPlay() {
+         if (intervalId) {
+           clearInterval(intervalId);
+           intervalId = null;
+         }
+       }
+       
+       // Pause autoplay on hover
+       carousel.addEventListener('mouseenter', stopAutoPlay);
+       carousel.addEventListener('mouseleave', startAutoPlay);
+       
+       // Start autoplay
+       startAutoPlay();
+     });
+   });
+ </script>
+
+
