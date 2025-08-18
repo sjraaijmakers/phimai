@@ -1,6 +1,6 @@
 export const siteConfig = {
   // Site URLs
-  url: 'https://phh.aktis.dev',
+  url: 'https://pph.aktis.dev',
   email: 'stay@phimaipondhouse.com',
   phone: '+66 12 345 6789',
   
