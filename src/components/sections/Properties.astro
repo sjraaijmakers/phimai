@@ -1,6 +1,6 @@
 ---
-import { galleryImages } from '../data/images';
-import Lightbox from './Lightbox.astro';
+import { galleryImages } from '../../data/images';
+import Lightbox from '../ui/Lightbox.astro';
 
 const maxImages = 5;
 ---
@@ -9,8 +9,8 @@ const maxImages = 5;
   <div class="container">
     <div class="properties-content">
       <div class="section-header">
-        <h2 class="section-title" data-i18n="gallery.title" />
-        <p class="section-subtitle" data-i18n="gallery.subtitle" />
+        <h2 class="section-title" data-i18n="gallery.title">Our Tiny Homes</h2>
+        <p class="section-subtitle" data-i18n="gallery.subtitle">Explore our cozy accommodations designed for comfort and tranquility</p>
       </div>
 
       <div class="gallery-grid">
@@ -25,7 +25,7 @@ const maxImages = 5;
         <div class="gallery-more">
           <button class="btn btn-secondary" onclick="openLightbox(0)">
             <span>
-              <span data-i18n="gallery.showMore"></span>
+              <span data-i18n="gallery.showMore">See More Pictures</span>
               {' '}
               ({galleryImages.length})
             </span>

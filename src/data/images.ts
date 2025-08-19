@@ -26,10 +26,6 @@ export const galleryImages: ImageConfig[] = [
     caption: 'Comfortable living area with all essentials'
   },
   {
-    src: '/images/phimai-temple.jpg',
-    caption: 'Ancient Khmer temple ruins just minutes away'
-  },
-  {
     src: '/images/family-suite.jpg',
     caption: 'Spacious family accommodation for larger groups'
   },
@@ -40,10 +36,6 @@ export const galleryImages: ImageConfig[] = [
   {
     src: '/images/bedroom.jpg',
     caption: 'Cozy bedroom with quality linens'
-  },
-  {
-    src: '/images/sai-ngam-mangrove.jpg',
-    caption: 'Beautiful mangrove forest perfect for nature walks'
   }
 ];
 
