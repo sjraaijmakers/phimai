@@ -1,0 +1,136 @@
+---
+interface Props {
+  type: 'whatsapp' | 'line';
+  phoneNumber: string;
+  size?: number;
+  className?: string;
+  lang?: string;
+  whatsappQrCode?: string; // URL to official WhatsApp QR code image
+}
+
+const { type, phoneNumber, size = 200, className = '', lang = 'en', whatsappQrCode } = Astro.props;
+
+// Generate QR code URLs
+const whatsappUrl = `https://wa.me/${phoneNumber.replace(/\D/g, '')}`;
+const lineUrl = `https://line.me/ti/p/~${phoneNumber}`;
+
+// For WhatsApp, use official QR code if provided, otherwise use direct link
+const qrUrl = type === 'whatsapp' ? whatsappUrl : lineUrl;
+
+// For Line, still use the API since Line doesn't have an official QR API
+const lineQrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(lineUrl)}`;
+
+// Labels based on language
+const labels = {
+  en: {
+    whatsapp: 'WhatsApp',
+    line: 'Line',
+    instruction: 'Scan to message us'
+  },
+  th: {
+    whatsapp: 'WhatsApp',
+    line: 'Line',
+    instruction: 'สแกนเพื่อส่งข้อความ'
+  }
+};
+
+const currentLabels = labels[lang as keyof typeof labels] || labels.en;
+---
+
+<div class={`qr-code-container ${className}`}>
+  <div class="qr-code">
+    {type === 'whatsapp' && whatsappQrCode ? (
+      <!-- Use official WhatsApp QR code -->
+      <img 
+        src={whatsappQrCode} 
+        alt="WhatsApp QR Code"
+        width={size}
+        height={size}
+        loading="lazy"
+      />
+    ) : type === 'whatsapp' ? (
+      <!-- Fallback: Direct WhatsApp link QR -->
+      <img 
+        src={`https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(qrUrl)}`}
+        alt="WhatsApp QR Code"
+        width={size}
+        height={size}
+        loading="lazy"
+      />
+    ) : (
+      <!-- Line QR code -->
+      <img 
+        src={lineQrApiUrl} 
+        alt="Line QR Code"
+        width={size}
+        height={size}
+        loading="lazy"
+      />
+    )}
+  </div>
+  <div class="qr-code-label">
+    <span class="qr-app-name">{type === 'whatsapp' ? currentLabels.whatsapp : currentLabels.line}</span>
+    <span class="qr-instruction">{currentLabels.instruction}</span>
+  </div>
+</div>
+
+<style>
+  .qr-code-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space);
+    background: var(--color-white);
+    border-radius: var(--radius);
+    border: 1px solid #E8E0D6;
+    transition: var(--transition);
+  }
+
+  .qr-code-container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .qr-code {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .qr-code img {
+    border-radius: var(--radius-sm);
+    max-width: 100%;
+    height: auto;
+  }
+
+  .qr-code-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.25rem;
+  }
+
+  .qr-app-name {
+    font-weight: 600;
+    color: var(--color-text);
+    font-size: 0.9rem;
+  }
+
+  .qr-instruction {
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+  }
+
+  @media (max-width: 768px) {
+    .qr-code-container {
+      padding: var(--space-sm);
+    }
+    
+    .qr-code img {
+      width: 150px;
+      height: 150px;
+    }
+  }
+</style>

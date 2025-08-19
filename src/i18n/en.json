@@ -58,9 +58,17 @@
     "email": {
       "label": "Email"
     },
-    "phone": {
-      "label": "Phone"
+    "messaging": {
+      "label": "Message Us",
+      "description": "Click the buttons below to contact us via WhatsApp or Line"
     },
+    "whatsapp": {
+      "label": "Chat on WhatsApp"
+    },
+    "line": {
+      "label": "Chat on Line"
+    },
+
     "form": {
       "title": "Contact Us",
       "email": {

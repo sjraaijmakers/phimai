@@ -58,8 +58,18 @@
     "email": {
       "label": "อีเมล"
     },
-    "phone": {
-      "label": "โทรศัพท์"
+    "messaging": {
+      "label": "ส่งข้อความถึงเรา",
+      "description": "คลิกปุ่มด้านล่างเพื่อติดต่อเราผ่าน WhatsApp หรือ Line"
+    },
+    "whatsapp": {
+      "label": "แชทบน WhatsApp"
+    },
+    "line": {
+      "label": "แชทบน Line"
+    },
+    "qr": {
+      "show": "แสดง Line QR Code"
     },
     "form": {
       "title": "ติดต่อเรา",
