@@ -898,7 +898,22 @@ p {
 .messaging-buttons {
   display: flex;
   gap: var(--space);
-  margin-top: var(--space-lg);
+  margin-top: var(--space);
+  flex-wrap: wrap;
+}
+
+.messaging-method .contact-details {
+  flex: 1;
+}
+
+.messaging-method .contact-details {
+  margin-top: 0;
+}
+
+.messaging-buttons {
+  display: flex;
+  gap: var(--space);
+  margin-top: 0;
   flex-wrap: wrap;
 }
 
@@ -922,14 +937,14 @@ p {
 }
 
 .whatsapp-official-btn {
-  background: #25D366;
-  color: white;
+  background: #25D366 !important;
+  color: white !important;
   display: flex;
   align-items: center;
   gap: var(--space-sm);
   padding: var(--space-sm) var(--space-lg);
   border-radius: var(--radius-sm);
-  text-decoration: none;
+  text-decoration: none !important;
   font-weight: 500;
   transition: var(--transition);
   border: 1px solid transparent;
@@ -938,25 +953,29 @@ p {
 }
 
 .whatsapp-official-btn:hover {
-  background: #128C7E;
-  color: white;
+  background: #128C7E !important;
+  color: white !important;
   transform: translateY(-2px);
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 .whatsapp-official-btn svg {
-  color: white;
+  color: white !important;
+}
+
+.whatsapp-official-btn span {
+  color: white !important;
 }
 
 .line-official-btn {
-  background: #00B900;
-  color: white;
+  background: #00B900 !important;
+  color: white !important;
   display: flex;
   align-items: center;
   gap: var(--space-sm);
   padding: var(--space-sm) var(--space-lg);
   border-radius: var(--radius-sm);
-  text-decoration: none;
+  text-decoration: none !important;
   font-weight: 500;
   transition: var(--transition);
   border: 1px solid transparent;
@@ -965,14 +984,18 @@ p {
 }
 
 .line-official-btn:hover {
-  background: #009900;
-  color: white;
+  background: #009900 !important;
+  color: white !important;
   transform: translateY(-2px);
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 .line-official-btn svg {
-  color: white;
+  color: white !important;
+}
+
+.line-official-btn span {
+  color: white !important;
 }
 
 .btn-icon {
