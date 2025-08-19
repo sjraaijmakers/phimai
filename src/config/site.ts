@@ -21,6 +21,8 @@ export const siteConfig = {
   // Booking platforms (if needed later)
   booking: {
     airbnb: 'https://www.airbnb.nl/rooms/1469265532291794355',
-    // booking: 'https://booking.com/phimaipondhouse',
+    agoda: 'https://www.agoda.com/phimai-pond-house/hotel/nakhonratchasima-th.html',
+    booking: 'https://www.booking.com/hotel/th/phimai-pond-house',
+    trip: ''
   }
 } as const;

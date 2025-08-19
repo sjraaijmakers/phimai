@@ -225,9 +225,9 @@ p {
   left: 0;
   right: 0;
   z-index: 1000;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(139, 115, 85, 0.1);
-  transition: var(--transition);
 }
 
 .header-content {
@@ -305,7 +305,7 @@ p {
 
 .mobile-menu {
   position: fixed;
-  top: 80px; /* Position directly below header */
+  top: var(--header-height); /* Position directly below header */
   left: 0;
   right: 0;
   background: rgba(255, 255, 255, 0.98);
@@ -319,7 +319,7 @@ p {
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   height: auto;
-  max-height: calc(100vh - 80px);
+  max-height: calc(100vh - var(--header-height));
   overflow-y: auto;
 }
 
@@ -421,12 +421,25 @@ p {
 /* ===== HERO ===== */
 .hero {
   position: relative;
-  min-height: 100vh;
+  /* Fallback */
+  min-height: calc(100vh - var(--header-height));
+  /* Better on iOS 15+/Safari/Chrome */
   padding-top: var(--header-height);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+}
+
+/* Prefer static viewport height if supported (stable layout) */
+@supports (height: 100svh) {
+  .hero { min-height: calc(100svh - var(--header-height)); }
+}
+
+/* Prefer dynamic viewport height to account for browser chrome */
+@supports (height: 100dvh) {
+  .hero { min-height: calc(100dvh - var(--header-height)); }
 }
 
 .hero-background {

@@ -7,26 +7,26 @@ import { siteConfig } from '../config/site';
 const t = useTranslations('en');
 
 const providers = [
-  {
-    key: 'agoda',
-    name: 'Agoda',
-    href: 'https://www.agoda.com/phimai-pond-house/hotel/nakhonratchasima-th.html',
-    logo: '/images/logos/agoda-logo.jpeg',
-    i18nKey: 'booking.agoda',
-    className: 'agoda'
-  },
-  {
+  siteConfig.booking?.airbnb && {
     key: 'airbnb',
     name: 'Airbnb',
-    href: siteConfig.booking?.airbnb || 'https://www.airbnb.com/',
+    href: siteConfig.booking.airbnb,
     logo: '/images/logos/airbnb-logo.jpeg',
     i18nKey: 'booking.airbnb',
     className: 'airbnb'
   },
-  {
+  siteConfig.booking?.agoda && {
+    key: 'agoda',
+    name: 'Agoda',
+    href: siteConfig.booking.agoda,
+    logo: '/images/logos/agoda-logo.jpeg',
+    i18nKey: 'booking.agoda',
+    className: 'agoda'
+  },
+  siteConfig.booking?.booking && {
     key: 'booking',
     name: 'Booking.com',
-    href: 'https://www.booking.com/hotel/th/phimai-pond-house',
+    href: siteConfig.booking.booking,
     logo: '/images/logos/booking-logo.jpeg',
     i18nKey: 'booking.booking',
     className: 'booking'
@@ -34,13 +34,13 @@ const providers = [
   {
     key: 'trip',
     name: 'Trip.com',
-    href: '',
+    href: siteConfig.booking?.trip || '',
     logo: '/images/logos/trip-logo.jpeg',
     i18nKey: 'booking.trip',
     className: 'trip',
     disabled: true
   }
-].sort((a, b) => a.name.localeCompare(b.name));
+].filter(Boolean).sort((a, b) => (a!.name).localeCompare(b!.name));
 ---
 
 <section id="booking" class="booking section">
