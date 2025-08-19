@@ -4,28 +4,117 @@ import '../assets/styles.css';
 
 export interface Props {
   title?: string;
+  description?: string;
+  keywords?: string;
+  image?: string;
+  canonical?: string;
+  lang?: string;
 }
 
-const { title = `${siteConfig.name} - ${siteConfig.description}` } = Astro.props;
+const { 
+  title = `${siteConfig.name} - ${siteConfig.description}`,
+  description = "Stay in cozy tiny homes at Phimai Pond House, Thailand. Minutes from Phimai Historical Park and Sai Ngam mangrove. Free bikes, kitchenette, and authentic Thai experience.",
+  keywords = "Phimai accommodation, Thailand tiny homes, Phimai Historical Park, vacation rental Thailand, small town Thailand, Khmer temple, Sai Ngam, Nakhon Ratchasima",
+  image = "/images/hero-tiny-home.jpg",
+  canonical = siteConfig.url,
+  lang = "en"
+} = Astro.props;
+
+// Thai-specific content
+const isThai = lang === "th";
+const thaiDescription = "พักในบ้านเล็กๆ ที่อบอุ่นที่ Phimai Pond House ประเทศไทย ใกล้กับอุทยานประวัติศาสตร์พิมายและป่าชายเลนสายน้ำ จักรยานฟรี ห้องครัว และประสบการณ์ไทยแท้";
+const thaiKeywords = "ที่พักพิมาย, บ้านเล็กประเทศไทย, อุทยานประวัติศาสตร์พิมาย, เช่าที่พักประเทศไทย, เมืองเล็กไทย, วัดขอม, สายน้ำ, นครราชสีมา";
+
+const finalDescription = isThai ? thaiDescription : description;
+const finalKeywords = isThai ? thaiKeywords : keywords;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
-    <meta name="description" content="Stay in cozy tiny homes at Phimai Pond House, Thailand. Minutes from Phimai Historical Park and Sai Ngam mangrove. Free bikes, kitchenette, and authentic Thai experience." />
-    <meta name="keywords" content="Phimai accommodation, Thailand tiny homes, Phimai Historical Park, vacation rental Thailand, small town Thailand" />
     
-    <!-- Open Graph -->
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content="Stay in cozy tiny homes at Phimai Pond House, Thailand. Minutes from Phimai Historical Park and Sai Ngam mangrove. Free bikes, kitchenette, and authentic Thai experience." />
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={finalDescription} />
+    <meta name="keywords" content={finalKeywords} />
+    <meta name="author" content={siteConfig.name} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonical} />
+    
+    <!-- Language Alternates -->
+    <link rel="alternate" hreflang="en" href="https://pph.aktis.dev" />
+    <link rel="alternate" hreflang="th" href="https://pph.aktis.dev/th" />
+    <link rel="alternate" hreflang="x-default" href="https://pph.aktis.dev" />
+    
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={siteConfig.url} />
-    <meta property="og:image" content="/images/hero-tiny-home.jpg" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={finalDescription} />
+    <meta property="og:image" content={new URL(image, siteConfig.url).href} />
+    <meta property="og:site_name" content={siteConfig.name} />
+    <meta property="og:locale" content={isThai ? "th_TH" : "en_US"} />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonical} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={finalDescription} />
+    <meta property="twitter:image" content={new URL(image, siteConfig.url).href} />
+    
+    <!-- Additional SEO -->
+    <meta name="geo.region" content="TH-30" />
+    <meta name="geo.placename" content="Phimai, Nakhon Ratchasima, Thailand" />
+    <meta name="geo.position" content="15.2217;102.4947" />
+    <meta name="ICBM" content="15.2217, 102.4947" />
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "LodgingBusiness",
+      "name": siteConfig.name,
+      "description": finalDescription,
+      "url": canonical,
+      "telephone": siteConfig.phone,
+      "email": siteConfig.email,
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Phimai",
+        "addressRegion": "Nakhon Ratchasima",
+        "addressCountry": "TH"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 15.2217,
+        "longitude": 102.4947
+      },
+      "amenityFeature": [
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": isThai ? "WiFi ฟรี" : "Free WiFi",
+          "value": true
+        },
+        {
+          "@type": "LocationFeatureSpecification", 
+          "name": isThai ? "จักรยานฟรี" : "Free Bike Rental",
+          "value": true
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": isThai ? "ห้องครัว" : "Kitchenette",
+          "value": true
+        }
+      ],
+      "image": new URL(image, siteConfig.url).href,
+      "priceRange": "$$",
+      "currenciesAccepted": "THB, USD, EUR",
+      "inLanguage": lang
+    })} />
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

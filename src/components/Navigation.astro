@@ -19,6 +19,9 @@ const { className = "" } = Astro.props;
   document.addEventListener('DOMContentLoaded', () => {
     const navLinks = Array.from(document.querySelectorAll('.nav-link')) as HTMLAnchorElement[];
     const sections = Array.from(document.querySelectorAll('section[id]')) as HTMLElement[];
+    let scrollTimeout: ReturnType<typeof setTimeout>;
+    let lastScrollPosition = 0;
+    let isNavigating = false;
     
     function updateActiveNav() {
       const headerEl = document.querySelector('.header') as HTMLElement | null;
@@ -32,12 +35,30 @@ const { className = "" } = Astro.props;
         return;
       }
 
+      // Find the section that's most visible in the viewport
+      let mostVisibleSection: HTMLElement | null = null;
+      let maxVisibility = 0;
+
       sections.forEach((section) => {
         const sectionTop = (section as HTMLElement).offsetTop;
         const sectionHeight = (section as HTMLElement).offsetHeight;
-        const sectionId = section.getAttribute('id');
+        const sectionBottom = sectionTop + sectionHeight;
         
-        if (sectionId && scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+        // Calculate how much of the section is visible
+        const visibleTop = Math.max(sectionTop, scrollPosition);
+        const visibleBottom = Math.min(sectionBottom, scrollPosition + window.innerHeight);
+        const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+        const visibility = visibleHeight / sectionHeight;
+        
+        if (visibility > maxVisibility) {
+          maxVisibility = visibility;
+          mostVisibleSection = section as HTMLElement;
+        }
+      });
+
+      if (mostVisibleSection) {
+        const sectionId = mostVisibleSection.getAttribute('id');
+        if (sectionId) {
           // Remove active class from all nav links
           navLinks.forEach((link) => link.classList.remove('active'));
           
@@ -47,11 +68,49 @@ const { className = "" } = Astro.props;
             activeLink.classList.add('active');
           }
         }
-      });
+      }
     }
     
-    // Update on scroll
-    window.addEventListener('scroll', updateActiveNav);
+    // Debounced scroll handler to prevent intermediate activations
+    function handleScroll() {
+      // Don't update active nav during programmatic navigation
+      if (isNavigating) return;
+      
+      const currentScrollPosition = window.scrollY;
+      const scrollDifference = Math.abs(currentScrollPosition - lastScrollPosition);
+      
+      // Only update if there's significant scroll movement or after scrolling stops
+      if (scrollDifference > 50) {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+          updateActiveNav();
+        }, 100);
+      }
+      
+      lastScrollPosition = currentScrollPosition;
+    }
+    
+    // Handle navigation clicks - immediately set active state
+    navLinks.forEach((link) => {
+      link.addEventListener('click', () => {
+        const href = link.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          isNavigating = true;
+          
+          // Immediately set the clicked link as active
+          navLinks.forEach((navLink) => navLink.classList.remove('active'));
+          link.classList.add('active');
+          
+          // Reset navigation flag after scroll completes
+          setTimeout(() => {
+            isNavigating = false;
+          }, 1000);
+        }
+      });
+    });
+    
+    // Update on scroll with debouncing
+    window.addEventListener('scroll', handleScroll);
     
     // Update on page load
     updateActiveNav();

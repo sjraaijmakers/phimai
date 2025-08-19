@@ -230,6 +230,8 @@ p {
   border-bottom: 1px solid rgba(139, 115, 85, 0.1);
 }
 
+
+
 .header-content {
   display: flex;
   align-items: center;
@@ -353,7 +355,10 @@ p {
   font-family: var(--font-secondary);
 }
 
-.navigation a:hover { color: var(--color-primary); }
+.navigation a:hover { 
+  color: var(--color-secondary); 
+  transform: translateY(-1px);
+}
 
 .navigation a::after {
   content: '';
@@ -367,7 +372,10 @@ p {
   border-radius: 1px;
 }
 
-.navigation a:hover::after { width: 100%; }
+.navigation a:hover::after { 
+  width: 100%; 
+  background: var(--color-secondary);
+}
 
 .navigation a.active {
   color: var(--color-primary);
@@ -511,6 +519,53 @@ p {
 .hero-actions .btn { min-width: 140px; }
 
 /* ===== GALLERY ===== */
+.gallery {
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.02);
+  -webkit-mask-image: url('/src/assets/banyan-vines-thick.png');
+  -webkit-mask-repeat: repeat;
+  -webkit-mask-size: 150px 150px;
+  mask-image: url('/src/assets/banyan-vines-thick.png');
+  mask-repeat: repeat;
+  mask-size: 150px 150px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Also apply to the section that contains gallery */
+.section[id="gallery"] {
+  position: relative;
+  overflow: hidden;
+}
+
+.section[id="gallery"]::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.02);
+  -webkit-mask-image: url('/src/assets/banyan-vines-thick.png');
+  -webkit-mask-repeat: repeat;
+  -webkit-mask-size: 150px 150px;
+  mask-image: url('/src/assets/banyan-vines-thick.png');
+  mask-repeat: repeat;
+  mask-size: 150px 150px;
+  pointer-events: none;
+  z-index: 1;
+}
+
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -768,6 +823,26 @@ p {
 /* ===== BOOKING ===== */
 .booking {
   background: var(--gradient-cool);
+  position: relative;
+  overflow: hidden;
+}
+
+.booking::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.02);
+  -webkit-mask-image: url('/src/assets/banyan-vines-thick.png');
+  -webkit-mask-repeat: repeat;
+  -webkit-mask-size: 150px 150px;
+  mask-image: url('/src/assets/banyan-vines-thick.png');
+  mask-repeat: repeat;
+  mask-size: 150px 150px;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .booking-options {
@@ -973,7 +1048,7 @@ p {
 }
 
 .whatsapp-official-btn:hover {
-  background: #128C7E !important;
+  background: #1a8f5f !important;
   color: white !important;
   transform: translateY(-2px);
   text-decoration: none !important;
@@ -1004,7 +1079,7 @@ p {
 }
 
 .line-official-btn:hover {
-  background: #009900 !important;
+  background: #008000 !important;
   color: white !important;
   transform: translateY(-2px);
   text-decoration: none !important;
@@ -1078,6 +1153,26 @@ p {
   padding: var(--space-xl);
   border-radius: var(--radius);
   border: 1px solid #E8E0D6;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-form-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.04);
+  -webkit-mask-image: url('/src/assets/banyan-vines-thick.png');
+  -webkit-mask-repeat: repeat;
+  -webkit-mask-size: 100px 100px;
+  mask-image: url('/src/assets/banyan-vines-thick.png');
+  mask-repeat: repeat;
+  mask-size: 100px 100px;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .contact-form h3 {
@@ -1107,7 +1202,8 @@ p {
   font-size: 1rem;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
   font-family: var(--font-secondary);
-  background: rgba(255, 255, 255, 0.8);
+  background-color: #FFFFFF !important;
+  background-image: none !important;
 }
 
 .form-group textarea {
@@ -1121,7 +1217,8 @@ p {
 .form-group textarea:focus {
   outline: none;
   border-color: var(--color-primary);
-  background: rgba(255, 255, 255, 1);
+  background-color: #FFFFFF !important;
+  background-image: none !important;
 }
 
 .contact-form .btn { width: 100%; }

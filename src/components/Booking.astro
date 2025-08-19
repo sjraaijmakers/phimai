@@ -6,41 +6,23 @@ import { siteConfig } from '../config/site';
 // For now, we'll use English as default
 const t = useTranslations('en');
 
-const providers = [
-  siteConfig.booking?.airbnb && {
-    key: 'airbnb',
-    name: 'Airbnb',
-    href: siteConfig.booking.airbnb,
-    logo: '/images/logos/airbnb-logo.jpeg',
-    i18nKey: 'booking.airbnb',
-    className: 'airbnb'
-  },
-  siteConfig.booking?.agoda && {
-    key: 'agoda',
-    name: 'Agoda',
-    href: siteConfig.booking.agoda,
-    logo: '/images/logos/agoda-logo.jpeg',
-    i18nKey: 'booking.agoda',
-    className: 'agoda'
-  },
-  siteConfig.booking?.booking && {
-    key: 'booking',
-    name: 'Booking.com',
-    href: siteConfig.booking.booking,
-    logo: '/images/logos/booking-logo.jpeg',
-    i18nKey: 'booking.booking',
-    className: 'booking'
-  },
-  {
-    key: 'trip',
-    name: 'Trip.com',
-    href: siteConfig.booking?.trip || '',
-    logo: '/images/logos/trip-logo.jpeg',
-    i18nKey: 'booking.trip',
-    className: 'trip',
-    disabled: true
-  }
-].filter(Boolean).sort((a, b) => (a!.name).localeCompare(b!.name));
+// Build providers list from unified config map
+const providers = Object.entries(siteConfig.booking || {})
+  .map(([key, value]) => {
+    const v = value as any;
+    if (!v || typeof v !== 'object') return null;
+    return {
+      key,
+      name: v.name,
+      href: v.url as string,
+      logo: v.logo,
+      i18nKey: `booking.${key}`,
+      className: v.className,
+      disabled: !v.url || !!v.disabled,
+    };
+  })
+  .filter(Boolean)
+  .sort((a, b) => (a!.name).localeCompare(b!.name));
 ---
 
 <section id="booking" class="booking section">

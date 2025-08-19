@@ -18,11 +18,11 @@ export const siteConfig = {
     // instagram: 'https://instagram.com/phimaipondhouse',
   },
   
-  // Booking platforms (if needed later)
+  // Booking platforms (links + metadata)
   booking: {
-    airbnb: 'https://www.airbnb.nl/rooms/1469265532291794355',
-    agoda: 'https://www.agoda.com/phimai-pond-house/hotel/nakhonratchasima-th.html',
-    booking: 'https://www.booking.com/hotel/th/phimai-pond-house',
-    trip: ''
+    airbnb:  { url: 'https://www.airbnb.nl/rooms/1469265532291794355', name: 'Airbnb',     logo: '/images/logos/airbnb-logo.jpeg',  className: 'airbnb' },
+    agoda:   { url: 'https://www.agoda.com/phimai-pond-house/hotel/nakhonratchasima-th.html', name: 'Agoda',      logo: '/images/logos/agoda-logo.jpeg',   className: 'agoda' },
+    booking: { url: 'https://www.booking.com/hotel/th/phimai-pond-house', name: 'Booking.com', logo: '/images/logos/booking-logo.jpeg', className: 'booking' },
+    trip:    { url: '', name: 'Trip.com',    logo: '/images/logos/trip-logo.jpeg',    className: 'trip', disabled: true }
   }
 } as const;
