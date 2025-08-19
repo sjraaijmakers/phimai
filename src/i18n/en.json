@@ -49,7 +49,7 @@
   "booking": {
     "title": "Book Your Stay",
     "subtitle": "Ready to experience Phimai? Book directly through our trusted platforms!",
-    "airbnb": "Book on Airbnb",
+    "agoda": "Book on Agoda",
     "booking": "Book on Booking.com"
   },
   "contact": {

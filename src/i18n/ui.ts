@@ -3,8 +3,7 @@ import th from './th.json';
 
 export const languages = {
   en: 'English',
-  th: 'ไทย',
-  zh: '中文'
+  th: 'ไทย'
 };
 
 export const defaultLang = 'en';

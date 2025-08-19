@@ -1,7 +1,6 @@
 import i18next from 'i18next';
 import en from './en.json';
 import th from './th.json';
-import zh from './zh.json';
 
 // Initialize i18next
 i18next.init({
@@ -9,8 +8,7 @@ i18next.init({
   fallbackLng: 'en',
   resources: {
     en: { translation: en },
-    th: { translation: th },
-    zh: { translation: zh }
+    th: { translation: th }
   },
   interpolation: {
     escapeValue: false
