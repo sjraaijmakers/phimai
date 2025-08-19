@@ -1,9 +1,46 @@
 ---
 import { useTranslations } from '../i18n/ui';
 import { ArrowRight } from 'lucide-astro';
+import { siteConfig } from '../config/site';
 
 // For now, we'll use English as default
 const t = useTranslations('en');
+
+const providers = [
+  {
+    key: 'agoda',
+    name: 'Agoda',
+    href: 'https://www.agoda.com/phimai-pond-house/hotel/nakhonratchasima-th.html',
+    logo: '/images/logos/agoda-logo.jpeg',
+    i18nKey: 'booking.agoda',
+    className: 'agoda'
+  },
+  {
+    key: 'airbnb',
+    name: 'Airbnb',
+    href: siteConfig.booking?.airbnb || 'https://www.airbnb.com/',
+    logo: '/images/logos/airbnb-logo.jpeg',
+    i18nKey: 'booking.airbnb',
+    className: 'airbnb'
+  },
+  {
+    key: 'booking',
+    name: 'Booking.com',
+    href: 'https://www.booking.com/hotel/th/phimai-pond-house',
+    logo: '/images/logos/booking-logo.jpeg',
+    i18nKey: 'booking.booking',
+    className: 'booking'
+  },
+  {
+    key: 'trip',
+    name: 'Trip.com',
+    href: '',
+    logo: '/images/logos/trip-logo.jpeg',
+    i18nKey: 'booking.trip',
+    className: 'trip',
+    disabled: true
+  }
+].sort((a, b) => a.name.localeCompare(b.name));
 ---
 
 <section id="booking" class="booking section">
@@ -14,29 +51,33 @@ const t = useTranslations('en');
     </div>
 
     <div class="booking-options">
-              <a href="https://www.agoda.com/phimai-pond-house/hotel/nakhonratchasima-th.html" class="booking-option btn agoda" target="_blank" rel="noopener">
-          <div class="booking-logo">
-            <img src="/images/logos/agoda-logo.jpeg" alt="Agoda" class="logo-image" />
+      {providers.map((p) => (
+        p.disabled ? (
+          <div class={`booking-option btn ${p.className} disabled`} aria-disabled="true">
+            <div class="booking-logo">
+              <img src={p.logo} alt={p.name} class="logo-image" />
+            </div>
+            <div class="booking-content">
+              <span data-i18n={p.i18nKey} />
+            </div>
+            <div class="booking-arrow">
+              <ArrowRight size={20} />
+            </div>
           </div>
-                  <div class="booking-content">
-            <span data-i18n="booking.agoda" />
-          </div>
-        <div class="booking-arrow">
-          <ArrowRight size={20} />
-        </div>
-      </a>
-
-              <a href="https://www.booking.com/hotel/th/phimai-pond-house" class="booking-option btn booking" target="_blank" rel="noopener">
-          <div class="booking-logo">
-            <img src="/images/logos/booking-logo.jpeg" alt="Booking.com" class="logo-image" />
-          </div>
-                  <div class="booking-content">
-            <span data-i18n="booking.booking" />
-          </div>
-        <div class="booking-arrow">
-          <ArrowRight size={20} />
-        </div>
-      </a>
+        ) : (
+          <a href={p.href} class={`booking-option btn ${p.className}`} target="_blank" rel="noopener noreferrer">
+            <div class="booking-logo">
+              <img src={p.logo} alt={p.name} class="logo-image" />
+            </div>
+            <div class="booking-content">
+              <span data-i18n={p.i18nKey} />
+            </div>
+            <div class="booking-arrow">
+              <ArrowRight size={20} />
+            </div>
+          </a>
+        )
+      ))}
     </div>
   </div>
 </section>

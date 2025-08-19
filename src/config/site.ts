@@ -20,7 +20,7 @@ export const siteConfig = {
   
   // Booking platforms (if needed later)
   booking: {
-    // airbnb: 'https://airbnb.com/phimaipondhouse',
+    airbnb: 'https://www.airbnb.nl/rooms/1469265532291794355',
     // booking: 'https://booking.com/phimaipondhouse',
   }
 } as const;

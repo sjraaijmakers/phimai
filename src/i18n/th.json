@@ -49,8 +49,10 @@
   "booking": {
     "title": "จองการพักของคุณ",
     "subtitle": "พร้อมที่จะสัมผัสพิมายแล้วหรือยัง? จองผ่านแพลตฟอร์มที่เชื่อถือได้ของเราโดยตรง",
+    "airbnb": "จองบน Airbnb",
     "agoda": "จองบน Agoda",
-    "booking": "จองบน Booking.com"
+    "booking": "จองบน Booking.com",
+    "trip": "Trip.com (เร็วๆ นี้)"
   },
   "contact": {
     "title": "ติดต่อเรา",

@@ -838,6 +838,13 @@ p {
   opacity: 1;
 }
 
+/* Disabled booking option */
+.booking-option.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 /* ===== CONTACT ===== */
 .contact {
   background: #FEFEFE;
@@ -1105,6 +1112,14 @@ p {
 }
 
 .contact-form .btn { width: 100%; }
+
+/* Center the contact form submit button and make it auto-width */
+.contact-form button[type="submit"],
+.contact-form .btn[type="submit"] {
+  display: block;
+  width: max-content;
+  margin: var(--space) auto 0;
+}
 
 /* ===== FOOTER ===== */
 .footer {
