@@ -1,36 +1,32 @@
 ---
 import { siteConfig } from '../config/site';
+import { getSEOConfig, getStructuredData, getHreflangLinks } from '../config/seo';
 import '../assets/styles.css';
 
 export interface Props {
-  title?: string;
-  description?: string;
-  keywords?: string;
-  image?: string;
-  canonical?: string;
   lang?: string;
+  customSEO?: {
+    title?: string;
+    description?: string;
+    keywords?: string;
+    image?: string;
+    canonical?: string;
+  };
 }
 
 const { 
-  title = `${siteConfig.name} - ${siteConfig.description}`,
-  description = "Stay in cozy tiny homes at Phimai Pond House, Thailand. Minutes from Phimai Historical Park and Sai Ngam mangrove. Free bikes, kitchenette, and authentic Thai experience.",
-  keywords = "Phimai accommodation, Thailand tiny homes, Phimai Historical Park, vacation rental Thailand, small town Thailand, Khmer temple, Sai Ngam, Nakhon Ratchasima",
-  image = "/images/hero-tiny-home.jpg",
-  canonical = siteConfig.url,
-  lang = "en"
+  lang = "en",
+  customSEO = {}
 } = Astro.props;
 
-// Thai-specific content
-const isThai = lang === "th";
-const thaiDescription = "พักในบ้านเล็กๆ ที่อบอุ่นที่ Phimai Pond House ประเทศไทย ใกล้กับอุทยานประวัติศาสตร์พิมายและป่าชายเลนสายน้ำ จักรยานฟรี ห้องครัว และประสบการณ์ไทยแท้";
-const thaiKeywords = "ที่พักพิมาย, บ้านเล็กประเทศไทย, อุทยานประวัติศาสตร์พิมาย, เช่าที่พักประเทศไทย, เมืองเล็กไทย, วัดขอม, สายน้ำ, นครราชสีมา";
-
-const finalDescription = isThai ? thaiDescription : description;
-const finalKeywords = isThai ? thaiKeywords : keywords;
+// Get SEO configuration for the specified language
+const seoConfig = getSEOConfig(lang, customSEO);
+const structuredData = getStructuredData(lang, seoConfig);
+const hreflangLinks = getHreflangLinks(seoConfig.hreflang);
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang={seoConfig.lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -38,34 +34,35 @@ const finalKeywords = isThai ? thaiKeywords : keywords;
     <meta name="generator" content={Astro.generator} />
     
     <!-- Primary Meta Tags -->
-    <title>{title}</title>
-    <meta name="title" content={title} />
-    <meta name="description" content={finalDescription} />
-    <meta name="keywords" content={finalKeywords} />
+    <title>{seoConfig.title}</title>
+    <meta name="title" content={seoConfig.title} />
+    <meta name="description" content={seoConfig.description} />
+    <meta name="keywords" content={seoConfig.keywords} />
     <meta name="author" content={siteConfig.name} />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href={canonical} />
+    <link rel="canonical" href={seoConfig.canonical} />
     
     <!-- Language Alternates -->
-    <link rel="alternate" hreflang="en" href="https://pph.aktis.dev" />
-    <link rel="alternate" hreflang="th" href="https://pph.aktis.dev/th" />
-    <link rel="alternate" hreflang="x-default" href="https://pph.aktis.dev" />
+    {hreflangLinks.map(link => (
+      <link rel={link.rel} hreflang={link.hreflang} href={link.href} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={seoConfig.hreflang.en} />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonical} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={finalDescription} />
-    <meta property="og:image" content={new URL(image, siteConfig.url).href} />
+    <meta property="og:url" content={seoConfig.canonical} />
+    <meta property="og:title" content={seoConfig.title} />
+    <meta property="og:description" content={seoConfig.description} />
+    <meta property="og:image" content={new URL(seoConfig.image, siteConfig.url).href} />
     <meta property="og:site_name" content={siteConfig.name} />
-    <meta property="og:locale" content={isThai ? "th_TH" : "en_US"} />
+    <meta property="og:locale" content={seoConfig.locale} />
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={canonical} />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={finalDescription} />
-    <meta property="twitter:image" content={new URL(image, siteConfig.url).href} />
+    <meta property="twitter:url" content={seoConfig.canonical} />
+    <meta property="twitter:title" content={seoConfig.title} />
+    <meta property="twitter:description" content={seoConfig.description} />
+    <meta property="twitter:image" content={new URL(seoConfig.image, siteConfig.url).href} />
     
     <!-- Additional SEO -->
     <meta name="geo.region" content="TH-30" />
@@ -74,47 +71,7 @@ const finalKeywords = isThai ? thaiKeywords : keywords;
     <meta name="ICBM" content="15.2217, 102.4947" />
     
     <!-- Structured Data -->
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "LodgingBusiness",
-      "name": siteConfig.name,
-      "description": finalDescription,
-      "url": canonical,
-      "telephone": siteConfig.phone,
-      "email": siteConfig.email,
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Phimai",
-        "addressRegion": "Nakhon Ratchasima",
-        "addressCountry": "TH"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 15.2217,
-        "longitude": 102.4947
-      },
-      "amenityFeature": [
-        {
-          "@type": "LocationFeatureSpecification",
-          "name": isThai ? "WiFi ฟรี" : "Free WiFi",
-          "value": true
-        },
-        {
-          "@type": "LocationFeatureSpecification", 
-          "name": isThai ? "จักรยานฟรี" : "Free Bike Rental",
-          "value": true
-        },
-        {
-          "@type": "LocationFeatureSpecification",
-          "name": isThai ? "ห้องครัว" : "Kitchenette",
-          "value": true
-        }
-      ],
-      "image": new URL(image, siteConfig.url).href,
-      "priceRange": "$$",
-      "currenciesAccepted": "THB, USD, EUR",
-      "inLanguage": lang
-    })} />
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
