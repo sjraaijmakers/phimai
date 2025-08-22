@@ -1,0 +1,166 @@
+---
+import Carousel from '../ui/Carousel.astro';
+import Lightbox from '../ui/Lightbox.astro';
+import type { ImageConfig } from '../../data/images';
+
+interface Props {
+  title: string;
+  images: ImageConfig[];
+  mapSrc: string;
+  carouselId: string;
+  lightboxId: string;
+}
+
+const { title, images, mapSrc, carouselId, lightboxId } = Astro.props;
+---
+
+<div class="guide-section">
+  <div class="section-content">
+    <div class="section-text">
+      <h2 class="section-title">{title}</h2>
+    </div>
+    
+    <div class="section-media">
+      <div class="section-carousel">
+        <Carousel 
+          id={carouselId}
+          images={images}
+          interval={4000}
+          showArrows={true}
+          showDots={true}
+          autoPlay={true}
+        />
+      </div>
+      <div class="section-map">
+        <iframe 
+          class="spot-map"
+          src={mapSrc}
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Lightbox for this section -->
+  <Lightbox id={lightboxId} images={images} />
+</div>
+
+<style>
+  .guide-section {
+    margin-bottom: var(--space-5xl);
+    padding: var(--space-4xl) 0;
+    position: relative;
+  }
+
+  .guide-section:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 600px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+  }
+
+  .guide-section:last-child {
+    margin-bottom: 0;
+  }
+
+  .section-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-3xl);
+    align-items: start;
+  }
+
+  .section-text {
+    padding-top: var(--space-lg);
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--color-primary);
+    margin: 0;
+    line-height: var(--lh-heading);
+    position: relative;
+  }
+
+
+
+  .section-media {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+
+  .section-carousel {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    aspect-ratio: 4/3;
+  }
+
+  .section-carousel .carousel {
+    height: 100%;
+  }
+
+  .section-carousel .carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .section-map {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    aspect-ratio: 4/3;
+  }
+
+  .spot-map {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .section-content {
+      grid-template-columns: 1fr;
+      gap: var(--space-2xl);
+    }
+
+    .section-text {
+      padding-top: 0;
+      text-align: center;
+    }
+
+
+  }
+
+  @media (max-width: 768px) {
+    .section-media {
+      grid-template-columns: 1fr;
+      gap: var(--space-xl);
+    }
+
+    .section-carousel,
+    .section-map {
+      aspect-ratio: 3/2;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .section-title {
+      font-size: clamp(1.8rem, 5vw, 2.5rem);
+    }
+  }
+</style>

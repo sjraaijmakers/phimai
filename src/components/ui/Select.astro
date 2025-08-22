@@ -1,0 +1,100 @@
+---
+export interface Props {
+  id: string;
+  options: Array<{ value: string; label: string; flag?: string }>;
+  selectedValue?: string;
+  placeholder?: string;
+  className?: string;
+}
+
+const { id, options, selectedValue, placeholder = "Select an option", className = "" } = Astro.props;
+---
+
+<div class={`shoelace-select ${className}`}>
+  <sl-select id={id} value={selectedValue} placeholder={placeholder} hoist>
+    {options.map((option) => (
+      <sl-option value={option.value}>
+        {option.flag && <span class="option-flag">{option.flag}</span>}
+        {option.label}
+      </sl-option>
+    ))}
+  </sl-select>
+</div>
+
+<script>
+  // Import Shoelace components from CDN
+  import 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.1/cdn/components/select/select.js';
+  import 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.1/cdn/components/option/option.js';
+  
+  // Set the base path for Shoelace assets
+  import { setBasePath } from 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.1/cdn/utilities/base-path.js';
+  setBasePath('https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.1/cdn/');
+</script>
+
+<style>
+  /* Import Shoelace theme via URL */
+  @import url('https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.1/cdn/themes/light.css');
+
+  .shoelace-select {
+    min-width: 120px;
+  }
+
+  .shoelace-select sl-select {
+    --border-radius: var(--radius-sm);
+    --border-color: rgba(139, 115, 85, 0.15);
+    --border-color-hover: var(--color-primary);
+    --border-color-focus: var(--color-accent);
+    --background-color: rgba(255, 255, 255, 0.9);
+    --background-color-hover: rgba(255, 255, 255, 0.95);
+    --color: var(--color-text);
+    --font-size: 0.875rem;
+    --height: auto;
+    --padding: var(--space-sm) var(--space);
+    backdrop-filter: blur(10px);
+    transition: var(--transition);
+  }
+
+  .shoelace-select sl-select::part(combobox) {
+    transition: var(--transition);
+  }
+
+  .shoelace-select sl-select::part(combobox):hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .shoelace-select sl-select::part(listbox) {
+    background: var(--color-white);
+    border: 1px solid rgba(139, 115, 85, 0.1);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(10px);
+  }
+
+  .option-flag {
+    margin-right: var(--space-xs);
+    font-size: 1.1em;
+  }
+
+  /* Header-specific styling */
+  .header-actions .shoelace-select {
+    min-width: 80px;
+  }
+
+  .header-actions .shoelace-select sl-select {
+    --font-size: 0.8rem;
+    --padding: var(--space-xs) var(--space-sm);
+  }
+
+  /* Mobile adjustments */
+  @media (max-width: 768px) {
+    .header-actions .shoelace-select {
+      min-width: 60px;
+    }
+    
+    .header-actions .shoelace-select sl-select {
+      --font-size: 0.75rem;
+      --padding: var(--space-xs);
+    }
+  }
+</style>

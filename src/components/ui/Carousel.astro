@@ -25,7 +25,14 @@ const {
   <div class="carousel-container">
     {images.map((image, index) => (
              <div class={`carousel-slide ${index === 0 ? 'active' : ''}`} data-index={index}>
-         <img src={image.src} alt={image.caption || ''} class="hero-image">
+         <img 
+           src={image.src} 
+           alt={image.caption || ''} 
+           class="hero-image carousel-image-clickable"
+           data-image-index={index}
+           onclick="handleCarouselImageClick(this)"
+           style="cursor: pointer;"
+         >
        </div>
     ))}
   </div>
@@ -56,9 +63,29 @@ const {
    )}
 </div>
 
- <script define:vars={{ autoPlayInterval: interval, shouldAutoPlay: autoPlay }}>
+ <script define:vars={{ autoPlayInterval: interval, shouldAutoPlay: autoPlay, carouselImages: images }}>
    // Carousel functionality
    document.addEventListener('DOMContentLoaded', () => {
+     
+           // Handle carousel image clicks to open lightbox
+      window.handleCarouselImageClick = function(imgElement) {
+        const imageIndex = parseInt(imgElement.getAttribute('data-image-index'));
+        const carouselId = imgElement.closest('.carousel').id;
+        
+                 // Map carousel ID to lightbox ID
+         const lightboxIdMap = {
+           'chicken-carousel': 'chicken-lightbox',
+           'boat-noodle-carousel': 'boat-noodle-lightbox',
+           'market-carousel': 'market-lightbox',
+           'coffee-carousel': 'coffee-lightbox'
+         };
+        
+        const lightboxId = lightboxIdMap[carouselId];
+        if (lightboxId && window.openLightbox) {
+          // Open the specific lightbox for this carousel
+          window.openLightbox(imageIndex, lightboxId);
+        }
+      };
      // Global carousel functions
      window.carouselPrev = function(carouselId) {
        const carousel = document.getElementById(carouselId);

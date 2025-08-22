@@ -1,16 +1,24 @@
 ---
+import Select from './Select.astro';
 import { languages, defaultLang } from '../../i18n/ui';
+
+// Define language options with flags
+const languageOptions = [
+  { value: 'en', label: 'English', flag: '🇺🇸' },
+  { value: 'th', label: 'ไทย', flag: '🇹🇭' }
+];
+
+// Get current language from client-side
+const currentLang = defaultLang;
 ---
 
 <div class="language-selector">
-  <label for="language-select" data-i18n="language.label" />
-  <select id="language-select" class="language-select">
-    {Object.entries(languages).map(([code, name]) => (
-      <option value={code} selected={code === defaultLang}>
-        {name}
-      </option>
-    ))}
-  </select>
+  <Select
+    id="language-select"
+    options={languageOptions}
+    selectedValue={currentLang}
+    className="language-selector__custom"
+  />
 </div>
 
 <script>
@@ -18,8 +26,8 @@ import { languages, defaultLang } from '../../i18n/ui';
 
   // Language switching
   document.addEventListener('DOMContentLoaded', () => {
-    const languageSelect = document.getElementById('language-select') as HTMLSelectElement;
-
+    const languageSelect = document.getElementById('language-select') as any; // Shoelace sl-select
+    
     if (!languageSelect) return;
 
     // Set initial language from localStorage
@@ -27,11 +35,27 @@ import { languages, defaultLang } from '../../i18n/ui';
     languageSelect.value = currentLang;
 
     // Handle language change
-    languageSelect.addEventListener('change', (e) => {
-      const selectedLang = (e.target as HTMLSelectElement).value;
+    languageSelect.addEventListener('sl-change', (e: any) => {
+      const selectedLang = e.target.value;
       setLanguage(selectedLang);
+    });
+
+    // Listen for language changes from other components
+    window.addEventListener('languageChanged', (e: any) => {
+      languageSelect.value = e.detail.language;
     });
   });
 </script>
+
+<style>
+  .language-selector {
+    display: flex;
+    align-items: center;
+  }
+
+  .language-selector__custom {
+    /* Inherit styles from Select component */
+  }
+</style>
 
 

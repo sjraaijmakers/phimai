@@ -1,6 +1,7 @@
 ---
 import Navigation from './Navigation.astro';
 import ScrollToTop from './ui/ScrollToTop.astro';
+import LanguageSelector from './ui/LanguageSelector.astro';
 import { Menu, X } from 'lucide-astro';
 ---
 
@@ -17,6 +18,7 @@ import { Menu, X } from 'lucide-astro';
       <Navigation className="desktop-nav nav-links" />
       
       <div class="header-actions">
+        <LanguageSelector />
         <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu" onclick="toggleMobileMenu()">
           <Menu size={20} class="menu-icon" />
           <X size={20} class="close-icon" />

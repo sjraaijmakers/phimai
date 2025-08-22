@@ -11,7 +11,7 @@
   },
   "hero": {
     "title": "Your Perfect Getaway",
-    "subtitle": "Experience authentic small-town Thailand living in our cozy tiny homes. Minutes from Phimai Historical Park and Sai Ngam mangrove. Free bike rentals included.",
+    "subtitle": "Experience authentic small-town Thailand living in our cozy tiny homes.",
     "bookNow": "Book Now",
     "viewGallery": "View Gallery"
   },
@@ -25,7 +25,8 @@
         "temple": "Ancient Khmer Temple",
         "mangrove": "Sai Ngam Banyan Trees",
         "culture": "Local Thai Culture"
-      }
+      },
+      "guideButton": "Insider's Guide to Phimai"
     },
     "showMore": "View All Photos"
   },
@@ -52,7 +53,7 @@
     "airbnb": "Book on Airbnb",
     "agoda": "Book on Agoda",
     "booking": "Book on Booking.com",
-    "trip": "Trip.com (coming soon)"
+    "trip": "Book on Trip.com"
   },
   "contact": {
     "title": "Get in touch",
@@ -89,5 +90,39 @@
   },
   "language": {
     "label": "Language"
+  },
+  "guide": {
+    "title": "Insider's Guide to Phimai",
+    "subtitle": "Discover the hidden gems, ancient temples, and local culture of this charming Thai town",
+    "intro": "Welcome to Phimai, a hidden gem in the heart of Thailand's Isaan region. This ancient town is home to one of the most important Khmer temples outside of Cambodia, surrounded by lush landscapes and warm local hospitality.",
+    "proTips": "💡 Pro Tips",
+    "sections": {
+      "chicken": {
+        "title": "Best Grilled Chicken in Town"
+      },
+      "boatNoodle": {
+        "title": "Air Conditioned Boat Noodle Shop"
+      },
+      "market": {
+        "title": "The Morning Market"
+      },
+      "coffee": {
+        "title": "Best Coffee Cafe in Town"
+      }
+    },
+    "gettingAround": {
+      "title": "Getting Around Phimai",
+      "description": "Phimai is a compact town perfect for walking and cycling. Our free bike rentals make it easy to explore all the attractions at your own pace.",
+      "distances": {
+        "temple": "5 minutes walk",
+        "banyan": "10 minutes walk",
+        "market": "3 minutes walk",
+        "bus": "15 minutes walk"
+      }
+    },
+    "bestTime": {
+      "title": "Best Time to Visit",
+      "description": "Phimai is beautiful year-round, but the cool season (November to February) offers the most pleasant weather for exploring. The rainy season brings lush greenery, while the hot season is perfect for early morning temple visits."
+    }
   }
 }

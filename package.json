@@ -10,6 +10,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@headlessui/vue": "^1.7.23",
     "astro": "^5.2.5",
     "i18next": "^25.3.6",
     "lucide-astro": "^0.539.0"
