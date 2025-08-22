@@ -70,20 +70,23 @@ const {
            // Handle carousel image clicks to open lightbox
       window.handleCarouselImageClick = function(imgElement) {
         const imageIndex = parseInt(imgElement.getAttribute('data-image-index'));
-        const carouselId = imgElement.closest('.carousel').id;
+        const carousel = imgElement.closest('.carousel');
+        const carouselId = carousel.id;
         
-                 // Map carousel ID to lightbox ID
-         const lightboxIdMap = {
-           'chicken-carousel': 'chicken-lightbox',
-           'boat-noodle-carousel': 'boat-noodle-lightbox',
-           'market-carousel': 'market-lightbox',
-           'coffee-carousel': 'coffee-lightbox'
-         };
+        // Find the lightbox within the same guide section
+        const guideSection = carousel.closest('.guide-section');
+        const lightbox = guideSection?.querySelector('.lightbox');
         
-        const lightboxId = lightboxIdMap[carouselId];
-        if (lightboxId && window.openLightbox) {
-          // Open the specific lightbox for this carousel
-          window.openLightbox(imageIndex, lightboxId);
+        console.log('Carousel click:', { imageIndex, carouselId, lightboxId: lightbox?.id, guideSectionFound: !!guideSection });
+        
+        if (lightbox) {
+          // Dispatch a custom event to open the lightbox
+          const event = new CustomEvent('openLightbox', {
+            detail: { index: imageIndex, lightboxId: lightbox.id }
+          });
+          lightbox.dispatchEvent(event);
+        } else {
+          console.log('Lightbox not found in guide section');
         }
       };
      // Global carousel functions

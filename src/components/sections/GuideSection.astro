@@ -9,19 +9,24 @@ interface Props {
   mapSrc: string;
   carouselId: string;
   lightboxId: string;
+  sectionNumber: number;
+  titleKey?: string; // Add titleKey for translation
 }
 
-const { title, images, mapSrc, carouselId, lightboxId } = Astro.props;
+const { title, images, mapSrc, carouselId, lightboxId, sectionNumber, titleKey } = Astro.props;
 ---
 
 <div class="guide-section">
   <div class="section-content">
     <div class="section-text">
-      <h2 class="section-title">{title}</h2>
+      <h2 class="section-title">
+        <span class="section-number">{sectionNumber || '?'}</span>
+        <span data-i18n-key={titleKey}>{title}</span>
+      </h2>
     </div>
     
     <div class="section-media">
-      <div class="section-carousel">
+      <div class="section-carousel image-hover-zoom">
         <Carousel 
           id={carouselId}
           images={images}
@@ -49,9 +54,13 @@ const { title, images, mapSrc, carouselId, lightboxId } = Astro.props;
 
 <style>
   .guide-section {
-    margin-bottom: var(--space-5xl);
-    padding: var(--space-4xl) 0;
     position: relative;
+    background: var(--color-white);
+  }
+
+  /* Override the global brown background gradient for guide sections */
+  .guide-section::before {
+    display: none;
   }
 
   .guide-section:not(:last-child)::after {
@@ -66,45 +75,92 @@ const { title, images, mapSrc, carouselId, lightboxId } = Astro.props;
     background: linear-gradient(90deg, transparent, var(--color-border), transparent);
   }
 
+  @media (max-width: 768px) {
+    .guide-section:not(:last-child)::after {
+      width: 90%;
+      max-width: none;
+    }
+  }
+
   .guide-section:last-child {
     margin-bottom: 0;
   }
 
-  .section-content {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: var(--space-3xl);
-    align-items: start;
-  }
+     .section-content {
+     display: grid;
+     grid-template-columns: 1fr 2fr;
+     gap: var(--space-3xl);
+     align-items: center;
+   }
+
+   @media (max-width: 1024px) {
+     .section-content {
+       grid-template-columns: 1fr;
+       gap: var(--space-xl);
+     }
+   }
 
   .section-text {
-    padding-top: var(--space-lg);
+    display: flex;
+    align-items: center;
+    height: 100%;
   }
 
   .section-title {
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 700;
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    font-weight: 500;
     color: var(--color-primary);
     margin: 0;
-    line-height: var(--lh-heading);
+    line-height: 1.5;
     position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-style: italic;
+  }
+
+  .section-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: var(--color-accent);
+    color: white;
+    border-radius: 50%;
+    font-size: 0.7rem;
+    font-weight: 600;
+    flex-shrink: 0;
+    box-shadow: var(--shadow-sm);
+    min-width: 1.5rem;
+    min-height: 1.5rem;
+    margin-right: var(--space-sm);
+    opacity: 0.9;
   }
 
 
 
-  .section-media {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-2xl);
-    align-items: start;
-  }
+     .section-media {
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+     gap: var(--space-2xl);
+     align-items: start;
+   }
+
+   @media (max-width: 768px) {
+     .section-media {
+       grid-template-columns: 1fr;
+       gap: var(--space-lg);
+     }
+   }
 
   .section-carousel {
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius);
     overflow: hidden;
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-md);
     position: relative;
     aspect-ratio: 4/3;
+    border: 1px solid rgba(139, 115, 85, 0.1);
   }
 
   .section-carousel .carousel {
@@ -118,11 +174,12 @@ const { title, images, mapSrc, carouselId, lightboxId } = Astro.props;
   }
 
   .section-map {
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius);
     overflow: hidden;
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-md);
     position: relative;
     aspect-ratio: 4/3;
+    border: 1px solid rgba(139, 115, 85, 0.1);
   }
 
   .spot-map {
@@ -131,36 +188,5 @@ const { title, images, mapSrc, carouselId, lightboxId } = Astro.props;
     border: none;
   }
 
-  /* Responsive Design */
-  @media (max-width: 1024px) {
-    .section-content {
-      grid-template-columns: 1fr;
-      gap: var(--space-2xl);
-    }
-
-    .section-text {
-      padding-top: 0;
-      text-align: center;
-    }
-
-
-  }
-
-  @media (max-width: 768px) {
-    .section-media {
-      grid-template-columns: 1fr;
-      gap: var(--space-xl);
-    }
-
-    .section-carousel,
-    .section-map {
-      aspect-ratio: 3/2;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .section-title {
-      font-size: clamp(1.8rem, 5vw, 2.5rem);
-    }
-  }
+  
 </style>

@@ -4,7 +4,6 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Animations from '../components/ui/Animations.astro';
 import GuideSection from '../components/sections/GuideSection.astro';
-import { MapPin, Clock, Camera, Utensils, Users, TreePine, Landmark, ShoppingBag } from 'lucide-astro';
 import type { ImageConfig } from '../data/images';
 import { useTranslations, getLangFromUrl } from '../i18n/ui';
 
@@ -14,6 +13,18 @@ const t = useTranslations(lang);
 
 // Define guide sections data structure
 const guideSections = [
+
+  {
+    id: 'saiNgam',
+    titleKey: 'guide.sections.saiNgam.title',
+    images: [
+      { src: '/images/sai-gnam-front.jpg' },
+      { src: '/images/sai-gnam-pond.jpg' },
+      { src: '/images/sai-gnam-bench.jpg' },
+      { src: '/images/sai-gnam-shadow.jpg' },
+    ] as ImageConfig[],
+    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1924.9440490989714!2d102.4950!3d15.2184!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311917a1629c1fbf%3A0x682188c4c7576e05!2sSai%20Ngam%20Banyan%20Trees!5e0!3m2!1sen!2sth!4v1755585214037"
+  },
   {
     id: 'chicken',
     titleKey: 'guide.sections.chicken.title',
@@ -27,8 +38,8 @@ const guideSections = [
     id: 'boatNoodle',
     titleKey: 'guide.sections.boatNoodle.title',
     images: [
-      { src: '/images/boat-noodle.jpg', caption: 'Air Conditioned Boat Noodle Shop' },
-      { src: '/images/boat-noodle-far.jpg', caption: 'Comfortable Dining Experience' },
+      { src: '/images/boat-noodle.jpg' },
+      { src: '/images/boat-noodle-far.jpg' },
     ] as ImageConfig[],
     mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1924.9440490989714!2d102.4940!3d15.2185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311917a1629c1fbf%3A0x682188c4c7576e05!2sBoat%20Noodle%20Shop%20Phimai!5e0!3m2!1sen!2sth!4v1755585214034"
   },
@@ -36,9 +47,9 @@ const guideSections = [
     id: 'market',
     titleKey: 'guide.sections.market.title',
     images: [
-      { src: '/images/market-uncle.jpg', caption: 'The Morning Market' },
-      { src: '/images/market-auntie.jpg', caption: 'Fresh Local Produce' },
-      { src: '/images/marktet-auntie2.jpg', caption: 'Traditional Market Experience' },
+      { src: '/images/market-uncle.jpg' },
+      { src: '/images/market-auntie.jpg' },
+      { src: '/images/marktet-auntie2.jpg' },
     ] as ImageConfig[],
     mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1924.9440490989714!2d102.4945!3d15.2182!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311917a1629c1fbf%3A0x682188c4c7576e05!2sPhimai%20Morning%20Market!5e0!3m2!1sen!2sth!4v1755585214035"
   },
@@ -46,45 +57,55 @@ const guideSections = [
     id: 'coffee',
     titleKey: 'guide.sections.coffee.title',
     images: [
-      { src: '/images/coffee-cafe.jpg', caption: 'Best Coffee, Cafe in Town' },
+      { src: '/images/coffee-cafe.jpg' },
     ] as ImageConfig[],
     mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1924.9440490989714!2d102.4948!3d15.2183!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311917a1629c1fbf%3A0x682188c4c7576e05!2sBest%20Coffee%20Cafe%20Phimai!5e0!3m2!1sen!2sth!4v1755585214036"
   }
 ];
 ---
 
-<Layout lang="en" customSEO={{
-  title: "Insider's Guide to Phimai - Discover Ancient Temples & Local Culture",
-  description: "Your insider's guide to Phimai, Thailand. Explore the ancient Khmer temple, Sai Ngam banyan trees, local markets, and authentic Isaan cuisine.",
-  keywords: "Phimai guide, Phimai Historical Park, Sai Ngam, Isaan culture, Thailand travel",
+<Layout lang={lang} customSEO={{
+  title: t('guide.seo.title'),
+  description: t('guide.seo.description'),
+  keywords: t('guide.seo.keywords'),
   canonical: "https://phimaipondhouse.com/guide"
 }}>
   <Header />
   
-  <main>
-    <!-- Hero Section -->
-    <section class="guide-hero">
+  <main class="guide-main">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs" aria-label={t('breadcrumbs.ariaLabel')}>
       <div class="container">
-        <div class="hero-content">
-          <h1 class="hero-title" data-i18n="guide.title" />
-          
-        </div>
+        <ol class="breadcrumb-list">
+          <li class="breadcrumb-item">
+            <a href="/" class="breadcrumb-link" data-i18n-key="breadcrumbs.home">{t('breadcrumbs.home')}</a>
+          </li>
+          <li class="breadcrumb-item" aria-current="page">
+            <span class="breadcrumb-current" data-i18n-key="breadcrumbs.guide">{t('breadcrumbs.guide')}</span>
+          </li>
+        </ol>
       </div>
-      <div class="hero-background">
-        <div class="hero-image-overlay"></div>
+    </nav>
+
+    <!-- Guide Title -->
+    <section class="guide-title-section">
+      <div class="container">
+        <h1 class="guide-title" data-i18n-key="guide.title">{t('guide.title')}</h1>
       </div>
     </section>
 
     <!-- Guide Sections -->
     <section class="guide-sections">
-      <div class="container">
-        {guideSections.map((section) => (
+      <div class="container guide-sections-grid">
+        {guideSections.map((section, index) => (
           <GuideSection 
             title={t(section.titleKey)}
+            titleKey={section.titleKey}
             images={section.images}
             mapSrc={section.mapUrl}
             carouselId={`${section.id}-carousel`}
             lightboxId={`${section.id}-lightbox`}
+            sectionNumber={index + 1}
           />
         ))}
       </div>
@@ -97,61 +118,98 @@ const guideSections = [
    <Animations />
  </Layout>
 
-<style>
-  /* Guide Hero Section */
-  .guide-hero {
-    position: relative;
-    min-height: 60vh;
+ <style>
+   /* Guide Main */
+   .guide-main {
+     display: flex;
+     flex-direction: column;
+     gap: var(--space-xl);
+     padding: var(--space-2xl) 0;
+     background: var(--color-white);
+   }
+
+   /* Breadcrumbs */
+   .breadcrumbs {
+     padding: var(--space-md) 0;
+     /* Removed background and border */
+     margin-top: var(--header-height, 80px);
+   }
+
+  .breadcrumb-list {
     display: flex;
     align-items: center;
-    background: var(--gradient-primary);
-    overflow: hidden;
+    gap: var(--space-sm);
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
 
-  .hero-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('/images/temple.jpg') center/cover;
-    z-index: 1;
+  .breadcrumb-item {
+    display: flex;
+    align-items: center;
   }
 
-  .hero-image-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(139, 115, 85, 0.8) 0%, rgba(166, 124, 82, 0.7) 50%, rgba(196, 164, 132, 0.6) 100%);
-    z-index: 2;
+  .breadcrumb-item:not(:last-child)::after {
+    content: '';
+    margin-left: var(--space-sm);
+    width: 16px;
+    height: 16px;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%238B7355' stroke-width='2'%3e%3cpolyline points='9,18 15,12 9,6'%3e%3c/polyline%3e%3c/svg%3e");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.6;
   }
 
-  .hero-content {
-    position: relative;
-    z-index: 3;
-    text-align: center;
-    color: var(--color-white);
-    max-width: 800px;
-    margin: 0 auto;
-    padding: var(--space-4xl) 0;
+  .breadcrumb-link {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: var(--transition);
   }
 
-  .hero-title {
-    font-size: clamp(2rem, 4vw, 3rem);
+  .breadcrumb-link:hover {
+    color: var(--color-text);
+    text-decoration: underline;
+  }
+
+  .breadcrumb-current {
+    color: var(--color-text);
+    font-size: 0.9rem;
     font-weight: 600;
+  }
+
+  /* Guide Title Section */
+  .guide-title-section {
+    padding: var(--space-md) 0;
+    /* Removed background */
+  }
+
+  .guide-title {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-primary);
+    text-align: left;
+    margin: 0;
     line-height: var(--lh-heading);
-    margin-bottom: var(--space-lg);
   }
 
 
 
   /* Guide Sections */
   .guide-sections {
-    padding: 0;
-    background: var(--gradient-secondary);
+    /* Removed background to match breadcrumbs and title */
+    position: relative;
   }
+
+  .guide-sections-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xl);
+  }
+
+
 
 
 
@@ -269,37 +327,5 @@ const guideSections = [
     margin: 0;
   }
 
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .guide-hero {
-      min-height: 50vh;
-    }
-
-    .hero-content {
-      padding: var(--space-2xl) 0;
-    }
-
-    .getting-around-content {
-      grid-template-columns: 1fr;
-      gap: var(--space-xl);
-    }
-
-    .distances-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .map-iframe {
-      height: 300px;
-    }
-  }
-
-      @media (max-width: 480px) {
-      .section-header {
-        margin-bottom: var(--space-2xl);
-      }
-
-      .distance-item {
-        padding: var(--space-md);
-      }
-    }
+  
 </style>

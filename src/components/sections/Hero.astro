@@ -1,33 +1,25 @@
 ---
-import { siteConfig } from '../../config/site';
-import { galleryImages as rawGalleryImages } from '../../data/images';
-import Carousel from '../ui/Carousel.astro';
+import { useTranslations, getLangFromUrl } from '../../i18n/ui';
 
-// Use the first 5 images for the hero carousel
-const heroImages = rawGalleryImages.slice(0, 5);
+// Get i18n translations
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
-<section class="hero">
+<section id="hero" class="hero">
   <div class="hero-background">
-    <Carousel 
-      id="hero-carousel"
-      images={heroImages}
-      interval={6000}
-      showArrows={false}
-      showDots={true}
-      autoPlay={true}
-    />
+    <img src="/images/hero-tiny-home.jpg" alt="Phimai Pond House" class="hero-image">
     <div class="hero-overlay"></div>
   </div>
   
-  <div class="container">
-    <div class="hero-content">
-      <h1 class="hero-title" data-i18n="hero.title" />
-      <p class="hero-subtitle" data-i18n="hero.subtitle" />
+  <div class="hero-content">
+    <div class="container">
+      <h1 class="hero-title" data-i18n-key="hero.title">{t('hero.title')}</h1>
+      <p class="hero-subtitle" data-i18n-key="hero.subtitle">{t('hero.subtitle')}</p>
       
-      <div class="hero-actions">
-        <a href="#booking" class="btn btn-primary" data-i18n="hero.bookNow" />
-        <a href="#gallery" class="btn btn-secondary" data-i18n="hero.viewGallery" />
+      <div class="hero-buttons">
+        <a href="#booking" class="btn btn-primary" data-i18n-key="hero.bookNow">{t('hero.bookNow')}</a>
+        <a href="#gallery" class="btn btn-secondary" data-i18n-key="hero.viewGallery">{t('hero.viewGallery')}</a>
       </div>
     </div>
   </div>

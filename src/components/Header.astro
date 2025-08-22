@@ -2,22 +2,32 @@
 import Navigation from './Navigation.astro';
 import ScrollToTop from './ui/ScrollToTop.astro';
 import LanguageSelector from './ui/LanguageSelector.astro';
+import { useTranslations, getLangFromUrl } from '../i18n/ui';
 import { Menu, X } from 'lucide-astro';
+
+// Get i18n translations
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
-<header class="header">
+<header class="header" id="header">
   <div class="container">
     <div class="header-content">
-      <div class="logo-section">
+      <!-- Left column: Logo -->
+      <div class="header-left">
         <div class="logo">
-          <a href="#top" class="logo-link" data-i18n="header.logo" />
+          <a href="#top" class="logo-link" data-i18n-key="header.logo">{t('header.logo')}</a>
         </div>
         <ScrollToTop id="headerScrollToTop" className="header-style" />
       </div>
       
-      <Navigation className="desktop-nav nav-links" />
+      <!-- Center column: Navigation -->
+      <div class="header-center">
+        <Navigation className="desktop-nav nav-links" />
+      </div>
       
-      <div class="header-actions">
+      <!-- Right column: Language selector and mobile menu -->
+      <div class="header-right">
         <LanguageSelector />
         <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu" onclick="toggleMobileMenu()">
           <Menu size={20} class="menu-icon" />

@@ -82,13 +82,32 @@ const hreflangLinks = getHreflangLinks(seoConfig.hreflang);
   </head>
   <body>
     <div id="top"></div>
-    <slot />
+    <main class="main-content">
+      <slot />
+    </main>
+
     <script>
       import '../i18n/client';
     </script>
     <script>
-      // Global smooth anchor scrolling with header offset
+      // Set dynamic header height and handle anchor scrolling
       document.addEventListener('DOMContentLoaded', () => {
+        // Set dynamic header height
+        const updateHeaderHeight = () => {
+          const headerEl = document.querySelector('.header') as HTMLElement | null;
+          if (headerEl) {
+            const headerHeight = headerEl.offsetHeight;
+            document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
+          }
+        };
+
+        // Initial setup
+        updateHeaderHeight();
+
+        // Update on resize
+        window.addEventListener('resize', updateHeaderHeight);
+
+        // Global smooth anchor scrolling with header offset
         document.querySelectorAll('a[href^="#"]').forEach((anchorEl) => {
           anchorEl.addEventListener('click', (e) => {
             const href = (e.currentTarget as HTMLAnchorElement).getAttribute('href');
@@ -150,6 +169,10 @@ const hreflangLinks = getHreflangLinks(seoConfig.hreflang);
     background: var(--secondary-gradient);
     min-height: 100vh;
     position: relative;
+  }
+
+  .main-content {
+    /* No padding-top needed - let content flow naturally */
   }
 
   body::before {

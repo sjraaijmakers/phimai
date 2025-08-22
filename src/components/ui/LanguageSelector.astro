@@ -1,15 +1,15 @@
 ---
 import Select from './Select.astro';
-import { languages, defaultLang } from '../../i18n/ui';
+import { languages, defaultLang, getLangFromUrl } from '../../i18n/ui';
 
-// Define language options with flags
+// Define language options with flags and proper language names
 const languageOptions = [
-  { value: 'en', label: 'English', flag: '🇺🇸' },
-  { value: 'th', label: 'ไทย', flag: '🇹🇭' }
+  { value: 'en', label: 'English' },
+  { value: 'th', label: 'ไทย'}
 ];
 
-// Get current language from client-side
-const currentLang = defaultLang;
+// Get current language from URL
+const currentLang = getLangFromUrl(Astro.url);
 ---
 
 <div class="language-selector">
@@ -26,7 +26,7 @@ const currentLang = defaultLang;
 
   // Language switching
   document.addEventListener('DOMContentLoaded', () => {
-    const languageSelect = document.getElementById('language-select') as any; // Shoelace sl-select
+    const languageSelect = document.getElementById('language-select') as HTMLSelectElement;
     
     if (!languageSelect) return;
 
@@ -35,7 +35,7 @@ const currentLang = defaultLang;
     languageSelect.value = currentLang;
 
     // Handle language change
-    languageSelect.addEventListener('sl-change', (e: any) => {
+    languageSelect.addEventListener('change', (e: any) => {
       const selectedLang = e.target.value;
       setLanguage(selectedLang);
     });

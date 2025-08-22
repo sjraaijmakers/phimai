@@ -3,12 +3,15 @@ import { ChevronUp } from 'lucide-astro';
 interface Props {
   id?: string;
   className?: string;
+  text?: string;
+  i18nKey?: string;
 }
 
-const { id = "scrollToTop", className = "" } = Astro.props;
+const { id = "scrollToTop", className = "", text, i18nKey } = Astro.props;
 ---
 
 <button class={`scroll-to-top ${className}`} id={id} aria-label="Scroll to top">
+  {text && <span class="scroll-to-top-text" data-i18n-key={i18nKey}>{text}</span>}
   <ChevronUp size={16} />
 </button>
 

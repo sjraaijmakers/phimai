@@ -1,42 +1,44 @@
 ---
-import { Landmark, TreePine, Users } from 'lucide-astro';
+import { useTranslations, getLangFromUrl } from '../../i18n/ui';
+import { Landmark, TreePine, Users, ShoppingBag, Utensils, Store } from 'lucide-astro';
+
+// Get i18n translations
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// Location features structure for DRY approach
+const locationFeatures = [
+  { icon: Landmark, key: 'gallery.location.features.temple' },
+  { icon: TreePine, key: 'gallery.location.features.mangrove' },
+  { icon: Users, key: 'gallery.location.features.markets' },
+  { icon: Utensils, key: 'gallery.location.features.restaurants' },
+  { icon: Store, key: 'gallery.location.features.foodStalls' }
+];
 ---
 
 <section id="location" class="location section">
   <div class="container">
     <div class="location-section">
       <div class="location-info">
-        <h3 data-i18n="gallery.location.title" />
-        <p data-i18n="gallery.location.description" />
+        <h2 data-i18n-key="gallery.location.title">{t('gallery.location.title')}</h2>
+        <p data-i18n-key="gallery.location.description">{t('gallery.location.description')}</p>
         
         <div class="location-features">
-          <div class="location-feature">
-            <div class="feature-icon">
-              <Landmark size={16} />
+          {locationFeatures.map(({ icon: Icon, key }) => (
+            <div class="location-feature">
+              <div class="feature-icon">
+                <Icon size={16} />
+              </div>
+              <span data-i18n-key={key}>{t(key)}</span>
             </div>
-            <span data-i18n="gallery.location.features.temple" />
-          </div>
-          <div class="location-feature">
-            <div class="feature-icon">
-              <TreePine size={16} />
-            </div>
-            <span data-i18n="gallery.location.features.mangrove" />
-          </div>
-          <div class="location-feature">
-            <div class="feature-icon">
-              <Users size={16} />
-            </div>
-            <span data-i18n="gallery.location.features.culture" />
-          </div>
+          ))}
         </div>
         
-        <div class="guide-button-container">
-          <a href="/guide" class="guide-button" data-i18n="gallery.location.guideButton">
-            Insider's Guide to Phimai
-          </a>
+        <div class="guide-link-container">
+          <a href="/guide" class="guide-link" data-i18n-key="gallery.location.guideLink">{t('gallery.location.guideLink')}</a>
         </div>
       </div>
-
+      
       <div class="location-map">
         <iframe 
           class="map-iframe"

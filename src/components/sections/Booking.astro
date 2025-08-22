@@ -1,10 +1,11 @@
 ---
-import { useTranslations } from '../../i18n/ui';
+import { useTranslations, getLangFromUrl } from '../../i18n/ui';
 import { ArrowRight } from 'lucide-astro';
 import { siteConfig } from '../../config/site';
 
-// For now, we'll use English as default
-const t = useTranslations('en');
+// Get i18n translations
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 // Build providers list from unified config map
 const providers = Object.entries(siteConfig.booking || {})
@@ -21,15 +22,15 @@ const providers = Object.entries(siteConfig.booking || {})
       disabled: !v.url || !!v.disabled,
     };
   })
-  .filter(Boolean)
-  .sort((a, b) => (a!.name).localeCompare(b!.name));
+  .filter((p): p is NonNullable<typeof p> => p !== null)
+  .sort((a, b) => a.name.localeCompare(b.name));
 ---
 
 <section id="booking" class="booking section">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title" data-i18n="booking.title" />
-      <p class="section-subtitle" data-i18n="booking.subtitle" />
+      <h2 class="section-title" data-i18n-key="booking.title">{t('booking.title')}</h2>
+      <p class="section-subtitle" data-i18n-key="booking.subtitle">{t('booking.subtitle')}</p>
     </div>
 
     <div class="booking-options">
@@ -40,7 +41,7 @@ const providers = Object.entries(siteConfig.booking || {})
               <img src={p.logo} alt={p.name} class="logo-image" />
             </div>
             <div class="booking-content">
-              <span data-i18n={p.i18nKey} />
+              <span data-i18n-key={p.i18nKey}>{t(p.i18nKey)}</span>
             </div>
             <div class="booking-arrow">
               <ArrowRight size={20} />
@@ -52,7 +53,7 @@ const providers = Object.entries(siteConfig.booking || {})
               <img src={p.logo} alt={p.name} class="logo-image" />
             </div>
             <div class="booking-content">
-              <span data-i18n={p.i18nKey} />
+              <span data-i18n-key={p.i18nKey}>{t(p.i18nKey)}</span>
             </div>
             <div class="booking-arrow">
               <ArrowRight size={20} />

@@ -1,72 +1,71 @@
 ---
 import { siteConfig } from '../../config/site';
 import { WashingMachine, Utensils, Coffee, Package, Bike, Users, Car } from 'lucide-astro';
+import { useTranslations, getLangFromUrl } from '../../i18n/ui';
+
+// Get i18n translations
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// Amenities structure for DRY approach
+const amenities = [
+  {
+    icon: WashingMachine,
+    key: 'about.amenities.washingMachine'
+  },
+  {
+    icon: Utensils,
+    key: 'about.amenities.kitchenette'
+  },
+  {
+    icon: Coffee,
+    key: 'about.amenities.snacks'
+  },
+  {
+    icon: Package,
+    key: 'about.amenities.essentials'
+  },
+  {
+    icon: Car,
+    key: 'about.amenities.transfer'
+  },
+  {
+    icon: Bike,
+    key: 'about.amenities.bikes'
+  }
+];
 ---
 
 <section id="about" class="about section">
   <div class="container">
     <div class="about-content">
       <div class="about-info">
-        <h2 data-i18n="about.title" />
-        <p data-i18n="about.intro" />
+        <h2 data-i18n-key="about.title">{t('about.title')}</h2>
+        <p data-i18n-key="about.intro">{t('about.intro')}</p>
         
-        <div class="feature-section">
-          <div class="feature-box">
-            <div class="feature-icon bikes">
-              <Bike size={24} />
-            </div>
-            <div class="feature-content">
-              <p data-i18n="about.bikes" />
-            </div>
+        <!-- Family suite info integrated into main description -->
+        <div class="family-suite-info">
+          <div class="family-suite-icon">
+            <Users size={20} />
           </div>
-        </div>
-
-        <div class="feature-section">
-          <div class="feature-box">
-            <div class="feature-icon family">
-              <Users size={24} />
-            </div>
-            <div class="feature-content">
-              <h4 data-i18n="about.familySuite.title" />
-              <p data-i18n="about.familySuite.description" />
-            </div>
+          <div class="family-suite-content">
+            <h4 data-i18n-key="about.familySuite.title">{t('about.familySuite.title')}</h4>
+            <p data-i18n-key="about.familySuite.description">{t('about.familySuite.description')}</p>
           </div>
         </div>
       </div>
 
       <div class="amenities">
-        <h3 data-i18n="about.amenities.title" />
+        <h3 data-i18n-key="about.amenities.title">{t('about.amenities.title')}</h3>
         <div class="amenities-list">
-          <div class="amenity-item">
-            <div class="amenity-icon">
-              <WashingMachine size={20} />
+          {amenities.map(({ icon: Icon, key }) => (
+            <div class="amenity-item">
+              <div class="amenity-icon">
+                <Icon size={20} />
+              </div>
+              <span data-i18n-key={key}>{t(key)}</span>
             </div>
-            <span data-i18n="about.amenities.washingMachine" />
-          </div>
-          <div class="amenity-item">
-            <div class="amenity-icon">
-              <Utensils size={20} />
-            </div>
-            <span data-i18n="about.amenities.kitchenette" />
-          </div>
-          <div class="amenity-item">
-            <div class="amenity-icon">
-              <Coffee size={20} />
-            </div>
-            <span data-i18n="about.amenities.snacks" />
-          </div>
-          <div class="amenity-item">
-            <div class="amenity-icon">
-              <Package size={20} />
-            </div>
-            <span data-i18n="about.amenities.essentials" />
-          </div>
-          <div class="amenity-item">
-            <div class="amenity-icon">
-              <Car size={20} />
-            </div>
-            <span data-i18n="about.amenities.transfer" />
-          </div>
+          ))}
         </div>
       </div>
     </div>

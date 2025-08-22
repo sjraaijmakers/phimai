@@ -1,14 +1,20 @@
 ---
+import { useTranslations, getLangFromUrl } from '../../i18n/ui';
+import { siteConfig } from '../../config/site';
 import { galleryImages } from '../../data/images';
 import Lightbox from '../ui/Lightbox.astro';
+
+// Get i18n translations
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <section id="gallery" class="properties section">
   <div class="container">
     <div class="properties-content">
       <div class="section-header">
-        <h2 class="section-title" data-i18n="gallery.title">Our Tiny Homes</h2>
-        <p class="section-subtitle" data-i18n="gallery.subtitle">Explore our cozy accommodations designed for comfort and tranquility</p>
+        <h2 class="section-title" data-i18n-key="gallery.title">{t('gallery.title')}</h2>
+        <p class="section-subtitle" data-i18n-key="gallery.subtitle">{t('gallery.subtitle')}</p>
       </div>
 
       <div class="gallery-grid">

@@ -1,10 +1,16 @@
 {
+  "breadcrumbs": {
+    "home": "Home",
+    "guide": "Guide",
+    "ariaLabel": "Breadcrumb"
+  },
   "nav": {
     "gallery": "Gallery",
     "location": "Location",
     "bookNow": "Book Now",
     "about": "About",
-    "contact": "Contact"
+    "contact": "Contact",
+    "backHome": "Back to Home"
   },
   "header": {
     "logo": "Phimai Pond House"
@@ -24,16 +30,16 @@
       "features": {
         "temple": "Ancient Khmer Temple",
         "mangrove": "Sai Ngam Banyan Trees",
-        "culture": "Local Thai Culture"
+        "markets": "Local Markets",
+        "restaurants": "Restaurants",
+        "foodStalls": "Local Specialty Food Stalls"
       },
-      "guideButton": "Insider's Guide to Phimai"
-    },
-    "showMore": "View All Photos"
+      "guideLink": "Insider's Guide to Phimai"
+    }
   },
   "about": {
     "title": "Your Home Away From Home",
     "intro": "Enjoy small town living when you stay in our cozy tiny homes. We offer the tranquility of open spaces without sacrificing comfort. Walk or bike to local dining, markets, and attractions— the ancient Phimai Historical Park and the iconic Sai Ngam mangrove - all just minutes away.",
-    "bikes": "We offer free bike rentals, so that you can explore on your own.",
     "familySuite": {
       "title": "Perfect for Groups",
       "description": "In addition to our tiny homes, we offer a family suite that may accommodate 6 or more people."
@@ -44,7 +50,8 @@
       "kitchenette": "A kitchenette with essential appliances and utensils—perfect for preparing meals with local market finds",
       "snacks": "Complimentary snacks, coffee and tea",
       "essentials": "A refrigerator, hairdryer, dishes, and other home essentials",
-      "transfer": "Complimentary transfer to local bus station via tuktuk (minimum 3 nights stay)"
+      "transfer": "Complimentary transfer to local bus station via tuktuk (minimum 3 nights stay)",
+      "bikes": "Free bike rentals, so that you can explore on your own"
     }
   },
   "booking": {
@@ -57,13 +64,9 @@
   },
   "contact": {
     "title": "Get in touch",
-    "subtitle": "Have questions about your stay? We're here to help with availability, special requests, or any information you need about Phimai and our tiny homes.",
+    "description": "Have questions about your stay? We're here to help with availability, special requests, or any information you need about Phimai and our tiny homes.",
     "email": {
       "label": "Email"
-    },
-    "messaging": {
-      "label": "Message Us",
-      "description": "Click the buttons below to contact us via WhatsApp or Line"
     },
     "whatsapp": {
       "label": "Chat on WhatsApp"
@@ -71,58 +74,41 @@
     "line": {
       "label": "Chat on Line"
     },
-
     "form": {
       "title": "Contact Us",
-      "email": {
-        "label": "Email",
-        "placeholder": "your.email@example.com"
-      },
-      "message": {
-        "label": "Message",
-        "placeholder": "Tell us about your travel plans and any questions you have..."
-      },
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
       "submit": "Send Message"
     }
   },
   "footer": {
-    "copyright": "All rights reserved."
-  },
-  "language": {
-    "label": "Language"
+    "copyright": "All rights reserved.",
+    "scrollToTop": "Scroll to top"
   },
   "guide": {
     "title": "Insider's Guide to Phimai",
-    "subtitle": "Discover the hidden gems, ancient temples, and local culture of this charming Thai town",
-    "intro": "Welcome to Phimai, a hidden gem in the heart of Thailand's Isaan region. This ancient town is home to one of the most important Khmer temples outside of Cambodia, surrounded by lush landscapes and warm local hospitality.",
-    "proTips": "💡 Pro Tips",
+    "seo": {
+      "title": "Insider's Guide to Phimai - Discover Ancient Temples & Local Culture",
+      "description": "Your insider's guide to Phimai, Thailand. Explore the ancient Khmer temple, Sai Ngam banyan trees, local markets, and authentic Isaan cuisine.",
+      "keywords": "Phimai guide, Phimai Historical Park, Sai Ngam, Isaan culture, Thailand travel"
+    },
     "sections": {
       "chicken": {
         "title": "Best Grilled Chicken in Town"
       },
       "boatNoodle": {
-        "title": "Air Conditioned Boat Noodle Shop"
+        "title": "Boat Noodle Restaurant"
       },
       "market": {
-        "title": "The Morning Market"
+        "title": "Morning Market"
       },
       "coffee": {
-        "title": "Best Coffee Cafe in Town"
+        "title": "Best Coffee Shop in Town"
+      },
+      "saiNgam": {
+        "title": "Sai Ngam Banyan Trees"
       }
-    },
-    "gettingAround": {
-      "title": "Getting Around Phimai",
-      "description": "Phimai is a compact town perfect for walking and cycling. Our free bike rentals make it easy to explore all the attractions at your own pace.",
-      "distances": {
-        "temple": "5 minutes walk",
-        "banyan": "10 minutes walk",
-        "market": "3 minutes walk",
-        "bus": "15 minutes walk"
-      }
-    },
-    "bestTime": {
-      "title": "Best Time to Visit",
-      "description": "Phimai is beautiful year-round, but the cool season (November to February) offers the most pleasant weather for exploring. The rainy season brings lush greenery, while the hot season is perfect for early morning temple visits."
     }
   }
 }

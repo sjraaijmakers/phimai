@@ -147,10 +147,12 @@ export function getStructuredData(lang: string, seoConfig: SEOConfig) {
 }
 
 // Function to generate hreflang links
-export function getHreflangLinks(hreflang: Record<string, string>) {
-  return Object.entries(hreflang).map(([lang, url]) => ({
-    rel: 'alternate',
-    hreflang: lang,
-    href: url
-  }));
+export function getHreflangLinks(hreflang: Record<string, string | undefined>) {
+  return Object.entries(hreflang)
+    .filter(([_, url]) => url !== undefined)
+    .map(([lang, url]) => ({
+      rel: 'alternate',
+      hreflang: lang,
+      href: url!
+    }));
 }
