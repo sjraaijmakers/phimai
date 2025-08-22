@@ -29,7 +29,11 @@ const providers = Object.entries(siteConfig.booking || {})
 <section id="booking" class="booking section">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title" data-i18n-key="booking.title">{t('booking.title')}</h2>
+      <h2 class="section-title booking-title-gold" data-i18n-key="booking.title">
+        <span class="sparkle sparkle-left">★</span>
+        {t('booking.title')}
+        <span class="sparkle sparkle-right">★</span>
+      </h2>
       <p class="section-subtitle" data-i18n-key="booking.subtitle">{t('booking.subtitle')}</p>
     </div>
 

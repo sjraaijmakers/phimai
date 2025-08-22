@@ -21,7 +21,7 @@ const t = useTranslations(lang);
         <ScrollToTop id="headerScrollToTop" className="header-style" />
       </div>
       
-      <!-- Center column: Navigation -->
+      <!-- Center column: Navigation (desktop only) -->
       <div class="header-center">
         <Navigation className="desktop-nav nav-links" />
       </div>
@@ -36,13 +36,20 @@ const t = useTranslations(lang);
       </div>
     </div>
   </div>
-  
-  <div class="mobile-menu" id="mobileMenu" onclick="onMobileMenuClick(event)">
-    <div class="mobile-menu-content">
-      <Navigation className="mobile nav-links" />
-    </div>
-  </div>
 </header>
+
+<!-- Separate sliding navigation bar (mobile only) -->
+<nav class="sliding-nav" id="slidingNav">
+  <div class="container">
+    <Navigation className="mobile-nav nav-links" />
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-content">
+    <Navigation className="mobile nav-links" />
+  </div>
+</div>
 
 <script>
   // Header functionality
@@ -54,20 +61,11 @@ const t = useTranslations(lang);
     if (toggle) toggle.classList.toggle('active');
   };
 
-  window.onMobileMenuClick = function(event) {
-    const target = event && event.target;
-    if (target && target.closest && target.closest('a')) {
-      const menu = document.getElementById('mobileMenu');
-      const toggle = document.getElementById('mobileMenuToggle');
-      if (menu) menu.classList.remove('active');
-      if (toggle) toggle.classList.remove('active');
-    }
-  };
+
 
   document.addEventListener('DOMContentLoaded', () => {
     const headerScrollToTop = document.getElementById('headerScrollToTop');
-
-    // Keep header styling consistent (handled via CSS)
+    const slidingNav = document.getElementById('slidingNav') as HTMLElement | null;
 
     // Dynamically set --header-height so hero and mobile menu offset correctly
     const header = document.querySelector('.header') as HTMLElement | null;
@@ -78,6 +76,28 @@ const t = useTranslations(lang);
     };
     setHeaderHeight();
     window.addEventListener('resize', setHeaderHeight);
+
+    // Handle sliding navigation (mobile only)
+    if (slidingNav) {
+      const handleScroll = () => {
+        // Only apply sliding effect on mobile
+        if (window.innerWidth < 768) {
+          const scrollY = window.scrollY;
+          const headerHeight = header?.offsetHeight || 0;
+          
+          // Show sliding nav when scrolled past header height
+          if (scrollY > headerHeight) {
+            slidingNav.classList.add('visible');
+          } else {
+            slidingNav.classList.remove('visible');
+          }
+        }
+      };
+
+      window.addEventListener('scroll', handleScroll);
+      window.addEventListener('resize', handleScroll);
+      handleScroll(); // Initial check
+    }
 
     // Active nav handled in Navigation.astro
   });

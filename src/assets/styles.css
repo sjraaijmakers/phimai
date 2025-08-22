@@ -227,15 +227,64 @@ p {
   margin: 0 auto;
 }
 
+/* ===== BOOKING TITLE STYLING ===== */
+.booking-title-gold {
+  color: var(--color-text);
+  font-weight: 600;
+  position: relative;
+}
+
+.booking-title-gold .sparkle {
+  display: none;
+}
+
+
+
 /* ===== HEADER ===== */
 .header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 1001;
   background: rgba(255, 255, 255, 0.98);
   border-bottom: 1px solid rgba(139, 115, 85, 0.1);
+}
+
+/* ===== SLIDING NAVIGATION ===== */
+.sliding-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid rgba(139, 115, 85, 0.1);
+  transform: translateY(-100%);
+  transition: transform 0.3s ease-in-out;
+  backdrop-filter: blur(10px);
+}
+
+/* Hide sliding nav on desktop, show only on mobile */
+@media (min-width: 768px) {
+  .sliding-nav {
+    display: none;
+  }
+}
+
+.sliding-nav.visible {
+  transform: translateY(0);
+}
+
+.sliding-nav .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space) 0;
+}
+
+.sliding-nav .navigation {
+  margin: 0;
 }
 
 
@@ -260,6 +309,13 @@ p {
   align-items: center;
   justify-content: center;
   justify-self: center;
+}
+
+/* Hide desktop navigation on mobile */
+@media (max-width: 767px) {
+  .header-center {
+    display: none;
+  }
 }
 
 .header-right {
@@ -299,6 +355,13 @@ p {
 /* Language selector in header-right */
 .header-right .language-selector {
   margin-right: var(--space-sm);
+}
+
+/* Hide language selector on mobile */
+@media (max-width: 767px) {
+  .header-right .language-selector {
+    display: none;
+  }
 }
 
 .mobile-menu-toggle {
@@ -398,88 +461,66 @@ p {
 
 .nav-link {
   text-decoration: none;
-  color: var(--color-text);
+  color: #2c2c2c;
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 0.9rem;
   letter-spacing: 0.02em;
   transition: var(--transition);
   position: relative;
   font-family: var(--font-secondary);
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: transparent;
 }
 
 .nav-link:hover { 
-  color: var(--color-secondary); 
+  color: var(--color-secondary);
+  background: rgba(139, 115, 85, 0.05);
   transform: translateY(-1px);
 }
 
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--gradient-primary);
-  transition: width 0.3s ease;
-  border-radius: 1px;
-}
-
-.nav-link:hover::after { 
-  width: 100%; 
-  background: var(--color-secondary);
-}
-
 .nav-link.active {
-  color: var(--color-primary);
-  font-weight: 600;
+  background: var(--gradient-primary);
+  color: var(--color-white);
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(139, 115, 85, 0.2);
 }
 
-.nav-link.active::after {
-  width: 100%;
-  background: var(--gradient-primary);
+/* Remove the underline effects */
+.nav-link::after {
+  display: none;
 }
 
 .navigation a {
   text-decoration: none;
-  color: var(--color-text);
+  color: #2c2c2c;
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 0.9rem;
   letter-spacing: 0.02em;
   transition: var(--transition);
   position: relative;
   font-family: var(--font-secondary);
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: transparent;
 }
 
 .navigation a:hover { 
-  color: var(--color-secondary); 
+  color: var(--color-secondary);
+  background: rgba(139, 115, 85, 0.05);
   transform: translateY(-1px);
 }
 
-.navigation a::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--gradient-primary);
-  transition: width 0.3s ease;
-  border-radius: 1px;
-}
-
-.navigation a:hover::after { 
-  width: 100%; 
-  background: var(--color-secondary);
-}
-
 .navigation a.active {
-  color: var(--color-primary);
-  font-weight: 600;
+  background: var(--gradient-primary);
+  color: var(--color-white);
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(139, 115, 85, 0.2);
 }
 
-.navigation a.active::after {
-  width: 100%;
-  background: var(--gradient-primary);
+/* Remove the underline effects */
+.navigation a::after {
+  display: none;
 }
 
 .navigation.mobile {
@@ -490,12 +531,12 @@ p {
 }
 
 .navigation.mobile a {
-  font-size: 1.2rem;
-  padding: var(--space) var(--space-lg);
-  border-radius: var(--radius-sm);
+  font-size: 1.1rem;
+  padding: 12px 20px;
+  border-radius: 25px;
   border: 1px solid transparent;
   transition: var(--transition);
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.9);
   position: relative;
   display: flex;
   align-items: center;
@@ -504,21 +545,88 @@ p {
   margin-bottom: var(--space-sm);
   color: var(--color-text) !important;
   min-height: 44px;
+  font-weight: 400;
 }
 
 .navigation.mobile a:hover {
-  color: var(--color-primary);
+  color: var(--color-secondary);
   background: rgba(255, 255, 255, 0.95);
+  transform: translateY(-1px);
 }
 
 .navigation.mobile a.active {
-  color: var(--color-primary);
-  font-weight: 600;
+  background: var(--gradient-primary);
+  color: var(--color-white);
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(139, 115, 85, 0.2);
 }
 
 .navigation.mobile a.active::after {
-  width: 100%;
+  display: none;
+}
+
+/* ===== GOLD NAVIGATION LINK ===== */
+.nav-book-now {
+  background: transparent;
+  font-weight: 500 !important;
+  position: relative;
+  padding: 6px 12px !important;
+  border-radius: 20px !important;
+  color: #2c2c2c !important;
+  -webkit-text-fill-color: #2c2c2c !important;
+  border: none;
+  font-size: 0.9rem !important;
+  letter-spacing: 0.02em;
+}
+
+
+
+.nav-book-now:hover {
+  background: rgba(139, 115, 85, 0.05);
+  transform: translateY(-1px);
+}
+
+.nav-book-now.active {
   background: var(--gradient-primary);
+  color: var(--color-white) !important;
+  -webkit-text-fill-color: var(--color-white) !important;
+  font-weight: 500 !important;
+  box-shadow: 0 2px 8px rgba(139, 115, 85, 0.2);
+}
+
+/* Remove the brown underline for Book Now link */
+.nav-book-now::after {
+  display: none !important;
+}
+
+/* Override the navigation underline for Book Now link */
+.nav-link.nav-book-now::after {
+  display: none !important;
+}
+
+.navigation a.nav-book-now::after {
+  display: none !important;
+}
+
+/* Mobile navigation styling */
+.navigation.mobile .nav-book-now {
+  background: transparent !important;
+  color: #2c2c2c !important;
+  -webkit-text-fill-color: #2c2c2c !important;
+  font-weight: 500 !important;
+  padding: 12px 20px !important;
+  border-radius: 25px !important;
+  border: none;
+  font-size: 1rem !important;
+  letter-spacing: 0.02em;
+}
+
+.navigation.mobile .nav-book-now.active {
+  background: var(--gradient-primary) !important;
+  color: var(--color-white) !important;
+  -webkit-text-fill-color: var(--color-white) !important;
+  font-weight: 500 !important;
+  box-shadow: 0 2px 8px rgba(139, 115, 85, 0.2);
 }
 
 /* ===== HERO ===== */
