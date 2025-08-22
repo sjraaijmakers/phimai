@@ -19,7 +19,7 @@ const t = useTranslations(lang);
 
       <div class="gallery-grid">
         {galleryImages.map((image, index) => (
-          <div class="gallery-item" data-index={index} onclick={`openLightbox(${index})`}>
+          <div class="gallery-item" data-index={index} onclick={`openLightbox(${index}, 'gallery-lightbox')`}>
             <img src={image.src} alt={image.caption || ''} />
           </div>
         ))}
@@ -28,7 +28,7 @@ const t = useTranslations(lang);
   </div>
 </section>
 
-<Lightbox images={galleryImages} />
+<Lightbox id="gallery-lightbox" images={galleryImages} />
 
 
 
