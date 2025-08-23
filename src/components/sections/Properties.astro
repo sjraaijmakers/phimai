@@ -5,52 +5,54 @@ import Lightbox from '../ui/Lightbox.astro';
 
 ---
 
-<section id="gallery" class="properties section">
-  <div class="container">
-    <div class="properties-content">
-      <div class="section-header">
-        <h2 class="section-title">{t('gallery.title')}</h2>
-        <p class="section-subtitle">{t('gallery.subtitle')}</p>
-      </div>
+<div client:visible>
+  <section id="gallery" class="properties section">
+    <div class="container">
+      <div class="properties-content">
+        <div class="section-header">
+          <h2 class="section-title">{t('gallery.title')}</h2>
+          <p class="section-subtitle">{t('gallery.subtitle')}</p>
+        </div>
 
-      <div class="gallery-grid">
-        {galleryImages.map((image, index) => (
-          <div class="gallery-item" data-index={index} data-lightbox-id="gallery-lightbox">
-            <img src={image.src} alt={image.caption || ''} />
-          </div>
-        ))}
+        <div class="gallery-grid">
+          {galleryImages.map((image, index) => (
+            <div class="gallery-item" data-index={index} data-lightbox-id="gallery-lightbox">
+              <img src={image.src} alt={image.caption || ''} />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<Lightbox id="gallery-lightbox" images={galleryImages} />
+  <Lightbox client:load id="gallery-lightbox" images={galleryImages} />
 
-<script>
-  // Gallery lightbox functionality
-  document.addEventListener('DOMContentLoaded', () => {
-    console.log('Gallery script loaded');
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    console.log('Found gallery items:', galleryItems.length);
-    
-    galleryItems.forEach((item, index) => {
-      item.addEventListener('click', (e) => {
-        console.log('Gallery item clicked:', index);
-        const target = e.currentTarget as HTMLElement;
-        const lightboxId = target.dataset.lightboxId;
-        const imageIndex = parseInt(target.dataset.index || '0');
-        
-        console.log('Lightbox data:', { lightboxId, imageIndex, openLightbox: !!window.openLightbox });
-        
-        if (lightboxId && window.openLightbox) {
-          window.openLightbox(imageIndex, lightboxId);
-        } else {
-          console.error('Lightbox not available:', { lightboxId, openLightbox: !!window.openLightbox });
-        }
+  <script>
+    // Gallery lightbox functionality
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('Gallery script loaded');
+      const galleryItems = document.querySelectorAll('.gallery-item');
+      console.log('Found gallery items:', galleryItems.length);
+      
+      galleryItems.forEach((item, index) => {
+        item.addEventListener('click', (e) => {
+          console.log('Gallery item clicked:', index);
+          const target = e.currentTarget as HTMLElement;
+          const lightboxId = target.dataset.lightboxId;
+          const imageIndex = parseInt(target.dataset.index || '0');
+          
+          console.log('Lightbox data:', { lightboxId, imageIndex, openLightbox: !!window.openLightbox });
+          
+          if (lightboxId && window.openLightbox) {
+            window.openLightbox(imageIndex, lightboxId);
+          } else {
+            console.error('Lightbox not available:', { lightboxId, openLightbox: !!window.openLightbox });
+          }
+        });
       });
     });
-  });
-</script>
+  </script>
+</div>
 
 <style>
   /* ===== GALLERY ===== */

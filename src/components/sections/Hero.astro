@@ -12,7 +12,7 @@ const heroImages = [
 ];
 ---
 
-<section id="hero" class="hero">
+<section id="hero" class="hero" client:load>
   <div class="hero-background">
     <div class="carousel">
       {heroImages.map((image, index) => (
@@ -46,59 +46,59 @@ const heroImages = [
       ></button>
     ))}
   </div>
-</section>
 
-<script>
-  // Carousel functionality
-  document.addEventListener('DOMContentLoaded', () => {
-    const carousel = document.querySelector('.carousel');
-    const slides = document.querySelectorAll('.carousel-slide');
-    const dots = document.querySelectorAll('.carousel-dot');
-    let currentSlide = 0;
-    let interval;
+  <script>
+    // Carousel functionality
+    document.addEventListener('DOMContentLoaded', () => {
+      const carousel = document.querySelector('.carousel');
+      const slides = document.querySelectorAll('.carousel-slide');
+      const dots = document.querySelectorAll('.carousel-dot');
+      let currentSlide = 0;
+      let interval;
 
-    function showSlide(index) {
-      // Remove active class from all slides and dots
-      slides.forEach(slide => slide.classList.remove('active'));
-      dots.forEach(dot => dot.classList.remove('active'));
-      
-      // Add active class to current slide and dot
-      slides[index].classList.add('active');
-      dots[index].classList.add('active');
-      
-      currentSlide = index;
-    }
+      function showSlide(index) {
+        // Remove active class from all slides and dots
+        slides.forEach(slide => slide.classList.remove('active'));
+        dots.forEach(dot => dot.classList.remove('active'));
+        
+        // Add active class to current slide and dot
+        slides[index].classList.add('active');
+        dots[index].classList.add('active');
+        
+        currentSlide = index;
+      }
 
-    function nextSlide() {
-      const next = (currentSlide + 1) % slides.length;
-      showSlide(next);
-    }
+      function nextSlide() {
+        const next = (currentSlide + 1) % slides.length;
+        showSlide(next);
+      }
 
-    function startAutoPlay() {
-      interval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
-    }
+      function startAutoPlay() {
+        interval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+      }
 
-    function stopAutoPlay() {
-      clearInterval(interval);
-    }
+      function stopAutoPlay() {
+        clearInterval(interval);
+      }
 
-    // Add click handlers to dots
-    dots.forEach((dot, index) => {
-      dot.addEventListener('click', () => {
-        showSlide(index);
-        stopAutoPlay();
-        startAutoPlay(); // Restart autoplay
+      // Add click handlers to dots
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+          showSlide(index);
+          stopAutoPlay();
+          startAutoPlay(); // Restart autoplay
+        });
       });
+
+      // Pause autoplay on hover
+      carousel?.addEventListener('mouseenter', stopAutoPlay);
+      carousel?.addEventListener('mouseleave', startAutoPlay);
+
+      // Start autoplay
+      startAutoPlay();
     });
-
-    // Pause autoplay on hover
-    carousel?.addEventListener('mouseenter', stopAutoPlay);
-    carousel?.addEventListener('mouseleave', startAutoPlay);
-
-    // Start autoplay
-    startAutoPlay();
-  });
-</script>
+  </script>
+</section>
 
 <style>
   /* ===== HERO ===== */

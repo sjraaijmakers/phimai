@@ -12,110 +12,109 @@ export interface Props {
 const { hideNavigation = false } = Astro.props;
 ---
 
-<div client:load>
-  <header class="header" id="header">
-    <div class="container">
-      <div class={`header-content ${hideNavigation ? 'no-navigation' : ''}`}>
-        <!-- Left column: Logo -->
-        <div class="header-left">
-          <div class="logo">
-            <a href="#top" class="logo-link">{t('header.logo')}</a>
-          </div>
-          <ScrollToTop client:idle id="headerScrollToTop" className="header-style" />
+<header class="header" id="header" client:load>
+  <div class="container">
+    <div class={`header-content ${hideNavigation ? 'no-navigation' : ''}`}>
+      <!-- Left column: Logo -->
+      <div class="header-left">
+        <div class="logo">
+          <a href="#top" class="logo-link">{t('header.logo')}</a>
         </div>
-        
-        <!-- Center column: Navigation (desktop only) -->
+        <ScrollToTop id="headerScrollToTop" className="header-style" client:idle />
+      </div>
+      
+      <!-- Center column: Navigation (desktop only) -->
+      {!hideNavigation && (
+        <div class="header-center">
+          <Navigation className="desktop-nav nav-links" />
+        </div>
+      )}
+      
+      <!-- Right column: Language selector and mobile menu -->
+      <div class="header-right">
+        <LanguageSelector showFlag={true} class="language-select" />
         {!hideNavigation && (
-          <div class="header-center">
-            <Navigation className="desktop-nav nav-links" />
-          </div>
+          <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu" onclick="toggleMobileMenu()">
+            <Menu size={20} class="menu-icon" />
+            <X size={20} class="close-icon" />
+          </button>
         )}
-        
-        <!-- Right column: Language selector and mobile menu -->
-        <div class="header-right">
-          <LanguageSelector showFlag={true} class="language-select" />
-          {!hideNavigation && (
-            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu" onclick="toggleMobileMenu()">
-              <Menu size={20} class="menu-icon" />
-              <X size={20} class="close-icon" />
-            </button>
-          )}
-        </div>
       </div>
     </div>
-  </header>
+  </div>
+</header>
 
-  <!-- Separate sliding navigation bar (mobile only) -->
-  {!hideNavigation && (
-    <nav class="sliding-nav" id="slidingNav">
-      <div class="container">
-        <Navigation className="mobile-nav nav-links" />
-      </div>
-    </nav>
-  )}
-
-  {!hideNavigation && (
-    <div class="mobile-menu" id="mobileMenu">
-      <div class="mobile-menu-content">
-        <Navigation className="mobile nav-links" />
-      </div>
+<!-- Separate sliding navigation bar (mobile only) -->
+{!hideNavigation && (
+  <nav class="sliding-nav" id="slidingNav">
+    <div class="container">
+      <Navigation className="mobile-nav nav-links" />
     </div>
-  )}
+  </nav>
+)}
 
-  <script>
-    // Header functionality
-    // Expose simple reusable handlers for inline HTML events
-    declare global {
-      interface Window {
-        toggleMobileMenu: () => void;
-      }
+{!hideNavigation && (
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-content">
+      <Navigation className="mobile nav-links" />
+    </div>
+  </div>
+)}
+
+<script>
+  // Header functionality
+  // Expose simple reusable handlers for inline HTML events
+  declare global {
+    interface Window {
+      toggleMobileMenu: () => void;
     }
-    
-    window.toggleMobileMenu = function() {
-      const menu = document.getElementById('mobileMenu');
-      const toggle = document.getElementById('mobileMenuToggle');
-      if (menu) menu.classList.toggle('active');
-      if (toggle) toggle.classList.toggle('active');
+  }
+  
+  window.toggleMobileMenu = function() {
+    const menu = document.getElementById('mobileMenu');
+    const toggle = document.getElementById('mobileMenuToggle');
+    if (menu) menu.classList.toggle('active');
+    if (toggle) toggle.classList.toggle('active');
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const slidingNav = document.getElementById('slidingNav') as HTMLElement | null;
+
+    // Dynamically set --header-height so hero and mobile menu offset correctly
+    const header = document.querySelector('.header') as HTMLElement | null;
+    const setHeaderHeight = () => {
+      if (!header) return;
+      const height = header.offsetHeight;
+      document.documentElement.style.setProperty('--header-height', `${height}px`);
     };
+    setHeaderHeight();
+    window.addEventListener('resize', setHeaderHeight);
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const slidingNav = document.getElementById('slidingNav') as HTMLElement | null;
-
-      // Dynamically set --header-height so hero and mobile menu offset correctly
-      const header = document.querySelector('.header') as HTMLElement | null;
-      const setHeaderHeight = () => {
-        if (!header) return;
-        const height = header.offsetHeight;
-        document.documentElement.style.setProperty('--header-height', `${height}px`);
-      };
-      setHeaderHeight();
-      window.addEventListener('resize', setHeaderHeight);
-
-      // Handle sliding navigation (mobile only)
-      if (slidingNav) {
-        const handleScroll = () => {
-          // Only apply sliding effect on mobile
-          if (window.innerWidth < 768) {
-            const scrollY = window.scrollY;
-            const headerHeight = header?.offsetHeight || 0;
-            
-            // Show sliding nav when scrolled past header height
-            if (scrollY > headerHeight) {
-              slidingNav.classList.add('visible');
-            } else {
-              slidingNav.classList.remove('visible');
-            }
+    // Handle sliding navigation (mobile only)
+    if (slidingNav) {
+      const handleScroll = () => {
+        // Only apply sliding effect on mobile
+        if (window.innerWidth < 768) {
+          const scrollY = window.scrollY;
+          const headerHeight = header?.offsetHeight || 0;
+          
+          // Show sliding nav when scrolled past header height
+          if (scrollY > headerHeight) {
+            slidingNav.classList.add('visible');
+          } else {
+            slidingNav.classList.remove('visible');
           }
-        };
+        }
+      };
 
-        window.addEventListener('scroll', handleScroll);
-        window.addEventListener('resize', handleScroll);
-        handleScroll(); // Initial check
-      }
-    });
-  </script>
+      window.addEventListener('scroll', handleScroll);
+      window.addEventListener('resize', handleScroll);
+      handleScroll(); // Initial check
+    }
+  });
+</script>
 
-  <style>
+<style>
     /* ===== HEADER ===== */
     .header {
       position: fixed;
@@ -383,4 +382,3 @@ const { hideNavigation = false } = Astro.props;
       }
     }
   </style>
-</div>

@@ -17,13 +17,13 @@ changeLanguage("en");
 <Layout lang={i18next.language}>
   <Header />
   <main>
-    <Hero />
+    <Hero client:load />
     <About />
-    <Gallery />
+    <Gallery client:visible />
     <Location />
     <Booking />
-    <Contact />
+    <Contact client:load />
   </main>
   <Footer />
-  <Animations />
+  <Animations client:load />
 </Layout>
