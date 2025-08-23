@@ -1,0 +1,82 @@
+---
+import { useTranslations, getLangFromUrl } from '../../i18n/ui';
+
+// Get i18n translations
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+export interface Props {
+  currentPage: string;
+  currentPageKey: string;
+}
+
+const { currentPage, currentPageKey } = Astro.props;
+---
+
+<nav class="breadcrumbs" aria-label={t('breadcrumbs.ariaLabel')}>
+  <div class="container">
+    <ol class="breadcrumb-list">
+      <li class="breadcrumb-item">
+        <a href="/" class="breadcrumb-link" data-i18n-key="breadcrumbs.home" data-astro-reload="false">{t('breadcrumbs.home')}</a>
+      </li>
+      <li class="breadcrumb-item" aria-current="page">
+        <span class="breadcrumb-current" data-i18n-key={currentPageKey}>{t(currentPageKey)}</span>
+      </li>
+    </ol>
+  </div>
+</nav>
+
+<style>
+    
+   /* Breadcrumbs */
+   .breadcrumbs {
+     padding: var(--space-md) 0;
+     /* Removed background and border */
+     margin-top: var(--header-height, 80px);
+   }
+
+  .breadcrumb-list {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .breadcrumb-item {
+    display: flex;
+    align-items: center;
+  }
+
+  .breadcrumb-item:not(:last-child)::after {
+    content: '';
+    margin-left: var(--space-sm);
+    width: 16px;
+    height: 16px;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%238B7355' stroke-width='2'%3e%3cpolyline points='9,18 15,12 9,6'%3e%3c/polyline%3e%3c/svg%3e");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.6;
+  }
+
+  .breadcrumb-link {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: var(--transition);
+  }
+
+  .breadcrumb-link:hover {
+    color: var(--color-text);
+    text-decoration: underline;
+  }
+
+  .breadcrumb-current {
+    color: var(--color-text);
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  </style>

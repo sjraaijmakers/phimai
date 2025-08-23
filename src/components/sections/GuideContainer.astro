@@ -1,0 +1,121 @@
+---
+import { useTranslations, getLangFromUrl } from '../../i18n/ui';
+import GuideSection from './GuideSection.astro';
+import type { ImageConfig } from '../../data/images';
+
+// Get i18n translations
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// Define guide sections data structure
+const guideSections = [
+  {
+    id: 'saiNgam',
+    titleKey: 'guide.sections.saiNgam.title',
+    images: [
+      { src: '/images/sai-gnam-front.jpg' },
+      { src: '/images/sai-gnam-pond.jpg' },
+      { src: '/images/sai-gnam-bench.jpg' },
+      { src: '/images/sai-gnam-shadow.jpg' },
+    ] as ImageConfig[],
+    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1924.9440490989714!2d102.4950!3d15.2184!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311917a1629c1fbf%3A0x682188c4c7576e05!2sSai%20Ngam%20Banyan%20Trees!5e0!3m2!1sen!2sth!4v1755585214037"
+  },
+  {
+    id: 'chicken',
+    titleKey: 'guide.sections.chicken.title',
+    images: [
+      { src: '/images/chicken-front.jpg' },
+      { src: '/images/chicken-man.jpg' },
+    ] as ImageConfig[],
+    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1924.9440490989714!2d102.4937!3d15.2180!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311917a1629c1fbf%3A0x682188c4c7576e05!2sBest%20Grilled%20Chicken%20Phimai!5e0!3m2!1sen!2sth!4v1755585214033"
+  },
+  {
+    id: 'boatNoodle',
+    titleKey: 'guide.sections.boatNoodle.title',
+    images: [
+      { src: '/images/boat-noodle.jpg' },
+      { src: '/images/boat-noodle-far.jpg' },
+    ] as ImageConfig[],
+    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1924.9440490989714!2d102.4940!3d15.2185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311917a1629c1fbf%3A0x682188c4c7576e05!2sBoat%20Noodle%20Shop%20Phimai!5e0!3m2!1sen!2sth!4v1755585214034"
+  },
+  {
+    id: 'market',
+    titleKey: 'guide.sections.market.title',
+    images: [
+      { src: '/images/market-uncle.jpg' },
+      { src: '/images/market-auntie.jpg' },
+      { src: '/images/marktet-auntie2.jpg' },
+    ] as ImageConfig[],
+    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1924.9440490989714!2d102.4945!3d15.2182!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311917a1629c1fbf%3A0x682188c4c7576e05!2sPhimai%20Morning%20Market!5e0!3m2!1sen!2sth!4v1755585214035"
+  },
+  {
+    id: 'coffee',
+    titleKey: 'guide.sections.coffee.title',
+    images: [
+      { src: '/images/coffee-cafe.jpg' },
+    ] as ImageConfig[],
+    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1924.9440490989714!2d102.4948!3d15.2183!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311917a1629c1fbf%3A0x682188c4c7576e05!2sBest%20Coffee%20Cafe%20Phimai!5e0!3m2!1sen!2sth!4v1755585214036"
+  }
+];
+---
+
+<section class="guide-container">
+  <!-- Guide Title -->
+  <section class="guide-title-section">
+    <div class="container">
+      <h1 class="guide-title" data-i18n-key="guide.title">{t('guide.title')}</h1>
+    </div>
+  </section>
+
+  <!-- Guide Sections -->
+  <section class="guide-sections">
+    <div class="container guide-sections-grid">
+      {guideSections.map((section, index) => (
+        <GuideSection 
+          title={t(section.titleKey)}
+          titleKey={section.titleKey}
+          images={section.images}
+          mapSrc={section.mapUrl}
+          carouselId={`${section.id}-carousel`}
+          lightboxId={`${section.id}-lightbox`}
+          sectionNumber={index + 1}
+        />
+      ))}
+    </div>
+  </section>
+</section>
+
+<style>
+  /* Guide Container */
+  .guide-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    background: var(--color-white);
+  }
+
+  /* Guide Title Section */
+  .guide-title-section {
+    padding: var(--space-md) 0;
+  }
+
+  .guide-title {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-primary);
+    text-align: left;
+    margin: 0;
+    line-height: var(--lh-heading);
+  }
+
+  /* Guide Sections */
+  .guide-sections {
+    position: relative;
+  }
+
+  .guide-sections-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xl);
+  }
+</style>

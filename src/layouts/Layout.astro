@@ -2,6 +2,7 @@
 import { siteConfig } from '../config/site';
 import { getSEOConfig, getStructuredData, getHreflangLinks } from '../config/seo';
 import '../assets/styles.css';
+import { ClientRouter } from 'astro:transitions';
 
 export interface Props {
   lang?: string;
@@ -78,6 +79,7 @@ const hreflangLinks = getHreflangLinks(seoConfig.hreflang);
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
     
+    <ClientRouter />
 
   </head>
   <body>
