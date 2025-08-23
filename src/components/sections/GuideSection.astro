@@ -29,7 +29,6 @@ const lightboxId = `lightbox-${sectionNumber}`;
     <div class="section-media">
       <div class="section-carousel image-hover-zoom">
         <Carousel 
-          client:visible
           id={carouselId}
           images={images}
           interval={4000}
@@ -52,7 +51,7 @@ const lightboxId = `lightbox-${sectionNumber}`;
   </div>
   
   <!-- Lightbox for this section -->
-  <Lightbox client:load id={lightboxId} images={images} />
+  <Lightbox id={lightboxId} images={images} />
 </div>
 
 <style>

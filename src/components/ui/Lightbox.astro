@@ -1,5 +1,6 @@
 ---
 import { X, ChevronLeft, ChevronRight } from 'lucide-astro';
+import { Image } from 'astro:assets';
 
 interface LightboxImage {
   src: string;
@@ -20,7 +21,18 @@ const { id = "lightbox", images = [] } = Astro.props;
       <X size={24} />
     </button>
     <div class="lightbox-counter" id="lightbox-counter"></div>
-    <img id="lightbox-image" class="lightbox-image" src="" alt="">
+    {images.length > 0 && (
+      <Image 
+        id="lightbox-image" 
+        class="lightbox-image" 
+        src={images[0].src}
+        alt={images[0].caption || "Image"}
+        width={1200}
+        height={800}
+        format="webp"
+        quality={90}
+      />
+    )}
     <p id="lightbox-text" class="lightbox-text"></p>
     <button class="lightbox-control lightbox-prev" aria-label="Previous image">
       <ChevronLeft size={24} />
@@ -99,21 +111,21 @@ const { id = "lightbox", images = [] } = Astro.props;
          const lightboxText = lightbox.querySelector('#lightbox-text');
          const lightboxCounter = lightbox.querySelector('#lightbox-counter');
          
-           if (!lightboxImage || !lightboxText) return;
+         if (!lightboxImage || !lightboxText) return;
            
-           console.log('Setting image in lightbox:', { index, src: imageData[index].src });
-           manager.currentImageIndex = index;
-           lightboxImage.src = imageData[index].src;
-           const desc = imageData[index].caption || '';
-           lightboxImage.alt = desc || '';
-           
-           if (desc && desc.trim().length > 0) {
-             lightboxText.textContent = desc;
-             lightboxText.style.display = '';
-           } else {
-             lightboxText.textContent = '';
-             lightboxText.style.display = 'none';
-           }
+         console.log('Setting image in lightbox:', { index, src: imageData[index].src });
+         manager.currentImageIndex = index;
+         lightboxImage.src = imageData[index].src;
+         const desc = imageData[index].caption || '';
+         lightboxImage.alt = desc || '';
+         
+         if (desc && desc.trim().length > 0) {
+           lightboxText.textContent = desc;
+           lightboxText.style.display = '';
+         } else {
+           lightboxText.textContent = '';
+           lightboxText.style.display = 'none';
+         }
            
            // Update counter
            if (lightboxCounter) {

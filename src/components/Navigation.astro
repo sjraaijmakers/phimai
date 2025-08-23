@@ -8,7 +8,7 @@ const { className = "" } = Astro.props;
 
 ---
 
-<nav class={`navigation ${className}`} client:load>
+<nav class={`navigation ${className}`}>
   <div class="nav-container">
     {className.includes('guide-nav') && (
       <div class="nav-menu guide-nav">

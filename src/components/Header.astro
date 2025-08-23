@@ -12,7 +12,7 @@ export interface Props {
 const { hideNavigation = false } = Astro.props;
 ---
 
-<header class="header" id="header" client:load>
+<header class="header" id="header">
   <div class="container">
     <div class={`header-content ${hideNavigation ? 'no-navigation' : ''}`}>
       <!-- Left column: Logo -->
@@ -20,7 +20,7 @@ const { hideNavigation = false } = Astro.props;
         <div class="logo">
           <a href="#top" class="logo-link">{t('header.logo')}</a>
         </div>
-        <ScrollToTop id="headerScrollToTop" className="header-style" client:idle />
+        <ScrollToTop id="headerScrollToTop" className="header-style" />
       </div>
       
       <!-- Center column: Navigation (desktop only) -->

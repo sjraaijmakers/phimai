@@ -2,6 +2,7 @@
 import { t } from "i18next";
 import { ArrowRight } from 'lucide-astro';
 import { siteConfig } from '../../config/site';
+import { Image } from 'astro:assets';
 
 // Build providers list from unified config map
 const providers = Object.entries(siteConfig.booking || {})
@@ -38,7 +39,15 @@ const providers = Object.entries(siteConfig.booking || {})
         p.disabled ? (
           <div class={`booking-option btn ${p.className} disabled`} aria-disabled="true">
             <div class="booking-logo">
-              <img src={p.logo} alt={p.name} class="logo-image" />
+              <Image 
+                src={p.logo} 
+                alt={p.name} 
+                class="logo-image"
+                width={120}
+                height={60}
+                format="webp"
+                quality={80}
+              />
             </div>
             <div class="booking-content">
               <span>{t(p.i18nKey)}</span>
@@ -50,7 +59,15 @@ const providers = Object.entries(siteConfig.booking || {})
         ) : (
           <a href={p.href} class={`booking-option btn ${p.className}`} target="_blank" rel="noopener noreferrer">
             <div class="booking-logo">
-              <img src={p.logo} alt={p.name} class="logo-image" />
+              <Image 
+                src={p.logo} 
+                alt={p.name} 
+                class="logo-image"
+                width={120}
+                height={60}
+                format="webp"
+                quality={80}
+              />
             </div>
             <div class="booking-content">
               <span>{t(p.i18nKey)}</span>
