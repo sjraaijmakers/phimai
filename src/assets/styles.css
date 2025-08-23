@@ -8,6 +8,7 @@
   
   /* Layout */
   --header-height: 96px;
+  --scroll-offset: 96px;
   
   /* Responsive Breakpoints */
   --breakpoint-xs: 480px;
