@@ -1,29 +1,104 @@
 ---
-import { useTranslations, getLangFromUrl } from '../../i18n/ui';
+// This should work with astro-i18next integration
+const { t } = await import('i18next');
 
-// Get i18n translations
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+// Hero images for carousel
+const heroImages = [
+  '/images/hero-tiny-home.jpg',
+  '/images/bedroom-cozy.jpg',
+  '/images/exterior-cozy.jpg',
+  '/images/garden-view.jpg',
+  '/images/kitchen-cozy.jpg'
+];
 ---
 
 <section id="hero" class="hero">
   <div class="hero-background">
-    <img src="/images/hero-tiny-home.jpg" alt="Phimai Pond House" class="hero-image">
+    <div class="carousel">
+      {heroImages.map((image, index) => (
+        <div class={`carousel-slide ${index === 0 ? 'active' : ''}`}>
+          <img src={image} alt="Phimai Pond House" class="hero-image">
+        </div>
+      ))}
+    </div>
     <div class="hero-overlay"></div>
   </div>
   
   <div class="hero-content">
     <div class="container">
-      <h1 class="hero-title" data-i18n-key="hero.title">{t('hero.title')}</h1>
-      <p class="hero-subtitle" data-i18n-key="hero.subtitle">{t('hero.subtitle')}</p>
+      <h1 class="hero-title">{t('hero.title')}</h1>
+      <p class="hero-subtitle">{t('hero.subtitle')}</p>
       
       <div class="hero-buttons">
-        <a href="#booking" class="btn btn-primary" data-i18n-key="hero.bookNow">{t('hero.bookNow')}</a>
-        <a href="#gallery" class="btn btn-secondary" data-i18n-key="hero.viewGallery">{t('hero.viewGallery')}</a>
+        <a href="#booking" class="btn btn-primary">{t('hero.bookNow')}</a>
+        <a href="#gallery" class="btn btn-secondary">{t('hero.viewGallery')}</a>
       </div>
     </div>
   </div>
+
+  <!-- Carousel Navigation -->
+  <div class="carousel-nav">
+    {heroImages.map((_, index) => (
+      <button 
+        class={`carousel-dot ${index === 0 ? 'active' : ''}`}
+        data-slide={index}
+        aria-label={`Go to slide ${index + 1}`}
+      ></button>
+    ))}
+  </div>
 </section>
+
+<script>
+  // Carousel functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const carousel = document.querySelector('.carousel');
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots = document.querySelectorAll('.carousel-dot');
+    let currentSlide = 0;
+    let interval;
+
+    function showSlide(index) {
+      // Remove active class from all slides and dots
+      slides.forEach(slide => slide.classList.remove('active'));
+      dots.forEach(dot => dot.classList.remove('active'));
+      
+      // Add active class to current slide and dot
+      slides[index].classList.add('active');
+      dots[index].classList.add('active');
+      
+      currentSlide = index;
+    }
+
+    function nextSlide() {
+      const next = (currentSlide + 1) % slides.length;
+      showSlide(next);
+    }
+
+    function startAutoPlay() {
+      interval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+    }
+
+    function stopAutoPlay() {
+      clearInterval(interval);
+    }
+
+    // Add click handlers to dots
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        showSlide(index);
+        stopAutoPlay();
+        startAutoPlay(); // Restart autoplay
+      });
+    });
+
+    // Pause autoplay on hover
+    carousel?.addEventListener('mouseenter', stopAutoPlay);
+    carousel?.addEventListener('mouseleave', startAutoPlay);
+
+    // Start autoplay
+    startAutoPlay();
+  });
+</script>
 
 <style>
   /* ===== HERO ===== */
@@ -63,12 +138,27 @@ const t = useTranslations(lang);
     z-index: 1;
   }
 
-  .hero-background .carousel {
+  .carousel {
     width: 100%;
     height: 100%;
+    position: relative;
   }
 
-  .hero-background .carousel-slide img {
+  .carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+  }
+
+  .carousel-slide.active {
+    opacity: 1;
+  }
+
+  .carousel-slide img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -165,6 +255,37 @@ const t = useTranslations(lang);
     color: var(--color-white);
   }
 
+  /* ===== CAROUSEL NAVIGATION ===== */
+  .carousel-nav {
+    position: absolute;
+    bottom: var(--space-xl);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: var(--space-sm);
+    z-index: 4;
+  }
+
+  .carousel-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .carousel-dot:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.7);
+  }
+
+  .carousel-dot.active {
+    background: var(--color-white);
+    border-color: var(--color-white);
+  }
+
   /* ===== RESPONSIVE DESIGN ===== */
   @media (max-width: 768px) {
     .hero { 
@@ -194,6 +315,9 @@ const t = useTranslations(lang);
       width: 100%;
       max-width: 280px;
     }
+    .carousel-nav {
+      bottom: var(--space-lg);
+    }
   }
 
   @media (max-width: 480px) {
@@ -208,6 +332,10 @@ const t = useTranslations(lang);
       text-shadow: 
         0 1px 2px rgba(0, 0, 0, 0.6),
         0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    .carousel-dot {
+      width: 10px;
+      height: 10px;
     }
   }
 </style>

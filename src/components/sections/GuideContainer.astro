@@ -1,11 +1,8 @@
 ---
-import { useTranslations, getLangFromUrl } from '../../i18n/ui';
+import { t } from "i18next";
 import GuideSection from './GuideSection.astro';
 import type { ImageConfig } from '../../data/images';
 
-// Get i18n translations
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
 
 // Define guide sections data structure
 const guideSections = [
@@ -72,7 +69,7 @@ const guideSections = [
   <!-- Guide Title -->
   <section class="guide-title-section">
     <div class="container">
-      <h1 class="guide-title" data-i18n-key="guide.title">{t('guide.title')}</h1>
+      <h1 class="guide-title">{t('guide.title')}</h1>
     </div>
   </section>
 

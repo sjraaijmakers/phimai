@@ -1,0 +1,29 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Hero from "../../components/sections/Hero.astro";
+import Gallery from "../../components/sections/Properties.astro";
+import Location from "../../components/sections/Location.astro";
+import About from "../../components/sections/About.astro";
+import Booking from "../../components/sections/Booking.astro";
+import Contact from "../../components/sections/Contact.astro";
+import Footer from "../../components/Footer.astro";
+import Animations from "../../components/ui/Animations.astro";
+import i18next, { t, changeLanguage } from "i18next";
+
+changeLanguage("th");
+---
+
+<Layout lang={i18next.language}>
+  <Header />
+  <main>
+    <Hero />
+    <About />
+    <Gallery />
+    <Location />
+    <Booking />
+    <Contact />
+  </main>
+  <Footer />
+  <Animations />
+</Layout>

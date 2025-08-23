@@ -82,6 +82,7 @@ const { id = "lightbox", images = [] } = Astro.props;
      };
      
      console.log('Lightbox registered:', lightboxId, 'with', imageData.length, 'images');
+     console.log('Available lightboxes:', Object.keys(window.lightboxManager));
     
          // Global open lightbox function (only set once)
      if (!window.openLightbox) {
@@ -123,9 +124,8 @@ const { id = "lightbox", images = [] } = Astro.props;
              lightbox.classList.add('active');
              lockPageScroll();
            }
-         }
-       });
-     }
+         };
+       }
     
     // Close lightbox function
     function closeLightbox() {

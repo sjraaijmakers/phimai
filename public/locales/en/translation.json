@@ -21,6 +21,13 @@
     "bookNow": "Book Now",
     "viewGallery": "View Gallery"
   },
+  "home": {
+    "seo": {
+      "title": "Phimai Pond House - Cozy Tiny Homes in Thailand",
+      "description": "Stay in cozy tiny homes at Phimai Pond House, Thailand. Minutes from Phimai Historical Park and Sai Ngam mangrove. Free bikes, kitchenette, and authentic Thai experience.",
+      "keywords": "Phimai accommodation, Thailand tiny homes, Phimai Historical Park, vacation rental Thailand, small town Thailand, Khmer temple, Sai Ngam, Nakhon Ratchasima"
+    }
+  },
   "gallery": {
     "title": "Our Tiny Homes",
     "subtitle": "Experience the perfect blend of comfort and adventure in our thoughtfully designed tiny homes.",
@@ -85,6 +92,18 @@
   "footer": {
     "copyright": "All rights reserved.",
     "scrollToTop": "Scroll to top"
+  },
+  "seo": {
+    "title": "Phimai Pond House - Cozy Tiny Homes in Thailand",
+    "description": "Stay in cozy tiny homes at Phimai Pond House, Thailand. Minutes from Phimai Historical Park and Sai Ngam mangrove. Free bikes, kitchenette, and authentic Thai experience.",
+    "keywords": "Phimai accommodation, Thailand tiny homes, Phimai Historical Park, vacation rental Thailand, small town Thailand, Khmer temple, Sai Ngam, Nakhon Ratchasima",
+    "locale": "en_US",
+    "image": "/images/hero-tiny-home.jpg",
+    "canonical": "https://pph.aktis.dev",
+    "hreflang": {
+      "en": "https://pph.aktis.dev",
+      "th": "https://pph.aktis.dev/th"
+    }
   },
   "guide": {
     "title": "Insider's Guide to Phimai",

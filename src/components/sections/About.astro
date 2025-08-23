@@ -1,11 +1,7 @@
 ---
-import { siteConfig } from '../../config/site';
-import { WashingMachine, Utensils, Coffee, Package, Bike, Users, Car } from 'lucide-astro';
-import { useTranslations, getLangFromUrl } from '../../i18n/ui';
 
-// Get i18n translations
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+import { WashingMachine, Utensils, Coffee, Package, Bike, Users, Car } from 'lucide-astro';
+import { t } from "i18next";
 
 // Amenities structure for DRY approach
 const amenities = [
@@ -40,8 +36,8 @@ const amenities = [
   <div class="container">
     <div class="about-content">
       <div class="about-info">
-        <h2 data-i18n-key="about.title">{t('about.title')}</h2>
-        <p data-i18n-key="about.intro">{t('about.intro')}</p>
+        <h2>{t('about.title')}</h2>
+        <p>{t('about.intro')}</p>
         
         <!-- Family suite info integrated into main description -->
         <div class="family-suite-info">
@@ -49,21 +45,21 @@ const amenities = [
             <Users size={20} />
           </div>
           <div class="family-suite-content">
-            <h4 data-i18n-key="about.familySuite.title">{t('about.familySuite.title')}</h4>
-            <p data-i18n-key="about.familySuite.description">{t('about.familySuite.description')}</p>
+            <h4>{t('about.familySuite.title')}</h4>
+            <p>{t('about.familySuite.description')}</p>
           </div>
         </div>
       </div>
 
       <div class="amenities">
-        <h3 data-i18n-key="about.amenities.title">{t('about.amenities.title')}</h3>
+        <h3>{t('about.amenities.title')}</h3>
         <div class="amenities-list">
           {amenities.map(({ icon: Icon, key }) => (
             <div class="amenity-item">
               <div class="amenity-icon">
                 <Icon size={20} />
               </div>
-              <span data-i18n-key={key}>{t(key)}</span>
+              <span>{t(key)}</span>
             </div>
           ))}
         </div>

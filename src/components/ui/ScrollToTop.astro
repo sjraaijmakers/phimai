@@ -1,62 +1,55 @@
 ---
 import { ChevronUp } from 'lucide-astro';
-import { useTranslations, getLangFromUrl } from '../../i18n/ui';
 
 export interface Props {
   id?: string;
   className?: string;
-  text?: string;
   i18nKey?: string;
 }
 
 const { 
   id = "scrollToTop", 
   className = "", 
-  text,
   i18nKey 
 } = Astro.props;
 
-// Get i18n translations
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
 ---
 
 <button 
   id={id} 
   class={`scroll-to-top ${className}`}
-  aria-label={t('common.scrollToTop')}
-  onclick="scrollToTop()"
 >
   <ChevronUp size={20} />
-  {text && <span class="scroll-to-top-text" data-i18n-key={i18nKey}>{text}</span>}
+  {i18nKey && <span class="scroll-to-top-text" data-i18n-key={i18nKey} />}
 </button>
 
-<script>
-  // Scroll to top functionality
-  window.scrollToTop = function() {
-    window.scrollTo({ 
-      top: 0, 
-      behavior: 'smooth' 
-    });
-  };
-
+<script define:vars={{ buttonId: id }}>
   document.addEventListener('DOMContentLoaded', () => {
-    const scrollToTop = document.getElementById('scrollToTop');
-    if (!scrollToTop) return;
-
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const threshold = 300; // Show after scrolling 300px
+    const scrollToTopButton = document.getElementById(buttonId);
+    
+    if (scrollToTopButton) {
+      // Add click handler for scroll to top
+      scrollToTopButton.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
       
-      if (scrollY > threshold) {
-        scrollToTop.classList.add('visible');
-      } else {
-        scrollToTop.classList.remove('visible');
+      // Show/hide button based on scroll position (for fixed position buttons)
+      const handleScroll = () => {
+        if (scrollToTopButton.classList.contains('scroll-to-top') && !scrollToTopButton.classList.contains('footer-style')) {
+          if (window.scrollY > 300) {
+            scrollToTopButton.classList.add('visible');
+          } else {
+            scrollToTopButton.classList.remove('visible');
+          }
+        }
+      };
+      
+      // Only add scroll listener for fixed position buttons
+      if (!scrollToTopButton.classList.contains('footer-style')) {
+        window.addEventListener('scroll', handleScroll);
+        handleScroll(); // Initial check
       }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial check
+    }
   });
 </script>
 

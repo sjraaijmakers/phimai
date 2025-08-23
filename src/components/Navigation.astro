@@ -1,22 +1,18 @@
 ---
-import { useTranslations, getLangFromUrl } from '../i18n/ui';
-
+import { t } from "i18next";
 export interface Props {
   className?: string;
 }
 
 const { className = "" } = Astro.props;
 
-// Get i18n translations
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
 ---
 
 <nav class={`navigation ${className}`}>
   <div class="nav-container">
     {className.includes('guide-nav') && (
       <div class="nav-menu guide-nav">
-        <a href="/" class="nav-link back-home" data-i18n-key="nav.backHome">
+        <a href="/" class="nav-link back-home">{t("nav.backHome")}</a>
           ← {t('nav.backHome')}
         </a>
       </div>
@@ -24,11 +20,11 @@ const t = useTranslations(lang);
     
     {!className.includes('guide-nav') && (
       <div class="nav-menu">
-        <a href="#about" class="nav-link" data-i18n-key="nav.about">{t('nav.about')}</a>
-        <a href="#gallery" class="nav-link" data-i18n-key="nav.gallery">{t('nav.gallery')}</a>
-        <a href="#location" class="nav-link" data-i18n-key="nav.location">{t('nav.location')}</a>
-        <a href="#booking" class="nav-link nav-book-now" data-i18n-key="nav.bookNow">{t('nav.bookNow')}</a>
-        <a href="#contact" class="nav-link" data-i18n-key="nav.contact">{t('nav.contact')}</a>
+        <a href="#about" class="nav-link">{t('nav.about')}</a>
+        <a href="#gallery" class="nav-link">{t('nav.gallery')}</a>
+        <a href="#location" class="nav-link">{t('nav.location')}</a>
+        <a href="#booking" class="nav-link nav-book-now">{t('nav.bookNow')}</a>
+        <a href="#contact" class="nav-link">{t('nav.contact')}</a>
       </div>
     )}
   </div>

@@ -1,23 +1,19 @@
 ---
 import ScrollToTop from './ui/ScrollToTop.astro';
-import { useTranslations, getLangFromUrl } from '../i18n/ui';
+import { t } from "i18next";
 
 const currentYear = new Date().getFullYear();
-
-// Get i18n translations
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
 ---
 
 <footer class="footer">
   <div class="container">
     <div class="footer-content">
       <div class="footer-copyright">
-        <p>&copy; {currentYear} Phimai Pond House. <span data-i18n-key="footer.copyright">{t('footer.copyright')}</span></p>
+        <p>&copy; {currentYear} Phimai Pond House. <span>{t('footer.copyright')}</span></p>
       </div>
       <div class="footer-actions">
         <div class="scroll-to-top-wrapper">
-          <ScrollToTop id="footerScrollToTop" className="footer-style" text={t('footer.scrollToTop')} i18nKey="footer.scrollToTop" />
+          <ScrollToTop id="footerScrollToTop" className="footer-style" i18nKey="footer.scrollToTop" />
         </div>
       </div>
     </div>

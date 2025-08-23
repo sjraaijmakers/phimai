@@ -1,10 +1,6 @@
 ---
-import { useTranslations, getLangFromUrl } from '../../i18n/ui';
+import { t } from "i18next";
 import { Landmark, TreePine, Users, ShoppingBag, Utensils, Store } from 'lucide-astro';
-
-// Get i18n translations
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
 
 // Location features structure for DRY approach
 const locationFeatures = [
@@ -20,8 +16,8 @@ const locationFeatures = [
   <div class="container">
     <div class="location-section">
       <div class="location-info">
-        <h2 data-i18n-key="gallery.location.title">{t('gallery.location.title')}</h2>
-        <p data-i18n-key="gallery.location.description">{t('gallery.location.description')}</p>
+        <h2>{t('gallery.location.title')}</h2>
+        <p>{t('gallery.location.description')}</p>
         
         <div class="location-features">
           {locationFeatures.map(({ icon: Icon, key }) => (
@@ -29,13 +25,13 @@ const locationFeatures = [
               <div class="feature-icon">
                 <Icon size={16} />
               </div>
-              <span data-i18n-key={key}>{t(key)}</span>
+              <span>{t(key)}</span>
             </div>
           ))}
         </div>
         
         <div class="guide-link-container">
-          <a href="/guide" class="guide-link" data-i18n-key="gallery.location.guideLink">{t('gallery.location.guideLink')}</a>
+          <a href="/guide" class="guide-link">{t('gallery.location.guideLink')}</a>
         </div>
       </div>
       
@@ -75,8 +71,8 @@ const locationFeatures = [
   }
 
   .location-features {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: var(--space);
   }
 
@@ -146,6 +142,12 @@ const locationFeatures = [
       grid-template-columns: 1fr;
       gap: var(--space-xl);
     }
+    
+    .location-features {
+      grid-template-columns: 1fr;
+      gap: var(--space);
+    }
+    
     /* Unified typography: headings and paragraphs inherit global sizes */
     .location-info h3 { }
     .location-info p { }

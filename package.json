@@ -7,12 +7,20 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "clean": "rimraf --no-glob --force node_modules package-lock.json .astro dist .vite .cache .turbo .next .nuxt .output && npm cache clean --force",
+    "clean:windows": "taskkill /f /im node.exe 2>nul || true && rimraf --no-glob --force node_modules package-lock.json .astro dist .vite .cache .turbo .next .nuxt .output && npm cache clean --force",
+    "clean:install": "npm run clean && npm install",
+    "clean:install:windows": "npm run clean:windows && npm install"
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.23",
     "astro": "^5.2.5",
-    "i18next": "^25.3.6",
+    "astro-i18next": "^1.0.0-beta.21",
+    "i18next-fs-backend": "^2.6.0",
     "lucide-astro": "^0.539.0"
+  },
+  "devDependencies": {
+    "rimraf": "^5.0.5"
   }
 }

@@ -1,0 +1,38 @@
+---
+import { changeLanguage } from "i18next";
+import Layout from "../../layouts/Layout.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+
+changeLanguage("th");
+---
+
+<Layout lang="en">
+  <main class="container">
+    <h1>Hello World A</h1>
+    <p>This is page A. <a href="/page-b">Go to Page B</a></p>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  main {
+    padding: var(--space-2xl) 0;
+    text-align: center;
+  }
+  
+  h1 {
+    color: var(--color-primary);
+    margin-bottom: var(--space-lg);
+  }
+  
+  a {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
