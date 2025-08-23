@@ -32,7 +32,7 @@ const { hideNavigation = false } = Astro.props;
       
       <!-- Right column: Language selector and mobile menu -->
       <div class="header-right">
-        <LanguageSelector showFlag={true} class="language-select" />
+        <LanguageSelector class="language-select" />
         {!hideNavigation && (
           <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu" onclick="toggleMobileMenu()">
             <Menu size={20} class="menu-icon" />
@@ -228,16 +228,30 @@ const { hideNavigation = false } = Astro.props;
       margin-left: auto; 
     }
 
-    /* Language selector in header-right */
-    .header-right .language-selector {
-      margin-right: var(--space-sm);
+    /* Language selector styling to match hamburger menu */
+    .header-right .language-select {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(139, 115, 85, 0.1);
+      border-radius: var(--radius-sm);
+      padding: var(--space-sm);
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 0.875rem;
+      color: var(--color-text);
+      backdrop-filter: blur(10px);
+      min-width: fit-content;
     }
 
-    /* Hide language selector on mobile */
-    @media (max-width: 767px) {
-      .header-right .language-selector {
-        display: none;
-      }
+    .header-right .language-select:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-1px);
+      border-color: var(--color-primary);
+    }
+
+    .header-right .language-select:focus {
+      outline: none;
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px rgba(156, 175, 136, 0.1);
     }
 
     .mobile-menu-toggle {
@@ -354,16 +368,7 @@ const { hideNavigation = false } = Astro.props;
     }
 
     @media (max-width: 768px) {
-      /* Mobile header language selector adjustments */
-      .header-actions .language-selector {
-        margin-right: var(--space-xs);
-      }
-      
-      .header-actions .language-select {
-        padding: var(--space-xs);
-        font-size: 0.75rem;
-        min-width: 50px;
-      }
+      /* Mobile header adjustments */
       
       .mobile-menu {
         top: 70px; /* Adjust for smaller header on mobile */
