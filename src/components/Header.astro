@@ -1,5 +1,4 @@
 ---
-import ScrollToTop from './ui/ScrollToTop.astro';
 import { LanguageSelector } from "astro-i18next/components";
 import { t } from "i18next";
 import { Menu, X } from 'lucide-astro';
@@ -18,9 +17,8 @@ const { hideNavigation = false } = Astro.props;
       <!-- Left column: Logo -->
       <div class="header-left">
         <div class="logo">
-          <a href="#top" class="logo-link">PPH</a>
+          <a href="#top" class="logo-link">Phimai Pond House</a>
         </div>
-        <ScrollToTop id="headerScrollToTop" className="header-style" />
       </div>
       
       <!-- Center column: Navigation -->
@@ -179,7 +177,6 @@ const { hideNavigation = false } = Astro.props;
     padding: var(--space-sm);
     cursor: pointer;
     transition: var(--transition);
-    font-size: 0.875rem;
     color: var(--color-text);
     backdrop-filter: blur(10px);
     min-width: fit-content;
@@ -266,8 +263,30 @@ const { hideNavigation = false } = Astro.props;
   }
 
   .mobile-menu-content {
-    max-width: var(--container-xl);
-    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  /* Mobile navigation vertical stacking */
+  .mobile-menu .navigation {
+    flex-direction: column;
+    gap: var(--space-sm);
+    width: 100%;
+  }
+
+  .mobile-menu .nav-menu {
+    flex-direction: column;
+    gap: var(--space-sm);
+    width: 100%;
+  }
+
+  .mobile-menu .nav-link {
+    width: 100%;
+    text-align: center;
+    padding: var(--space-sm) var(--space-md);
+    font-size: 1rem;
   }
 
   /* Mobile navigation uses shared styling above */
