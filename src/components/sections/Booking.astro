@@ -69,4 +69,140 @@ const providers = Object.entries(siteConfig.booking || {})
   </div>
 </section>
 
+<style>
+  /* ===== BOOKING ===== */
+  .booking {
+    background: var(--gradient-cool);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .booking::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.02);
+    -webkit-mask-image: url('/src/assets/banyan-vines-thick.png');
+    -webkit-mask-repeat: repeat;
+    -webkit-mask-size: 150px 150px;
+    mask-image: url('/src/assets/banyan-vines-thick.png');
+    mask-repeat: repeat;
+    mask-size: 150px 150px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .booking-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .booking-option {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    padding: var(--space);
+    border-radius: 16px;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    background: var(--color-white);
+    color: var(--color-text);
+    border: 1px solid rgba(139, 115, 85, 0.1);
+  }
+
+  .booking-option::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .booking-logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(139, 115, 85, 0.1);
+  }
+
+  .logo-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  .booking-option .booking-content {
+    flex: 1;
+    text-align: left;
+    display: flex;
+    align-items: center;
+  }
+
+  .booking-arrow {
+    color: inherit;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .booking-option:hover .booking-arrow { 
+    transform: translateX(4px); 
+    opacity: 1;
+  }
+
+  /* Disabled booking option */
+  .booking-option.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  /* ===== BOOKING TITLE STYLING ===== */
+  .booking-title-gold {
+    color: var(--color-text);
+    font-weight: 600;
+    position: relative;
+  }
+
+  .booking-title-gold .sparkle {
+    display: none;
+  }
+
+  /* ===== RESPONSIVE DESIGN ===== */
+  @media (max-width: 768px) {
+    .booking-options {
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+    }
+    .booking-option {
+      padding: var(--space-lg);
+    }
+    .booking-content { 
+      text-align: left; 
+    }
+  }
+</style>
+
 

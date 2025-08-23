@@ -7,13 +7,14 @@ interface Props {
   title: string;
   images: ImageConfig[];
   mapSrc: string;
-  carouselId: string;
-  lightboxId: string;
   sectionNumber: number;
-  titleKey?: string; // Add titleKey for translation
 }
 
-const { title, images, mapSrc, carouselId, lightboxId, sectionNumber, titleKey } = Astro.props;
+const { title, images, mapSrc, sectionNumber } = Astro.props;
+
+// Generate IDs internally using section number
+const carouselId = `carousel-${sectionNumber}`;
+const lightboxId = `lightbox-${sectionNumber}`;
 ---
 
 <div class="guide-section">
@@ -21,7 +22,7 @@ const { title, images, mapSrc, carouselId, lightboxId, sectionNumber, titleKey }
     <div class="section-text">
       <h2 class="section-title">
         <span class="section-number">{sectionNumber || '?'}</span>
-        <span data-i18n-key={titleKey}>{title}</span>
+        <span data-i18n-key={title}>{title}</span>
       </h2>
     </div>
     
@@ -34,6 +35,7 @@ const { title, images, mapSrc, carouselId, lightboxId, sectionNumber, titleKey }
           showArrows={true}
           showDots={true}
           autoPlay={true}
+          lightboxId={lightboxId}
         />
       </div>
       <div class="section-map">

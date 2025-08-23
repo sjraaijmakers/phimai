@@ -24,3 +24,37 @@ const t = useTranslations(lang);
   </div>
 </footer>
 
+<style>
+  /* ===== FOOTER ===== */
+  .footer {
+    background: var(--gradient-muted);
+    padding: var(--space-lg);
+    border-top: 1px solid rgba(139, 115, 85, 0.1);
+  }
+
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-xl);
+  }
+
+  .footer-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+  }
+
+  /* ===== RESPONSIVE DESIGN ===== */
+  @media (max-width: 768px) {
+    .footer { 
+      padding: var(--space) var(--space); 
+    }
+    .footer-content {
+      flex-direction: column;
+      text-align: center;
+      gap: var(--space-lg);
+    }
+  }
+</style>
+

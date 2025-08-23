@@ -1,25 +1,28 @@
 ---
 import { useTranslations, getLangFromUrl } from '../i18n/ui';
 
+export interface Props {
+  className?: string;
+}
+
+const { className = "" } = Astro.props;
+
 // Get i18n translations
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-
-// Check if we're on the guide page
-const isGuidePage = Astro.url.pathname.includes('/guide') || Astro.url.pathname.includes('/th/guide');
 ---
 
-<nav class="navigation">
-  <div class="nav-container">    
-    {isGuidePage ? (
-      <!-- Guide page navigation -->
+<nav class={`navigation ${className}`}>
+  <div class="nav-container">
+    {className.includes('guide-nav') && (
       <div class="nav-menu guide-nav">
         <a href="/" class="nav-link back-home" data-i18n-key="nav.backHome">
           ← {t('nav.backHome')}
         </a>
       </div>
-    ) : (
-      <!-- Index page navigation -->
+    )}
+    
+    {!className.includes('guide-nav') && (
       <div class="nav-menu">
         <a href="#about" class="nav-link" data-i18n-key="nav.about">{t('nav.about')}</a>
         <a href="#gallery" class="nav-link" data-i18n-key="nav.gallery">{t('nav.gallery')}</a>
@@ -30,6 +33,217 @@ const isGuidePage = Astro.url.pathname.includes('/guide') || Astro.url.pathname.
     )}
   </div>
 </nav>
+
+<style>
+  /* ===== NAVIGATION ===== */
+  .navigation {
+    display: flex;
+    gap: var(--space-xl);
+    z-index: 1000;
+  }
+
+  .nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .nav-menu {
+    display: flex;
+    gap: var(--space-xl);
+    align-items: center;
+  }
+
+  .nav-link {
+    text-decoration: none;
+    color: #2c2c2c;
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
+    transition: var(--transition);
+    position: relative;
+    font-family: var(--font-secondary);
+    padding: 6px 12px;
+    border-radius: 20px;
+    background: transparent;
+  }
+
+  .nav-link:hover { 
+    color: var(--color-secondary);
+    background: rgba(139, 115, 85, 0.05);
+    transform: translateY(-1px);
+  }
+
+  .nav-link.active {
+    background: var(--gradient-primary);
+    color: var(--color-white);
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(139, 115, 85, 0.2);
+  }
+
+  /* Remove the underline effects */
+  .nav-link::after {
+    display: none;
+  }
+
+  .navigation a {
+    text-decoration: none;
+    color: #2c2c2c;
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
+    transition: var(--transition);
+    position: relative;
+    font-family: var(--font-secondary);
+    padding: 6px 12px;
+    border-radius: 20px;
+    background: transparent;
+  }
+
+  .navigation a:hover { 
+    color: var(--color-secondary);
+    background: rgba(139, 115, 85, 0.05);
+    transform: translateY(-1px);
+  }
+
+  .navigation a.active {
+    background: var(--gradient-primary);
+    color: var(--color-white);
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(139, 115, 85, 0.2);
+  }
+
+  /* Remove the underline effects */
+  .navigation a::after {
+    display: none;
+  }
+
+  .navigation.mobile {
+    flex-direction: column;
+    gap: var(--space-sm);
+    width: 100%;
+    padding: var(--space) 0;
+  }
+
+  .navigation.mobile a {
+    font-size: 1.1rem;
+    padding: 12px 20px;
+    border-radius: 25px;
+    border: 1px solid transparent;
+    transition: var(--transition);
+    background: rgba(255, 255, 255, 0.9);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: var(--space-sm);
+    color: var(--color-text) !important;
+    min-height: 44px;
+    font-weight: 400;
+  }
+
+  .navigation.mobile a:hover {
+    color: var(--color-secondary);
+    background: rgba(255, 255, 255, 0.95);
+    transform: translateY(-1px);
+  }
+
+  .navigation.mobile a.active {
+    background: var(--gradient-primary);
+    color: var(--color-white);
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(139, 115, 85, 0.2);
+  }
+
+  .navigation.mobile a.active::after {
+    display: none;
+  }
+
+  /* ===== GOLD NAVIGATION LINK ===== */
+  .nav-book-now {
+    background: transparent;
+    font-weight: 500 !important;
+    position: relative;
+    padding: 6px 12px !important;
+    border-radius: 20px !important;
+    color: #2c2c2c !important;
+    -webkit-text-fill-color: #2c2c2c !important;
+    border: none;
+    font-size: 0.9rem !important;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-book-now:hover {
+    background: rgba(139, 115, 85, 0.05);
+    transform: translateY(-1px);
+  }
+
+  .nav-book-now.active {
+    background: var(--gradient-primary);
+    color: var(--color-white) !important;
+    -webkit-text-fill-color: var(--color-white) !important;
+    font-weight: 500 !important;
+    box-shadow: 0 2px 8px rgba(139, 115, 85, 0.2);
+  }
+
+  /* Remove the brown underline for Book Now link */
+  .nav-book-now::after {
+    display: none !important;
+  }
+
+  /* Override the navigation underline for Book Now link */
+  .nav-link.nav-book-now::after {
+    display: none !important;
+  }
+
+  .navigation a.nav-book-now::after {
+    display: none !important;
+  }
+
+  /* Mobile navigation styling */
+  .navigation.mobile .nav-book-now {
+    background: transparent !important;
+    color: #2c2c2c !important;
+    -webkit-text-fill-color: #2c2c2c !important;
+    font-weight: 500 !important;
+    padding: 12px 20px !important;
+    border-radius: 25px !important;
+    border: none;
+    font-size: 1rem !important;
+    letter-spacing: 0.02em;
+  }
+
+  .navigation.mobile .nav-book-now.active {
+    background: var(--gradient-primary) !important;
+    color: var(--color-white) !important;
+    -webkit-text-fill-color: var(--color-white) !important;
+    font-weight: 500 !important;
+    box-shadow: 0 2px 8px rgba(139, 115, 85, 0.2);
+  }
+
+  /* Guide navigation styling */
+  .guide-nav {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .guide-nav .back-home {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  .guide-nav .back-home:hover {
+    color: var(--color-text);
+    transform: translateX(-2px);
+  }
+</style>
 
 <script>
   // Only run navigation logic on index page

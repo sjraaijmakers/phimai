@@ -30,5 +30,131 @@ const t = useTranslations(lang);
 
 <Lightbox id="gallery-lightbox" images={galleryImages} />
 
+<style>
+  /* ===== GALLERY ===== */
+  .gallery {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .gallery::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.02);
+    -webkit-mask-image: url('/src/assets/banyan-vines-thick.png');
+    -webkit-mask-repeat: repeat;
+    -webkit-mask-size: 150px 150px;
+    mask-image: url('/src/assets/banyan-vines-thick.png');
+    mask-repeat: repeat;
+    mask-size: 150px 150px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Also apply to the section that contains gallery */
+  .section[id="gallery"] {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section[id="gallery"]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.02);
+    -webkit-mask-image: url('/src/assets/banyan-vines-thick.png');
+    -webkit-mask-repeat: repeat;
+    -webkit-mask-size: 150px 150px;
+    mask-image: url('/src/assets/banyan-vines-thick.png');
+    mask-repeat: repeat;
+    mask-size: 150px 150px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space);
+    margin-bottom: var(--space-3xl);
+  }
+
+  .gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: var(--transition);
+    aspect-ratio: 1/1;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+  }
+
+  .gallery-item:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .gallery-item {
+    overflow: hidden;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .gallery-item:hover img { 
+    transform: scale(1.05); 
+  }
+
+  .gallery-more {
+    text-align: center;
+    margin-top: var(--space-2xl);
+  }
+
+  .gallery-more .btn {
+    padding: var(--space) var(--space-2xl);
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+
+  .gallery-more .btn-secondary {
+    background: var(--color-primary);
+    color: var(--color-white);
+    border: 1px solid var(--color-primary);
+  }
+
+  .gallery-more .btn-secondary:hover {
+    background: var(--color-primary);
+    color: var(--color-white);
+    border: 1px solid var(--color-primary);
+  }
+
+  /* ===== RESPONSIVE DESIGN ===== */
+  @media (max-width: 1024px) {
+    .gallery-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .gallery-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-sm);
+    }
+  }
+</style>
+
 
 

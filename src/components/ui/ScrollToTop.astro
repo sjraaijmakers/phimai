@@ -1,44 +1,178 @@
 ---
 import { ChevronUp } from 'lucide-astro';
-interface Props {
+import { useTranslations, getLangFromUrl } from '../../i18n/ui';
+
+export interface Props {
   id?: string;
   className?: string;
   text?: string;
   i18nKey?: string;
 }
 
-const { id = "scrollToTop", className = "", text, i18nKey } = Astro.props;
+const { 
+  id = "scrollToTop", 
+  className = "", 
+  text,
+  i18nKey 
+} = Astro.props;
+
+// Get i18n translations
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
-<button class={`scroll-to-top ${className}`} id={id} aria-label="Scroll to top">
+<button 
+  id={id} 
+  class={`scroll-to-top ${className}`}
+  aria-label={t('common.scrollToTop')}
+  onclick="scrollToTop()"
+>
+  <ChevronUp size={20} />
   {text && <span class="scroll-to-top-text" data-i18n-key={i18nKey}>{text}</span>}
-  <ChevronUp size={16} />
 </button>
 
-<script define:vars={{ buttonId: id }}>
+<script>
   // Scroll to top functionality
+  window.scrollToTop = function() {
+    window.scrollTo({ 
+      top: 0, 
+      behavior: 'smooth' 
+    });
+  };
+
   document.addEventListener('DOMContentLoaded', () => {
-    const scrollToTopBtn = document.getElementById(buttonId);
-    
-    if (scrollToTopBtn) {
-      // Show/hide scroll to top button based on scroll position
-      window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 300) {
-          scrollToTopBtn.classList.add('visible');
-        } else {
-          scrollToTopBtn.classList.remove('visible');
-        }
-      });
+    const scrollToTop = document.getElementById('scrollToTop');
+    if (!scrollToTop) return;
+
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const threshold = 300; // Show after scrolling 300px
       
-      // Scroll to top when button is clicked
-      scrollToTopBtn.addEventListener('click', () => {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
-      });
-    }
+      if (scrollY > threshold) {
+        scrollToTop.classList.add('visible');
+      } else {
+        scrollToTop.classList.remove('visible');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial check
   });
 </script>
+
+<style>
+  /* ===== SCROLL TO TOP ===== */
+  .scroll-to-top {
+    position: fixed;
+    bottom: var(--space-xl);
+    right: var(--space-xl);
+    width: 48px;
+    height: 48px;
+    background: var(--gradient-primary);
+    border: none;
+    border-radius: 50%;
+    color: var(--color-white);
+    cursor: pointer;
+    transition: var(--transition);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  .scroll-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .scroll-to-top:hover {
+    transform: translateY(-4px);
+  }
+
+  .scroll-to-top.footer-style {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    width: auto;
+    height: auto;
+    min-width: 32px;
+    min-height: 32px;
+    padding: var(--space-xs) var(--space-sm);
+    background: transparent;
+    color: var(--color-text);
+    box-shadow: none;
+    transition: var(--transition);
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(139, 115, 85, 0.2);
+  }
+
+  .scroll-to-top.footer-style:hover {
+    background: rgba(139, 115, 85, 0.1);
+    color: var(--color-primary);
+    transform: translateY(-1px);
+    border-color: rgba(139, 115, 85, 0.3);
+  }
+
+  .scroll-to-top.header-style {
+    position: static;
+    opacity: 0;
+    visibility: hidden;
+    transform: none;
+    width: auto;
+    height: auto;
+    min-width: 32px;
+    min-height: 32px;
+    padding: var(--space-xs) var(--space-sm);
+    background: transparent;
+    color: var(--color-text);
+    box-shadow: none;
+    transition: var(--transition);
+    border-radius: var(--radius-sm);
+  }
+
+  .scroll-to-top.header-style.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .scroll-to-top.header-style:hover {
+    background: rgba(139, 115, 85, 0.1);
+    color: var(--color-primary);
+    transform: translateY(-1px);
+  }
+
+  /* Scroll to top with text styling */
+  .scroll-to-top-text {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: inherit;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  /* Ensure icon and text are properly aligned */
+  .scroll-to-top svg {
+    flex-shrink: 0;
+  }
+
+  /* ===== RESPONSIVE DESIGN ===== */
+  @media (max-width: 768px) {
+    /* Mobile scroll-to-top adjustments */
+    .scroll-to-top.header-style {
+      padding: var(--space-xs);
+      min-width: auto;
+      min-height: auto;
+    }
+    
+    .scroll-to-top-text {
+      font-size: 0.8rem;
+    }
+  }
+</style>
 
 

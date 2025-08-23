@@ -1,60 +1,160 @@
 ---
 import Select from './Select.astro';
-import { languages, defaultLang, getLangFromUrl } from '../../i18n/ui';
+import { useTranslations, getLangFromUrl } from '../../i18n/ui';
 
-// Define language options with flags and proper language names
-const languageOptions = [
-  { value: 'en', label: 'English' },
-  { value: 'th', label: 'ไทย'}
+// Get i18n translations
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const options = [
+  { value: 'en', label: 'EN' },
+  { value: 'th', label: 'TH' }
 ];
-
-// Get current language from URL
-const currentLang = getLangFromUrl(Astro.url);
 ---
 
 <div class="language-selector">
-  <Select
+  <label for="language-select" class="language-label">{t('common.language')}</label>
+  <Select 
     id="language-select"
-    options={languageOptions}
-    selectedValue={currentLang}
-    className="language-selector__custom"
+    options={options}
+    selectedValue={lang}
+    className="language-select"
   />
 </div>
 
 <script>
-  import { setLanguage, getCurrentLanguage } from '../../i18n/client';
-
-  // Language switching
+  // Language selector functionality
   document.addEventListener('DOMContentLoaded', () => {
     const languageSelect = document.getElementById('language-select') as HTMLSelectElement;
-    
     if (!languageSelect) return;
 
-    // Set initial language from localStorage
-    const currentLang = getCurrentLanguage();
-    languageSelect.value = currentLang;
-
-    // Handle language change
-    languageSelect.addEventListener('change', (e: any) => {
-      const selectedLang = e.target.value;
-      setLanguage(selectedLang);
-    });
-
-    // Listen for language changes from other components
-    window.addEventListener('languageChanged', (e: any) => {
-      languageSelect.value = e.detail.language;
+    languageSelect.addEventListener('change', (e) => {
+      const target = e.target as HTMLSelectElement;
+      const newLang = target.value;
+      const currentPath = window.location.pathname;
+      
+      // Handle language switching
+      if (newLang === 'th') {
+        // Switch to Thai
+        if (currentPath.startsWith('/th/')) {
+          // Already on Thai path, do nothing
+          return;
+        } else if (currentPath === '/') {
+          window.location.href = '/th/';
+        } else {
+          // Remove /en/ prefix if exists and add /th/ prefix
+          const pathWithoutLang = currentPath.replace(/^\/en\//, '/');
+          window.location.href = `/th${pathWithoutLang}`;
+        }
+      } else {
+        // Switch to English
+        if (currentPath.startsWith('/th/')) {
+          // Remove /th/ prefix
+          const pathWithoutLang = currentPath.replace(/^\/th\//, '/');
+          window.location.href = pathWithoutLang === '/' ? '/' : pathWithoutLang;
+        } else {
+          // Already on English path, do nothing
+          return;
+        }
+      }
     });
   });
 </script>
 
 <style>
+  /* ===== LANGUAGE SELECTOR ===== */
   .language-selector {
     display: flex;
     align-items: center;
+    gap: var(--space-sm);
   }
 
-  .language-selector__custom {
-    /* Inherit styles from Select component */
+  /* Header-specific language selector styling */
+  .header-actions .language-selector {
+    margin-right: var(--space-sm);
+  }
+
+  .header-actions .language-selector label {
+    display: none; /* Hide label in header for cleaner look */
+  }
+
+  .header-actions .language-select {
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(139, 115, 85, 0.15);
+    border-radius: var(--radius-sm);
+    padding: var(--space-xs) var(--space-sm);
+    font-size: 0.8rem;
+    color: var(--color-text);
+    cursor: pointer;
+    transition: var(--transition);
+    min-width: 60px;
+    backdrop-filter: blur(10px);
+  }
+
+  .header-actions .language-select:hover {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-1px);
+  }
+
+  .header-actions .language-select:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 2px rgba(156, 175, 136, 0.2);
+    background: rgba(255, 255, 255, 0.95);
+  }
+
+  /* General language selector styling (for footer or other locations) */
+  .language-selector label {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+    font-weight: 400;
+  }
+
+  .language-select {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(139, 115, 85, 0.1);
+    border-radius: var(--radius-sm);
+    padding: var(--space-sm) var(--space-sm);
+    font-size: 0.875rem;
+    color: var(--color-text);
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .language-select:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .language-select:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 2px rgba(156, 175, 136, 0.2);
+  }
+
+  .language-select option {
+    background: var(--color-white);
+    color: var(--color-text);
+  }
+
+  /* ===== RESPONSIVE DESIGN ===== */
+  @media (max-width: 768px) {
+    .language-selector { 
+      justify-content: center; 
+    }
+    
+    /* Mobile header language selector adjustments */
+    .header-actions .language-selector {
+      margin-right: var(--space-xs);
+    }
+    
+    .header-actions .language-select {
+      padding: var(--space-xs);
+      font-size: 0.75rem;
+      min-width: 50px;
+    }
   }
 </style>
 

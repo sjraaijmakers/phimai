@@ -1,172 +1,294 @@
 ---
-import { ChevronLeft, ChevronRight, Circle } from 'lucide-astro';
+import { ChevronLeft, ChevronRight } from 'lucide-astro';
 import type { ImageConfig } from '../../data/images';
 
-interface Props {
-  id?: string;
+export interface Props {
+  id: string;
   images: ImageConfig[];
-  interval?: number; // milliseconds
+  interval?: number;
   showArrows?: boolean;
   showDots?: boolean;
   autoPlay?: boolean;
+  lightboxId?: string;
 }
 
 const { 
-  id = "carousel", 
-  images = [], 
+  id, 
+  images, 
   interval = 5000, 
   showArrows = true, 
   showDots = true, 
-  autoPlay = true 
+  autoPlay = true,
+  lightboxId
 } = Astro.props;
 ---
 
 <div class="carousel" id={id}>
   <div class="carousel-container">
     {images.map((image, index) => (
-             <div class={`carousel-slide ${index === 0 ? 'active' : ''}`} data-index={index}>
-         <img 
-           src={image.src} 
-           alt={image.caption || ''} 
-           class="hero-image carousel-image-clickable"
-           data-image-index={index}
-           onclick="handleCarouselImageClick(this)"
-           style="cursor: pointer;"
-         >
-       </div>
+      <div 
+        class={`carousel-slide ${index === 0 ? 'active' : ''}`}
+        data-index={index}
+      >
+        <img 
+          src={image.src} 
+          alt={image.alt || `Image ${index + 1}`}
+          class="hero-image carousel-image-clickable"
+          data-lightbox-id={lightboxId || id + '-lightbox'}
+          data-image-index={index}
+          loading={index === 0 ? 'eager' : 'lazy'}
+        />
+      </div>
     ))}
   </div>
 
-     {showArrows && images.length > 1 && (
-     <>
-       <button class="carousel-arrow carousel-prev" aria-label="Previous" onclick={`carouselPrev('${id}')`}>
-         <ChevronLeft size={24} />
-       </button>
-       <button class="carousel-arrow carousel-next" aria-label="Next" onclick={`carouselNext('${id}')`}>
-         <ChevronRight size={24} />
-       </button>
-     </>
-   )}
+  {showArrows && (
+    <>
+      <button class="carousel-arrow carousel-prev" aria-label="Previous">
+        <ChevronLeft size={24} />
+      </button>
+      <button class="carousel-arrow carousel-next" aria-label="Next">
+        <ChevronRight size={24} />
+      </button>
+    </>
+  )}
 
-   {showDots && images.length > 1 && (
-     <div class="carousel-dots">
-       {images.map((_, index) => (
-         <button 
-           class={`carousel-dot ${index === 0 ? 'active' : ''}`} 
-           aria-label={`Go to slide ${index + 1}`}
-           onclick={`carouselGoTo('${id}', ${index})`}
-         >
-           <Circle size={12} />
-         </button>
-       ))}
-     </div>
-   )}
+  {showDots && (
+    <div class="carousel-dots">
+      {images.map((_, index) => (
+        <button 
+          class={`carousel-dot ${index === 0 ? 'active' : ''}`}
+          aria-label={`Go to slide ${index + 1}`}
+          data-slide-index={index}
+        >
+          <svg width="8" height="8" viewBox="0 0 8 8" fill="currentColor">
+            <circle cx="4" cy="4" r="4" />
+          </svg>
+        </button>
+      ))}
+    </div>
+  )}
 </div>
 
- <script define:vars={{ autoPlayInterval: interval, shouldAutoPlay: autoPlay, carouselImages: images }}>
-   // Carousel functionality
-   document.addEventListener('DOMContentLoaded', () => {
-     
-           // Handle carousel image clicks to open lightbox
-      window.handleCarouselImageClick = function(imgElement) {
-        const imageIndex = parseInt(imgElement.getAttribute('data-image-index'));
-        const carousel = imgElement.closest('.carousel');
-        const carouselId = carousel.id;
+<script define:vars={{ carouselId: id, autoPlayInterval: interval, shouldAutoPlay: autoPlay }}>
+  // Carousel functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const carousel = document.getElementById(carouselId);
+    if (!carousel) return;
+
+    const slides = carousel.querySelectorAll('.carousel-slide');
+    const dots = carousel.querySelectorAll('.carousel-dot');
+    const prevBtn = carousel.querySelector('.carousel-prev');
+    const nextBtn = carousel.querySelector('.carousel-next');
+    
+    let currentSlide = 0;
+    let autoPlayTimer: number | null = null;
+
+    function showSlide(index: number) {
+      // Hide all slides and dots
+      slides.forEach(slide => slide.classList.remove('active'));
+      dots.forEach(dot => dot.classList.remove('active'));
+      
+      // Show current slide and dot
+      if (slides[index]) {
+        slides[index].classList.add('active');
+      }
+      if (dots[index]) {
+        dots[index].classList.add('active');
+      }
+      
+      currentSlide = index;
+    }
+
+    function nextSlide() {
+      const nextIndex = (currentSlide + 1) % slides.length;
+      showSlide(nextIndex);
+    }
+
+    function prevSlide() {
+      const prevIndex = (currentSlide - 1 + slides.length) % slides.length;
+      showSlide(prevIndex);
+    }
+
+    function goToSlide(index: number) {
+      if (index >= 0 && index < slides.length) {
+        showSlide(index);
+      }
+    }
+
+    function startAutoPlay() {
+      if (!shouldAutoPlay) return;
+      
+      stopAutoPlay();
+      autoPlayTimer = window.setInterval(nextSlide, autoPlayInterval);
+    }
+
+    function stopAutoPlay() {
+      if (autoPlayTimer) {
+        clearInterval(autoPlayTimer);
+        autoPlayTimer = null;
+      }
+    }
+
+    // Event listeners
+    if (prevBtn) {
+      prevBtn.addEventListener('click', prevSlide);
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', nextSlide);
+    }
+
+    // Dot navigation
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => goToSlide(index));
+    });
+
+    // Image click for lightbox
+    const images = carousel.querySelectorAll('.carousel-image-clickable');
+    images.forEach(img => {
+      img.addEventListener('click', (e) => {
+        const target = e.currentTarget as HTMLElement;
+        const lightboxId = target.dataset.lightboxId;
+        const imageIndex = parseInt(target.dataset.imageIndex || '0');
         
-        // Find the lightbox within the same guide section
-        const guideSection = carousel.closest('.guide-section');
-        const lightbox = guideSection?.querySelector('.lightbox');
-        
-        console.log('Carousel click:', { imageIndex, carouselId, lightboxId: lightbox?.id, guideSectionFound: !!guideSection });
-        
-        if (lightbox) {
-          // Dispatch a custom event to open the lightbox
-          const event = new CustomEvent('openLightbox', {
-            detail: { index: imageIndex, lightboxId: lightbox.id }
-          });
-          lightbox.dispatchEvent(event);
-        } else {
-          console.log('Lightbox not found in guide section');
+        if (lightboxId && window.openLightbox) {
+          window.openLightbox(imageIndex, lightboxId);
         }
-      };
-     // Global carousel functions
-     window.carouselPrev = function(carouselId) {
-       const carousel = document.getElementById(carouselId);
-       if (!carousel) return;
-       
-       const slides = carousel.querySelectorAll('.carousel-slide');
-       const currentSlide = carousel.querySelector('.carousel-slide.active');
-       const currentIndex = Array.from(slides).indexOf(currentSlide);
-       const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
-       showSlide(carousel, prevIndex);
-     };
-     
-     window.carouselNext = function(carouselId) {
-       const carousel = document.getElementById(carouselId);
-       if (!carousel) return;
-       
-       const slides = carousel.querySelectorAll('.carousel-slide');
-       const currentSlide = carousel.querySelector('.carousel-slide.active');
-       const currentIndex = Array.from(slides).indexOf(currentSlide);
-       const nextIndex = (currentIndex + 1) % slides.length;
-       showSlide(carousel, nextIndex);
-     };
-     
-     window.carouselGoTo = function(carouselId, index) {
-       const carousel = document.getElementById(carouselId);
-       if (!carousel) return;
-       showSlide(carousel, index);
-     };
-     
-     function showSlide(carousel, index) {
-       const slides = carousel.querySelectorAll('.carousel-slide');
-       const dots = carousel.querySelectorAll('.carousel-dot');
-       
-       // Hide all slides and dots
-       slides.forEach(slide => slide.classList.remove('active'));
-       dots.forEach(dot => dot.classList.remove('active'));
-       
-       // Show current slide and dot
-       if (slides[index]) slides[index].classList.add('active');
-       if (dots[index]) dots[index].classList.add('active');
-     }
-     
-     // Auto-play functionality
-     const carousels = document.querySelectorAll('.carousel');
-     carousels.forEach(carousel => {
-       if (!shouldAutoPlay) return;
-       
-       const slides = carousel.querySelectorAll('.carousel-slide');
-       if (slides.length <= 1) return;
-       
-       let intervalId = null;
-       
-       function nextSlide() {
-         const currentSlide = carousel.querySelector('.carousel-slide.active');
-         const currentIndex = Array.from(slides).indexOf(currentSlide);
-         const nextIndex = (currentIndex + 1) % slides.length;
-         showSlide(carousel, nextIndex);
-       }
-       
-       function startAutoPlay() {
-         intervalId = setInterval(nextSlide, autoPlayInterval);
-       }
-       
-       function stopAutoPlay() {
-         if (intervalId) {
-           clearInterval(intervalId);
-           intervalId = null;
-         }
-       }
-       
-       // Pause autoplay on hover
-       carousel.addEventListener('mouseenter', stopAutoPlay);
-       carousel.addEventListener('mouseleave', startAutoPlay);
-       
-       // Start autoplay
-       startAutoPlay();
-     });
-   });
- </script>
+      });
+    });
+
+    // Auto-play pause on hover
+    carousel.addEventListener('mouseenter', stopAutoPlay);
+    carousel.addEventListener('mouseleave', startAutoPlay);
+
+    // Initialize
+    if (slides.length > 0) {
+      showSlide(0);
+      startAutoPlay();
+    }
+  });
+</script>
+
+<style>
+  /* ===== CAROUSEL ===== */
+  .carousel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .carousel-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  .carousel-slide.active {
+    opacity: 1;
+  }
+
+  .carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 20;
+  }
+
+  .carousel-arrow:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .carousel-prev {
+    left: 20px;
+  }
+
+  .carousel-next {
+    right: 20px;
+  }
+
+  .carousel-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 20;
+  }
+
+  .carousel-dot {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .carousel-dot:hover {
+    color: rgba(255, 255, 255, 0.8);
+    transform: scale(1.1);
+  }
+
+  .carousel-dot.active {
+    color: white;
+  }
+
+  .carousel-dot.active svg {
+    fill: white;
+  }
+
+  /* ===== RESPONSIVE DESIGN ===== */
+  @media (max-width: 768px) {
+    .carousel-arrow {
+      width: 40px;
+      height: 40px;
+    }
+
+    .carousel-prev {
+      left: 10px;
+    }
+
+    .carousel-next {
+      right: 10px;
+    }
+
+    .carousel-dots {
+      bottom: 15px;
+    }
+
+    .carousel-dot svg {
+      width: 10px;
+      height: 10px;
+    }
+  }
+</style>
 
 
