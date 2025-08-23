@@ -1,41 +1,41 @@
 export interface ImageConfig {
   src: string;
-  caption?: string; // visible caption; also used for alt text
+  captionKey?: string; // translation key for caption
 }
 
 export const galleryImages: ImageConfig[] = [
   {
     src: '/images/the-pond.jpg',
-    caption: 'Our peaceful pond setting with lily pads, aquatic plants, and the main building reflected in the water'
+    captionKey: 'gallery.captions.pond'
   },  
   {
     src: '/images/bikes.jpg',
-    caption: 'Complimentary bikes to explore Phimai at your own pace'
+    captionKey: 'gallery.captions.bikes'
   },
   {
     src: '/images/tiny-home-exterior.jpg',
-    caption: 'Our charming tiny home exterior with modern design'
+    captionKey: 'gallery.captions.exterior'
   },
   // Example without a description to verify lightbox behavior
   {
     src: '/images/garden-view.jpg',
-    caption: undefined
+    captionKey: undefined
   },
   {
     src: '/images/interior-living.jpg',
-    caption: 'Comfortable living area with all essentials'
+    captionKey: 'gallery.captions.living'
   },
   {
     src: '/images/family-suite.jpg',
-    caption: 'Spacious family accommodation for larger groups'
+    captionKey: 'gallery.captions.familySuite'
   },
   {
     src: '/images/kitchenette.jpg',
-    caption: 'Fully equipped kitchenette for your convenience'
+    captionKey: 'gallery.captions.kitchenette'
   },
   {
     src: '/images/bedroom.jpg',
-    caption: 'Cozy bedroom with quality linens'
+    captionKey: 'gallery.captions.bedroom'
   }
 ];
 

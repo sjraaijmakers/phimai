@@ -22,11 +22,12 @@ const { hideNavigation = false } = Astro.props;
       </div>
       
       <!-- Center column: Navigation -->
+      <div class="header-center">
       {!hideNavigation && (
-        <div class="header-center">
           <Navigation className="desktop-nav" />
-        </div>
       )}
+      </div>
+
       
       <!-- Right column: Language selector and mobile menu -->
       <div class="header-right">

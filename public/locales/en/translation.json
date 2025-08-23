@@ -31,6 +31,15 @@
   "gallery": {
     "title": "Our Tiny Homes",
     "subtitle": "Experience the perfect blend of comfort and adventure in our thoughtfully designed tiny homes.",
+    "captions": {
+      "pond": "Our peaceful pond setting with lily pads, aquatic plants, and the main building reflected in the water",
+      "bikes": "Complimentary bikes to explore Phimai at your own pace",
+      "exterior": "Our charming tiny home exterior with modern design",
+      "living": "Comfortable living area with all essentials",
+      "familySuite": "Spacious family accommodation for larger groups",
+      "kitchenette": "Fully equipped kitchenette for your convenience",
+      "bedroom": "Cozy bedroom with quality linens"
+    },
     "location": {
       "title": "Discover Phimai",
       "description": "Nestled in the heart of Phimai, you'll enjoy the tranquility of open spaces while staying just minutes from the ancient Phimai Historical Park and the iconic Sai Ngam mangrove. Free bike rentals included for effortless exploration.",

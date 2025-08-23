@@ -4,7 +4,7 @@ import { Image } from 'astro:assets';
 
 interface LightboxImage {
   src: string;
-  caption?: string;
+  captionKey?: string; // translation key for caption
 }
 
 interface Props {
@@ -47,9 +47,6 @@ const { id = "lightbox", images = [] } = Astro.props;
   // Lightbox functionality
   document.addEventListener('DOMContentLoaded', () => {
     const lightbox = document.getElementById(lightboxId);
-    const lightboxImage = document.getElementById('lightbox-image');
-    const lightboxText = document.getElementById('lightbox-text');
-    const lightboxCounter = document.getElementById('lightbox-counter');
     const lightboxClose = lightbox?.querySelector('.lightbox-close');
     const lightboxPrev = lightbox?.querySelector('.lightbox-prev');
     const lightboxNext = lightbox?.querySelector('.lightbox-next');
@@ -116,8 +113,21 @@ const { id = "lightbox", images = [] } = Astro.props;
          console.log('Setting image in lightbox:', { index, src: imageData[index].src });
          manager.currentImageIndex = index;
          lightboxImage.src = imageData[index].src;
-         const desc = imageData[index].caption || '';
-         lightboxImage.alt = desc || '';
+         
+         // Handle translation for caption
+         const captionKey = imageData[index].captionKey;
+         let desc = '';
+         
+         if (captionKey && window.i18next) {
+           try {
+             desc = window.i18next.t(captionKey);
+           } catch (e) {
+             console.warn('Translation failed for key:', captionKey, e);
+             desc = '';
+           }
+         }
+         
+         lightboxImage.alt = desc || 'Image';
          
          if (desc && desc.trim().length > 0) {
            lightboxText.textContent = desc;
