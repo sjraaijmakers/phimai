@@ -136,17 +136,16 @@ const { id = "lightbox", images = [] } = Astro.props;
              lightbox.classList.add('active');
              lockPageScroll();
            }
-         };
+                   };
+        }
+     
+     // Close lightbox function
+     function closeLightbox() {
+       if (lightbox && lightbox.classList.contains('active')) {
+         lightbox.classList.remove('active');
+         unlockPageScroll();
        }
-    
-    // Close lightbox function
-    function closeLightbox() {
-      const activeLightbox = document.querySelector('.lightbox.active');
-      if (activeLightbox) {
-        activeLightbox.classList.remove('active');
-        unlockPageScroll();
-      }
-    }
+     }
     
     // Navigation functions
     function showPrevImage() {
@@ -287,9 +286,7 @@ const { id = "lightbox", images = [] } = Astro.props;
     transition: transform 0.3s ease;
   }
 
-  .lightbox-image:hover {
-    transform: scale(1.02);
-  }
+
 
   .lightbox-text {
     color: white;
@@ -302,8 +299,9 @@ const { id = "lightbox", images = [] } = Astro.props;
 
   .lightbox-counter {
     position: absolute;
-    top: -40px;
-    right: 0;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
     color: white;
     font-size: 0.9rem;
     background: rgba(0, 0, 0, 0.5);
@@ -333,7 +331,7 @@ const { id = "lightbox", images = [] } = Astro.props;
   }
 
   .lightbox-close {
-    top: 20px;
+    top: 0px;
     right: 20px;
   }
 
@@ -363,7 +361,7 @@ const { id = "lightbox", images = [] } = Astro.props;
     }
 
     .lightbox-close {
-      top: 10px;
+      top: 0px;
       right: 10px;
     }
 
@@ -381,7 +379,9 @@ const { id = "lightbox", images = [] } = Astro.props;
     }
 
     .lightbox-counter {
-      top: -30px;
+      top: 0px;
+      left: 50%;
+      transform: translateX(-50%);
       font-size: 0.8rem;
       padding: var(--space-xs) var(--space-sm);
     }
