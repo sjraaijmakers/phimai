@@ -9,9 +9,19 @@ import Booking from '../components/sections/Booking.astro';
 import Contact from '../components/sections/Contact.astro';
 import Footer from '../components/Footer.astro';
 import Animations from '../components/ui/Animations.astro';
+import { useTranslations, getLangFromUrl } from '../i18n/ui';
+
+// Get i18n translations
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
-<Layout lang="en">
+<Layout lang={lang} customSEO={{
+  title: t('home.seo.title'),
+  description: t('home.seo.description'),
+  keywords: t('home.seo.keywords'),
+  canonical: "https://phimaipondhouse.com"
+}}>
   <Header />
   <main>
     <Hero />
