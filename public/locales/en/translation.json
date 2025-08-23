@@ -90,7 +90,8 @@
     }
   },
   "footer": {
-    "copyright": "All rights reserved.",
+    "copyright": "All rights reserved. See more in our",
+    "guideLink": "insider's guide",
     "scrollToTop": "Scroll to top"
   },
   "seo": {

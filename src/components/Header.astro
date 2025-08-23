@@ -1,5 +1,4 @@
 ---
-import Navigation from './Navigation.astro';
 import ScrollToTop from './ui/ScrollToTop.astro';
 import { LanguageSelector } from "astro-i18next/components";
 import { t } from "i18next";
@@ -14,7 +13,7 @@ const { hideNavigation = false } = Astro.props;
 
 <header class="header" id="header">
   <div class="container">
-    <div class={`header-content ${hideNavigation ? 'no-navigation' : ''}`}>
+    <div class="header-content">
       <!-- Left column: Logo -->
       <div class="header-left">
         <div class="logo">
@@ -23,10 +22,18 @@ const { hideNavigation = false } = Astro.props;
         <ScrollToTop id="headerScrollToTop" className="header-style" />
       </div>
       
-      <!-- Center column: Navigation (desktop only) -->
+      <!-- Center column: Navigation -->
       {!hideNavigation && (
         <div class="header-center">
-          <Navigation className="desktop-nav nav-links" />
+          <nav class="desktop-nav">
+            <ul class="nav-list">
+              <li><a href="#gallery">{t('nav.gallery')}</a></li>
+              <li><a href="#location">{t('nav.location')}</a></li>
+              <li><a href="#about">{t('nav.about')}</a></li>
+              <li><a href="#booking">{t('nav.bookNow')}</a></li>
+              <li><a href="#contact">{t('nav.contact')}</a></li>
+            </ul>
+          </nav>
         </div>
       )}
       
@@ -34,7 +41,7 @@ const { hideNavigation = false } = Astro.props;
       <div class="header-right">
         <LanguageSelector class="language-select" />
         {!hideNavigation && (
-          <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu" onclick="toggleMobileMenu()">
+          <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu">
             <Menu size={20} class="menu-icon" />
             <X size={20} class="close-icon" />
           </button>
@@ -44,346 +51,347 @@ const { hideNavigation = false } = Astro.props;
   </div>
 </header>
 
-<!-- Separate sliding navigation bar (mobile only) -->
-{!hideNavigation && (
-  <nav class="sliding-nav" id="slidingNav">
-    <div class="container">
-      <Navigation className="mobile-nav nav-links" />
-    </div>
-  </nav>
-)}
-
 {!hideNavigation && (
   <div class="mobile-menu" id="mobileMenu">
     <div class="mobile-menu-content">
-      <Navigation className="mobile nav-links" />
+      <nav class="mobile-nav">
+        <ul class="mobile-nav-list">
+          <li><a href="#gallery">{t('nav.gallery')}</a></li>
+          <li><a href="#location">{t('nav.location')}</a></li>
+          <li><a href="#about">{t('nav.about')}</a></li>
+          <li><a href="#booking">{t('nav.bookNow')}</a></li>
+          <li><a href="#contact">{t('nav.contact')}</a></li>
+        </ul>
+      </nav>
     </div>
   </div>
 )}
 
 <script>
-  // Header functionality
-  // Expose simple reusable handlers for inline HTML events
-  declare global {
-    interface Window {
-      toggleMobileMenu: () => void;
-    }
-  }
-  
-  window.toggleMobileMenu = function() {
-    const menu = document.getElementById('mobileMenu');
-    const toggle = document.getElementById('mobileMenuToggle');
-    if (menu) menu.classList.toggle('active');
-    if (toggle) toggle.classList.toggle('active');
-  };
-
   document.addEventListener('DOMContentLoaded', () => {
-    const slidingNav = document.getElementById('slidingNav') as HTMLElement | null;
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-list a');
+    const desktopNavLinks = document.querySelectorAll('.nav-list a');
+    const allNavLinks = [...mobileNavLinks, ...desktopNavLinks];
 
-    // Dynamically set --header-height so hero and mobile menu offset correctly
-    const header = document.querySelector('.header') as HTMLElement | null;
-    const setHeaderHeight = () => {
-      if (!header) return;
-      const height = header.offsetHeight;
-      document.documentElement.style.setProperty('--header-height', `${height}px`);
-    };
-    setHeaderHeight();
-    window.addEventListener('resize', setHeaderHeight);
+    // Toggle mobile menu
+    if (mobileMenuToggle && mobileMenu) {
+      mobileMenuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('active');
+        mobileMenuToggle.classList.toggle('active');
+      });
+    }
 
-    // Handle sliding navigation (mobile only)
-    if (slidingNav) {
-      const handleScroll = () => {
-        // Only apply sliding effect on mobile
-        if (window.innerWidth < 768) {
-          const scrollY = window.scrollY;
-          const headerHeight = header?.offsetHeight || 0;
-          
-          // Show sliding nav when scrolled past header height
-          if (scrollY > headerHeight) {
-            slidingNav.classList.add('visible');
-          } else {
-            slidingNav.classList.remove('visible');
-          }
+    // Navigation links don't close the mobile menu anymore
+    // Mobile menu only closes when X button is clicked
+
+    // Handle active state for navigation links
+    const updateActiveState = () => {
+      const currentHash = window.location.hash || '#top';
+      
+      allNavLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === currentHash) {
+          link.classList.add('active');
         }
-      };
+      });
+    };
 
-      window.addEventListener('scroll', handleScroll);
-      window.addEventListener('resize', handleScroll);
-      handleScroll(); // Initial check
+    // Prevent mobile menu from closing when clicking navigation links
+    mobileNavLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        // Ensure mobile menu stays open
+        if (mobileMenu) {
+          mobileMenu.classList.add('active');
+        }
+        if (mobileMenuToggle) {
+          mobileMenuToggle.classList.add('active');
+        }
+      });
+    });
+
+    // Set initial active state
+    updateActiveState();
+
+    // Update active state on hash change
+    window.addEventListener('hashchange', updateActiveState);
+
+    // Update active state on scroll (for smooth scrolling)
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('section[id]');
+      const scrollPos = window.scrollY + 200; // Increased offset for better active state detection
+
+      sections.forEach(section => {
+        const sectionTop = (section as HTMLElement).offsetTop;
+        const sectionHeight = (section as HTMLElement).offsetHeight;
+        const sectionId = section.getAttribute('id');
+
+        if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+          allNavLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${sectionId}`) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    });
+
+    // Set header height
+    const header = document.querySelector('.header') as HTMLElement;
+    if (header) {
+      const setHeaderHeight = () => {
+        const height = header.offsetHeight;
+        document.documentElement.style.setProperty('--header-height', `${height}px`);
+      };
+      setHeaderHeight();
+      window.addEventListener('resize', setHeaderHeight);
     }
   });
 </script>
 
 <style>
-    /* ===== HEADER ===== */
-    .header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1001;
-      background: rgba(255, 255, 255, 0.98);
-      border-bottom: 1px solid rgba(139, 115, 85, 0.1);
-    }
+  /* ===== HEADER ===== */
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1001;
+    background: rgba(255, 255, 255, 0.98);
+    border-bottom: 1px solid rgba(139, 115, 85, 0.1);
+  }
 
-    /* ===== SLIDING NAVIGATION ===== */
-    .sliding-nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      background: rgba(255, 255, 255, 0.95);
-      border-bottom: 1px solid rgba(139, 115, 85, 0.1);
-      transform: translateY(-100%);
-      transition: transform 0.3s ease-in-out;
-      backdrop-filter: blur(10px);
-    }
+  .header-content {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: var(--space) 0;
+    gap: var(--space-xl);
+  }
 
-    /* Hide sliding nav on desktop, show only on mobile */
-    @media (min-width: 768px) {
-      .sliding-nav {
-        display: none;
-      }
-    }
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    justify-self: start;
+  }
 
-    .sliding-nav.visible {
-      transform: translateY(0);
-    }
+  .header-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+  }
 
-    .sliding-nav .container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: var(--space) 0;
-    }
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    justify-self: end;
+  }
 
-    .sliding-nav .navigation {
-      margin: 0;
-    }
+  .logo a {
+    font-family: var(--font-primary);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-text);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    transition: var(--transition);
+  }
 
-    .header-content {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      padding: var(--space) 0;
-      gap: var(--space-xl);
-    }
+  .logo a:hover { 
+    color: var(--color-primary); 
+  }
 
-    /* When navigation is hidden, adjust layout */
-    .header-content.no-navigation {
+  /* Shared navigation styling */
+  .desktop-nav,
+  .mobile-nav {
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-list,
+  .mobile-nav-list {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-list li a,
+  .mobile-nav-list li a {
+    display: block;
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius);
+    transition: var(--transition);
+    white-space: nowrap;
+  }
+
+  .nav-list li a:hover,
+  .mobile-nav-list li a:hover {
+    color: var(--color-primary);
+    background: rgba(139, 115, 85, 0.1);
+  }
+
+  .nav-list li a.active,
+  .mobile-nav-list li a.active {
+    color: var(--color-white);
+    background: var(--gradient-primary);
+  }
+
+  /* Language selector styling */
+  .header-right .language-select {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(139, 115, 85, 0.1);
+    border-radius: var(--radius-sm);
+    padding: var(--space-sm);
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.875rem;
+    color: var(--color-text);
+    backdrop-filter: blur(10px);
+    min-width: fit-content;
+  }
+
+  .header-right .language-select:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+    border-color: var(--color-primary);
+  }
+
+  .header-right .language-select:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(156, 175, 136, 0.1);
+  }
+
+  /* Mobile menu toggle */
+  .mobile-menu-toggle {
+    display: flex;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(139, 115, 85, 0.1);
+    border-radius: var(--radius-sm);
+    padding: var(--space-sm);
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+  }
+
+  .mobile-menu-toggle:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+  }
+
+  .mobile-menu-toggle.active { 
+    background: var(--gradient-primary); 
+  }
+
+  .mobile-menu-toggle .menu-icon,
+  .mobile-menu-toggle .close-icon {
+    color: var(--color-text);
+    transition: var(--transition);
+  }
+
+  .mobile-menu-toggle.active .menu-icon {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .mobile-menu-toggle.active .close-icon {
+    opacity: 1;
+    visibility: visible;
+    color: var(--color-white);
+  }
+
+  .mobile-menu-toggle .close-icon {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* Mobile menu */
+  .mobile-menu {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.98);
+    border-top: 1px solid rgba(139, 115, 85, 0.1);
+    padding: var(--space);
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+    z-index: 999;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    height: auto;
+    max-height: calc(100vh - var(--header-height));
+    overflow-y: auto;
+  }
+
+  .mobile-menu.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .mobile-menu-content {
+    max-width: var(--container-xl);
+    margin: 0 auto;
+  }
+
+  /* Mobile navigation uses shared styling above */
+
+  /* ===== RESPONSIVE DESIGN ===== */
+  
+  /* Hide mobile elements on wide screens */
+  @media (min-width: calc(var(--breakpoint-md) + 1px)) {
+    .mobile-menu { 
+      display: none !important; 
+    }
+    .mobile-menu-toggle { 
+      display: none !important; 
+    }
+  }
+
+  /* Show mobile elements and hide desktop nav on narrow screens */
+  @media (max-width: var(--breakpoint-md)) {
+    .header-content { 
+      padding: var(--space) var(--space); 
       grid-template-columns: 1fr auto;
+      gap: var(--space);
     }
-
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: var(--space-sm);
-      justify-self: start;
+    .header-center { 
+      display: none !important; 
     }
-
-    .header-center {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      justify-self: center;
+    .mobile-menu-toggle { 
+      display: flex !important; 
     }
-
-    /* Hide desktop navigation on mobile */
-    @media (max-width: 767px) {
-      .header-center {
-        display: none;
-      }
+    .logo a { 
+      font-size: 1.3rem; 
     }
+  }
 
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: var(--space-sm);
-      justify-self: end;
-    }
-
-    .logo a {
-      font-family: var(--font-primary);
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--color-text);
-      text-decoration: none;
-      letter-spacing: -0.02em;
-      transition: var(--transition);
-    }
-
-    .logo a:hover { 
-      color: var(--color-primary); 
-    }
-
-    .desktop-nav { 
-      margin-left: auto; 
-    }
-
-    .header-actions { 
-      display: flex; 
-      gap: var(--space-sm); 
-      align-items: center; 
-      margin-left: auto; 
-    }
-
-    /* Language selector styling to match hamburger menu */
-    .header-right .language-select {
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(139, 115, 85, 0.1);
-      border-radius: var(--radius-sm);
-      padding: var(--space-sm);
-      cursor: pointer;
-      transition: var(--transition);
-      font-size: 0.875rem;
-      color: var(--color-text);
-      backdrop-filter: blur(10px);
-      min-width: fit-content;
-    }
-
-    .header-right .language-select:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: translateY(-1px);
-      border-color: var(--color-primary);
-    }
-
-    .header-right .language-select:focus {
-      outline: none;
-      border-color: var(--color-accent);
-      box-shadow: 0 0 0 3px rgba(156, 175, 136, 0.1);
-    }
-
-    .mobile-menu-toggle {
-      display: none;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(139, 115, 85, 0.1);
-      border-radius: var(--radius-sm);
-      padding: var(--space-sm);
-      cursor: pointer;
-      transition: var(--transition);
-      position: relative;
-    }
-
-    .mobile-menu-toggle:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: translateY(-1px);
-    }
-
-    .mobile-menu-toggle.active { 
-      background: var(--gradient-primary); 
-    }
-
-    .mobile-menu-toggle .menu-icon,
-    .mobile-menu-toggle .close-icon {
-      color: var(--color-text);
-      transition: var(--transition);
-    }
-
-    .mobile-menu-toggle.active .menu-icon {
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    .mobile-menu-toggle.active .close-icon {
-      opacity: 1;
-      visibility: visible;
-      color: var(--color-white);
-    }
-
-    .mobile-menu-toggle .close-icon {
-      opacity: 0;
-      visibility: hidden;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
+  @media (max-width: var(--breakpoint-sm)) {
     .mobile-menu {
-      position: fixed;
-      top: var(--header-height); /* Position directly below header */
-      left: 0;
-      right: 0;
-      background: rgba(255, 255, 255, 0.98);
-      border-top: 1px solid rgba(139, 115, 85, 0.1);
-      padding: var(--space);
-      transform: translateY(-100%);
-      opacity: 0;
-      visibility: hidden;
-      transition: var(--transition);
-      z-index: 999;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      height: auto;
-      max-height: calc(100vh - var(--header-height));
-      overflow-y: auto;
+      top: 70px;
+      max-height: calc(100vh - 70px);
     }
-
-    .mobile-menu.active {
-      transform: translateY(0);
-      opacity: 1;
-      visibility: visible;
-    }
-
+    
     .mobile-menu-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: var(--space-lg) 0;
+      padding: var(--space) 0;
     }
-
-    /* ===== RESPONSIVE DESIGN ===== */
-    @media (max-width: 1024px) {
-      .desktop-nav { 
-        display: none !important; 
-      }
-      .mobile-menu-toggle { 
-        display: flex; 
-      }
-      .header-content { 
-        padding: var(--space) var(--space); 
-        grid-template-columns: 1fr auto;
-        gap: var(--space);
-      }
-      .header-center { 
-        display: none; 
-      }
-      .header-right { 
-        justify-self: end; 
-      }
-      .logo a { 
-        font-size: 1.3rem; 
-      }
-    }
-
-    /* Desktop styles - ensure language selector is visible */
-    @media (min-width: 1025px) {
-      .mobile-menu-toggle { 
-        display: none; 
-      }
-      .header-actions { 
-        display: flex; 
-        gap: var(--space-sm); 
-        align-items: center; 
-      }
-    }
-
-    @media (max-width: 768px) {
-      /* Mobile header adjustments */
-      
-      .mobile-menu {
-        top: 70px; /* Adjust for smaller header on mobile */
-        max-height: calc(100vh - 70px);
-      }
-      
-      .mobile-menu-content {
-        padding: var(--space) 0;
-      }
-    }
-
-    @media (min-width: 1025px) {
-      /* Ensure mobile menu never shows on larger screens */
-      .mobile-menu { 
-        display: none !important; 
-      }
-    }
-  </style>
+  }
+</style>

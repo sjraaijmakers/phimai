@@ -9,6 +9,21 @@
   /* Layout */
   --header-height: 96px;
   
+  /* Responsive Breakpoints */
+  --breakpoint-xs: 480px;
+  --breakpoint-sm: 768px;
+  --breakpoint-md: 1024px;
+  --breakpoint-lg: 1200px;
+  --breakpoint-xl: 1440px;
+  
+  /* Container Max Widths */
+  --container-xs: 100%;
+  --container-sm: 540px;
+  --container-md: 720px;
+  --container-lg: 960px;
+  --container-xl: 1140px;
+  --container-xxl: 1320px;
+  
   /* Colors */
   --color-primary: #8B7355;
   --color-secondary: #A67C52;
@@ -110,9 +125,37 @@ img {
 
 /* ===== LAYOUT UTILITIES ===== */
 .container {
-  max-width: 1200px;
+  width: 100%;
+  max-width: var(--container-xl);
   margin: 0 auto;
   padding: 0 var(--space-xl);
+}
+
+/* Responsive container sizes */
+@media (max-width: 1200px) {
+  .container {
+    max-width: var(--container-lg);
+  }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    max-width: var(--container-md);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    max-width: var(--container-sm);
+    padding: 0 var(--space-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    max-width: var(--container-xs);
+    padding: 0 var(--space);
+  }
 }
 
 /* ===== TYPOGRAPHY SYSTEM ===== */

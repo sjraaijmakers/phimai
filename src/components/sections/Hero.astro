@@ -169,7 +169,7 @@ const heroImages: ImageConfig[] = [
   }
 
   /* ===== RESPONSIVE DESIGN ===== */
-  @media (max-width: 768px) {
+  @media (max-width: var(--breakpoint-sm)) {
     .hero { 
       min-height: 100vh; 
     }
@@ -199,7 +199,7 @@ const heroImages: ImageConfig[] = [
     }
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: var(--breakpoint-xs)) {
     .hero-title { 
       font-size: clamp(1.8rem, 10vw, 2rem);
       text-shadow: 

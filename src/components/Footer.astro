@@ -9,7 +9,7 @@ const currentYear = new Date().getFullYear();
   <div class="container">
     <div class="footer-content">
       <div class="footer-copyright">
-        <p>&copy; {currentYear} Phimai Pond House. <span>{t('footer.copyright')}</span></p>
+        <p>&copy; {currentYear} Phimai Pond House. <span>{t('footer.copyright')} <a href="/guide" class="guide-link">{t('footer.guideLink')}</a>.</span></p>
       </div>
       <div class="footer-actions">
         <div class="scroll-to-top-wrapper">
@@ -39,6 +39,18 @@ const currentYear = new Date().getFullYear();
     display: flex;
     align-items: center;
     gap: var(--space-lg);
+  }
+
+  .guide-link {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+  }
+
+  .guide-link:hover {
+    color: var(--color-secondary);
+    text-decoration: underline;
   }
 
   /* ===== RESPONSIVE DESIGN ===== */
