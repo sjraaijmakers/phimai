@@ -46,7 +46,7 @@ const { hideNavigation = false } = Astro.props;
   <div class="mobile-menu" id="mobileMenu">
     <div class="container">
       <div class="mobile-menu-content">
-        <Navigation className="mobile-nav" />
+        <Navigation className="mobile" />
       </div>
     </div>
   </div>
@@ -254,6 +254,8 @@ const { hideNavigation = false } = Astro.props;
     height: auto;
     max-height: calc(100vh - var(--header-height));
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
   }
 
   .mobile-menu.active {
@@ -267,29 +269,11 @@ const { hideNavigation = false } = Astro.props;
     align-items: center;
     justify-content: center;
     width: 100%;
+    flex: 1;
+    min-height: 0;
   }
 
-  /* Mobile navigation vertical stacking */
-  .mobile-menu .navigation {
-    flex-direction: column;
-    gap: var(--space-sm);
-    width: 100%;
-  }
-
-  .mobile-menu .nav-menu {
-    flex-direction: column;
-    gap: var(--space-sm);
-    width: 100%;
-  }
-
-  .mobile-menu .nav-link {
-    width: 100%;
-    text-align: center;
-    padding: var(--space-sm) var(--space-md);
-    font-size: 1rem;
-  }
-
-  /* Mobile navigation uses shared styling above */
+  /* Mobile navigation styling handled by Navigation component */
 
   /* ===== RESPONSIVE DESIGN ===== */
   
@@ -325,10 +309,16 @@ const { hideNavigation = false } = Astro.props;
     .mobile-menu {
       top: 70px;
       max-height: calc(100vh - 70px);
+      padding: var(--space-sm);
     }
     
     .mobile-menu-content {
-      padding: var(--space) 0;
+      padding: var(--space-sm) 0;
+    }
+    
+    .mobile-menu .nav-link {
+      padding: var(--space-sm) var(--space-sm);
+      font-size: 0.9rem;
     }
   }
 </style>
