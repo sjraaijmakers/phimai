@@ -18,7 +18,7 @@
   "dependencies": {
     "@headlessui/vue": "^1.7.23",
     "astro": "^5.2.5",
-    "astro-i18next": "^1.0.0-beta.21",
+    "astro-i18next": "1.0.0-beta.21",
     "i18next-fs-backend": "^2.6.0",
     "lucide-astro": "^0.539.0",
     "sharp": "^0.34.3"
