@@ -36,9 +36,6 @@ jobs:
           rm -rf node_modules package-lock.json
           npm install
 
-      - name: Generate i18n types
-        run: npx astro-i18next generate
-
       - name: Build
         run: npm run build
 
