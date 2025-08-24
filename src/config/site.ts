@@ -12,11 +12,6 @@ export const siteConfig = {
   description: 'Cozy Tiny Homes in Thailand',
   location: 'Phimai, Nakhon Ratchasima, Thailand',
   
-  // Social media (if needed later)
-  social: {
-    // facebook: 'https://facebook.com/phimaipondhouse',
-    // instagram: 'https://instagram.com/phimaipondhouse',
-  },
   
   // Booking platforms (links + metadata)
   booking: {
