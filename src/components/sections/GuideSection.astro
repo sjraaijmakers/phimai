@@ -8,9 +8,11 @@ interface Props {
   images: ImageConfig[];
   mapSrc: string;
   sectionNumber: number;
+  description?: string;
+  openingTimes?: string;
 }
 
-const { title, images, mapSrc, sectionNumber } = Astro.props;
+const { title, images, mapSrc, sectionNumber, description, openingTimes } = Astro.props;
 
 // Generate IDs internally using section number
 const carouselId = `carousel-${sectionNumber}`;
@@ -24,6 +26,13 @@ const lightboxId = `lightbox-${sectionNumber}`;
         <span class="section-number">{sectionNumber || '?'}</span>
         <span>{title}</span>
       </h2>
+      {description && <p class="section-description">{description}</p>}
+      {openingTimes && (
+        <div class="opening-times">
+          <span class="opening-label">Opening times:</span>
+          <span class="opening-text">{openingTimes}</span>
+        </div>
+      )}
     </div>
 
     <div class="section-media">
@@ -110,8 +119,11 @@ const lightboxId = `lightbox-${sectionNumber}`;
 
   .section-text {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
     height: 100%;
+    gap: var(--space-md);
   }
 
   .section-title {
@@ -144,6 +156,30 @@ const lightboxId = `lightbox-${sectionNumber}`;
     min-height: 1.5rem;
     margin-right: var(--space-sm);
     opacity: 0.9;
+  }
+
+  .section-description {
+    color: var(--color-text);
+    line-height: 1.6;
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  .opening-times {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: 0.9rem;
+  }
+
+  .opening-label {
+    color: var(--color-text-light);
+    font-weight: 500;
+  }
+
+  .opening-text {
+    color: var(--color-primary);
+    font-weight: 500;
   }
 
   .section-media {

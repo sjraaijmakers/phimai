@@ -125,9 +125,10 @@
       "chicken": {
         "title": "Best Grilled Chicken in Town"
       },
-      "duck": {
-        "title": "Best Salt Grilled Duck"
-      },
+             "duck": {
+         "title": "Best Salt Grilled Duck",
+         "openingTimes": "~8:00 - until sold out (not later than 12:00)"
+       },
       "boatNoodle": {
         "title": "Boat Noodle Restaurant"
       },
@@ -139,7 +140,16 @@
       },
       "saiNgam": {
         "title": "Sai Ngam Banyan Trees"
-      }
+      },
+      "beignets": {
+        "title": "Best Thai style beignets in town",
+        "description": "You snooze, you lose!!",
+        "openingTimes": "5:30 - 8:00"
+      },
+             "nightBazaar": {
+         "title": "Phimai Night Bazaar",
+         "openingTimes": "15:30 - 19:00"
+       }
     }
   }
 }

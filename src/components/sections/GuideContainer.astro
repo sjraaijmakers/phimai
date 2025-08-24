@@ -3,7 +3,6 @@ import { t } from 'i18next';
 import GuideSection from './GuideSection.astro';
 import type { ImageConfig } from '../../data/images';
 
-// Define guide sections data structure
 const guideSections = [
   {
     id: 'saiNgam',
@@ -30,6 +29,7 @@ const guideSections = [
   {
     id: 'duck',
     titleKey: 'guide.sections.duck.title',
+    openingTimesKey: 'guide.sections.duck.openingTimes',
     images: [
       { src: '/images/duck-woman.jpg' },
       { src: '/images/duck-grill.jpg' },
@@ -65,6 +65,29 @@ const guideSections = [
     mapUrl:
       'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1924.9440490989714!2d102.4948!3d15.2183!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311917a1629c1fbf%3A0x682188c4c7576e05!2sBest%20Coffee%20Cafe%20Phimai!5e0!3m2!1sen!2sth!4v1755585214036',
   },
+  {
+    id: 'beignets',
+    titleKey: 'guide.sections.beignets.title',
+    descriptionKey: 'guide.sections.beignets.description',
+    openingTimesKey: 'guide.sections.beignets.openingTimes',
+    images: [
+      { src: '/images/beignet-stall.jpg' }, 
+      {src: '/images/beignet-close.jpg'}
+    ] as ImageConfig[],
+    mapUrl:
+      'https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3849.8827666414395!2d102.49448777511843!3d15.219580685343493!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTXCsDEzJzEwLjUiTiAxMDLCsDI5JzQ5LjQiRQ!5e0!3m2!1snl!2snl!4v1756038902140!5m2!1snl!2snl',
+  },
+  {
+    id: 'nightBazaar',
+    titleKey: 'guide.sections.nightBazaar.title',
+    openingTimesKey: 'guide.sections.nightBazaar.openingTimes',
+    images: [
+      { src: '/images/night-bazaar1.jpg' },
+      { src: '/images/night-bazaar2.jpg' }
+    ] as ImageConfig[],
+    mapUrl:
+      'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d481.2356571561628!2d102.49600709080978!3d15.219444441747491!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31191712ad3a493f%3A0x3eea7dc5fd0ec369!2sPhimai%20Night%20Bazaar!5e0!3m2!1snl!2snl!4v1756039272495!5m2!1snl!2snl',
+  },
 ];
 ---
 
@@ -83,6 +106,8 @@ const guideSections = [
         guideSections.map((section, index) => (
           <GuideSection
             title={t(section.titleKey)}
+            description={section.descriptionKey ? t(section.descriptionKey) : undefined}
+            openingTimes={section.openingTimesKey ? t(section.openingTimesKey) : undefined}
             images={section.images}
             mapSrc={section.mapUrl}
             sectionNumber={index + 1}
