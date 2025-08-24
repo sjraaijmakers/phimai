@@ -170,10 +170,18 @@ const {
         img.addEventListener('click', e => {
           const target = e.currentTarget;
           const lightboxId = target.dataset.lightboxId;
-          const imageIndex = parseInt(target.dataset.imageIndex || '0');
-
-          if (lightboxId && window.openLightbox) {
-            window.openLightbox(imageIndex, lightboxId);
+          
+          // Find the carousel that contains this image and get its current slide
+          const parentCarousel = target.closest('.carousel');
+          if (parentCarousel) {
+            const activeSlide = parentCarousel.querySelector('.carousel-slide.active');
+            if (activeSlide) {
+              const imageIndex = parseInt(activeSlide.dataset.index || '0');
+              
+              if (lightboxId && window.openLightbox) {
+                window.openLightbox(imageIndex, lightboxId);
+              }
+            }
           }
         });
       });
