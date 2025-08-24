@@ -1,5 +1,6 @@
 {
-  "name": "@example/basics",
+  "name": "pph",
+  "description": "Pond house accommodation website in Phimai, Thailand",
   "type": "module",
   "version": "0.0.1",
   "private": true,
