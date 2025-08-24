@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro-i18next generate --config ./astro-i18next.config.mjs && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "clean": "rimraf --no-glob --force node_modules package-lock.json .astro dist .vite .cache .turbo .next .nuxt .output && npm cache clean --force",
