@@ -7,12 +7,6 @@ export const siteConfig = {
   // Contact form endpoint (e.g., Formspree: https://formspree.io/f/xxxxxxx or your serverless API URL)
   contactEndpoint: '',
   
-  // Site metadata
-  name: 'Phimai Pond House',
-  description: 'Cozy Tiny Homes in Thailand',
-  location: 'Phimai, Nakhon Ratchasima, Thailand',
-  
-  
   // Booking platforms (links + metadata)
   booking: {
     airbnb:  { url: 'https://www.airbnb.nl/rooms/1469265532291794355', name: 'Airbnb',     logo: '/images/logos/airbnb-logo.jpeg',  className: 'airbnb' },
