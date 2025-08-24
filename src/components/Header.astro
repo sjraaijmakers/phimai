@@ -8,7 +8,7 @@ export interface Props {
   hideNavigation?: boolean;
 }
 
-const { hideNavigation = false } = Astro.props;
+const { hideNavigation = true } = Astro.props;
 ---
 
 <header class="header" id="header">
@@ -27,7 +27,6 @@ const { hideNavigation = false } = Astro.props;
           <Navigation className="desktop-nav" />
       )}
       </div>
-
       
       <!-- Right column: Language selector and mobile menu -->
       <div class="header-right">

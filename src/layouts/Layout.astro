@@ -1,7 +1,7 @@
 ---
-import { siteConfig } from '../config/site';
 import '../assets/styles.css';
 import { ClientRouter } from 'astro:transitions';
+import i18next, { t, changeLanguage } from "i18next";
 
 export interface Props {
   lang?: string;
@@ -10,6 +10,9 @@ export interface Props {
 const { 
   lang = "en"
 } = Astro.props;
+
+// Set language for i18next
+changeLanguage(lang);
 ---
 
 <!doctype html>
@@ -19,6 +22,26 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    
+    <!-- SEO Metadata -->
+    <title>{t('seo.title')}</title>
+    <meta name="description" content={t('seo.description')} />
+    <meta name="keywords" content={t('seo.keywords')} />
+    <meta property="og:title" content={t('seo.title')} />
+    <meta property="og:description" content={t('seo.description')} />
+    <meta property="og:image" content={t('seo.image')} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={t('seo.locale')} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={t('seo.title')} />
+    <meta name="twitter:description" content={t('seo.description')} />
+    <meta name="twitter:image" content={t('seo.image')} />
+    
+    <!-- Language and Canonical -->
+    <link rel="canonical" href={t('seo.canonical')} />
+    <link rel="alternate" hreflang="en" href={t('seo.hreflang.en')} />
+    <link rel="alternate" hreflang="th" href={t('seo.hreflang.th')} />
+    <link rel="alternate" hreflang="x-default" href={t('seo.hreflang.en')} />
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -84,67 +107,9 @@ const {
     }
   }
 
-  @keyframes slideInLeft {
-    from {
-      opacity: 0;
-      transform: translateX(-30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes slideInRight {
-    from {
-      opacity: 0;
-      transform: translateX(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes scaleIn {
-    from {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-  @keyframes float {
-    0%, 100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-  }
-
   /* ===== ANIMATION UTILITY CLASSES ===== */
   .fade-in {
     animation: fadeIn 0.6s ease-out;
-  }
-
-  .slide-in-left {
-    animation: slideInLeft 0.8s ease-out;
-  }
-
-  .slide-in-right {
-    animation: slideInRight 0.8s ease-out;
-  }
-
-  .scale-in {
-    animation: scaleIn 0.6s ease-out;
-  }
-
-  .float {
-    animation: float 3s ease-in-out infinite;
   }
 
   /* ===== GLOBAL UTILITIES ===== */
