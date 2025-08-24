@@ -1,4 +1,5 @@
 ---
+import { localizePath } from 'astro-i18next';
 import { t } from 'i18next';
 
 export interface Props {
@@ -13,7 +14,7 @@ const { currentPage, currentPageKey } = Astro.props;
   <div class="container">
     <ol class="breadcrumb-list">
       <li class="breadcrumb-item">
-        <a href="/" class="breadcrumb-link">{t('breadcrumbs.home')}</a>
+        <a href={localizePath("/")} class="breadcrumb-link">{t('breadcrumbs.home')}</a>
       </li>
       <li class="breadcrumb-item" aria-current="page">
         <span class="breadcrumb-current">{t(currentPageKey)}</span>
