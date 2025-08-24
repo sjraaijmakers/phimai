@@ -13,41 +13,8 @@ const { id = 'scrollToTop', className = '', i18nKey } = Astro.props;
 
 <button id={id} class={`scroll-to-top ${className}`}>
   <ChevronUp size={20} />
-  {i18nKey && <span class="scroll-to-top-text">{t(i18nKey)}</span>}
+  {i18nKey && <a href="#" class="scroll-to-top-text">{t(i18nKey)}</a>}
 </button>
-
-<script define:vars={{ buttonId: id }}>
-  document.addEventListener('DOMContentLoaded', () => {
-    const scrollToTopButton = document.getElementById(buttonId);
-
-    if (scrollToTopButton) {
-      // Add click handler for scroll to top
-      scrollToTopButton.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-
-      // Show/hide button based on scroll position (for fixed position buttons)
-      const handleScroll = () => {
-        if (
-          scrollToTopButton.classList.contains('scroll-to-top') &&
-          !scrollToTopButton.classList.contains('footer-style')
-        ) {
-          if (window.scrollY > 300) {
-            scrollToTopButton.classList.add('visible');
-          } else {
-            scrollToTopButton.classList.remove('visible');
-          }
-        }
-      };
-
-      // Only add scroll listener for fixed position buttons
-      if (!scrollToTopButton.classList.contains('footer-style')) {
-        window.addEventListener('scroll', handleScroll);
-        handleScroll(); // Initial check
-      }
-    }
-  });
-</script>
 
 <style>
   /* ===== SCROLL TO TOP ===== */

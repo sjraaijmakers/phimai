@@ -10,9 +10,10 @@ interface Props {
   sectionNumber: number;
   description?: string;
   openingTimes?: string;
+  openingTimesLabel?: string;
 }
 
-const { title, images, mapSrc, sectionNumber, description, openingTimes } = Astro.props;
+const { title, images, mapSrc, sectionNumber, description, openingTimes, openingTimesLabel } = Astro.props;
 
 // Generate IDs internally using section number
 const carouselId = `carousel-${sectionNumber}`;
@@ -29,7 +30,7 @@ const lightboxId = `lightbox-${sectionNumber}`;
       {description && <p class="section-description">{description}</p>}
       {openingTimes && (
         <div class="opening-times">
-          <span class="opening-label">Opening times:</span>
+          <span class="opening-label">{openingTimesLabel}</span>
           <span class="opening-text">{openingTimes}</span>
         </div>
       )}

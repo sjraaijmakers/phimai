@@ -95,7 +95,7 @@ const guideSections = [
   <!-- Guide Title -->
   <section class="guide-title-section">
     <div class="container">
-      <h1 class="guide-title">{t('guide.title')}</h1>
+      <h1 class="guide-title">{t('guide.title') as string}</h1>
     </div>
   </section>
 
@@ -105,9 +105,10 @@ const guideSections = [
       {
         guideSections.map((section, index) => (
           <GuideSection
-            title={t(section.titleKey)}
-            description={section.descriptionKey ? t(section.descriptionKey) : undefined}
-            openingTimes={section.openingTimesKey ? t(section.openingTimesKey) : undefined}
+            title={t(section.titleKey) as string}
+            description={section.descriptionKey ? t(section.descriptionKey) as string : undefined}
+            openingTimes={section.openingTimesKey ? t(section.openingTimesKey) as string : undefined}
+            openingTimesLabel={t('guide.openingTimes') as string}
             images={section.images}
             mapSrc={section.mapUrl}
             sectionNumber={index + 1}
