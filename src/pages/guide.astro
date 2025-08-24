@@ -1,0 +1,225 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Animations from "../components/ui/Animations.astro";
+import Breadcrumb from "../components/sections/Breadcrumb.astro";
+import GuideContainer from "../components/sections/GuideContainer.astro";
+import i18next, { changeLanguage } from "i18next";
+
+changeLanguage("en");
+---
+
+<Layout lang={i18next.language}>
+  <Header hideNavigation={true} />
+
+  <main class="guide-main">
+    <Breadcrumb currentPage="guide" currentPageKey="breadcrumbs.guide" />
+    <GuideContainer />
+  </main>
+
+  <Footer />
+  <Animations />
+</Layout>
+
+<style>
+  /* Guide Main */
+  .guide-main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    padding: var(--space-2xl) 0;
+    background: var(--color-white);
+  }
+
+  /* Guide Title Section */
+  .guide-title-section {
+    padding: var(--space-md) 0;
+    /* Removed background */
+  }
+
+  .guide-title {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-primary);
+    text-align: left;
+    margin: 0;
+    line-height: var(--lh-heading);
+  }
+
+  /* Guide Sections */
+  .guide-sections {
+    /* Removed background to match breadcrumbs and title */
+    position: relative;
+  }
+
+  .guide-sections-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xl);
+  }
+
+  /* Getting Around Section */
+  .getting-around {
+    padding: var(--space-4xl) 0;
+    background: var(--gradient-cool);
+  }
+
+  .getting-around-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3xl);
+    align-items: start;
+  }
+
+  .getting-around-text h2 {
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: var(--space-lg);
+    line-height: var(--lh-heading);
+  }
+
+  .distances-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+  }
+
+  .distance-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    background: var(--color-white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+  }
+
+  .distance-item svg {
+    color: var(--color-accent);
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+  }
+
+  .distance-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .distance-item svg {
+    color: var(--color-accent);
+    flex-shrink: 0;
+  }
+
+  .distance-item h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin: 0 0 var(--space-xs) 0;
+  }
+
+  .distance-item span {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+  }
+
+  .getting-around-map {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .map-iframe {
+    width: 100%;
+    height: 400px;
+    border: none;
+  }
+
+  /* Best Time Section */
+  .best-time {
+    padding: var(--space-4xl) 0;
+    background: var(--gradient-warm);
+    text-align: center;
+  }
+
+  .best-time-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .best-time-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    margin-bottom: var(--space-xl);
+    color: var(--color-white);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .best-time h2 {
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: var(--space-lg);
+    line-height: var(--lh-heading);
+  }
+
+  .best-time p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  /* ===== RESPONSIVE DESIGN ===== */
+  @media (max-width: 768px) {
+    .getting-around-content {
+      grid-template-columns: 1fr;
+      gap: var(--space-xl);
+    }
+
+    .distances-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+    }
+
+    .distance-item {
+      padding: var(--space-md);
+      gap: var(--space-sm);
+    }
+
+    .distance-item svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .map-iframe {
+      height: 300px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .distance-item {
+      flex-direction: row;
+      align-items: center;
+      text-align: left;
+    }
+
+    .distance-item svg {
+      flex-shrink: 0;
+      margin-right: var(--space-sm);
+    }
+
+    .distance-item h4,
+    .distance-item span {
+      text-align: left;
+    }
+  }
+</style>
