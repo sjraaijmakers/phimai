@@ -1,5 +1,5 @@
 ---
-import { t } from "i18next";
+import { t } from 'i18next';
 import { ArrowRight } from 'lucide-astro';
 import { siteConfig } from '../../config/site';
 import { Image } from 'astro:assets';
@@ -35,49 +35,59 @@ const providers = Object.entries(siteConfig.booking || {})
     </div>
 
     <div class="booking-options">
-      {providers.map((p) => (
-        p.disabled ? (
-          <div class={`booking-option btn ${p.className} disabled`} aria-disabled="true">
-            <div class="booking-logo">
-              <Image 
-                src={p.logo} 
-                alt={p.name} 
-                class="logo-image"
-                width={120}
-                height={60}
-                format="webp"
-                quality={80}
-              />
+      {
+        providers.map(p =>
+          p.disabled ? (
+            <div
+              class={`booking-option btn ${p.className} disabled`}
+              aria-disabled="true"
+            >
+              <div class="booking-logo">
+                <Image
+                  src={p.logo}
+                  alt={p.name}
+                  class="logo-image"
+                  width={120}
+                  height={60}
+                  format="webp"
+                  quality={80}
+                />
+              </div>
+              <div class="booking-content">
+                <span>{t(p.i18nKey)}</span>
+              </div>
+              <div class="booking-arrow">
+                <ArrowRight size={20} />
+              </div>
             </div>
-            <div class="booking-content">
-              <span>{t(p.i18nKey)}</span>
-            </div>
-            <div class="booking-arrow">
-              <ArrowRight size={20} />
-            </div>
-          </div>
-        ) : (
-          <a href={p.href} class={`booking-option btn ${p.className}`} target="_blank" rel="noopener noreferrer">
-            <div class="booking-logo">
-              <Image 
-                src={p.logo} 
-                alt={p.name} 
-                class="logo-image"
-                width={120}
-                height={60}
-                format="webp"
-                quality={80}
-              />
-            </div>
-            <div class="booking-content">
-              <span>{t(p.i18nKey)}</span>
-            </div>
-            <div class="booking-arrow">
-              <ArrowRight size={20} />
-            </div>
-          </a>
+          ) : (
+            <a
+              href={p.href}
+              class={`booking-option btn ${p.className}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div class="booking-logo">
+                <Image
+                  src={p.logo}
+                  alt={p.name}
+                  class="logo-image"
+                  width={120}
+                  height={60}
+                  format="webp"
+                  quality={80}
+                />
+              </div>
+              <div class="booking-content">
+                <span>{t(p.i18nKey)}</span>
+              </div>
+              <div class="booking-arrow">
+                <ArrowRight size={20} />
+              </div>
+            </a>
+          )
         )
-      ))}
+      }
     </div>
   </div>
 </section>
@@ -138,7 +148,11 @@ const providers = Object.entries(siteConfig.booking || {})
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
     opacity: 0;
     transition: opacity 0.3s ease;
   }
@@ -180,8 +194,8 @@ const providers = Object.entries(siteConfig.booking || {})
     flex-shrink: 0;
   }
 
-  .booking-option:hover .booking-arrow { 
-    transform: translateX(4px); 
+  .booking-option:hover .booking-arrow {
+    transform: translateX(4px);
     opacity: 1;
   }
 
@@ -212,10 +226,8 @@ const providers = Object.entries(siteConfig.booking || {})
     .booking-option {
       padding: var(--space-lg);
     }
-    .booking-content { 
-      text-align: left; 
+    .booking-content {
+      text-align: left;
     }
   }
 </style>
-
-

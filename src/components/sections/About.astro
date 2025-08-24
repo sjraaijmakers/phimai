@@ -1,34 +1,41 @@
 ---
-
-import { WashingMachine, Utensils, Coffee, Package, Bike, Users, Car } from 'lucide-astro';
-import { t } from "i18next";
+import {
+  WashingMachine,
+  Utensils,
+  Coffee,
+  Package,
+  Bike,
+  Users,
+  Car,
+} from 'lucide-astro';
+import { t } from 'i18next';
 
 // Amenities structure for DRY approach
 const amenities = [
   {
     icon: WashingMachine,
-    key: 'about.amenities.washingMachine'
+    key: 'about.amenities.washingMachine',
   },
   {
     icon: Utensils,
-    key: 'about.amenities.kitchenette'
+    key: 'about.amenities.kitchenette',
   },
   {
     icon: Coffee,
-    key: 'about.amenities.snacks'
+    key: 'about.amenities.snacks',
   },
   {
     icon: Package,
-    key: 'about.amenities.essentials'
+    key: 'about.amenities.essentials',
   },
   {
     icon: Car,
-    key: 'about.amenities.transfer'
+    key: 'about.amenities.transfer',
   },
   {
     icon: Bike,
-    key: 'about.amenities.bikes'
-  }
+    key: 'about.amenities.bikes',
+  },
 ];
 ---
 
@@ -38,7 +45,7 @@ const amenities = [
       <div class="about-info">
         <h2>{t('about.title')}</h2>
         <p>{t('about.intro')}</p>
-        
+
         <!-- Family suite info integrated into main description -->
         <div class="family-suite-info">
           <div class="family-suite-icon">
@@ -54,14 +61,16 @@ const amenities = [
       <div class="amenities">
         <h3>{t('about.amenities.title')}</h3>
         <div class="amenities-list">
-          {amenities.map(({ icon: Icon, key }) => (
-            <div class="amenity-item">
-              <div class="amenity-icon">
-                <Icon size={20} />
+          {
+            amenities.map(({ icon: Icon, key }) => (
+              <div class="amenity-item">
+                <div class="amenity-icon">
+                  <Icon size={20} />
+                </div>
+                <span>{t(key)}</span>
               </div>
-              <span>{t(key)}</span>
-            </div>
-          ))}
+            ))
+          }
         </div>
       </div>
     </div>
@@ -92,7 +101,11 @@ const amenities = [
     gap: var(--space-lg);
     margin-top: var(--space-xl);
     padding: var(--space-lg);
-    background: linear-gradient(135deg, rgba(156, 175, 136, 0.05) 0%, rgba(156, 175, 136, 0.02) 100%);
+    background: linear-gradient(
+      135deg,
+      rgba(156, 175, 136, 0.05) 0%,
+      rgba(156, 175, 136, 0.02) 100%
+    );
     border-radius: var(--radius);
     border: 1px solid rgba(156, 175, 136, 0.1);
   }
@@ -146,7 +159,11 @@ const amenities = [
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
     opacity: 0;
     transition: opacity 0.3s ease;
   }
@@ -173,11 +190,11 @@ const amenities = [
   }
 
   .feature-icon.bikes {
-    background: linear-gradient(135deg, #9CAF88 0%, #8BA876 100%);
+    background: linear-gradient(135deg, #9caf88 0%, #8ba876 100%);
   }
 
   .feature-icon.family {
-    background: linear-gradient(135deg, #8B7355 0%, #A67C52 100%);
+    background: linear-gradient(135deg, #8b7355 0%, #a67c52 100%);
   }
 
   .feature-content p {
@@ -235,8 +252,8 @@ const amenities = [
     transition: transform 0.3s ease;
   }
 
-  .about-image:hover img { 
-    transform: scale(1.05); 
+  .about-image:hover img {
+    transform: scale(1.05);
   }
 
   /* ===== RESPONSIVE DESIGN ===== */
@@ -245,28 +262,28 @@ const amenities = [
       grid-template-columns: 1fr;
       gap: var(--space-xl);
     }
-    .about-info h2 { 
-      font-size: 2rem; 
+    .about-info h2 {
+      font-size: 2rem;
     }
-    .about-info p { }
-    .amenities-list { 
-      gap: var(--space-sm); 
+    .about-info p {
     }
-    
+    .amenities-list {
+      gap: var(--space-sm);
+    }
+
     /* Mobile adjustments for family suite info */
     .family-suite-info {
       flex-direction: row;
       gap: var(--space);
       padding: var(--space);
     }
-    
+
     .family-suite-icon {
       align-self: flex-start;
     }
-    
+
     .family-suite-content h4 {
       font-size: 1rem;
     }
   }
 </style>
-

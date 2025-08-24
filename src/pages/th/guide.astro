@@ -1,18 +1,18 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import Header from "../../components/Header.astro";
-import Footer from "../../components/Footer.astro";
-import Animations from "../../components/ui/Animations.astro";
-import Breadcrumb from "../../components/sections/Breadcrumb.astro";
-import GuideContainer from "../../components/sections/GuideContainer.astro";
-import i18next, { t, changeLanguage } from "i18next";
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Animations from '../../components/ui/Animations.astro';
+import Breadcrumb from '../../components/sections/Breadcrumb.astro';
+import GuideContainer from '../../components/sections/GuideContainer.astro';
+import i18next, { t, changeLanguage } from 'i18next';
 
-changeLanguage("th");
+changeLanguage('th');
 ---
 
 <Layout lang={i18next.language}>
   <Header hideNavigation={true} />
-  
+
   <main class="guide-main">
     <Breadcrumb currentPage="guide" currentPageKey="breadcrumbs.guide" />
     <GuideContainer />
@@ -28,10 +28,9 @@ changeLanguage("th");
     display: flex;
     flex-direction: column;
     gap: var(--space-xl);
-     padding: var(--space-2xl) 0;
-     background: var(--color-white);
-   }
-
+    padding: var(--space-2xl) 0;
+    background: var(--color-white);
+  }
 
   /* Guide Title Section */
   .guide-title-section {
@@ -48,8 +47,6 @@ changeLanguage("th");
     line-height: var(--lh-heading);
   }
 
-
-
   /* Guide Sections */
   .guide-sections {
     /* Removed background to match breadcrumbs and title */
@@ -61,10 +58,6 @@ changeLanguage("th");
     flex-direction: column;
     gap: var(--space-2xl);
   }
-
-
-
-
 
   /* Getting Around Section */
   .getting-around {
@@ -86,8 +79,6 @@ changeLanguage("th");
     margin-bottom: var(--space-lg);
     line-height: var(--lh-heading);
   }
-
-  
 
   .distances-grid {
     display: grid;

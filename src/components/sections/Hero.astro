@@ -1,6 +1,6 @@
 ---
 // This should work with astro-i18next integration
-import { t } from "i18next";
+import { t } from 'i18next';
 import Carousel from '../ui/Carousel.astro';
 import type { ImageConfig } from '../../data/images';
 
@@ -8,30 +8,30 @@ import type { ImageConfig } from '../../data/images';
 const heroImages: ImageConfig[] = [
   {
     src: '/images/hero-tiny-home.jpg',
-    caption: 'Phimai Pond House - Your peaceful retreat'
+    caption: 'Phimai Pond House - Your peaceful retreat',
   },
   {
     src: '/images/bedroom-cozy.jpg',
-    caption: 'Cozy bedroom with modern amenities'
+    caption: 'Cozy bedroom with modern amenities',
   },
   {
     src: '/images/exterior-cozy.jpg',
-    caption: 'Charming exterior with garden views'
+    caption: 'Charming exterior with garden views',
   },
   {
     src: '/images/garden-view.jpg',
-    caption: 'Beautiful garden setting'
+    caption: 'Beautiful garden setting',
   },
   {
     src: '/images/kitchen-cozy.jpg',
-    caption: 'Fully equipped kitchen for your comfort'
-  }
+    caption: 'Fully equipped kitchen for your comfort',
+  },
 ];
 ---
 
 <section id="hero" class="hero">
   <div class="hero-background">
-    <Carousel 
+    <Carousel
       id="hero-carousel"
       images={heroImages}
       interval={5000}
@@ -39,14 +39,13 @@ const heroImages: ImageConfig[] = [
       showDots={true}
       autoPlay={true}
     />
-
   </div>
-  
+
   <div class="hero-content">
     <div class="container">
       <h1 class="hero-title">{t('hero.title')}</h1>
       <p class="hero-subtitle">{t('hero.subtitle')}</p>
-      
+
       <div class="hero-buttons">
         <a href="#booking" class="btn btn-primary">{t('hero.bookNow')}</a>
         <a href="#gallery" class="btn btn-secondary">{t('hero.viewGallery')}</a>
@@ -72,15 +71,15 @@ const heroImages: ImageConfig[] = [
 
   /* Prefer static viewport height if supported (stable layout) */
   @supports (height: 100svh) {
-    .hero { 
-      min-height: calc(100svh - var(--header-height)); 
+    .hero {
+      min-height: calc(100svh - var(--header-height));
     }
   }
 
   /* Prefer dynamic viewport height to account for browser chrome */
   @supports (height: 100dvh) {
-    .hero { 
-      min-height: calc(100dvh - var(--header-height)); 
+    .hero {
+      min-height: calc(100dvh - var(--header-height));
     }
   }
 
@@ -92,8 +91,6 @@ const heroImages: ImageConfig[] = [
     height: 100%;
     z-index: 1;
   }
-
-
 
   .hero-content {
     text-align: center;
@@ -110,7 +107,7 @@ const heroImages: ImageConfig[] = [
     font-size: clamp(3.5rem, 10vw, 6rem);
     margin-bottom: var(--space);
     color: var(--color-white);
-    text-shadow: 
+    text-shadow:
       0 2px 4px rgba(0, 0, 0, 0.4),
       0 4px 8px rgba(0, 0, 0, 0.3);
     font-weight: 800;
@@ -123,7 +120,7 @@ const heroImages: ImageConfig[] = [
     color: var(--color-white);
     margin-bottom: var(--space-xl);
     font-weight: 300;
-    text-shadow: 
+    text-shadow:
       0 1px 2px rgba(0, 0, 0, 0.5),
       0 2px 4px rgba(0, 0, 0, 0.4);
     opacity: 0.8;
@@ -139,10 +136,10 @@ const heroImages: ImageConfig[] = [
     flex-wrap: wrap;
   }
 
-  .hero-buttons .btn { 
+  .hero-buttons .btn {
     min-width: 140px;
     border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 
+    box-shadow:
       0 4px 16px rgba(0, 0, 0, 0.2),
       0 2px 8px rgba(0, 0, 0, 0.1);
   }
@@ -170,22 +167,22 @@ const heroImages: ImageConfig[] = [
 
   /* ===== RESPONSIVE DESIGN ===== */
   @media (max-width: var(--breakpoint-sm)) {
-    .hero { 
-      min-height: 100vh; 
+    .hero {
+      min-height: 100vh;
     }
     .hero-content {
       padding: var(--space-lg);
       margin: var(--space);
     }
-    .hero-title { 
+    .hero-title {
       font-size: clamp(2rem, 8vw, 2.5rem);
-      text-shadow: 
+      text-shadow:
         0 2px 4px rgba(0, 0, 0, 0.4),
         0 4px 8px rgba(0, 0, 0, 0.3);
     }
-    .hero-subtitle { 
+    .hero-subtitle {
       font-size: clamp(1rem, 4vw, 1.1rem);
-      text-shadow: 
+      text-shadow:
         0 1px 2px rgba(0, 0, 0, 0.5),
         0 2px 4px rgba(0, 0, 0, 0.4);
     }
@@ -200,18 +197,17 @@ const heroImages: ImageConfig[] = [
   }
 
   @media (max-width: var(--breakpoint-xs)) {
-    .hero-title { 
+    .hero-title {
       font-size: clamp(1.8rem, 10vw, 2rem);
-      text-shadow: 
+      text-shadow:
         0 2px 4px rgba(0, 0, 0, 0.5),
         0 4px 8px rgba(0, 0, 0, 0.4);
     }
-    .hero-subtitle { 
+    .hero-subtitle {
       font-size: clamp(0.9rem, 5vw, 1rem);
-      text-shadow: 
+      text-shadow:
         0 1px 2px rgba(0, 0, 0, 0.6),
         0 2px 4px rgba(0, 0, 0, 0.5);
     }
   }
 </style>
-

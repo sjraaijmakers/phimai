@@ -25,10 +25,10 @@ const lightboxId = `lightbox-${sectionNumber}`;
         <span>{title}</span>
       </h2>
     </div>
-    
+
     <div class="section-media">
       <div class="section-carousel image-hover-zoom">
-        <Carousel 
+        <Carousel
           id={carouselId}
           images={images}
           interval={4000}
@@ -39,17 +39,18 @@ const lightboxId = `lightbox-${sectionNumber}`;
         />
       </div>
       <div class="section-map">
-        <iframe 
+        <iframe
           class="spot-map"
           src={mapSrc}
-          allowfullscreen="" 
-          loading="lazy" 
-          referrerpolicy="no-referrer-when-downgrade">
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        >
         </iframe>
       </div>
     </div>
   </div>
-  
+
   <!-- Lightbox for this section -->
   <Lightbox id={lightboxId} images={images} />
 </div>
@@ -74,7 +75,12 @@ const lightboxId = `lightbox-${sectionNumber}`;
     width: 80%;
     max-width: 600px;
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--color-border),
+      transparent
+    );
   }
 
   @media (max-width: 768px) {
@@ -88,19 +94,19 @@ const lightboxId = `lightbox-${sectionNumber}`;
     margin-bottom: 0;
   }
 
-     .section-content {
-     display: grid;
-     grid-template-columns: 1fr 2fr;
-     gap: var(--space-3xl);
-     align-items: center;
-   }
+  .section-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-3xl);
+    align-items: center;
+  }
 
-   @media (max-width: 1024px) {
-     .section-content {
-       grid-template-columns: 1fr;
-       gap: var(--space-xl);
-     }
-   }
+  @media (max-width: 1024px) {
+    .section-content {
+      grid-template-columns: 1fr;
+      gap: var(--space-xl);
+    }
+  }
 
   .section-text {
     display: flex;
@@ -140,21 +146,19 @@ const lightboxId = `lightbox-${sectionNumber}`;
     opacity: 0.9;
   }
 
+  .section-media {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+    align-items: start;
+  }
 
-
-     .section-media {
-     display: grid;
-     grid-template-columns: 1fr 1fr;
-     gap: var(--space-2xl);
-     align-items: start;
-   }
-
-   @media (max-width: 768px) {
-     .section-media {
-       grid-template-columns: 1fr;
-       gap: var(--space-lg);
-     }
-   }
+  @media (max-width: 768px) {
+    .section-media {
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+    }
+  }
 
   .section-carousel {
     border-radius: var(--radius);
@@ -189,6 +193,4 @@ const lightboxId = `lightbox-${sectionNumber}`;
     height: 100%;
     border: none;
   }
-
-  
 </style>

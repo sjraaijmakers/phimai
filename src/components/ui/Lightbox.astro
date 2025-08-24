@@ -12,7 +12,7 @@ interface Props {
   images?: LightboxImage[];
 }
 
-const { id = "lightbox", images = [] } = Astro.props;
+const { id = 'lightbox', images = [] } = Astro.props;
 ---
 
 <div id={id} class="lightbox">
@@ -21,18 +21,20 @@ const { id = "lightbox", images = [] } = Astro.props;
       <X size={24} />
     </button>
     <div class="lightbox-counter" id="lightbox-counter"></div>
-    {images.length > 0 && (
-      <Image 
-        id="lightbox-image" 
-        class="lightbox-image" 
-        src={images[0].src}
-        alt={images[0].caption || "Image"}
-        width={1200}
-        height={800}
-        format="webp"
-        quality={90}
-      />
-    )}
+    {
+      images.length > 0 && (
+        <Image
+          id="lightbox-image"
+          class="lightbox-image"
+          src={images[0].src}
+          alt={images[0].caption || 'Image'}
+          width={1200}
+          height={800}
+          format="webp"
+          quality={90}
+        />
+      )
+    }
     <p id="lightbox-text" class="lightbox-text"></p>
     <button class="lightbox-control lightbox-prev" aria-label="Previous image">
       <ChevronLeft size={24} />
@@ -50,7 +52,7 @@ const { id = "lightbox", images = [] } = Astro.props;
     const lightboxClose = lightbox?.querySelector('.lightbox-close');
     const lightboxPrev = lightbox?.querySelector('.lightbox-prev');
     const lightboxNext = lightbox?.querySelector('.lightbox-next');
-    
+
     let currentImageIndex = 0;
     let previousScrollY = 0;
     let touchStartX = 0;
@@ -58,7 +60,8 @@ const { id = "lightbox", images = [] } = Astro.props;
     let touchActive = false;
 
     function lockPageScroll() {
-      previousScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+      previousScrollY =
+        window.scrollY || document.documentElement.scrollTop || 0;
       document.documentElement.classList.add('no-scroll');
       document.body.classList.add('no-scroll');
       document.body.style.top = `-${previousScrollY}px`;
@@ -69,135 +72,156 @@ const { id = "lightbox", images = [] } = Astro.props;
       document.body.classList.remove('no-scroll');
       document.body.style.top = '';
       // Temporarily disable smooth scrolling and restore position instantly
-      const originalScrollBehavior = document.documentElement.style.scrollBehavior;
+      const originalScrollBehavior =
+        document.documentElement.style.scrollBehavior;
       document.documentElement.style.scrollBehavior = 'auto';
       window.scrollTo(0, previousScrollY);
       // Restore original scroll behavior
       document.documentElement.style.scrollBehavior = originalScrollBehavior;
     }
-    
+
     // Initialize global lightbox manager if it doesn't exist
     if (!window.lightboxManager) {
       window.lightboxManager = {};
     }
-    
-         // Register this lightbox with the global manager
-     window.lightboxManager[lightboxId] = {
-       lightbox,
-       imageData,
-       currentImageIndex: 0,
-       lockPageScroll,
-       unlockPageScroll
-     };
-     
-     console.log('Lightbox registered:', lightboxId, 'with', imageData.length, 'images');
-     console.log('Available lightboxes:', Object.keys(window.lightboxManager));
-    
-         // Global open lightbox function (only set once)
-     if (!window.openLightbox) {
-       window.openLightbox = function(index, targetLightboxId) {
-         console.log('openLightbox called:', { index, targetLightboxId });
-         
-         const manager = window.lightboxManager[targetLightboxId];
-         console.log('Manager found:', !!manager, 'Manager data:', manager?.imageData?.length);
-         
-         if (!manager || !manager.imageData[index]) return;
-         
-         const { lightbox, imageData, lockPageScroll } = manager;
-         const lightboxImage = lightbox.querySelector('#lightbox-image');
-         const lightboxText = lightbox.querySelector('#lightbox-text');
-         const lightboxCounter = lightbox.querySelector('#lightbox-counter');
-         
-         if (!lightboxImage || !lightboxText) return;
-           
-         console.log('Setting image in lightbox:', { index, src: imageData[index].src });
-         manager.currentImageIndex = index;
-         lightboxImage.src = imageData[index].src;
-         
-         // Handle translation for caption
-         const captionKey = imageData[index].captionKey;
-         let desc = '';
-         
-         if (captionKey && window.i18next) {
-           try {
-             desc = window.i18next.t(captionKey);
-           } catch (e) {
-             console.warn('Translation failed for key:', captionKey, e);
-             desc = '';
-           }
-         }
-         
-         lightboxImage.alt = desc || 'Image';
-         
-         if (desc && desc.trim().length > 0) {
-           lightboxText.textContent = desc;
-           lightboxText.style.display = '';
-         } else {
-           lightboxText.textContent = '';
-           lightboxText.style.display = 'none';
-         }
-           
-           // Update counter
-           if (lightboxCounter) {
-             lightboxCounter.textContent = `${index + 1}/${imageData.length}`;
-           }
-           
-           if (!lightbox.classList.contains('active')) {
-             lightbox.classList.add('active');
-             lockPageScroll();
-           }
-                   };
+
+    // Register this lightbox with the global manager
+    window.lightboxManager[lightboxId] = {
+      lightbox,
+      imageData,
+      currentImageIndex: 0,
+      lockPageScroll,
+      unlockPageScroll,
+    };
+
+    console.log(
+      'Lightbox registered:',
+      lightboxId,
+      'with',
+      imageData.length,
+      'images'
+    );
+    console.log('Available lightboxes:', Object.keys(window.lightboxManager));
+
+    // Global open lightbox function (only set once)
+    if (!window.openLightbox) {
+      window.openLightbox = function (index, targetLightboxId) {
+        console.log('openLightbox called:', { index, targetLightboxId });
+
+        const manager = window.lightboxManager[targetLightboxId];
+        console.log(
+          'Manager found:',
+          !!manager,
+          'Manager data:',
+          manager?.imageData?.length
+        );
+
+        if (!manager || !manager.imageData[index]) return;
+
+        const { lightbox, imageData, lockPageScroll } = manager;
+        const lightboxImage = lightbox.querySelector('#lightbox-image');
+        const lightboxText = lightbox.querySelector('#lightbox-text');
+        const lightboxCounter = lightbox.querySelector('#lightbox-counter');
+
+        if (!lightboxImage || !lightboxText) return;
+
+        console.log('Setting image in lightbox:', {
+          index,
+          src: imageData[index].src,
+        });
+        manager.currentImageIndex = index;
+        lightboxImage.src = imageData[index].src;
+
+        // Handle translation for caption
+        const captionKey = imageData[index].captionKey;
+        let desc = '';
+
+        if (captionKey && window.i18next) {
+          try {
+            desc = window.i18next.t(captionKey);
+          } catch (e) {
+            console.warn('Translation failed for key:', captionKey, e);
+            desc = '';
+          }
         }
-     
-     // Close lightbox function
-     function closeLightbox() {
-       if (lightbox && lightbox.classList.contains('active')) {
-         lightbox.classList.remove('active');
-         unlockPageScroll();
-       }
-     }
-    
+
+        lightboxImage.alt = desc || 'Image';
+
+        if (desc && desc.trim().length > 0) {
+          lightboxText.textContent = desc;
+          lightboxText.style.display = '';
+        } else {
+          lightboxText.textContent = '';
+          lightboxText.style.display = 'none';
+        }
+
+        // Update counter
+        if (lightboxCounter) {
+          lightboxCounter.textContent = `${index + 1}/${imageData.length}`;
+        }
+
+        if (!lightbox.classList.contains('active')) {
+          lightbox.classList.add('active');
+          lockPageScroll();
+        }
+      };
+    }
+
+    // Close lightbox function
+    function closeLightbox() {
+      if (lightbox && lightbox.classList.contains('active')) {
+        lightbox.classList.remove('active');
+        unlockPageScroll();
+      }
+    }
+
     // Navigation functions
     function showPrevImage() {
       const manager = window.lightboxManager[lightboxId];
       if (!manager) return;
-      
-      manager.currentImageIndex = (manager.currentImageIndex - 1 + manager.imageData.length) % manager.imageData.length;
+
+      manager.currentImageIndex =
+        (manager.currentImageIndex - 1 + manager.imageData.length) %
+        manager.imageData.length;
       window.openLightbox(manager.currentImageIndex, lightboxId);
     }
-    
+
     function showNextImage() {
       const manager = window.lightboxManager[lightboxId];
       if (!manager) return;
-      
-      manager.currentImageIndex = (manager.currentImageIndex + 1) % manager.imageData.length;
+
+      manager.currentImageIndex =
+        (manager.currentImageIndex + 1) % manager.imageData.length;
       window.openLightbox(manager.currentImageIndex, lightboxId);
     }
-    
+
     // Event listeners
     if (lightboxClose) {
       lightboxClose.addEventListener('click', closeLightbox);
     }
-    
+
     if (lightboxPrev) {
       lightboxPrev.addEventListener('click', showPrevImage);
     }
-    
+
     if (lightboxNext) {
       lightboxNext.addEventListener('click', showNextImage);
     }
-    
+
     if (lightbox) {
-      lightbox.addEventListener('click', (e) => {
+      lightbox.addEventListener('click', e => {
         const target = e.target;
         if (!(target instanceof HTMLElement)) return;
 
         // Ignore clicks on nav/close buttons
-        const isNavOrClose = target.closest('.lightbox-prev, .lightbox-next, .lightbox-close') !== null;
+        const isNavOrClose =
+          target.closest('.lightbox-prev, .lightbox-next, .lightbox-close') !==
+          null;
         if (isNavOrClose) return;
 
         // Clicking the image goes to next
-        const isImage = target.id === 'lightbox-image' || target.closest('#lightbox-image');
+        const isImage =
+          target.id === 'lightbox-image' || target.closest('#lightbox-image');
         if (isImage) {
           e.preventDefault();
           showNextImage();
@@ -209,37 +233,48 @@ const { id = "lightbox", images = [] } = Astro.props;
       });
 
       // Touch swipe for mobile: left→next, right→prev
-      lightbox.addEventListener('touchstart', (e) => {
-        if (!lightbox.classList.contains('active')) return;
-        if (!e.touches || e.touches.length === 0) return;
-        touchActive = true;
-        touchStartX = e.touches[0].clientX;
-        touchStartY = e.touches[0].clientY;
-      }, { passive: true });
+      lightbox.addEventListener(
+        'touchstart',
+        e => {
+          if (!lightbox.classList.contains('active')) return;
+          if (!e.touches || e.touches.length === 0) return;
+          touchActive = true;
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+        },
+        { passive: true }
+      );
 
-      lightbox.addEventListener('touchend', (e) => {
-        if (!touchActive) return;
-        touchActive = false;
-        if (!e.changedTouches || e.changedTouches.length === 0) return;
-        const dx = e.changedTouches[0].clientX - touchStartX;
-        const dy = e.changedTouches[0].clientY - touchStartY;
-        const horizontalThreshold = 40; // px
-        const verticalTolerance = 80; // px
-        if (Math.abs(dx) > horizontalThreshold && Math.abs(dy) < verticalTolerance) {
-          if (dx < 0) {
-            showNextImage();
-          } else {
-            showPrevImage();
+      lightbox.addEventListener(
+        'touchend',
+        e => {
+          if (!touchActive) return;
+          touchActive = false;
+          if (!e.changedTouches || e.changedTouches.length === 0) return;
+          const dx = e.changedTouches[0].clientX - touchStartX;
+          const dy = e.changedTouches[0].clientY - touchStartY;
+          const horizontalThreshold = 40; // px
+          const verticalTolerance = 80; // px
+          if (
+            Math.abs(dx) > horizontalThreshold &&
+            Math.abs(dy) < verticalTolerance
+          ) {
+            if (dx < 0) {
+              showNextImage();
+            } else {
+              showPrevImage();
+            }
           }
-        }
-      }, { passive: true });
+        },
+        { passive: true }
+      );
     }
-    
+
     // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
+    document.addEventListener('keydown', e => {
       if (!lightbox || !lightbox?.classList.contains('active')) return;
-      
-      switch(e.key) {
+
+      switch (e.key) {
         case 'Escape':
           closeLightbox();
           break;
@@ -269,7 +304,9 @@ const { id = "lightbox", images = [] } = Astro.props;
     z-index: 9999;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition:
+      opacity 0.3s ease,
+      visibility 0.3s ease;
   }
 
   .lightbox.active {
@@ -295,8 +332,6 @@ const { id = "lightbox", images = [] } = Astro.props;
     cursor: pointer;
     transition: transform 0.3s ease;
   }
-
-
 
   .lightbox-text {
     color: white;
@@ -397,6 +432,3 @@ const { id = "lightbox", images = [] } = Astro.props;
     }
   }
 </style>
-
-
-

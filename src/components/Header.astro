@@ -1,6 +1,5 @@
 ---
-import { LanguageSelector } from "astro-i18next/components";
-import { t } from "i18next";
+import { LanguageSelector } from 'astro-i18next/components';
 import { Menu, X } from 'lucide-astro';
 import Navigation from './Navigation.astro';
 
@@ -20,37 +19,43 @@ const { hideNavigation = true } = Astro.props;
           <a href="#top" class="logo-link">Phimai Pond House</a>
         </div>
       </div>
-      
+
       <!-- Center column: Navigation -->
       <div class="header-center">
-      {!hideNavigation && (
-          <Navigation className="desktop-nav" />
-      )}
+        {!hideNavigation && <Navigation className="desktop-nav" />}
       </div>
-      
+
       <!-- Right column: Language selector and mobile menu -->
       <div class="header-right">
         <LanguageSelector class="language-select" />
-        {!hideNavigation && (
-          <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu">
-            <Menu size={20} class="menu-icon" />
-            <X size={20} class="close-icon" />
-          </button>
-        )}
+        {
+          !hideNavigation && (
+            <button
+              class="mobile-menu-toggle"
+              id="mobileMenuToggle"
+              aria-label="Toggle mobile menu"
+            >
+              <Menu size={20} class="menu-icon" />
+              <X size={20} class="close-icon" />
+            </button>
+          )
+        }
       </div>
     </div>
   </div>
 </header>
 
-{!hideNavigation && (
-  <div class="mobile-menu" id="mobileMenu">
-    <div class="container">
-      <div class="mobile-menu-content">
-        <Navigation className="mobile" />
+{
+  !hideNavigation && (
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="container">
+        <div class="mobile-menu-content">
+          <Navigation className="mobile" />
+        </div>
       </div>
     </div>
-  </div>
-)}
+  )
+}
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
@@ -72,34 +77,40 @@ const { hideNavigation = true } = Astro.props;
 
     // Set header height and mobile menu offset
     const header = document.querySelector('.header') as HTMLElement;
-    
+
     if (header) {
       const setHeaderHeight = () => {
         const height = header.offsetHeight;
-        document.documentElement.style.setProperty('--header-height', `${height}px`);
+        document.documentElement.style.setProperty(
+          '--header-height',
+          `${height}px`
+        );
       };
-      
+
       const updateScrollOffset = () => {
         let totalOffset = header.offsetHeight;
-        
+
         // Add mobile menu height if it's open
         if (mobileMenu && mobileMenu.classList.contains('active')) {
           totalOffset += mobileMenu.offsetHeight;
         }
-        
+
         // Set the scroll offset for smooth scrolling
-        document.documentElement.style.setProperty('--scroll-offset', `${totalOffset}px`);
+        document.documentElement.style.setProperty(
+          '--scroll-offset',
+          `${totalOffset}px`
+        );
       };
-      
+
       setHeaderHeight();
       updateScrollOffset();
-      
+
       // Update on resize
       window.addEventListener('resize', () => {
         setHeaderHeight();
         updateScrollOffset();
       });
-      
+
       // Update scroll offset when mobile menu toggles
       if (mobileMenuToggle && mobileMenu) {
         const originalToggleClick = mobileMenuToggle.onclick;
@@ -163,8 +174,8 @@ const { hideNavigation = true } = Astro.props;
     transition: var(--transition);
   }
 
-  .logo a:hover { 
-    color: var(--color-primary); 
+  .logo a:hover {
+    color: var(--color-primary);
   }
 
   /* Navigation styling is handled by Navigation component */
@@ -276,32 +287,32 @@ const { hideNavigation = true } = Astro.props;
   /* Mobile navigation styling handled by Navigation component */
 
   /* ===== RESPONSIVE DESIGN ===== */
-  
+
   /* Hide mobile elements on wide screens (1025px and up) */
   @media (min-width: 1025px) {
-    .mobile-menu { 
-      display: none !important; 
+    .mobile-menu {
+      display: none !important;
     }
-    .mobile-menu-toggle { 
-      display: none !important; 
+    .mobile-menu-toggle {
+      display: none !important;
     }
   }
 
   /* Show mobile elements and hide desktop nav on narrow screens (1024px and down) */
   @media (max-width: 1024px) {
-    .header-content { 
-      padding: var(--space) var(--space); 
+    .header-content {
+      padding: var(--space) var(--space);
       grid-template-columns: 1fr auto;
       gap: var(--space);
     }
-    .header-center { 
-      display: none !important; 
+    .header-center {
+      display: none !important;
     }
-    .mobile-menu-toggle { 
-      display: flex !important; 
+    .mobile-menu-toggle {
+      display: flex !important;
     }
-    .logo a { 
-      font-size: 1.3rem; 
+    .logo a {
+      font-size: 1.3rem;
     }
   }
 
@@ -311,11 +322,11 @@ const { hideNavigation = true } = Astro.props;
       max-height: calc(100vh - 70px);
       padding: var(--space-sm);
     }
-    
+
     .mobile-menu-content {
       padding: var(--space-sm) 0;
     }
-    
+
     .mobile-menu .nav-link {
       padding: var(--space-sm) var(--space-sm);
       font-size: 0.9rem;

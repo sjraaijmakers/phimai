@@ -1,8 +1,7 @@
 ---
-import { t } from "i18next";
+import { t } from 'i18next';
 import GuideSection from './GuideSection.astro';
 import type { ImageConfig } from '../../data/images';
-
 
 // Define guide sections data structure
 const guideSections = [
@@ -15,7 +14,8 @@ const guideSections = [
       { src: '/images/sai-gnam-bench.jpg' },
       { src: '/images/sai-gnam-shadow.jpg' },
     ] as ImageConfig[],
-    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1924.9440490989714!2d102.4950!3d15.2184!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311917a1629c1fbf%3A0x682188c4c7576e05!2sSai%20Ngam%20Banyan%20Trees!5e0!3m2!1sen!2sth!4v1755585214037"
+    mapUrl:
+      'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1924.9440490989714!2d102.4950!3d15.2184!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311917a1629c1fbf%3A0x682188c4c7576e05!2sSai%20Ngam%20Banyan%20Trees!5e0!3m2!1sen!2sth!4v1755585214037',
   },
   {
     id: 'chicken',
@@ -24,16 +24,18 @@ const guideSections = [
       { src: '/images/chicken-front.jpg' },
       { src: '/images/chicken-man.jpg' },
     ] as ImageConfig[],
-    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1924.9440490989714!2d102.4937!3d15.2180!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311917a1629c1fbf%3A0x682188c4c7576e05!2sBest%20Grilled%20Chicken%20Phimai!5e0!3m2!1sen!2sth!4v1755585214033"
+    mapUrl:
+      'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1924.9440490989714!2d102.4937!3d15.2180!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311917a1629c1fbf%3A0x682188c4c7576e05!2sBest%20Grilled%20Chicken%20Phimai!5e0!3m2!1sen!2sth!4v1755585214033',
   },
   {
     id: 'duck',
     titleKey: 'guide.sections.duck.title',
     images: [
-        { src: '/images/duck-woman.jpg' },
-        { src: '/images/duck-grill.jpg' },
+      { src: '/images/duck-woman.jpg' },
+      { src: '/images/duck-grill.jpg' },
     ] as ImageConfig[],
-    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d240.61432677178774!2d102.49321139999999!3d15.2225091!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3119177257afd713%3A0x5156ae0b4d201b5c!2z4Lii4Liy4Lii4Lit4LmJ4Lin4LiZIOC5gOC4m-C5h-C4lOC4ouC5iOC4suC4h-C4nuC4tOC4oeC4suC4og!5e0!3m2!1snl!2snl!4v1755937226841!5m2!1snl!2snl"
+    mapUrl:
+      'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d240.61432677178774!2d102.49321139999999!3d15.2225091!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3119177257afd713%3A0x5156ae0b4d201b5c!2z4Lii4Liy4Lii4Lit4LmJ4Lin4LiZIOC5gOC4m-C5h-C4lOC4ouC5iOC4suC4h-C4nuC4tOC4oeC4suC4og!5e0!3m2!1snl!2snl!4v1755937226841!5m2!1snl!2snl',
   },
   {
     id: 'boatNoodle',
@@ -42,7 +44,8 @@ const guideSections = [
       { src: '/images/boat-noodle.jpg' },
       { src: '/images/boat-noodle-far.jpg' },
     ] as ImageConfig[],
-    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1924.9440490989714!2d102.4940!3d15.2185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311917a1629c1fbf%3A0x682188c4c7576e05!2sBoat%20Noodle%20Shop%20Phimai!5e0!3m2!1sen!2sth!4v1755585214034"
+    mapUrl:
+      'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1924.9440490989714!2d102.4940!3d15.2185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311917a1629c1fbf%3A0x682188c4c7576e05!2sBoat%20Noodle%20Shop%20Phimai!5e0!3m2!1sen!2sth!4v1755585214034',
   },
   {
     id: 'market',
@@ -52,16 +55,16 @@ const guideSections = [
       { src: '/images/market-auntie.jpg' },
       { src: '/images/marktet-auntie2.jpg' },
     ] as ImageConfig[],
-    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1924.9440490989714!2d102.4945!3d15.2182!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311917a1629c1fbf%3A0x682188c4c7576e05!2sPhimai%20Morning%20Market!5e0!3m2!1sen!2sth!4v1755585214035"
+    mapUrl:
+      'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1924.9440490989714!2d102.4945!3d15.2182!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311917a1629c1fbf%3A0x682188c4c7576e05!2sPhimai%20Morning%20Market!5e0!3m2!1sen!2sth!4v1755585214035',
   },
   {
     id: 'coffee',
     titleKey: 'guide.sections.coffee.title',
-    images: [
-      { src: '/images/coffee-cafe.jpg' },
-    ] as ImageConfig[],
-    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1924.9440490989714!2d102.4948!3d15.2183!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311917a1629c1fbf%3A0x682188c4c7576e05!2sBest%20Coffee%20Cafe%20Phimai!5e0!3m2!1sen!2sth!4v1755585214036"
-  }
+    images: [{ src: '/images/coffee-cafe.jpg' }] as ImageConfig[],
+    mapUrl:
+      'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1924.9440490989714!2d102.4948!3d15.2183!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311917a1629c1fbf%3A0x682188c4c7576e05!2sBest%20Coffee%20Cafe%20Phimai!5e0!3m2!1sen!2sth!4v1755585214036',
+  },
 ];
 ---
 
@@ -76,14 +79,16 @@ const guideSections = [
   <!-- Guide Sections -->
   <section class="guide-sections">
     <div class="container guide-sections-grid">
-      {guideSections.map((section, index) => (
-        <GuideSection 
-          title={t(section.titleKey)}
-          images={section.images}
-          mapSrc={section.mapUrl}
-          sectionNumber={index + 1}
-        />
-      ))}
+      {
+        guideSections.map((section, index) => (
+          <GuideSection
+            title={t(section.titleKey)}
+            images={section.images}
+            mapSrc={section.mapUrl}
+            sectionNumber={index + 1}
+          />
+        ))
+      }
     </div>
   </section>
 </section>

@@ -1,5 +1,5 @@
 ---
-import { t } from "i18next";
+import { t } from 'i18next';
 
 export interface Props {
   currentPage: string;
@@ -23,13 +23,12 @@ const { currentPage, currentPageKey } = Astro.props;
 </nav>
 
 <style>
-    
-   /* Breadcrumbs */
-   .breadcrumbs {
-     padding: var(--space-md) 0;
-     /* Removed background and border */
-     margin-top: var(--header-height, 80px);
-   }
+  /* Breadcrumbs */
+  .breadcrumbs {
+    padding: var(--space-md) 0;
+    /* Removed background and border */
+    margin-top: var(--header-height, 80px);
+  }
 
   .breadcrumb-list {
     display: flex;
@@ -75,4 +74,4 @@ const { currentPage, currentPageKey } = Astro.props;
     font-size: 0.9rem;
     font-weight: 600;
   }
-  </style>
+</style>

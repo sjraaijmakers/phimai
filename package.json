@@ -11,7 +11,9 @@
     "clean": "rimraf --no-glob --force node_modules package-lock.json .astro dist .vite .cache .turbo .next .nuxt .output && npm cache clean --force",
     "clean:windows": "taskkill /f /im node.exe 2>nul || true && rimraf --no-glob --force node_modules package-lock.json .astro dist .vite .cache .turbo .next .nuxt .output && npm cache clean --force",
     "clean:install": "npm run clean && npm install",
-    "clean:install:windows": "npm run clean:windows && npm install"
+    "clean:install:windows": "npm run clean:windows && npm install",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.23",
@@ -22,6 +24,8 @@
     "sharp": "^0.34.3"
   },
   "devDependencies": {
+    "prettier": "^3.6.2",
+    "prettier-plugin-astro": "^0.14.1",
     "rimraf": "^5.0.5"
   }
 }

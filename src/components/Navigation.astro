@@ -1,33 +1,46 @@
 ---
-import { t } from "i18next";
+import { t } from 'i18next';
 
 export interface Props {
   className?: string;
 }
 
-const { className = "" } = Astro.props;
-
+const { className = '' } = Astro.props;
 ---
 
 <nav class={`navigation ${className}`}>
   <div class="nav-container">
-    {className.includes('guide-nav') && (
-      <div class="nav-menu guide-nav">
-        <a href="/" class="nav-link back-home">
-          ← {t('nav.backHome')}
-        </a>
-      </div>
-    )}
-    
-    {!className.includes('guide-nav') && (
-      <div class="nav-menu">
-        <a href="#about" class="nav-link">{t('nav.about')}</a>
-        <a href="#gallery" class="nav-link">{t('nav.gallery')}</a>
-        <a href="#location" class="nav-link">{t('nav.location')}</a>
-        <a href="#booking" class="nav-link nav-book-now">{t('nav.bookNow')}</a>
-        <a href="#contact" class="nav-link">{t('nav.contact')}</a>
-      </div>
-    )}
+    {
+      className.includes('guide-nav') && (
+        <div class="nav-menu guide-nav">
+          <a href="/" class="nav-link back-home">
+            ← {t('nav.backHome')}
+          </a>
+        </div>
+      )
+    }
+
+    {
+      !className.includes('guide-nav') && (
+        <div class="nav-menu">
+          <a href="#about" class="nav-link">
+            {t('nav.about')}
+          </a>
+          <a href="#gallery" class="nav-link">
+            {t('nav.gallery')}
+          </a>
+          <a href="#location" class="nav-link">
+            {t('nav.location')}
+          </a>
+          <a href="#booking" class="nav-link nav-book-now">
+            {t('nav.bookNow')}
+          </a>
+          <a href="#contact" class="nav-link">
+            {t('nav.contact')}
+          </a>
+        </div>
+      )
+    }
   </div>
 
   <script>
@@ -38,30 +51,36 @@ const { className = "" } = Astro.props;
         // Initialize for both desktop and mobile navigation
         const navLinks = Array.from(document.querySelectorAll('.nav-link'));
         const sections = Array.from(document.querySelectorAll('section[id]'));
-        
-        console.log('Navigation initialized with', navLinks.length, 'links and', sections.length, 'sections');
+
+        console.log(
+          'Navigation initialized with',
+          navLinks.length,
+          'links and',
+          sections.length,
+          'sections'
+        );
         let scrollTimeout;
         let lastScrollPosition = 0;
         let isNavigating = false;
-        
+
         function updateActiveNav() {
           const scrollPosition = window.scrollY + window.innerHeight / 3; // Use 1/3 of viewport height as trigger point
           const firstSectionTop = sections.length ? sections[0].offsetTop : 0;
 
           // While above first section (still in hero), no link should be active
           if (scrollPosition < firstSectionTop) {
-            navLinks.forEach((link) => link.classList.remove('active'));
+            navLinks.forEach(link => link.classList.remove('active'));
             return;
           }
 
           // Find the current section based on scroll position
           let currentSection = null;
-          
+
           for (let i = sections.length - 1; i >= 0; i--) {
             const section = sections[i];
             if (section && section.offsetTop !== undefined) {
               const sectionTop = section.offsetTop;
-              
+
               if (scrollPosition >= sectionTop) {
                 currentSection = section;
                 break;
@@ -73,28 +92,37 @@ const { className = "" } = Astro.props;
             const sectionId = currentSection.getAttribute('id');
             if (sectionId) {
               // Remove active class from all nav links
-              navLinks.forEach((link) => link.classList.remove('active'));
-              
+              navLinks.forEach(link => link.classList.remove('active'));
+
               // Add active class to corresponding nav link
-              const activeLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+              const activeLink = document.querySelector(
+                `.nav-link[href="#${sectionId}"]`
+              );
               if (activeLink) {
                 activeLink.classList.add('active');
-                console.log('Set active:', sectionId, 'on link:', activeLink.textContent);
+                console.log(
+                  'Set active:',
+                  sectionId,
+                  'on link:',
+                  activeLink.textContent
+                );
               } else {
                 console.log('No active link found for section:', sectionId);
               }
             }
           }
         }
-        
+
         // Debounced scroll handler to prevent intermediate activations
         function handleScroll() {
           // Don't update active nav during programmatic navigation
           if (isNavigating) return;
-          
+
           const currentScrollPosition = window.scrollY;
-          const scrollDifference = Math.abs(currentScrollPosition - lastScrollPosition);
-          
+          const scrollDifference = Math.abs(
+            currentScrollPosition - lastScrollPosition
+          );
+
           // Only update if there's significant scroll movement or after scrolling stops
           if (scrollDifference > 50) {
             clearTimeout(scrollTimeout);
@@ -102,21 +130,21 @@ const { className = "" } = Astro.props;
               updateActiveNav();
             }, 100);
           }
-          
+
           lastScrollPosition = currentScrollPosition;
         }
-        
+
         // Handle navigation clicks - immediately set active state
-        navLinks.forEach((link) => {
+        navLinks.forEach(link => {
           link.addEventListener('click', () => {
             const href = link.getAttribute('href');
             if (href && href.startsWith('#')) {
               isNavigating = true;
-              
+
               // Immediately set the clicked link as active
-              navLinks.forEach((navLink) => navLink.classList.remove('active'));
+              navLinks.forEach(navLink => navLink.classList.remove('active'));
               link.classList.add('active');
-              
+
               // Reset navigation flag after scroll completes
               setTimeout(() => {
                 isNavigating = false;
@@ -124,10 +152,10 @@ const { className = "" } = Astro.props;
             }
           });
         });
-        
+
         // Update on scroll with debouncing
         window.addEventListener('scroll', handleScroll);
-        
+
         // Update on page load
         updateActiveNav();
       });
@@ -169,7 +197,7 @@ const { className = "" } = Astro.props;
       background: transparent;
     }
 
-    .nav-link:hover { 
+    .nav-link:hover {
       color: var(--color-secondary);
       background: rgba(139, 115, 85, 0.05);
       transform: translateY(-1px);
@@ -201,7 +229,7 @@ const { className = "" } = Astro.props;
       background: transparent;
     }
 
-    .navigation a:hover { 
+    .navigation a:hover {
       color: var(--color-secondary);
       background: rgba(139, 115, 85, 0.05);
       transform: translateY(-1px);
@@ -344,5 +372,3 @@ const { className = "" } = Astro.props;
     }
   </style>
 </nav>
-
-

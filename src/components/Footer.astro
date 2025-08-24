@@ -1,6 +1,6 @@
 ---
 import ScrollToTop from './ui/ScrollToTop.astro';
-import { t } from "i18next";
+import { t } from 'i18next';
 
 const currentYear = new Date().getFullYear();
 ---
@@ -9,12 +9,20 @@ const currentYear = new Date().getFullYear();
   <div class="container">
     <div class="footer-content">
       <div class="footer-copyright">
-        <p>&copy; {currentYear} Phimai Pond House. <span>{t('footer.copyright')}</span></p>
+        <p>
+          &copy; {currentYear} Phimai Pond House. <span
+            >{t('footer.copyright')}</span
+          >
+        </p>
       </div>
       <div class="footer-actions">
         <div class="scroll-to-top-wrapper">
-          <ScrollToTop id="footerScrollToTop" className="footer-style" i18nKey="footer.scrollToTop" />
-       </div>
+          <ScrollToTop
+            id="footerScrollToTop"
+            className="footer-style"
+            i18nKey="footer.scrollToTop"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -55,8 +63,8 @@ const currentYear = new Date().getFullYear();
 
   /* ===== RESPONSIVE DESIGN ===== */
   @media (max-width: 768px) {
-    .footer { 
-      padding: var(--space) var(--space); 
+    .footer {
+      padding: var(--space) var(--space);
     }
     .footer-content {
       flex-direction: column;
@@ -65,4 +73,3 @@ const currentYear = new Date().getFullYear();
     }
   }
 </style>
-
