@@ -5,7 +5,6 @@ import { Image } from 'astro:assets';
 interface LightboxImage {
   src: string;
   captionKey?: string; // translation key for caption
-  caption?: string; // direct caption text
 }
 
 interface Props {
@@ -28,7 +27,7 @@ const { id = 'lightbox', images = [] } = Astro.props;
           id="lightbox-image"
           class="lightbox-image"
           src={images[0].src}
-          alt={images[0].caption || 'Image'}
+          alt="alt"
           width={1200}
           height={800}
           format="webp"
@@ -105,8 +104,8 @@ const { id = 'lightbox', images = [] } = Astro.props;
     console.log('Available lightboxes:', Object.keys(window.lightboxManager));
 
     // Global open lightbox function (only set once)
-    if (!window.openLightbox) {
-      window.openLightbox = function (index, targetLightboxId) {
+    if (!(window as any).openLightbox) {
+      (window as any).openLightbox = function (index, targetLightboxId) {
         console.log('openLightbox called:', { index, targetLightboxId });
 
         const manager = window.lightboxManager[targetLightboxId];

@@ -18,8 +18,7 @@ export const galleryImages: ImageConfig[] = [
   },
   // Example without a description to verify lightbox behavior
   {
-    src: '/images/garden-view.jpg',
-    captionKey: undefined,
+    src: '/images/garden-view.jpg'
   },
   {
     src: '/images/interior-living.jpg',

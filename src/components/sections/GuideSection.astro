@@ -199,7 +199,7 @@ const lightboxId = `lightbox-${sectionNumber}`;
 
   .section-carousel {
     border-radius: var(--radius);
-    overflow: hidden;
+    overflow: visible;
     box-shadow: var(--shadow-md);
     position: relative;
     aspect-ratio: 4/3;
@@ -208,12 +208,19 @@ const lightboxId = `lightbox-${sectionNumber}`;
 
   .section-carousel .carousel {
     height: 100%;
+    overflow: hidden;
   }
 
   .section-carousel .carousel-slide img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  /* Ensure carousel controls are visible */
+  .section-carousel .carousel-arrow,
+  .section-carousel .carousel-dots {
+    z-index: 30;
   }
 
   .section-map {
