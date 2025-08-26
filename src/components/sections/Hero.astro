@@ -1,213 +1,99 @@
 ---
-// This should work with astro-i18next integration
 import { t } from 'i18next';
 import Carousel from '../ui/Carousel.astro';
 import type { ImageConfig } from '../../data/images';
 
-// Hero images for carousel
 const heroImages: ImageConfig[] = [
   {
-    src: '/images/hero-tiny-home.jpg',
-    caption: 'Phimai Pond House - Your peaceful retreat',
+    src: '/images/hero-tiny-home.jpg'
   },
   {
-    src: '/images/bedroom-cozy.jpg',
-    caption: 'Cozy bedroom with modern amenities',
+    src: '/images/bedroom-cozy.jpg'
   },
   {
-    src: '/images/exterior-cozy.jpg',
-    caption: 'Charming exterior with garden views',
+    src: '/images/exterior-cozy.jpg'
   },
   {
-    src: '/images/garden-view.jpg',
-    caption: 'Beautiful garden setting',
+    src: '/images/garden-view.jpg'
   },
   {
-    src: '/images/kitchen-cozy.jpg',
-    caption: 'Fully equipped kitchen for your comfort',
+    src: '/images/kitchen-cozy.jpg'
   },
 ];
 ---
 
-<section id="hero" class="hero">
-  <div class="hero-background">
-    <Carousel
-      id="hero-carousel"
-      images={heroImages}
-      interval={5000}
-      showArrows={false}
-      showDots={true}
-      autoPlay={true}
-    />
-  </div>
+<!-- Hero Background Carousel -->
+<Carousel
+  id="hero-carousel"
+  images={heroImages}
+  interval={5000}
+  showArrows={false}
+  showDots={true}
+  autoPlay={true}
+/>
 
-  <div class="hero-content">
-    <div class="container">
-      <h1 class="hero-title">{t('hero.title')}</h1>
-      <p class="hero-subtitle">{t('hero.subtitle')}</p>
+<!-- Hero Content -->
+<h1 class="hero-title">{t('hero.title')}</h1>
+<p class="hero-subtitle">{t('hero.subtitle')}</p>
 
-      <div class="hero-buttons">
-        <a href="#booking" class="btn btn-primary">{t('hero.bookNow')}</a>
-        <a href="#gallery" class="btn btn-secondary">{t('hero.viewGallery')}</a>
-      </div>
-    </div>
-  </div>
-</section>
+<div class="hero-buttons">
+  <a href="#booking" class="btn btn-primary">{t('hero.bookNow')}</a>
+  <a href="#gallery" class="btn btn-secondary">{t('hero.viewGallery')}</a>
+</div>
 
 <style>
-  /* ===== HERO ===== */
-  .hero {
-    position: relative;
-    /* Full height */
-    height: 100vh;
-    /* Better on iOS 15+/Safari/Chrome */
-    padding-top: var(--header-height);
-    padding-bottom: env(safe-area-inset-bottom, 0px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-
-  /* Prefer static viewport height if supported (stable layout) */
-  @supports (height: 100svh) {
-    .hero {
-      min-height: calc(100svh - var(--header-height));
-    }
-  }
-
-  /* Prefer dynamic viewport height to account for browser chrome */
-  @supports (height: 100dvh) {
-    .hero {
-      min-height: calc(100dvh - var(--header-height));
-    }
-  }
-
-  .hero-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-  }
-
-  .hero-content {
-    text-align: center;
-    width: 100%;
-    max-width: none;
-    margin: 0 auto;
-    padding: var(--space-2xl);
-    animation: fadeIn 1s ease-out;
-    position: relative;
-    z-index: 3;
-  }
-
+  /* ===== HERO CONTENT STYLES ===== */
   .hero-title {
-    font-size: clamp(3.5rem, 10vw, 6rem);
-    margin-bottom: var(--space);
+    font-size: 3.5rem;
+    font-weight: 700;
     color: var(--color-white);
-    text-shadow:
-      0 2px 4px rgba(0, 0, 0, 0.4),
-      0 4px 8px rgba(0, 0, 0, 0.3);
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    line-height: 1;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-bottom: var(--space-lg);
+    line-height: 1.1;
   }
 
   .hero-subtitle {
-    font-size: clamp(1rem, 3vw, 1.2rem);
+    font-size: 1.25rem;
     color: var(--color-white);
-    margin-bottom: var(--space-xl);
-    font-weight: 300;
-    text-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.5),
-      0 2px 4px rgba(0, 0, 0, 0.4);
-    opacity: 0.8;
-    max-width: none;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    margin-bottom: var(--space-2xl);
+    max-width: 600px;
     margin-left: auto;
     margin-right: auto;
   }
 
   .hero-buttons {
     display: flex;
-    gap: var(--space);
+    gap: var(--space-lg);
     justify-content: center;
     flex-wrap: wrap;
   }
 
   .hero-buttons .btn {
-    min-width: 140px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow:
-      0 4px 16px rgba(0, 0, 0, 0.2),
-      0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-
-  .hero-buttons .btn::before {
-    display: none;
-  }
-
-  .hero-buttons .btn-primary {
-    background: rgba(255, 255, 255, 0.95);
-    color: var(--color-text);
+    min-width: 160px;
+    padding: var(--space-lg) var(--space-2xl);
+    font-size: 1.1rem;
     font-weight: 600;
-  }
-
-  .hero-buttons .btn-secondary {
-    background: rgba(255, 255, 255, 0.15);
-    color: var(--color-white);
-    border-color: rgba(255, 255, 255, 0.3);
-  }
-
-  .hero-buttons .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.25);
-    color: var(--color-white);
   }
 
   /* ===== RESPONSIVE DESIGN ===== */
   @media (max-width: var(--breakpoint-sm)) {
-    .hero {
-      min-height: 100vh;
-    }
-    .hero-content {
-      padding: var(--space-lg);
-      margin: var(--space);
-    }
     .hero-title {
-      font-size: clamp(2rem, 8vw, 2.5rem);
-      text-shadow:
-        0 2px 4px rgba(0, 0, 0, 0.4),
-        0 4px 8px rgba(0, 0, 0, 0.3);
+      font-size: 2.5rem;
     }
+
     .hero-subtitle {
-      font-size: clamp(1rem, 4vw, 1.1rem);
-      text-shadow:
-        0 1px 2px rgba(0, 0, 0, 0.5),
-        0 2px 4px rgba(0, 0, 0, 0.4);
+      font-size: 1.1rem;
     }
+
     .hero-buttons {
       flex-direction: column;
       align-items: center;
     }
+
     .hero-buttons .btn {
       width: 100%;
       max-width: 280px;
-    }
-  }
-
-  @media (max-width: var(--breakpoint-xs)) {
-    .hero-title {
-      font-size: clamp(1.8rem, 10vw, 2rem);
-      text-shadow:
-        0 2px 4px rgba(0, 0, 0, 0.5),
-        0 4px 8px rgba(0, 0, 0, 0.4);
-    }
-    .hero-subtitle {
-      font-size: clamp(0.9rem, 5vw, 1rem);
-      text-shadow:
-        0 1px 2px rgba(0, 0, 0, 0.6),
-        0 2px 4px rgba(0, 0, 0, 0.5);
     }
   }
 </style>

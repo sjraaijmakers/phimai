@@ -39,57 +39,42 @@ const amenities = [
 ];
 ---
 
-<section id="about" class="about section">
-  <div class="container">
-    <div class="about-content">
-      <div class="about-info">
-        <h2>{t('about.title')}</h2>
-        <p>{t('about.intro')}</p>
+<!-- About Info -->
+<div class="about-info">
+  <h2>{t('about.title')}</h2>
+  <p>{t('about.intro')}</p>
 
-        <!-- Family suite info integrated into main description -->
-        <div class="family-suite-info">
-          <div class="family-suite-icon">
-            <Users size={20} />
-          </div>
-          <div class="family-suite-content">
-            <h4>{t('about.familySuite.title')}</h4>
-            <p>{t('about.familySuite.description')}</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="amenities">
-        <h3>{t('about.amenities.title')}</h3>
-        <div class="amenities-list">
-          {
-            amenities.map(({ icon: Icon, key }) => (
-              <div class="amenity-item">
-                <div class="amenity-icon">
-                  <Icon size={20} />
-                </div>
-                <span>{t(key)}</span>
-              </div>
-            ))
-          }
-        </div>
-      </div>
+  <!-- Family suite info integrated into main description -->
+  <div class="family-suite-info">
+    <div class="family-suite-icon">
+      <Users size={20} />
+    </div>
+    <div class="family-suite-content">
+      <h4>{t('about.familySuite.title')}</h4>
+      <p>{t('about.familySuite.description')}</p>
     </div>
   </div>
-</section>
+</div>
+
+<!-- Amenities -->
+<div class="amenities">
+  <h3>{t('about.amenities.title')}</h3>
+  <div class="amenities-list">
+    {
+      amenities.map(({ icon: Icon, key }) => (
+        <div class="amenity-item">
+          <div class="amenity-icon">
+            <Icon size={20} />
+          </div>
+          <span>{t(key)}</span>
+        </div>
+      ))
+    }
+  </div>
+</div>
 
 <style>
-  /* ===== ABOUT ===== */
-  .about {
-    background: var(--color-white);
-  }
-
-  .about-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-3xl);
-    align-items: center;
-  }
-
+  /* ===== ABOUT CONTENT STYLES ===== */
   .about-info p {
     margin-bottom: var(--space-xl);
   }
@@ -98,192 +83,91 @@ const amenities = [
   .family-suite-info {
     display: flex;
     align-items: flex-start;
-    gap: var(--space-lg);
-    margin-top: var(--space-xl);
+    gap: var(--space);
     padding: var(--space-lg);
-    background: linear-gradient(
-      135deg,
-      rgba(156, 175, 136, 0.05) 0%,
-      rgba(156, 175, 136, 0.02) 100%
-    );
+    background: rgba(139, 115, 85, 0.05);
     border-radius: var(--radius);
-    border: 1px solid rgba(156, 175, 136, 0.1);
+    margin-top: var(--space-xl);
   }
 
   .family-suite-icon {
     width: 40px;
     height: 40px;
-    background: var(--gradient-accent);
+    background: var(--color-primary);
     border-radius: var(--radius-sm);
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--color-white);
     flex-shrink: 0;
-    margin-top: 2px;
   }
 
   .family-suite-content h4 {
     margin: 0 0 var(--space-sm) 0;
     color: var(--color-primary);
-    font-size: 1.1rem;
   }
 
   .family-suite-content p {
     margin: 0;
     color: var(--color-text);
-    line-height: var(--lh-body);
   }
 
-  .feature-section {
-    margin: var(--space-xl) 0;
-  }
-
-  .feature-box {
-    display: flex;
-    align-items: center;
-    gap: var(--space-lg);
-    padding: var(--space-xl);
-    background: var(--color-white);
-    border-radius: var(--radius-lg);
-    border: 1px solid rgba(139, 115, 85, 0.1);
-    transition: var(--transition);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .feature-box::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.1) 0%,
-      rgba(255, 255, 255, 0.05) 100%
-    );
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .feature-box:hover {
-    transform: translateY(-2px);
-  }
-
-  .feature-box:hover::before {
-    opacity: 1;
-  }
-
-  .feature-icon {
-    width: 56px;
-    height: 56px;
-    border-radius: var(--radius);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-white);
-    flex-shrink: 0;
-    position: relative;
-    z-index: 1;
-  }
-
-  .feature-icon.bikes {
-    background: linear-gradient(135deg, #9caf88 0%, #8ba876 100%);
-  }
-
-  .feature-icon.family {
-    background: linear-gradient(135deg, #8b7355 0%, #a67c52 100%);
-  }
-
-  .feature-content p {
-    margin: 0;
-    position: relative;
-    z-index: 1;
+  .amenities h3 {
+    margin-bottom: var(--space-xl);
   }
 
   .amenities-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-lg);
   }
 
   .amenity-item {
     display: flex;
     align-items: center;
-    gap: var(--space-sm);
-    padding: var(--space-sm) 0;
+    gap: var(--space);
+    padding: var(--space);
+    background: rgba(139, 115, 85, 0.03);
+    border-radius: var(--radius-sm);
     transition: var(--transition);
   }
 
   .amenity-item:hover {
-    transform: translateX(4px);
+    background: rgba(139, 115, 85, 0.08);
+    transform: translateY(-2px);
   }
 
   .amenity-icon {
-    width: 24px;
-    height: 24px;
-    color: var(--color-primary);
+    width: 40px;
+    height: 40px;
+    background: var(--color-primary);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
     flex-shrink: 0;
   }
 
   .amenity-item span {
-    font-weight: 400;
-    color: var(--color-text-light);
-    font-size: 0.9rem;
-  }
-
-  .about-image {
-    position: relative;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow-lg);
-  }
-
-  .about-image {
-    overflow: hidden;
-  }
-
-  .about-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-  }
-
-  .about-image:hover img {
-    transform: scale(1.05);
+    font-weight: 500;
+    color: var(--color-text);
   }
 
   /* ===== RESPONSIVE DESIGN ===== */
   @media (max-width: var(--breakpoint-sm)) {
-    .about-content {
-      grid-template-columns: 1fr;
-      gap: var(--space-xl);
-    }
-    .about-info h2 {
-      font-size: 2rem;
-    }
-    .about-info p {
-    }
     .amenities-list {
-      gap: var(--space-sm);
+      grid-template-columns: 1fr;
+      gap: var(--space);
     }
 
-    /* Mobile adjustments for family suite info */
     .family-suite-info {
-      flex-direction: row;
-      gap: var(--space);
-      padding: var(--space);
+      flex-direction: column;
+      text-align: center;
     }
 
     .family-suite-icon {
-      align-self: flex-start;
-    }
-
-    .family-suite-content h4 {
-      font-size: 1rem;
+      align-self: center;
     }
   }
 </style>

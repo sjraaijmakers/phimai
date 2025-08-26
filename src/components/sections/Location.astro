@@ -20,65 +20,45 @@ const locationFeatures = [
 ];
 ---
 
-<section id="location" class="location section">
-  <div class="container">
-    <div class="location-section">
-      <div class="location-info">
-        <h2>{t('gallery.location.title')}</h2>
-        <p>{t('gallery.location.description')}</p>
+<!-- Location Info -->
+<div class="location-info">
+  <h2>{t('gallery.location.title')}</h2>
+  <p>{t('gallery.location.description')}</p>
 
-        <div class="location-features">
-          {
-            locationFeatures.map(({ icon: Icon, key }) => (
-              <div class="location-feature">
-                <div class="feature-icon">
-                  <Icon size={16} />
-                </div>
-                <span>{t(key)}</span>
-              </div>
-            ))
-          }
+  <div class="location-features">
+    {
+      locationFeatures.map(({ icon: Icon, key }) => (
+        <div class="location-feature">
+          <div class="feature-icon">
+            <Icon size={16} />
+          </div>
+          <span>{t(key)}</span>
         </div>
-
-        <div class="guide-link-container">
-          <a href={localizePath("/guide")} class="guide-link"
-            >{t('gallery.location.guideLink')}</a
-          >
-        </div>
-      </div>
-
-      <div class="location-map">
-        <iframe
-          class="map-iframe"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1924.9440490989714!2d102.49866774589388!3d15.219289032023765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311917a1629c1fbf%3A0x682188c4c7576e05!2sPhimai%20Pond%20House!5e0!3m2!1snl!2snl!4v1755585214032!5m2!1snl!2snl"
-          allowfullscreen=""
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-        >
-        </iframe>
-      </div>
-    </div>
+      ))
+    }
   </div>
-</section>
+
+  <div class="guide-link-container">
+    <a href={localizePath("/guide")} class="guide-link"
+      >{t('gallery.location.guideLink')}</a
+    >
+  </div>
+</div>
+
+<!-- Location Map -->
+<div class="location-map">
+  <iframe
+    class="map-iframe"
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1924.9440490989714!2d102.49866774589388!3d15.219289032023765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311917a1629c1fbf%3A0x682188c4c7576e05!2sPhimai%20Pond%20House!5e0!3m2!1snl!2snl!4v1755585214032!5m2!1snl!2snl"
+    allowfullscreen=""
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+  >
+  </iframe>
+</div>
 
 <style>
-  /* ===== LOCATION ===== */
-  .location {
-    background: var(--color-white);
-  }
-
-  .location-content {
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  .location-section {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-3xl);
-    align-items: stretch;
-  }
-
+  /* ===== LOCATION CONTENT STYLES ===== */
   .location-info p {
     margin-bottom: var(--space-xl);
   }
@@ -98,67 +78,64 @@ const locationFeatures = [
   .feature-icon {
     width: 32px;
     height: 32px;
-    background: var(--gradient-accent);
+    background: var(--color-primary);
     border-radius: var(--radius-sm);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--color-text);
+    color: var(--color-white);
     flex-shrink: 0;
   }
 
   .location-feature span {
     font-weight: 500;
     color: var(--color-text);
-    font-family: var(--font-secondary);
   }
 
   .guide-link-container {
     margin-top: var(--space-xl);
   }
 
-  .guide-text {
-    color: var(--color-text);
-    font-family: var(--font-secondary);
-    font-style: italic;
-  }
-
   .guide-link {
-    color: var(--color-primary);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space) var(--space-lg);
+    background: var(--color-primary);
+    color: var(--color-white);
     text-decoration: none;
-    font-weight: 600;
-    font-family: var(--font-secondary);
-    transition: color 0.2s ease;
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+    transition: var(--transition);
   }
 
   .guide-link:hover {
-    color: var(--color-primary-dark);
-    text-decoration: underline;
+    background: var(--color-secondary);
+    transform: translateY(-2px);
   }
 
   .location-map {
-    min-height: 400px;
-    height: 100%;
+    position: relative;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
   }
 
   .map-iframe {
     width: 100%;
-    height: 100%;
-    min-height: 400px;
-    border-radius: var(--radius);
-    border: 1px solid #e8e0d6;
+    height: 400px;
+    border: none;
   }
 
   /* ===== RESPONSIVE DESIGN ===== */
   @media (max-width: var(--breakpoint-sm)) {
-    .location-section {
-      grid-template-columns: 1fr;
-      gap: var(--space-xl);
-    }
-
     .location-features {
       grid-template-columns: 1fr;
-      gap: var(--space);
+      gap: var(--space-sm);
+    }
+
+    .map-iframe {
+      height: 300px;
     }
   }
 </style>

@@ -23,99 +23,109 @@ const providers = Object.entries(siteConfig.booking || {})
   .sort((a, b) => a.name.localeCompare(b.name));
 ---
 
-<section id="booking" class="booking section">
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title booking-title-gold">
-        <span class="sparkle sparkle-left">★</span>
-        {t('booking.title')}
-        <span class="sparkle sparkle-right">★</span>
-      </h2>
-      <p class="section-subtitle">{t('booking.subtitle')}</p>
-    </div>
+<!-- Booking Header -->
+<div class="section-header">
+  <h2 class="section-title">
+    {t('booking.title')}
+  </h2>
+  <p class="section-subtitle">{t('booking.subtitle')}</p>
+</div>
 
-    <div class="booking-options">
-      {
-        providers.map(p =>
-          p.disabled ? (
-            <div
-              class={`booking-option btn ${p.className} disabled`}
-              aria-disabled="true"
-            >
-              <div class="booking-logo">
-                <Image
-                  src={p.logo}
-                  alt={p.name}
-                  class="logo-image"
-                  width={120}
-                  height={60}
-                  format="webp"
-                  quality={80}
-                />
-              </div>
-              <div class="booking-content">
-                <span>{t(p.i18nKey)}</span>
-              </div>
-              <div class="booking-arrow">
-                <ArrowRight size={20} />
-              </div>
-            </div>
-          ) : (
-            <a
-              href={p.href}
-              class={`booking-option btn ${p.className}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <div class="booking-logo">
-                <Image
-                  src={p.logo}
-                  alt={p.name}
-                  class="logo-image"
-                  width={120}
-                  height={60}
-                  format="webp"
-                  quality={80}
-                />
-              </div>
-              <div class="booking-content">
-                <span>{t(p.i18nKey)}</span>
-              </div>
-              <div class="booking-arrow">
-                <ArrowRight size={20} />
-              </div>
-            </a>
-          )
-        )
-      }
-    </div>
-  </div>
-</section>
+<!-- Booking Options -->
+<div class="booking-options">
+  {
+    providers.map(p =>
+      p.disabled ? (
+        <div
+          class={`booking-option btn ${p.className} disabled`}
+          aria-disabled="true"
+        >
+          <div class="booking-logo">
+            <Image
+              src={p.logo}
+              alt={p.name}
+              class="logo-image"
+              width={120}
+              height={60}
+              format="webp"
+              quality={80}
+            />
+          </div>
+          <div class="booking-content">
+            <span>{t(p.i18nKey)}</span>
+          </div>
+          <div class="booking-arrow">
+            <ArrowRight size={20} />
+          </div>
+        </div>
+      ) : (
+        <a
+          href={p.href}
+          class={`booking-option btn ${p.className}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div class="booking-logo">
+            <Image
+              src={p.logo}
+              alt={p.name}
+              class="logo-image"
+              width={120}
+              height={60}
+              format="webp"
+              quality={80}
+            />
+          </div>
+          <div class="booking-content">
+            <span>{t(p.i18nKey)}</span>
+          </div>
+          <div class="booking-arrow">
+            <ArrowRight size={20} />
+          </div>
+        </a>
+      )
+    )
+  }
+</div>
 
 <style>
-  /* ===== BOOKING ===== */
-  .booking {
-    background: var(--gradient-cool);
+  /* ===== BOOKING CONTENT STYLES ===== */
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--space-3xl);
     position: relative;
-    overflow: hidden;
+    z-index: 2;
   }
 
-  .booking::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.02);
-    -webkit-mask-image: url('/src/assets/banyan-vines-thick.png');
-    -webkit-mask-repeat: repeat;
-    -webkit-mask-size: 150px 150px;
-    mask-image: url('/src/assets/banyan-vines-thick.png');
-    mask-repeat: repeat;
-    mask-size: 150px 150px;
-    pointer-events: none;
-    z-index: 1;
+  .booking-title-gold {
+    color: var(--color-primary);
+    position: relative;
+    display: inline-block;
+  }
+
+  .sparkle {
+    color: var(--color-accent);
+    font-size: 1.5rem;
+    animation: sparkle 2s ease-in-out infinite;
+  }
+
+  .sparkle-left {
+    margin-right: var(--space);
+  }
+
+  .sparkle-right {
+    margin-left: var(--space);
+  }
+
+  @keyframes sparkle {
+    0%, 100% { opacity: 0.7; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.1); }
+  }
+
+  .section-subtitle {
+    color: var(--color-text-light);
+    max-width: 600px;
+    margin: 0 auto;
   }
 
   .booking-options {
@@ -124,6 +134,8 @@ const providers = Object.entries(siteConfig.booking || {})
     gap: var(--space-xl);
     max-width: 800px;
     margin: 0 auto;
+    position: relative;
+    z-index: 2;
   }
 
   .booking-option {
@@ -157,6 +169,23 @@ const providers = Object.entries(siteConfig.booking || {})
     transition: opacity 0.3s ease;
   }
 
+  .booking-option:hover {
+    transform: translateY(-2px);
+  }
+
+  .booking-option:hover::before {
+    opacity: 1;
+  }
+
+  .booking-option.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .booking-option.disabled:hover {
+    transform: none;
+  }
+
   .booking-logo {
     width: 48px;
     height: 48px;
@@ -177,11 +206,16 @@ const providers = Object.entries(siteConfig.booking || {})
     border-radius: 12px;
   }
 
-  .booking-option .booking-content {
+  .booking-content {
     flex: 1;
     text-align: left;
     display: flex;
     align-items: center;
+  }
+
+  .booking-content span {
+    font-weight: 600;
+    color: var(--color-text);
   }
 
   .booking-arrow {
@@ -199,23 +233,17 @@ const providers = Object.entries(siteConfig.booking || {})
     opacity: 1;
   }
 
-  /* Disabled booking option */
-  .booking-option.disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    pointer-events: none;
-  }
-
-
   /* ===== RESPONSIVE DESIGN ===== */
   @media (max-width: var(--breakpoint-sm)) {
     .booking-options {
       grid-template-columns: 1fr;
       gap: var(--space-lg);
     }
+
     .booking-option {
-      padding: var(--space-lg);
+      padding: var(--space);
     }
+
     .booking-content {
       text-align: left;
     }
