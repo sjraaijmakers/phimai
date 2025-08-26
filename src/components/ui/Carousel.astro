@@ -1,5 +1,5 @@
 ---
-import { ChevronLeft, ChevronRight } from 'lucide-astro';
+import { ChevronLeft, ChevronRight, Circle } from 'lucide-astro';
 import { Image } from 'astro:assets';
 import type { ImageConfig } from '../../data/images';
 
@@ -72,9 +72,7 @@ const {
             aria-label={`Go to slide ${index + 1}`}
             data-slide-index={index}
           >
-            <svg width="8" height="8" viewBox="0 0 8 8" fill="currentColor">
-              <circle cx="4" cy="4" r="4" />
-            </svg>
+            <Circle size={8} />
           </button>
         ))}
       </div>
@@ -312,7 +310,7 @@ const {
   }
 
   /* ===== RESPONSIVE DESIGN ===== */
-  @media (max-width: 768px) {
+  @media (max-width: var(--breakpoint-sm)) {
     .carousel-arrow {
       width: 40px;
       height: 40px;

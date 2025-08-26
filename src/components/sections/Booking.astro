@@ -206,19 +206,9 @@ const providers = Object.entries(siteConfig.booking || {})
     pointer-events: none;
   }
 
-  /* ===== BOOKING TITLE STYLING ===== */
-  .booking-title-gold {
-    color: var(--color-text);
-    font-weight: 600;
-    position: relative;
-  }
-
-  .booking-title-gold .sparkle {
-    display: none;
-  }
 
   /* ===== RESPONSIVE DESIGN ===== */
-  @media (max-width: 768px) {
+  @media (max-width: var(--breakpoint-sm)) {
     .booking-options {
       grid-template-columns: 1fr;
       gap: var(--space-lg);

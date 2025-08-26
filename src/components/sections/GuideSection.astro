@@ -93,7 +93,7 @@ const lightboxId = `lightbox-${sectionNumber}`;
     );
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: var(--breakpoint-sm)) {
     .guide-section:not(:last-child)::after {
       width: 90%;
       max-width: none;
@@ -111,7 +111,7 @@ const lightboxId = `lightbox-${sectionNumber}`;
     align-items: center;
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: var(--breakpoint-md)) {
     .section-content {
       grid-template-columns: 1fr;
       gap: var(--space-xl);
@@ -190,7 +190,7 @@ const lightboxId = `lightbox-${sectionNumber}`;
     align-items: start;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: var(--breakpoint-sm)) {
     .section-media {
       grid-template-columns: 1fr;
       gap: var(--space-lg);

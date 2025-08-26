@@ -118,7 +118,7 @@ const { id = 'scrollToTop', className = '', i18nKey } = Astro.props;
   }
 
   /* ===== RESPONSIVE DESIGN ===== */
-  @media (max-width: 768px) {
+  @media (max-width: var(--breakpoint-sm)) {
     /* Mobile scroll-to-top adjustments */
     .scroll-to-top.header-style {
       padding: var(--space-xs);

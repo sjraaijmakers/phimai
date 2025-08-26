@@ -397,7 +397,7 @@ const { id = 'lightbox', images = [] } = Astro.props;
   }
 
   /* ===== RESPONSIVE DESIGN ===== */
-  @media (max-width: 768px) {
+  @media (max-width: var(--breakpoint-sm)) {
     .lightbox-control {
       width: 40px;
       height: 40px;

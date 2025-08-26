@@ -289,7 +289,7 @@ const { hideNavigation = true } = Astro.props;
   /* ===== RESPONSIVE DESIGN ===== */
 
   /* Hide mobile elements on wide screens (1025px and up) */
-  @media (min-width: 1025px) {
+  @media (min-width: calc(var(--breakpoint-md) + 1px)) {
     .mobile-menu {
       display: none !important;
     }
@@ -299,7 +299,7 @@ const { hideNavigation = true } = Astro.props;
   }
 
   /* Show mobile elements and hide desktop nav on narrow screens (1024px and down) */
-  @media (max-width: 1024px) {
+  @media (max-width: var(--breakpoint-md)) {
     .header-content {
       grid-template-columns: 1fr auto;
       gap: var(--space);
@@ -315,7 +315,7 @@ const { hideNavigation = true } = Astro.props;
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: var(--breakpoint-sm)) {
     .mobile-menu {
       top: 70px;
       max-height: calc(100vh - 70px);
