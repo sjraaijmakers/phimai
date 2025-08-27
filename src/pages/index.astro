@@ -19,14 +19,7 @@ changeLanguage("en");
   <main>
     <!-- Hero Section -->
     <section id="hero" class="hero">
-      <div class="hero-background">
-        <Hero />
-      </div>
-      <div class="hero-content">
-        <div class="container">
-          <!-- Hero content will be rendered by the Hero component -->
-        </div>
-      </div>
+      <Hero />
     </section>
 
     <!-- About Section -->
@@ -80,8 +73,7 @@ changeLanguage("en");
   /* ===== HERO SECTION ===== */
   .hero {
     position: relative;
-    height: 100vh;
-    padding-top: var(--header-height);
+    min-height: calc(100vh - var(--header-height));
     padding-bottom: env(safe-area-inset-bottom, 0px);
     display: flex;
     align-items: center;
