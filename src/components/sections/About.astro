@@ -64,7 +64,7 @@ const amenities = [
       amenities.map(({ icon: Icon, key }) => (
         <div class="amenity-item">
           <div class="amenity-icon">
-            <Icon size={20} />
+            <Icon size={16} />
           </div>
           <span>{t(key)}</span>
         </div>
@@ -117,30 +117,26 @@ const amenities = [
   }
 
   .amenities-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    display: flex;
+    flex-direction: column;
     gap: var(--space-lg);
   }
 
   .amenity-item {
     display: flex;
     align-items: center;
-    gap: var(--space);
-    padding: var(--space);
-    background: rgba(139, 115, 85, 0.03);
-    border-radius: var(--radius-sm);
-    transition: var(--transition);
+    gap: var(--space-lg);
   }
 
   .amenity-item:hover {
-    background: rgba(139, 115, 85, 0.08);
-    transform: translateY(-2px);
+    background: transparent;
+    transform: none;
   }
 
   .amenity-icon {
-    width: 40px;
-    height: 40px;
-    background: var(--color-primary);
+    width: 32px;
+    height: 32px;
+    background: var(--color-accent);
     border-radius: var(--radius-sm);
     display: flex;
     align-items: center;
@@ -150,17 +146,11 @@ const amenities = [
   }
 
   .amenity-item span {
-    font-weight: 500;
     color: var(--color-text);
   }
 
   /* ===== RESPONSIVE DESIGN ===== */
   @media (max-width: var(--breakpoint-sm)) {
-    .amenities-list {
-      grid-template-columns: 1fr;
-      gap: var(--space);
-    }
-
     .family-suite-info {
       flex-direction: column;
       text-align: center;
@@ -168,6 +158,20 @@ const amenities = [
 
     .family-suite-icon {
       align-self: center;
+    }
+
+    .amenity-item {
+      padding: var(--space-sm);
+      gap: var(--space-sm);
+    }
+
+    .amenity-icon {
+      width: 28px;
+      height: 28px;
+    }
+
+    .amenity-item span {
+      font-size: 0.9rem;
     }
   }
 </style>

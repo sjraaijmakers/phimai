@@ -22,26 +22,52 @@ const heroImages: ImageConfig[] = [
 ];
 ---
 
-<!-- Hero Background Carousel -->
-<Carousel
-  id="hero-carousel"
-  images={heroImages}
-  interval={5000}
-  showArrows={false}
-  showDots={true}
-  autoPlay={true}
-/>
+<div class="hero-background">
+  <!-- Hero Background Carousel -->
+  <Carousel
+    id="hero-carousel"
+    images={heroImages}
+    interval={5000}
+    showArrows={false}
+    showDots={true}
+    autoPlay={true}
+  />
+</div>
 
-<!-- Hero Content -->
-<h1 class="hero-title">{t('hero.title')}</h1>
-<p class="hero-subtitle">{t('hero.subtitle')}</p>
+<div class="hero-content">
+  <div class="container">
+    <!-- Hero Content -->
+    <h1 class="hero-title">{t('hero.title')}</h1>
+    <p class="hero-subtitle">{t('hero.subtitle')}</p>
 
-<div class="hero-buttons">
-  <a href="#booking" class="btn btn-primary">{t('hero.bookNow')}</a>
-  <a href="#gallery" class="btn btn-secondary">{t('hero.viewGallery')}</a>
+    <div class="hero-buttons">
+      <a href="#booking" class="btn btn-primary">{t('hero.bookNow')}</a>
+      <a href="#gallery" class="btn btn-secondary">{t('hero.viewGallery')}</a>
+    </div>
+  </div>
 </div>
 
 <style>
+  /* ===== HERO BACKGROUND ===== */
+  .hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .hero-content {
+    text-align: center;
+    width: 100%;
+    max-width: none;
+    margin: 0 auto;
+    padding: var(--space-2xl);
+    position: relative;
+    z-index: 2;
+  }
+
   /* ===== HERO CONTENT STYLES ===== */
   .hero-title {
     font-size: 3.5rem;
@@ -87,7 +113,6 @@ const heroImages: ImageConfig[] = [
     }
 
     .hero-buttons {
-      flex-direction: column;
       align-items: center;
     }
 
