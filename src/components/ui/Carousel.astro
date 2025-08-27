@@ -1,6 +1,5 @@
 ---
 import { ChevronLeft, ChevronRight, Circle } from 'lucide-astro';
-import { Image } from 'astro:assets';
 import type { ImageConfig } from '../../data/images';
 
 export interface Props {
@@ -32,7 +31,7 @@ const {
           class={`carousel-slide ${index === 0 ? 'active' : ''}`}
           data-index={index}
         >
-          <Image
+          <img
             src={image.src}
             alt={image.captionKey ? `Image ${index + 1}` : `Image ${index + 1}`}
             class={`hero-image ${lightboxId ? 'carousel-image-clickable' : ''}`}
@@ -40,10 +39,6 @@ const {
             data-image-index={lightboxId ? index : undefined}
             loading={index <= 1 ? 'eager' : 'lazy'}
             fetchpriority={index === 0 ? 'high' : 'auto'}
-            width={800}
-            height={600}
-            format="webp"
-            quality={80}
           />
         </div>
       ))
@@ -89,7 +84,7 @@ const {
   }}
 >
   // Carousel functionality
-  document.addEventListener('DOMContentLoaded', () => {
+  function initCarousel() {
     console.log('Carousel script loaded for:', carouselId);
     const carousel = document.getElementById(carouselId);
     if (!carousel) {
@@ -173,17 +168,17 @@ const {
       images.forEach(img => {
         img.addEventListener('click', e => {
           const target = e.currentTarget;
-          const lightboxId = target.dataset.lightboxId;
-          
+          const lightboxIdAttr = target && target.dataset ? target.dataset.lightboxId : null;
+
           // Find the carousel that contains this image and get its current slide
-          const parentCarousel = target.closest('.carousel');
+          const parentCarousel = target && typeof target.closest === 'function' ? target.closest('.carousel') : null;
           if (parentCarousel) {
             const activeSlide = parentCarousel.querySelector('.carousel-slide.active');
-            if (activeSlide) {
+            if (activeSlide && activeSlide.dataset) {
               const imageIndex = parseInt(activeSlide.dataset.index || '0');
-              
-              if (lightboxId && (window as any).openLightbox) {
-                (window as any).openLightbox(imageIndex, lightboxId);
+
+              if (lightboxIdAttr && window && window.openLightbox) {
+                window.openLightbox(imageIndex, lightboxIdAttr);
               }
             }
           }
@@ -204,7 +199,13 @@ const {
     } else {
       console.error('No slides found in carousel');
     }
-  });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCarousel);
+  } else {
+    initCarousel();
+  }
 </script>
 
 <style>
