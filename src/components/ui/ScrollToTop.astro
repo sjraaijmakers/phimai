@@ -12,94 +12,34 @@ const { id = 'scrollToTop', className = '', i18nKey } = Astro.props;
 ---
 
 <button id={id} class={`scroll-to-top ${className}`}>
-  <ChevronUp size={20} />
   {i18nKey && <a href="#top" class="scroll-to-top-text">{t(i18nKey)}</a>}
+  <ChevronUp size={20} />
 </button>
 
 <style>
-  /* ===== SCROLL TO TOP ===== */
   .scroll-to-top {
-    position: fixed;
-    bottom: var(--space-xl);
-    right: var(--space-xl);
-    width: 48px;
-    height: 48px;
-    background: var(--gradient-primary);
-    border: none;
-    border-radius: 50%;
-    color: var(--color-white);
-    cursor: pointer;
-    transition: var(--transition);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(20px);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-  }
-
-  .scroll-to-top.visible {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-
-  .scroll-to-top:hover {
-    transform: translateY(-4px);
-  }
-
-  .scroll-to-top.footer-style {
-    position: static;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
     width: auto;
     height: auto;
     min-width: 32px;
     min-height: 32px;
     padding: var(--space-xs) var(--space-sm);
     background: transparent;
-    color: var(--color-text);
-    box-shadow: none;
-    transition: var(--transition);
+    border: none;
     border-radius: var(--radius-sm);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
     border: 1px solid rgba(139, 115, 85, 0.2);
   }
 
-  .scroll-to-top.footer-style:hover {
+  .scroll-to-top:hover {
     background: rgba(139, 115, 85, 0.1);
     color: var(--color-primary);
     transform: translateY(-1px);
     border-color: rgba(139, 115, 85, 0.3);
-  }
-
-  .scroll-to-top.header-style {
-    position: static;
-    opacity: 0;
-    visibility: hidden;
-    transform: none;
-    width: auto;
-    height: auto;
-    min-width: 32px;
-    min-height: 32px;
-    padding: var(--space-xs) var(--space-sm);
-    background: transparent;
-    color: var(--color-text);
-    box-shadow: none;
-    transition: var(--transition);
-    border-radius: var(--radius-sm);
-  }
-
-  .scroll-to-top.header-style.visible {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  .scroll-to-top.header-style:hover {
-    background: rgba(139, 115, 85, 0.1);
-    color: var(--color-primary);
-    transform: translateY(-1px);
   }
 
   /* Scroll to top with text styling */
@@ -119,8 +59,7 @@ const { id = 'scrollToTop', className = '', i18nKey } = Astro.props;
 
   /* ===== RESPONSIVE DESIGN ===== */
   @media (max-width: var(--breakpoint-sm)) {
-    /* Mobile scroll-to-top adjustments */
-    .scroll-to-top.header-style {
+    .scroll-to-top {
       padding: var(--space-xs);
       min-width: auto;
       min-height: auto;

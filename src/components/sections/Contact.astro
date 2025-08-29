@@ -34,7 +34,7 @@ import { t } from 'i18next';
             class="whatsapp-official-btn"
           >
             <img 
-              src="/images/logos/whatsapp-logo.svg" 
+              src="/images/logos/whatsapp-logo.png" 
               alt="WhatsApp" 
               width="20" 
               height="20"
@@ -49,7 +49,7 @@ import { t } from 'i18next';
             class="line-official-btn"
           >
             <img 
-              src="/images/logos/line-logo.svg" 
+              src="/images/logos/line-logo.png" 
               alt="Line" 
               width="20" 
               height="20"
@@ -63,7 +63,7 @@ import { t } from 'i18next';
 </div>
 
 <!-- Contact Form -->
-<div class="contact-form-container bg-brown mask-banyan">
+<div class="contact-form-container bg-secondary mask-banyan">
   <form class="contact-form" id="contactForm">
     <h3>{t('contact.form.title')}</h3>
 
@@ -90,8 +90,7 @@ import { t } from 'i18next';
     </div>
 
     <button type="submit" class="btn btn-primary"
-      >{t('contact.form.submit')}</button
-    >
+      >{t('contact.form.submit')}</button>
   </form>
 </div>
 
@@ -245,7 +244,7 @@ import { t } from 'i18next';
   }
 
   .whatsapp-official-btn img {
-    filter: brightness(0) invert(1);
+    /* Remove filter since PNG logos have their own colors */
   }
 
   .whatsapp-official-btn span {
@@ -276,7 +275,7 @@ import { t } from 'i18next';
   }
 
   .line-official-btn img {
-    filter: brightness(0) invert(1);
+    /* Remove filter since PNG logos have their own colors */
   }
 
   .line-official-btn span {

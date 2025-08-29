@@ -33,7 +33,7 @@ const { className = '' } = Astro.props;
           <a href="#location" class="nav-link">
             {t('nav.location')}
           </a>
-          <a href="#booking" class="nav-link nav-book-now">
+          <a href="#booking" class="nav-link">
             {t('nav.bookNow')}
           </a>
           <a href="#contact" class="nav-link">
@@ -207,8 +207,6 @@ const { className = '' } = Astro.props;
     .nav-link.active {
       background: var(--gradient-primary);
       color: var(--color-white);
-      font-weight: 500;
-      box-shadow: 0 2px 8px rgba(139, 115, 85, 0.2);
     }
 
     /* Remove the underline effects */
@@ -279,78 +277,13 @@ const { className = '' } = Astro.props;
     }
 
     .navigation.mobile a.active {
-      background: var(--gradient-primary);
+      background: var(----color-secondary);
       color: var(--color-white);
-      font-weight: 500;
-      box-shadow: 0 2px 8px rgba(139, 115, 85, 0.2);
     }
 
     .navigation.mobile a.active::after {
       display: none;
     }
-
-    /* ===== GOLD NAVIGATION LINK ===== */
-    .nav-book-now {
-      background: transparent;
-      font-weight: 500 !important;
-      position: relative;
-      padding: 6px 12px !important;
-      border-radius: 20px !important;
-      color: #2c2c2c !important;
-      -webkit-text-fill-color: #2c2c2c !important;
-      border: none;
-      font-size: 0.9rem !important;
-      letter-spacing: 0.02em;
-    }
-
-    .nav-book-now:hover {
-      background: rgba(139, 115, 85, 0.05);
-      transform: translateY(-1px);
-    }
-
-    .nav-book-now.active {
-      background: var(--gradient-primary);
-      color: var(--color-white) !important;
-      -webkit-text-fill-color: var(--color-white) !important;
-      font-weight: 500 !important;
-      box-shadow: 0 2px 8px rgba(139, 115, 85, 0.2);
-    }
-
-    /* Remove the brown underline for Book Now link */
-    .nav-book-now::after {
-      display: none !important;
-    }
-
-    /* Override the navigation underline for Book Now link */
-    .nav-link.nav-book-now::after {
-      display: none !important;
-    }
-
-    .navigation a.nav-book-now::after {
-      display: none !important;
-    }
-
-    /* Mobile navigation styling */
-    .navigation.mobile .nav-book-now {
-      background: transparent !important;
-      color: #2c2c2c !important;
-      -webkit-text-fill-color: #2c2c2c !important;
-      font-weight: 500 !important;
-      padding: 12px 20px !important;
-      border-radius: 25px !important;
-      border: none;
-      font-size: 1rem !important;
-      letter-spacing: 0.02em;
-    }
-
-    .navigation.mobile .nav-book-now.active {
-      background: var(--gradient-primary) !important;
-      color: var(--color-white) !important;
-      -webkit-text-fill-color: var(--color-white) !important;
-      font-weight: 500 !important;
-      box-shadow: 0 2px 8px rgba(139, 115, 85, 0.2);
-    }
-
     /* Guide navigation styling */
     .guide-nav {
       justify-content: center;
