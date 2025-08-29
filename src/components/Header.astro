@@ -207,7 +207,7 @@ const { hideNavigation = true } = Astro.props;
 
   /* Mobile menu toggle */
   .mobile-menu-toggle {
-    display: flex;
+    display: none;
     background: rgba(255, 255, 255, 0.9);
     border: 1px solid rgba(139, 115, 85, 0.1);
     border-radius: var(--radius-sm);
@@ -288,18 +288,13 @@ const { hideNavigation = true } = Astro.props;
 
   /* ===== RESPONSIVE DESIGN ===== */
 
-  /* Hide mobile elements on wide screens (1025px and up) */
-  @media (min-width: calc(var(--breakpoint-md) + 1px)) {
-    .mobile-menu {
-      display: none !important;
-    }
-    .mobile-menu-toggle {
-      display: none !important;
-    }
+  /* Hide mobile menu container on wide screens */
+  @media (min-width: 1025px) {
+    .mobile-menu { display: none !important; }
   }
 
   /* Show mobile elements and hide desktop nav on narrow screens (1024px and down) */
-  @media (max-width: var(--breakpoint-md)) {
+  @media (max-width: 1024px) {
     .header-content {
       grid-template-columns: 1fr auto;
       gap: var(--space);
@@ -315,7 +310,7 @@ const { hideNavigation = true } = Astro.props;
     }
   }
 
-  @media (max-width: var(--breakpoint-sm)) {
+  @media (max-width: 768px) {
     .mobile-menu {
       top: 70px;
       max-height: calc(100vh - 70px);
