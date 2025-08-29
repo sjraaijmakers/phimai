@@ -8,6 +8,7 @@ import {
   ShoppingBag,
   Utensils,
   Store,
+  Ellipsis
 } from 'lucide-astro';
 
 // Location features structure for DRY approach
@@ -28,7 +29,7 @@ const locationFeatures = [
   <div class="location-features">
     {
       locationFeatures.map(({ icon: Icon, key }) => (
-        <div class="location-feature">
+        <div class="feature">
           <div class="feature-icon">
             <Icon size={16} />
           </div>
@@ -36,13 +37,17 @@ const locationFeatures = [
         </div>
       ))
     }
+      <div class="feature">
+        <div class="feature-icon">
+          <Ellipsis size={16} />
+        </div>
+        <span>
+          View more, in our <a href={localizePath("/guide")}>{t('gallery.location.guideLink')}</a>
+        </span>
+      </div>
   </div>
 
-  <div class="guide-link-container">
-    <a href={localizePath("/guide")} class="guide-link"
-      >{t('gallery.location.guideLink')}</a
-    >
-  </div>
+
 </div>
 
 <!-- Location Map -->
@@ -67,29 +72,6 @@ const locationFeatures = [
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space);
-  }
-
-  .location-feature {
-    display: flex;
-    align-items: center;
-    gap: var(--space-sm);
-  }
-
-  .feature-icon {
-    width: 32px;
-    height: 32px;
-    background: var(--color-primary);
-    border-radius: var(--radius-sm);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-white);
-    flex-shrink: 0;
-  }
-
-  .location-feature span {
-    font-weight: 500;
-    color: var(--color-text);
   }
 
   .guide-link-container {

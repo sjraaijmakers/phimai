@@ -11,10 +11,10 @@ export interface Props {
 const { id = 'scrollToTop', className = '', i18nKey } = Astro.props;
 ---
 
-<button id={id} class={`scroll-to-top ${className}`}>
-  {i18nKey && <a href="#top" class="scroll-to-top-text">{t(i18nKey)}</a>}
+<a href="#top" id={id} class={`scroll-to-top ${className}`}>
+  {i18nKey && <span class="scroll-to-top-text">{t(i18nKey)}</span>}
   <ChevronUp size={20} />
-</button>
+</a>
 
 <style>
   .scroll-to-top {
@@ -33,6 +33,7 @@ const { id = 'scrollToTop', className = '', i18nKey } = Astro.props;
     align-items: center;
     gap: var(--space-xs);
     border: 1px solid rgba(139, 115, 85, 0.2);
+    text-decoration: none;
   }
 
   .scroll-to-top:hover {
@@ -40,33 +41,18 @@ const { id = 'scrollToTop', className = '', i18nKey } = Astro.props;
     color: var(--color-primary);
     transform: translateY(-1px);
     border-color: rgba(139, 115, 85, 0.3);
+    text-decoration: none;
   }
 
   /* Scroll to top with text styling */
   .scroll-to-top-text {
-    font-size: 0.875rem;
-    font-weight: 500;
     color: inherit;
     cursor: pointer;
     user-select: none;
-    text-decoration: none;
   }
 
   /* Ensure icon and text are properly aligned */
   .scroll-to-top svg {
     flex-shrink: 0;
-  }
-
-  /* ===== RESPONSIVE DESIGN ===== */
-  @media (max-width: var(--breakpoint-sm)) {
-    .scroll-to-top {
-      padding: var(--space-xs);
-      min-width: auto;
-      min-height: auto;
-    }
-
-    .scroll-to-top-text {
-      font-size: 0.8rem;
-    }
   }
 </style>

@@ -118,6 +118,7 @@ html {
 body {
   margin: 0;
   padding: 0;
+  font-weight: 300;
   line-height: var(--lh-body);
   color: var(--color-text);
   background: var(--color-white);
@@ -295,7 +296,6 @@ h6 {
 
 p {
   font-family: var(--font-secondary);
-  font-weight: 300;
   line-height: var(--lh-body);
   margin: 0;
 }
@@ -345,6 +345,10 @@ p {
 
 .btn-secondary {
   background: var(--gradient-accent);
+}
+
+.bg-accent {
+  background: var(--color-accent) !important;
 }
 
 
@@ -399,4 +403,28 @@ p {
   .section {
     padding: var(--space-xl) var(--space-sm);
   }
+}
+
+
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.feature-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--color-primary);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-white);
+  flex-shrink: 0;
+}
+
+.feature span {
+  color: var(--color-text);
 }

@@ -62,9 +62,9 @@ const amenities = [
   <div class="amenities-list">
     {
       amenities.map(({ icon: Icon, key }) => (
-        <div class="amenity-item">
-          <div class="amenity-icon">
-            <Icon size={16} />
+        <div class="feature ">
+          <div class="feature-icon bg-accent" > 
+            <Icon size={16}/>
           </div>
           <span>{t(key)}</span>
         </div>
@@ -74,11 +74,6 @@ const amenities = [
 </div>
 
 <style>
-  /* ===== ABOUT CONTENT STYLES ===== */
-  .about-info p {
-    margin-bottom: var(--space-xl);
-  }
-
   /* Family suite info integrated into main description */
   .family-suite-info {
     display: flex;
@@ -122,32 +117,6 @@ const amenities = [
     gap: var(--space-lg);
   }
 
-  .amenity-item {
-    display: flex;
-    align-items: center;
-    gap: var(--space-lg);
-  }
-
-  .amenity-item:hover {
-    background: transparent;
-    transform: none;
-  }
-
-  .amenity-icon {
-    width: 32px;
-    height: 32px;
-    background: var(--color-accent);
-    border-radius: var(--radius-sm);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-white);
-    flex-shrink: 0;
-  }
-
-  .amenity-item span {
-    color: var(--color-text);
-  }
 
   /* ===== RESPONSIVE DESIGN ===== */
   @media (max-width: var(--breakpoint-sm)) {
