@@ -16,16 +16,14 @@ const { hideNavigation = true } = Astro.props;
       <!-- Left column: Logo -->
       <div class="header-left">
         <div class="logo">
-          <a href="#top" class="logo-link">Phimai Pond House</a>
+          <a href="/" class="logo-link">Phimai Pond House</a>
         </div>
       </div>
 
-      <!-- Center column: Navigation -->
       <div class="header-center">
         {!hideNavigation && <Navigation className="desktop-nav" />}
       </div>
 
-      <!-- Right column: Language selector and mobile menu -->
       <div class="header-right">
         <LanguageSelector class="language-select" />
         {
@@ -174,12 +172,6 @@ const { hideNavigation = true } = Astro.props;
     transition: var(--transition);
   }
 
-  .logo a:hover {
-    color: var(--color-primary);
-  }
-
-  /* Navigation styling is handled by Navigation component */
-
   /* Language selector styling */
   .language-select {
     background: rgba(255, 255, 255, 0.9);
@@ -189,20 +181,7 @@ const { hideNavigation = true } = Astro.props;
     cursor: pointer;
     transition: var(--transition);
     color: var(--color-text);
-    backdrop-filter: blur(10px);
     min-width: fit-content;
-  }
-
-  .language-select:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-1px);
-    border-color: var(--color-primary);
-  }
-
-  .language-select:focus {
-    outline: none;
-    border-color: var(--color-accent);
-    box-shadow: 0 0 0 3px rgba(156, 175, 136, 0.1);
   }
 
   /* Mobile menu toggle */

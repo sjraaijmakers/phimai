@@ -1,7 +1,11 @@
 ---
+import { changeLanguage } from "i18next";
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import LightboxCarousel from "../components/ui/LightboxCarousel.astro";
+
+changeLanguage("en");
 ---
 
 <Layout>
@@ -11,72 +15,72 @@ import Footer from "../components/Footer.astro";
       <h1>GLightbox Demo</h1>
       <p>Tap an image to open the lightbox.</p>
 
-      <div class="grid">
-        <a href="/images/bedroom-cozy.jpg" class="glightbox" data-gallery="demo" aria-label="Bedroom cozy">
-          <img src="/images/bedroom-cozy.jpg" alt="Bedroom cozy" loading="lazy" />
-        </a>
-        <a href="/images/garden-view.jpg" class="glightbox" data-gallery="demo" aria-label="Garden view">
-          <img src="/images/garden-view.jpg" alt="Garden view" loading="lazy" />
-        </a>
-        <a href="/images/kitchen-cozy.jpg" class="glightbox" data-gallery="demo" aria-label="Kitchen cozy">
-          <img src="/images/kitchen-cozy.jpg" alt="Kitchen cozy" loading="lazy" />
-        </a>
-        <a href="/images/exterior-evening.jpg" class="glightbox" data-gallery="demo" aria-label="Exterior evening">
-          <img src="/images/exterior-evening.jpg" alt="Exterior evening" loading="lazy" />
-        </a>
-        <a href="/images/living-cozy.jpg" class="glightbox" data-gallery="demo" aria-label="Living cozy">
-          <img src="/images/living-cozy.jpg" alt="Living cozy" loading="lazy" />
-        </a>
-        <a href="/images/terrace-view.jpg" class="glightbox" data-gallery="demo" aria-label="Terrace view">
-          <img src="/images/terrace-view.jpg" alt="Terrace view" loading="lazy" />
-        </a>
-      </div>
+      <LightboxCarousel
+        images={[
+          { src: '/images/bedroom-cozy.jpg', desc: 'Bedroom cozy' },
+          { src: '/images/garden-view.jpg', desc: 'Garden view' },
+          { src: '/images/kitchen-cozy.jpg', desc: 'Kitchen cozy' },
+          { src: '/images/exterior-evening.jpg', desc: 'Exterior evening' },
+          { src: '/images/living-cozy.jpg', desc: 'Living cozy' },
+          { src: '/images/terrace-view.jpg', desc: 'Terrace view' },
+        ]}
+        galleryId="demo"
+      />
     </div>
   </main>
   <Footer />
 </Layout>
 
 <script>
-  import GLightbox from 'glightbox';
-  import 'glightbox/dist/css/glightbox.min.css';
+  // GLightbox and Swiper are imported & initialized globally in Layout
 
   document.addEventListener('DOMContentLoaded', () => {
-    const lightbox = GLightbox({
-        selector: '.glightbox',
-        touchNavigation: true,
-        loop: true,
-        autoplayVideos: false,
-        keyboardNavigation: true,
-        closeOnOutsideClick: true,
-    });
+    // Global initializers handle both GLightbox and Swiper
   });
 </script>
 
 <style>
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-lg);
-  }
-
-  @media (max-width: 1024px) {
-    .grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (max-width: 640px) {
-    .grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .grid img {
+  .swiper {
     width: 100%;
+    /* Override Swiper default blue theme */
+    --swiper-navigation-color: #ffffff;
+    --swiper-pagination-color: #ffffff;
+  }
+  .swiper-slide a,
+  .swiper-slide img {
+    width: 100%;
+  }
+  .swiper-slide img {
     height: 240px;
     object-fit: cover;
     border-radius: var(--radius-sm);
     box-shadow: var(--shadow-sm);
+  }
+  @media (max-width: 640px) {
+    .swiper-slide img { height: 220px; }
+  }
+
+  /* Tweak GLightbox controls to avoid default blue look */
+  :global(.glightbox-clean .gbtn) {
+    color: #fff;
+    background: rgba(0, 0, 0, 0.45);
+    border-radius: 9999px;
+  }
+
+  /* Style Swiper nav buttons to avoid blue icons and improve contrast */
+  :global(.swiper-button-prev),
+  :global(.swiper-button-next) {
+    width: 44px;
+    height: 44px;
+    border-radius: 9999px;
+    background: rgba(0, 0, 0, 0.45);
+    color: #ffffff;
+    backdrop-filter: blur(2px);
+  }
+  :global(.swiper-button-prev::after),
+  :global(.swiper-button-next::after) {
+    font-size: 18px;
+    font-weight: 700;
   }
 </style>
 

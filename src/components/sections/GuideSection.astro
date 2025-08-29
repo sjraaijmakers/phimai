@@ -1,6 +1,4 @@
 ---
-import Carousel from '../ui/Carousel.astro';
-import Lightbox from '../ui/Lightbox.astro';
 import type { ImageConfig } from '../../data/images';
 
 interface Props {
@@ -38,7 +36,7 @@ const lightboxId = `lightbox-${sectionNumber}`;
 
     <div class="section-media">
       <div class="section-carousel image-hover-zoom">
-        <Carousel
+        <!-- <Carousel
           id={carouselId}
           images={images}
           interval={4000}
@@ -46,7 +44,7 @@ const lightboxId = `lightbox-${sectionNumber}`;
           showDots={true}
           autoPlay={true}
           lightboxId={lightboxId}
-        />
+        /> -->
       </div>
       <div class="section-map">
         <iframe
@@ -62,7 +60,7 @@ const lightboxId = `lightbox-${sectionNumber}`;
   </div>
 
   <!-- Lightbox for this section -->
-  <Lightbox id={lightboxId} images={images} />
+  <!-- <Lightbox id={lightboxId} images={images} /> -->
 </div>
 
 <style>

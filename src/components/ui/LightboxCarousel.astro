@@ -1,0 +1,88 @@
+---
+import { t } from 'i18next';
+
+export interface ImageItem {
+  src: string;
+  desc?: string;
+  captionKey?: string;
+}
+
+export interface Props {
+  images: ImageItem[];
+  galleryId?: string;
+  slidesPerView?: number;
+}
+
+const { images = [], galleryId = 'demo', slidesPerView = 1 } = Astro.props as Props;
+const uid = Math.random().toString(36).slice(2);
+const swiperClass = `lbc-${uid}`;
+---
+
+<div class={`lightbox-carousel swiper ${swiperClass}`} data-auto-init data-swiper={JSON.stringify({ slidesPerView })}>
+  <div class="swiper-wrapper">
+    {images.map((image) => (
+      <div class="swiper-slide">
+        <a
+          href={image.src}
+          class="glightbox"
+          data-gallery={galleryId}
+          data-title={image.desc ? image.desc : (image.captionKey ? t(image.captionKey) : '')}
+          aria-label={image.desc ? image.desc : (image.captionKey ? t(image.captionKey) : 'Open image')}
+        >
+          <img src={image.src} alt={image.desc ? image.desc : (image.captionKey ? t(image.captionKey) : '')} loading="lazy" />
+        </a>
+      </div>
+    ))}
+  </div>
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-pagination"></div>
+</div>
+
+<script define:vars={{ swiperClass }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    const GLightbox = (window as any)['GLightbox'];
+    if (GLightbox) {
+      GLightbox({ selector: `.${swiperClass} .glightbox` });
+    }
+  });
+</script>
+
+<style>
+  .lightbox-carousel {
+    width: 100%;
+    --swiper-navigation-color: #ffffff;
+    --swiper-pagination-color: #ffffff;
+  }
+  .lightbox-carousel .swiper-slide a,
+  .lightbox-carousel .swiper-slide img {
+    width: 100%;
+  }
+  .lightbox-carousel .swiper-slide img {
+    height: 240px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+  }
+  @media (max-width: 640px) {
+    .lightbox-carousel .swiper-slide img { height: 220px; }
+  }
+
+  /* Style Swiper nav buttons */
+  .lightbox-carousel :global(.swiper-button-prev),
+  .lightbox-carousel :global(.swiper-button-next) {
+    width: 44px;
+    height: 44px;
+    border-radius: 9999px;
+    background: rgba(0, 0, 0, 0.45);
+    color: #ffffff;
+    backdrop-filter: blur(2px);
+  }
+  .lightbox-carousel :global(.swiper-button-prev::after),
+  .lightbox-carousel :global(.swiper-button-next::after) {
+    font-size: 18px;
+    font-weight: 700;
+  }
+</style>
+
+
