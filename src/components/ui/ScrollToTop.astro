@@ -23,7 +23,8 @@ const { id = 'scrollToTop', className = '', i18nKey } = Astro.props;
     min-width: 32px;
     min-height: 32px;
     padding: var(--space-xs) var(--space-sm);
-    background: transparent;
+    background: var(--color-white);
+    opacity:  ;
     border: none;
     border-radius: var(--radius-sm);
     color: var(--color-text);
@@ -37,10 +38,7 @@ const { id = 'scrollToTop', className = '', i18nKey } = Astro.props;
   }
 
   .scroll-to-top:hover {
-    background: rgba(139, 115, 85, 0.1);
-    color: var(--color-primary);
     transform: translateY(-1px);
-    border-color: rgba(139, 115, 85, 0.3);
     text-decoration: none;
   }
 

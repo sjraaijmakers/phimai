@@ -145,7 +145,8 @@ changeLanguage("en");
   }
 
   /* ===== RESPONSIVE DESIGN ===== */
-  @media (max-width: var(--breakpoint-sm)) {
+  /* CSS variables are not supported in media queries; use a concrete value */
+  @media (max-width: 768px) {
     .about-content,
     .location-section,
     .contact-content {
