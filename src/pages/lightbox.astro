@@ -1,0 +1,83 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout>
+  <Header hideNavigation={true} />
+  <main class="section">
+    <div class="container">
+      <h1>GLightbox Demo</h1>
+      <p>Tap an image to open the lightbox.</p>
+
+      <div class="grid">
+        <a href="/images/bedroom-cozy.jpg" class="glightbox" data-gallery="demo" aria-label="Bedroom cozy">
+          <img src="/images/bedroom-cozy.jpg" alt="Bedroom cozy" loading="lazy" />
+        </a>
+        <a href="/images/garden-view.jpg" class="glightbox" data-gallery="demo" aria-label="Garden view">
+          <img src="/images/garden-view.jpg" alt="Garden view" loading="lazy" />
+        </a>
+        <a href="/images/kitchen-cozy.jpg" class="glightbox" data-gallery="demo" aria-label="Kitchen cozy">
+          <img src="/images/kitchen-cozy.jpg" alt="Kitchen cozy" loading="lazy" />
+        </a>
+        <a href="/images/exterior-evening.jpg" class="glightbox" data-gallery="demo" aria-label="Exterior evening">
+          <img src="/images/exterior-evening.jpg" alt="Exterior evening" loading="lazy" />
+        </a>
+        <a href="/images/living-cozy.jpg" class="glightbox" data-gallery="demo" aria-label="Living cozy">
+          <img src="/images/living-cozy.jpg" alt="Living cozy" loading="lazy" />
+        </a>
+        <a href="/images/terrace-view.jpg" class="glightbox" data-gallery="demo" aria-label="Terrace view">
+          <img src="/images/terrace-view.jpg" alt="Terrace view" loading="lazy" />
+        </a>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  import GLightbox from 'glightbox';
+  import 'glightbox/dist/css/glightbox.min.css';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const lightbox = GLightbox({
+        selector: '.glightbox',
+        touchNavigation: true,
+        loop: true,
+        autoplayVideos: false,
+        keyboardNavigation: true,
+        closeOnOutsideClick: true,
+    });
+  });
+</script>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+  }
+
+  @media (max-width: 1024px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .grid img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+  }
+</style>
+
+

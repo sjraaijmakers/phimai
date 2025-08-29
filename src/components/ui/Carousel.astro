@@ -31,15 +31,32 @@ const {
           class={`carousel-slide ${index === 0 ? 'active' : ''}`}
           data-index={index}
         >
-          <img
-            src={image.src}
-            alt={image.captionKey ? `Image ${index + 1}` : `Image ${index + 1}`}
-            class={`hero-image ${lightboxId ? 'carousel-image-clickable' : ''}`}
-            data-lightbox-id={lightboxId}
-            data-image-index={lightboxId ? index : undefined}
-            loading={index <= 1 ? 'eager' : 'lazy'}
-            fetchpriority={index === 0 ? 'high' : 'auto'}
-          />
+          {
+            lightboxId ? (
+              <a
+                href={image.src}
+                class="glightbox"
+                data-gallery={lightboxId}
+                aria-label={`Open image ${index + 1}`}
+              >
+                <img
+                  src={image.src}
+                  alt={image.captionKey ? `Image ${index + 1}` : `Image ${index + 1}`}
+                  class="hero-image"
+                  loading={index <= 1 ? 'eager' : 'lazy'}
+                  fetchpriority={index === 0 ? 'high' : 'auto'}
+                />
+              </a>
+            ) : (
+              <img
+                src={image.src}
+                alt={image.captionKey ? `Image ${index + 1}` : `Image ${index + 1}`}
+                class="hero-image"
+                loading={index <= 1 ? 'eager' : 'lazy'}
+                fetchpriority={index === 0 ? 'high' : 'auto'}
+              />
+            )
+          }
         </div>
       ))
     }
@@ -162,29 +179,7 @@ const {
       dot.addEventListener('click', () => goToSlide(index));
     });
 
-    // Image click for lightbox (only if lightboxId is provided)
-    if (lightboxId) {
-      const images = carousel.querySelectorAll('.carousel-image-clickable');
-      images.forEach(img => {
-        img.addEventListener('click', e => {
-          const target = e.currentTarget;
-          const lightboxIdAttr = target && target.dataset ? target.dataset.lightboxId : null;
-
-          // Find the carousel that contains this image and get its current slide
-          const parentCarousel = target && typeof target.closest === 'function' ? target.closest('.carousel') : null;
-          if (parentCarousel) {
-            const activeSlide = parentCarousel.querySelector('.carousel-slide.active');
-            if (activeSlide && activeSlide.dataset) {
-              const imageIndex = parseInt(activeSlide.dataset.index || '0');
-
-              if (lightboxIdAttr && window && window.openLightbox) {
-                window.openLightbox(imageIndex, lightboxIdAttr);
-              }
-            }
-          }
-        });
-      });
-    }
+    // Lightbox is handled by GLightbox via anchors when lightboxId is provided
 
     // Auto-play pause on hover
     carousel.addEventListener('mouseenter', stopAutoPlay);

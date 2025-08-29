@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "gen": "astro-i18next generate", 
+    "gen": "astro-i18next generate",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
@@ -21,6 +21,7 @@
     "@headlessui/vue": "^1.7.23",
     "astro": "^5.2.5",
     "astro-i18next": "1.0.0-beta.21",
+    "glightbox": "^3.3.1",
     "lucide-astro": "^0.539.0",
     "sharp": "^0.34.3"
   },

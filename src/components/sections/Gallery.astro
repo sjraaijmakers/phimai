@@ -1,11 +1,10 @@
 ---
 import { t } from 'i18next';
 import { galleryImages } from '../../data/images';
-import Lightbox from '../ui/Lightbox.astro';
 import { Image } from 'astro:assets';
 
 // Limit gallery to 6 images
-const MAX_GALLERY_IMAGES = 6;
+const MAX_GALLERY_IMAGES = 8;
 const limitedGalleryImages = galleryImages.slice(0, MAX_GALLERY_IMAGES);
 ---
 
@@ -17,11 +16,13 @@ const limitedGalleryImages = galleryImages.slice(0, MAX_GALLERY_IMAGES);
 
 <div class="gallery-grid">
   {
-    limitedGalleryImages.map((image, index) => (
-      <div
-        class="gallery-item"
-        data-index={index}
-        data-lightbox-id="gallery-lightbox"
+    limitedGalleryImages.map((image) => (
+      <a
+        href={image.src}
+        class="gallery-item glightbox"
+        data-gallery="home-gallery"
+        data-title={image.captionKey ? t(image.captionKey) : ''}
+        aria-label={image.captionKey ? t(image.captionKey) : 'Open image'}
       >
         <Image
           src={image.src}
@@ -31,42 +32,23 @@ const limitedGalleryImages = galleryImages.slice(0, MAX_GALLERY_IMAGES);
           format="webp"
           quality={80}
         />
-      </div>
+      </a>
     ))
   }
 </div>
 
-<Lightbox id="gallery-lightbox" images={galleryImages} />
-
 <script>
-  // Gallery lightbox functionality
+  import GLightbox from 'glightbox';
+  import 'glightbox/dist/css/glightbox.min.css';
+
   document.addEventListener('DOMContentLoaded', () => {
-    console.log('Gallery script loaded');
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    console.log('Found gallery items:', galleryItems.length);
-
-    galleryItems.forEach((item, index) => {
-      item.addEventListener('click', e => {
-        console.log('Gallery item clicked:', index);
-        const target = e.currentTarget as HTMLElement;
-        const lightboxId = target.dataset.lightboxId;
-        const imageIndex = parseInt(target.dataset.index || '0');
-
-        console.log('Lightbox data:', {
-          lightboxId,
-          imageIndex,
-          openLightbox: !!window.openLightbox,
-        });
-
-        if (lightboxId && window.openLightbox) {
-          window.openLightbox(imageIndex, lightboxId);
-        } else {
-          console.error('Lightbox not available:', {
-            lightboxId,
-            openLightbox: !!window.openLightbox,
-          });
-        }
-      });
+    GLightbox({
+      selector: '.glightbox[data-gallery="home-gallery"]',
+      touchNavigation: true,
+      loop: true,
+      autoplayVideos: false,
+      keyboardNavigation: true,
+      closeOnOutsideClick: true,
     });
   });
 </script>
